@@ -1,0 +1,114 @@
+\documentclass[pdftex,a4paper,parskip=half,12pt,oneside]{scrreprt}
+\usepackage[latin1]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{hyperref}
+\usepackage[nohyperlinks]{acronym} %printonlyused blendet nicht benutze aus
+\usepackage{listings}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{emp}
+\usepackage{bibgerm}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{color}
+
+\ifx\pdftexversion\undefined
+\usepackage[dvips]{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+%Bilder
+%\pgfdeclareimage[height=8cm]{swlayer}{grafiken/SWLayerCake}
+%-----------------
+
+% Hiermit kann man festlegen, dass immer nur ein bestimmter Teil ¸bersetzt wird
+%\includeonly{Inhalt/2-grundlagen}
+
+%Nummerierung der Section und was soll im Inhaltsverzeichnis stehen
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\begin{document}
+\begin{empfile}
+\begin{empcmds}
+input metauml;
+\end{empcmds}
+%---------------------------------------------------------------------------
+% Frontpage
+%---------------------------------------------------------------------------
+\input{deckblatt.tex}
+% Kurzfassung und Abstract
+\newpage
+\pagenumbering{roman}
+\centerline{\bf Kurzfassung}
+\bigskip
+
+%
+\vskip 3cm
+%
+
+\centerline{\bf Abstract}
+\bigskip
+%---------------------------------------------------------------------------
+% Inhaltsverzeichnis
+%---------------------------------------------------------------------------
+\tableofcontents
+%---------------------------------------------------------------------------
+% Der eigentliche Inhalt
+%---------------------------------------------------------------------------
+\newpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+\include{Inhalt/1-einleitung} 	
+\include{Inhalt/2-grundlagen} 	
+\include{Inhalt/3-konzeption} 	
+\include{Inhalt/4-realisierung} 	
+\include{Inhalt/5-evaluation} 	
+\include{Inhalt/6-zusammenfassung}
+
+\nocite{*}
+%---------------------------------------------------------------------------
+% Anhang
+%---------------------------------------------------------------------------
+\appendix
+%% Abk¸rzungsverzeichnis
+\addchap{Abk�rzungsverzeichnis}
+\input{Inhalt/abkuerzungen}
+
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+
+\addcontentsline{toc}{chapter}{Listings}
+\lstlistoflistings
+
+%% Tabellenverzeichnis
+%\listoftables
+
+%% Listingverzeichnis
+%\addcontentsline{toc}{chapter}{Listings}
+%\lstlistoflistings
+
+\bibliographystyle{gerabbrv}
+\bibliography{quellen/master}
+
+
+%---------------------------------------------------------------------------
+%Erklaerung
+%---------------------------------------------------------------------------
+\newpage
+\vspace*{7cm}
+\centerline{\bf Erklärung}
+
+\vspace*{1cm}
+Ich versichere, die vorliegende Arbeit selbstständig und nur unter Benutzung
+der angegebenen Hilfsmittel angefertigt zu haben.
+
+\vspace*{3cm}
+Lübeck, den \today 
+%---------------------------------------------------------------------------
+
+\end{empfile}
+\end{document}

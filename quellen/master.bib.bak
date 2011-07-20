@@ -1,0 +1,160 @@
+% This file was created with JabRef 2.6.
+% Encoding: UTF8
+
+@MISC{turtle,
+  author = {David Beckett and Tim Berners-Lee},
+  title = {Turtle - Terse RDF Triple Language},
+  howpublished = {\url{http://www.w3.org/TeamSubmission/turtle/}},
+  month = {March},
+  year = {2011},
+  owner = {jenskluttig},
+  timestamp = {2011.07.05}
+}
+
+@MISC{n3,
+  author = {Tim Berners-Lee},
+  title = {Notation3 (N3) A readable RDF Syntax},
+  howpublished = {\url{http://www.w3.org/DesignIssues/Notation3}},
+  month = {March},
+  year = {2006},
+  owner = {jenskluttig},
+  timestamp = {2011.07.05}
+}
+
+@MISC{sparqltestsuite,
+  author = {Lee Feigenbaum},
+  title = {DAWG Testcases},
+  howpublished = {\url{http://www.w3.org/2001/sw/DataAccess/tests/r2}},
+  month = {2004},
+  owner = {jenskluttig},
+  timestamp = {2011.07.08}
+}
+
+@BOOK{groppe,
+  title = {Data Management and Query Processing in Semantic Web Databases},
+  publisher = {Springer-Verlag},
+  year = {2011},
+  author = {Sven Groppe},
+  owner = {jenskluttig},
+  timestamp = {2011.07.02}
+}
+
+@BOOK{semweb,
+  title = {Semantic Web},
+  publisher = {Springer-Verlag},
+  year = {2008},
+  author = {Pascal Hitzler and Markus Kroetsch and Sebastian Rudolph and York
+	Sure},
+  owner = {jenskluttig},
+  timestamp = {2011.04.20}
+}
+
+@ARTICLE{bernerslee,
+  author = {Tim Berners-Lee, James Hendler and Ora Lassila},
+  title = {The Semantic Web},
+  journal = {Scientific American},
+  year = {2001},
+  volume = {May},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@MISC{xpath,
+  author = {W3C},
+  title = {XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)},
+  howpublished = {\url{http://www.w3.org/TR/xpath-functions/}},
+  month = {December},
+  year = {2010},
+  owner = {jenskluttig},
+  timestamp = {2011.07.06}
+}
+
+@MISC{owl,
+  author = {W3C},
+  title = {OWL 2 Web Ontology Language: Document Overview},
+  howpublished = {\url{http://www.w3.org/TR/owl2-overview/}},
+  month = {October},
+  year = {2009},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@MISC{xsd,
+  author = {W3C},
+  title = {W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes},
+  howpublished = {\url{http://www.w3.org/TR/xmlschema11-2/}},
+  month = {December},
+  year = {2009},
+  owner = {jenskluttig},
+  timestamp = {2011.07.05}
+}
+
+@MISC{sparql,
+  author = {W3C},
+  title = {SPARQL Query Language for RDF},
+  howpublished = {\url{http://www.w3.org/TR/rdf-sparql-query/}},
+  month = {January},
+  year = {2008},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@MISC{layerCake,
+  author = {W3C},
+  title = {Semantic Web Layer Cake},
+  howpublished = {\url{http://www.w3.org/2007/03/layerCake.png}},
+  month = {March},
+  year = {2007},
+  owner = {jenskluttig},
+  timestamp = {2011.07.05}
+}
+
+@MISC{rdf,
+  author = {W3C},
+  title = {Resource Description Framework (RDF): Concepts and Abstract Syntax},
+  howpublished = {\url{http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/}},
+  month = {February},
+  year = {2004},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@MISC{rdfs,
+  author = {W3C},
+  title = {RDF Vocabulary Description Language 1.0: RDF Schema},
+  howpublished = {\url{http://www.w3.org/TR/rdf-schema/}},
+  month = {February},
+  year = {2004},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@MISC{rdfxml,
+  author = {W3C},
+  title = {RDF/XML Syntax Specification (Revised)},
+  howpublished = {\url{http://www.w3.org/TR/rdf-syntax-grammar/}},
+  month = {February},
+  year = {2004},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@MISC{html,
+  author = {W3C},
+  title = {HTML 4.01 Specification},
+  howpublished = {\url{http://www.w3.org/TR/html4/}},
+  month = {December},
+  year = {1999},
+  organization = {W3C},
+  owner = {jenskluttig},
+  timestamp = {2011.07.04}
+}
+
+@comment{jabref-meta: selector_publisher:}
+
+@comment{jabref-meta: selector_author:}
+
+@comment{jabref-meta: selector_journal:}
+
+@comment{jabref-meta: selector_keywords:}
+
