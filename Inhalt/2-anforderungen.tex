@@ -1,0 +1,84 @@
+\chapter{Anforderungsanalyse}
+\label{cha:anforderungsanalyse}
+In diesem Kapitel werden die aus der Aufgabenstellung sich ergebenen
+Anforderungen genauer analysiert. Es wird dabei geklärt, in welchem Umfang die
+einzelnen Anforderungen bearbeitet werden müssen.
+
+Die sich aus der Aufgabenstellung ergeben Anforderungen sind Transparenz,
+Anonymität, ein Erweitungssystem, die möglichkeit der Datenspeicherung, sowie
+die regelmäßige Übertragung von Daten an einen Server.
+
+\section{Transparenz}
+
+
+\section{Anonymität}
+Anonymität beschreibt den Zustand, einer Person oder Gruppe die
+nicht identifiziert werden kann. Bei der Art von Anonymität
+gibt unterscheidet man verschiedene Abstufungen~\cite{anonymitaet}:
+\begin{itemize}
+  \item formal anonym: Eindeutige Zuordnungsmerkmale (z.B. Namen usw.) sind
+  entfernt, die Daten ansonsten unverändert (das heißt leichte Zuordbarkeit der Einheiten).
+  \item faktisch anonym: Daten sind nur nur mit unverhältnismäßigem Zeit- und
+  Arbeitsaufwand zuordbar.
+  \item komplett anonym: die Zuordnung zu einzelnen Personen ist ausgeschlossen.
+\end{itemize}
+
+Im Rahmen der Aufgabenstellung soll eine Anonymisierung der Benutzers
+von ``formal anonym'' bis ``faktisch anonym'' ermöglicht werden. Dies bdeutet,
+dass es nicht möglich sein soll, eindeutige Merkmale eines Benutzers zu sammeln (z.B.
+IMEI, Telefonnummer) und zum anderen, eine Zuordnung zu realen Personen anhand
+der Daten erschwert wird.
+
+Bei der Anonymisierung der Daten ergibt sich aber ein Problem, bei der
+zurordbarkeit von einzelnen Datensätzen, die in regelmäßigen Abständen an einen
+Server übertragen werden. Werden zwei Datensätze A und B zu zwei
+unterschiedlichen Zeitpunkten übertragen, ist es nicht möglich die
+Datensätze A und B einander zuzurodnen. Eine Zuordnung auf dieser Ebene gefährte
+aber nicht die Anonymität der Benutzers. Hierbei ergibt sich nun die Anforderung
+eine Verfahren zu entwickeln, dass dieses Problem löst.
+
+\section{Erweiterungssystem}
+Aus der Aufgabenstellung ist zu entnehmen, dass die zu entwickelnde Anwendung,
+nur ein Grundgerüst darstellen soll. Es soll sich durch Erweitungen erweitern
+lassen. Die Anforderung besteht also darin, ein bestehendes Erweitungssystem in
+Android zu integrieren, oder ein eigenes zu implementieren.
+
+Anforderungen an das Erweiterungssystem:
+
+\begin{itemize}
+  \item Der Benutzer soll die möglichkeit haben neue Erweiterungen zu
+  installieren und zu deinstallieren.
+   \item Die Installation neuer Erweiterungen, soll für den Benutzer der
+   Anwendung möglichst einfach sein z.B. durch die Bereitstellung eines Markets.
+  \item Das Erweiterungssystem soll eine Bibliothek liefern, über die es möglich
+  ist neue Erweiterungen möglichst einfach zu erstellen.
+\end{itemize}
+
+\section{Datenspeicherung}
+Die von den Erweiterungen gesammelten Daten müssen auf dem Gerät zwischen
+gespeichert werden, bevor diese Übertragen werden dürfen. Der Benutzer soll
+nämlich die Möglichkeit besitzen, sich die gesammelten Daten, vor einer
+Übertragung zu kontrollieren. Deswegen ist ein Datenmodell zu entwickeln, dass
+es ermöglicht, Daten von beliebigen Erweiterungen zu speichern. Der Entwickler
+einer Erweiterung soll dabei aber so wenig wie möglich bei der Wahl seines
+Datenmodell eingeschränkt werden.
+
+\section{Datenübertragung}
+Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Abständen, an
+einen Server übertragen werden. Dies soll aber nicht automatisch geschehen,
+sondern es soll der Benutzer darauf hingewiesen werden, das neue Daten zur
+Übermittung bereit stehen. Dadurch soll der Benutzer die möglichkeit haben vor
+einer Übertragung die Daten zu kontrollen. Ist ein Benutzer nicht mit der
+Übertragung der Daten einverstanden, so soll diese Übertragung verworfen werden
+können. Des Weiteren soll die Möglichkeit bestehen die Übertragung zu einem
+späteren Zeitpunkt auszuführen. Dies kann der Fall sein, wenn eine Übertragung
+z.B. über das Mobilfunknetz für den Benutzer zu kostenintensiv ist.
+
+Für die Übertragung der Daten ist ein entsprechendes Datenformat und
+Übertragungsprotokoll zu wählen. Beim Datenformat ist darauf zu achten ein
+Format zu wählen, dass einen geringen Overhead aufweist, da die Bandbreite im
+mobilen Bereich stark limitiert ist.
+
+Zum Empfangen der Daten ist eine entsprechende Serverkomponente zu entwickeln.
+Neben dem Empfang soll die Serverkomponente es erlaubt die empfangenen Daten
+weiter zu verarbeiten um sie z.B. in einer Datenbank zu speichern.
