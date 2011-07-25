@@ -9,7 +9,29 @@ Anonymität, ein Erweitungssystem, die möglichkeit der Datenspeicherung, sowie
 die regelmäßige Übertragung von Daten an einen Server.
 
 \section{Transparenz}
+\label{sec:transparenz}
+Das größte Gewicht im Rahmen dieser Masterarbeit hat die Anforderung der
+Transparenz. Mit Transparenz wird hierbei nicht, wie oft in der Informatik
+gemeint, dass ein bestimmte Prozesse ``unsichtbar'' für den Benutzer
+abläuft~\cite{transparenz}. Im Rahmen der Erhebung von personenbezogenen Daten
+bedeutet Transparenz, dass der Benutzer einen tiefen Einblick darin erhält,
+welche Daten, wie über ihn gesammelt werden. Dies bedeutet das folgende
+Anforderungen an die transparente Datenerhebung gestellt werden:
 
+\begin{itemize}
+  \item Der Benutzer erhält zu jedem Zeitpunkt einblick in die bisher
+  gesammelten personenbezogenen Daten.
+  \item Vor der ersten Datenerhebung kann sich der Benutzer darüber informieren,
+  welche persönlichen Daten, wann über ihn gesammelt werden.
+  \item Eine Verschleierung, also das erheben von persönlichen Daten
+  und deren Übertragung ohne die Zustimmung des Benutzers, soll verhindert
+  werden.
+  \item Der Benutzer soll kontrolle darüber haben, wann Daten über ihn erhoben
+  werden sollen und wann nicht.
+  \item Vor einer Übertragung der Daten an einen exteren Server muss der
+  Benutzer zustimmen. Sollte er der Übertragung nicht zustimmen, sollen die
+  erhobenen Daten verworfen werden.
+\end{itemize}
 
 \section{Anonymität}
 Anonymität beschreibt den Zustand, einer Person oder Gruppe die
@@ -64,18 +86,19 @@ einer Erweiterung soll dabei aber so wenig wie möglich bei der Wahl seines
 Datenmodell eingeschränkt werden.
 
 \section{Datenübertragung}
-Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Abständen, an
-einen Server übertragen werden. Dies soll aber nicht automatisch geschehen,
+Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Ab-ständen,
+an einen Server übertragen werden. Dies soll aber nicht automatisch geschehen,
 sondern es soll der Benutzer darauf hingewiesen werden, das neue Daten zur
 Übermittung bereit stehen. Dadurch soll der Benutzer die möglichkeit haben vor
 einer Übertragung die Daten zu kontrollen. Ist ein Benutzer nicht mit der
 Übertragung der Daten einverstanden, so soll diese Übertragung verworfen werden
-können. Des Weiteren soll die Möglichkeit bestehen die Übertragung zu einem
-späteren Zeitpunkt auszuführen. Dies kann der Fall sein, wenn eine Übertragung
-z.B. über das Mobilfunknetz für den Benutzer zu kostenintensiv ist.
+können (Siehe \ref{sec:transparenz}). Des Weiteren soll die Möglichkeit bestehen
+die Übertragung zu einem späteren Zeitpunkt auszuführen. Dies kann der Fall
+sein, wenn eine Übertragung z.B. über das Mobilfunknetz für den Benutzer zu
+kostenintensiv ist.
 
 Für die Übertragung der Daten ist ein entsprechendes Datenformat und
-Übertragungsprotokoll zu wählen. Beim Datenformat ist darauf zu achten ein
+Über-tragungsprotokoll zu wählen. Beim Datenformat ist darauf zu achten ein
 Format zu wählen, dass einen geringen Overhead aufweist, da die Bandbreite im
 mobilen Bereich stark limitiert ist.
 
