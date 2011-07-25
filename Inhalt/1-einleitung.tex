@@ -129,7 +129,60 @@ vertrauenswürdige Instanz existiert, die sicherstellt, dass eine solche
 Täuschung geschehen kann.
 
 \section{Aufgabenstellung}
+\label{problem}
+Die Aufgabe besteht in der Entwicklung einer Android Applikation zum
+transparenten und anonymen Sammeln von Sensordaten. Die Anwendung soll ein
+Grundgerüst bieten, auf dem aufbauend Erweiterungen entwickelt werden können,
+die Daten über die zur Verfügung stehenden Sensoren eines Android-Smartphones
+sammeln. Der Benutzer soll dabei die Kontrolle behalten, wann über ihn Daten
+gesammelt werden. Die von den Erweiterungen gesammelten Daten sollen
+entsprechend dem Benutzer visualisiert werden können und sollen in regelmäßigen Abständen an
+einen Server zur Auswertung übertragen werden.
 
+Folgende Bereiche sollen hierbei bearbeitet werden:
+
+\begin{itemize}
+  \item Erarbeitung von Konzepten, wie das Sammeln von personenbezogenen Daten
+  möglichst Transparent und Anonym gestaltet werden kann.
+  \item Evaluierung der Android Plattform und Beschreibung zur generellen
+  Entwicklung von Android Anwendungen.
+  \item Implementierung einer Anwendung der die erarbeiteten Anforderungen
+  erfüllt und ein Framework zur Verfügung stellt, mit dem die Entwicklung von
+  Erweiterungen vereinfacht wird. Darüber hinaus ist ein Leitfaden zu erstellen,
+  der Beschreibt wie man Erweiterungen implementiert.
+  \item Evaluierung der entwickelten Anwendung anhand zweier Beispiele. Die
+  erste Erweiterung soll die Positionsdaten eines Benutzers in regelmäßigen
+  Abständen aufnehmen. Die zweite Anwendung soll neben den Positionsdaten noch
+  die aktuelle Lautstärke der Umgebung aufnehmen. Zu beiden Beispielen ist eine
+  entspreche Serveranwendung zu entwickeln, zur Validierung der gesammelten
+  Daten.
+\end{itemize}
 
 \section{Vorgehensweise}
+\label{approach}
+Bei der Bearbeitung des Themas wurde wie folgt vorgegangen:
+
+\begin{enumerate}
+  \item \textbf{\em Anforderungsanalyse:} Dieser Schritt wurde als erstes
+  durchgeführt, um die Anforderungen der Anwendung
+  zu analysieren. Die Anforderungen sind dafür ausschlaggebend,
+  welche Technologien zu verwenden sind und wie die Architektur auszusehen hat.
+  \item \textbf{\em Konzeption und Entwurf der Architektur:} Die Anforderungen
+  werden in diesem Schritt in ein Konzept überführt. Daraus lassen sich die einzelnen
+  Bestandteile der Anwendung ermitteln und die
+  Zusammenhänge zwischen diesen erkennen. Dieser Schritt soll die Vorbereitung
+  bilden, zur Überführung des Konzeptes in die Implementierung.
+  \item \textbf{\em Implementierung:} In diesem Schritt wurde das Konzept in die
+  Implementierung überführt. Gleichzeitig wurden auch entsprechende Technologien
+  gewählt um die definierten Anforderungen wie z.B. Persistenz zu realisieren.
+  \item \textbf{\em Evaluierung der Implementierung:} Die im vorigen Schritt
+  realisierte Anwendung wurde in nun anhand der in der
+  Aufgabenstellung definierten Erweiterungen evaluiert. Dadurch konnte sicher
+  gestellt werden, dass die zuvor definierten Anforderungen auch in der realität
+  eingehalten werden.
+\end{enumerate}
+
 \section{Aufbau der Masterarbeit}
+Diese Masterarbeit gliedert sich in die folgenden Kapitel:
+
+Folgt zum Schluss wenn die Masterarbeit fertig ist.
