@@ -1,15 +1,283 @@
 \chapter{Realisierung}
 \label{cha:realisierung}
+In diesem Kapitel wird die aus dem Konzept entwickelte Realisierung beschrieben.
+Die Anwendung trägt dabei den Arbeitstitel {\em Mobile Data Collector}, während
+das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data Collection
+Framework} trägt.
 
-\section{Architektur und Aufbau der Applikation}
+\section{Architektur des Mobile Data Collectors}
+
+
+Der Mobile Data Collector ist in die folgenden Komponenten aufgeteilt:
+
+\begin{itemize}
+  \item Der {\bf Plug-In Service} ist der zentrale Service-Komponente für alle
+  folgenden Activities. Er beherbergt das gesammte Plug-In System und kümmert
+  sich somit um die Verwaltung und Ausführung von Plug-Ins.
+  \item Der {\bf Plug-In Viewer} dient zur Auflistung von installierten Plug-Ins.
+  \item Die {\bf Plug-In Details} erlauben die darstellung von Plug-In
+  Informationen.
+  \item Der {\bf Log-Viewer} dient zur Auflistung von Aufrufen von Android
+  System Services.
+  \item Der {\bf Data-Viewer} erlaubt die Betrachtung von allen vom Plug-In
+  gesammelten Daten.
+  \item Der {\bf Transfer-Manager} listet alle ausstehenden Übertragungen auf
+  und erlaubt die nachträgliche Betrachtung aller bis zur Übertragung
+  gesammelten Daten, sowie deren Verwaltung.
+\end{itemize}
+
+Erzähle was darüber das der immer im Hintergrund läuft das die.
+
+Eine kleine Zeichnung wo gezeigt wird die die Komponenten ineinander greifen.
+
+Im Folgenden wird auf zurvor beschriebenen Komponenten genauer eingegangen.
+
 \subsection{Plug-In Service}
-\subsection{Plug-In Viewer}
-\subsection{Plug-In Details}
-\subsection{Log-Viewer}
-\subsection{Data-Viewer}
-\subsection{Transfer-Manager}
+Der Plug-In Service stellt die zentrale Komponente zur Verwaltung von Plug-Ins,
+sowie deren Ausführung dar. Er beinhaltet die gesammte Applikationslogik des
+{\em Mobile Data Collectors}. Alle Activities greifen über eine entsprechende
+Service Schnittstelle auf diesen Service zu.
 
-\section{Aufbau des Frameworks}
+Beschreibung des Service Interface.
+
+Sequenzdiagramme zum Thema wie registiert sich ein Plug-In.
+
+Wie werden Plug-Ins ausgeführt.
+
+\subsection{Plug-In Viewer}
+Der Plug-In Viewer dient zur Auflistung aller installierten Plug-Ins. Sind keine
+Plug-Ins installiert, wird wie in Abbildung \ref{pluginlist} zu sehen, der
+Benutzer daraufhin gewiesen.
+
+\begin{figure}[h!] \centering
+	\includegraphics[width=5cm]{grafiken/pluginlist.png}
+	\caption{Plug-In Viewer}
+	\label{pluginlist}
+\end{figure}
+
+Neue Plug-Ins können über Eclipse, dem Android Market oder von der SD-Card installert werden. Um den
+Android Market schneller zu erreichen kann wie in Abbildung \ref{more_plugins}
+direkt über den {\em Mobile Data Collector} durch einen Druck auf die
+``Menü''-Taste zugegriffen werden.
+
+\begin{figure}[h!] \centering
+	\includegraphics[width=5cm]{grafiken/more_plugins.png}
+	\caption{Neue Plug-Ins installieren}
+	\label{more_plugins}
+\end{figure}
+
+Wurden neue Plug-Ins installiert, werden diese wie in Abbildung \ref{plugins}
+dargestellt im Plug-In Viewer angezeigt. Die installierten Plug-Ins befinden
+sich zurzeit im Zustand {\em New}.
+
+\begin{figure}[h!] \centering
+	\includegraphics[width=5cm]{grafiken/plugins.png}
+	\caption{Installierte Plug-Ins}
+	\label{plugins}
+\end{figure}
+
+Durch das anwählen eines Plug-Ins kann man dieses aktivieren. Bevor das Plug-In
+aktiviert wird, werden wie in Abbildung \ref{activation} zu sehen, die Plug-In
+Informationen angezeigt. Hat man alle Informationen kontrolliert und ist mit der
+Ausführung einverstanden, kann man durch drücken der {\em Activate}
+Schaltfläche das Plug-In aktivieren. Durch das drücken von {\em Cancel} kann man
+die Aktivierug wieder verlassen.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/activation.png}
+	\caption{Plug-In aktivierung}
+	\label{activation}
+\end{figure}
+
+Hierbei ist besonders auf die sogenannten {\em Dangerous Permissions} zu achten.
+Diese weisen den Benutzer darauf hin, dass das Plug-In auf Rechte zugreifen
+möchte, die es normalerweise nicht braucht bzw. über diese auf personenbezogene
+Daten zugreifen könnte. Vor der Aktivierung wird deswegen der Benutzer durch die
+in Abbildung \ref{activation_warning} dargestellte Warnung darüber informiert.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/activation_warning.png}
+	\caption{Plug-In aktivierung}
+	\label{activation_warning}
+\end{figure}
+
+Ist sich der Benutzer trotzdem darüber bewusst, dass das Plug-In möglicherweise
+gefährlich sein könnte, so kann er durch drücken der {\em OK} Schaltfläche das
+Plug-In trotzdem aktivieren. Durch die {\em Cancel} Schaltfläche kann die
+Aktivierung entsprechend abgebrochen werden.
+
+Nach der Aktivierug eines Plug-In wechselt entsprechend die Anzeige von {\em
+New} zu {\em Activated}. Siehe Abbildung \ref{activate}, wo in diesem Fall das
+{\em Noise Tracker} Plug-In aktiviert wurde. Die Anzeige für Datum und
+Uhrzeit zeigt an, wann das Plug-In zum letzten mal ausgeführt wurde.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/active.png}
+	\caption{Aktiviertes Plug-In}
+	\label{activate}
+\end{figure}
+
+Wählt man ein aktiviertes Plug-In erneut an, deaktiviert man dieses, wie in
+Abbildung \ref{deactivated} zu sehen.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/deactivated.png}
+	\caption{Deaktiviertes Plug-In}
+	\label{deactivated}
+\end{figure}
+
+Wählt man ein Plug-In durch ein langes drücken aus, wird wie in Abbildung
+\ref{plugin_context_menu} dargestellt, das Context-Menü angezeigt. Dieses
+erlaubt das aktivieren und deaktivieren eines Plug-Ins, das anzeigen der Plug-In
+Details (Siehe hierzu Abschnitt \ref{plugin_details}), sowie das deinstallieren
+eines Plug-Ins.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/plugin_context_menu.png}
+	\caption{Context-Menü eines Plug-Ins}
+	\label{plugin_context_menu}
+\end{figure}
+
+\subsection{Plug-In Details}
+\label{plugin_details}
+Der Benutzer hat über die Plug-In Details zu jedem Zeitpunkt die Möglichkeit
+alle Informationen und Aktivitäten eines Plug-Ins sich anzeigen zu lassen. Die
+Plug-In Details sind, wie im vorigen Abschnitt beschrieben, über das
+Context-Menu des Plug-Ins zu erreichen. Öffnet man die Details zu einem Plug-In
+werden wie in Abbildung \ref{details} dargestellt, die Plug-In Informationen
+angezeigt. Über die Tabs im oberen Bildschirmbereich gelangt man, zu den
+weiteren Bereichen {\em Logs} und {\em Collected Data}, die in den folgenden
+Abschnitten {\em Log-Viewer} und {\em Data-Viewer} genauer erläutert werden.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/details.png}
+	\caption{Context-Menü eines Plug-Ins}
+	\label{details}
+\end{figure}
+
+\subsubsection{Log-Viewer}
+Der Log-Viewer dient zur Anzeige, aller Aktivitäten eines Plug-Ins. Mit
+Aktivitäten ist der Zugriff auf alle Android System Services gemeint. Greift ein
+Plug-In auf eine Methode der System Services zu, so wird ein Log eintrag
+erstellt. Dieser enthält in benutzerverständlicher Sprache, welche Informationen
+abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log} dargestellt.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/log.png}
+	\caption{Plug-In Logs}
+	\label{log}
+\end{figure}
+
+Der Log ist dabei wie folgt aufgebaut. Jede Zeile zeigt an, wann das Plug-In
+ausgeführt wurde. Durch die Auswahl eines Eintrags erweitern sich die Einträge
+um die eigendlichen Log einträge. In diesem Fall sagen die Log Einträge aus, das
+am 16.08.2011 um 5:58:40 Uhr das Plug-In ausgeführt wurde. Während dieser
+Ausführung wurde zur Lokalisierung des Benutzers das GSM/UMTS Netz ({\em
+network}) verwendet und als Position wurden die Koordinaten am 53,8477729
+Längengrad und am 10.6977904 Breitengrad ermittelt.
+
+\subsubsection{Data-Viewer}
+Der Data-Viewer dient zur Anzeige aller vom Plug-In gesammelten Daten bzw. aller
+Daten, die das Plug-In später Übertragen möchte. Einem Plug-In steht es frei
+beliebig viele private Daten für interne Zwecke zu Sammeln.
+
+Die im Konzept beschriebene hierarchische Datenstruktur lässt sich durch den
+Data-Viewer anzeigen. Dabei wird jede Ebene der Datenstruktur als Liste
+dargestellt. In Abbildung \ref{collected_data_overview} wird die erste Ebene
+angezeigt. Jede anklickbare {\em Node} wird dabei als Datum angezeigt. Dieses
+Datum gibt an, wann der entsprechende Datensatz das letzte mal modifiziert
+wurde. In diesem Fall werden drei Einträge dargestellt. In diesem Beispiel
+überschneiden sich die Daten mit denen die im Log stehen. Es wurde also bei
+jeder Ausführung jeweils ein neuer Eintrag zu den gesammelten Daten hinzugefügt.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/collected_data_overview.png}
+	\caption{Plug-In Logs}
+	\label{collected_data_overview}
+\end{figure}
+
+Wählt man einen {\em Node}-Eintrag aus, so gelangt man in der hierarchie eine
+Ebene tiefer. Die sich dabei ergebenen Daten können wie in Abbildung
+\ref{collected_data_details} aussehen. In diesem Beispiel befinden sich auf
+dieser Ebene nur {\em Properties}. Diese {\em Properties} beschreiben von oben
+nach unten die Höhe, Geschwindigkeit, Lautstärke, Längengrad, Genauigkeit,
+Breitengrad, Drehrichtung, Art der Positionsbestimmung. Um wieder auf eine
+höhere Ebene zu gelangen, kann die hardwareseitige Zurücktaste verwendet werden.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/collected_data_details.png}
+	\caption{Gesammelte Daten eines Plug-Ins}
+	\label{collected_data_details}
+\end{figure}
+
+\subsection{Transfer-Manager}
+Der Transfer-Manager dient zur Verwaltung aller ausstehenden Übertragungen.
+Sollte eine neue Übertragung ausstehen, so wird der Benutzer wie in Abbildung
+\ref{new_transfer} darüber informiert.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/new_transfer.png}
+	\caption{Neue Übertragung}
+	\label{new_transfer}
+\end{figure}
+
+Durch die Auswahl des Eintrages gelangt der Benutzer in den Übertragungsbereich
+des {\em Mobile Data Collectors}. Dieser kann bei einer ausstehenden Übertragung
+wie in Abbildung \ref{transfer_pending} aussehen.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/transfer_pending.png}
+	\caption{Ausstehende Übertragung}
+	\label{transfer_pending}
+\end{figure}
+
+Wählt der Benutzer den entsprechenden Eintrag aus, so gelangt dieser in die, in
+Abbildung \ref{transfer_details} dargestellte, Detailansicht der Übertragung. In
+dieser kann der Benutzer nochmal alle Informationen und Aktivitäten des Plug-Ins
+betrachten. Hierbei handelt es sich um einen Schnapschuss des aktuellen
+Zustandes des Plug-Ins, den es hatte, als die Übertragung vorbereitet wurde.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/transfer_details.png}
+	\caption{Übertragungsdetails}
+	\label{transfer_details}
+\end{figure}
+
+Hat der Benutzer alle Daten gesichtet und ist mit der Übertragung einverstanden,
+kann er durch drücken der {\em Transfer} Schaltfläche die Übertragung einleiten.
+Daraufhin wird dem Benutzer der Fortschritt der Übertragung wie in Abbildung
+\ref{transfer_details_sending} und \ref{transfer_sending_notification} zu sehen
+als Dialog und Mitteilung angezeigt.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/transfer_details_sending.png}
+	\caption{Übertragungsfortschritssdialog}
+	\label{transfer_details_sending}
+\end{figure}
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/transfer_sending_notification.png}
+	\caption{Übertragungsfortschritt im Mitteilungsbereich}
+	\label{transfer_sending_notification}
+\end{figure}
+
+Ist der Benutzer nicht mit der Übertragung seiner Daten einverstanden, kann er
+durch die {\em Dismiss} Schaltfläche, die Übertragung löschen.
+
+\section{Aufbau des Mobile Data Collection Frameworks}
 
 \section{Aufbau der Serverkomponente}
 
