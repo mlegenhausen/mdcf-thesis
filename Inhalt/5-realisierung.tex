@@ -5,6 +5,58 @@ Die Anwendung trägt dabei den Arbeitstitel {\em Mobile Data Collector}, während
 das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data Collection
 Framework} trägt.
 
+\section{Architektur des Mobile Data Collection Frameworks}
+Das {\em Mobile Data Collection Framework} dient zur Erstellung von Plug-Ins. Es
+beinhaltet alle Klassen und Interfaces die zwischen dem {\em Mobile Data
+Collector} und dem Plug-In geteilt werden, um eine Kommunikation zwischen beiden
+Komponenten zu ermöglichen. Das Framework wird als Android Bibliothek zur
+Verfügunng gestellt.
+
+Das Framework ist in drei Teile gegliedert. Zum einen Klassen und
+Interfaces, die es einem Plug-In erlauben sich an dem Plug-In System anzumelden
+und mit diesem über Schnittstellen zu kommunizieren. Zum anderen einer
+Implementierung der in Abschnitt \ref{unifiedrepresentation} beschriebenen
+Datenstruktur. Der letzte Teil beinhaltet die Schnittstellen der in Abschnitt
+\ref{securepluginexecution} beschriebenen sicheren Android Services.
+
+Ein Plug-In wird dadurch definiert, dass die {\em Plugin}
+Schnittstelle implementiert wird. Diese stellt alle für das Plug-In System
+nötigen Methoden zur Verfügung, um mit dem Plug-In zu interagieren. Die
+Schnittstelle selbst besteht aus einer Reihe von {\em Settern} mit denen die
+sicheren Versionen der Android System Services und ein {\em
+PersistenceManager} gesetzt werden, sowie einer {\em run}-Methode mit der
+das Plug-In ausgeführt wird. Da die {\em Setter} implementierung trivial und in
+den meisten Fällen identisch sind, gibt es zur Vereinfachung die Klasse {\em
+AbstractPlugin}. Erbt man von dieser Klasse muss nur noch die {\em run}-Methode
+implementiert werden.
+
+Innerhalb der {\em run}-Methode kann auf die gesetzten Services zugegriffen
+werden. Die Services bieten alle in der Android Dokumentation beschriebenen
+Methoden. Neben den Services kann auch auf einen {\em PersistenceManager}
+zugegriffen werden. Dieser erlaubt das einfache Abfragen aller bisher
+gespeicherter Daten über die {\em getWorkspace}-Methode. Die zurückgebene
+Datenstruktur kann dann innerhalb des Plug-Ins beliebig manipuliert werden.
+Wurden alle Daten erfolgreich manipuliert, kann über die {\em save}-Methode die
+Speicherung der Änderungen erfolgen.
+
+Damit das Plug-In System das Plug-In auffinden kann, muss das Plug-In einen
+{\em Broadcast Receiver} implementieren, der den vom Plug-In System versandten
+Broadcast empfangen kann und mit den Plug-In Informationen antwortet. Zu diesem
+Zweck existiert das {\em AbstractPluginRegister}. Erbt man von dieser Klasse
+muss man die {\em onRegister}-Methode implementieren. Diese muss ein {\em
+PluginInfo}-Objekt zurück liefern, welche die Plug-In Informationen enthält. Bei
+dem {\em PluginInfo}-Objekt handelt es sich um ein Java POJO. Neben der reinen
+Java Konfiguration kann man das Objekt auch aus einer XML-Datei generieren
+lassen. Dazu muss man von der {\em XMLPluginRegister} Klasse erben und den Pfad
+zur Konfigurationsdatei als Konstrukturparameter übergeben. Dabei muss darauf
+geachtet werden, dass die Datei sich im {\em Java Classpath} befindet.
+
+Damit das implementierte Plug-In und der {\em Broadcast Receiver} vom Android
+System gefunden werden können, müssen entsprechende Einträge in der {\em
+AndroidManifest.xml} erfolgen.
+
+Konkrete Beispiele sind dem Kapitel \ref{cha:leitfaden} zu entnehmen.
+
 \section{Architektur des Mobile Data Collectors}
 Der Mobile Data Collector ist in die folgenden Komponenten aufgeteilt:
 
@@ -63,42 +115,98 @@ sowie deren Ausführung dar. Er beinhaltet die gesammte Applikationslogik des
 {\em Mobile Data Collectors}. Alle Activities greifen über eine entsprechende
 Service Schnittstelle auf diesen Service zu.
 
-Das Service-Interface beinhaltet die folgenden zentralen Methoden:
+Neben der Service-Schnittstelle stellt das {\em PluginConfiguration}-Objekt eine
+wichtige Datenstruktur dar. Alle zusätzlichen Informationen über ein Plug-In,
+die zur internen Verwaltung benötigt werden, werden im {\em
+PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute.
 
 \begin{itemize}
-  \item activate
-  \item deactivate
-\end{itemize}
-
-Alle Informationen die über ein Plug-In, die nicht im {PluginInfo}-Objekt
-enthalten sind werden im {\em PluginConfiguration}-Objekt gespeichert. Alle
-zusätzlichen Informationen sind im folgenden aufgelistet.
-
-\begin{itemize}
-  \item {\em Mode} gibt an ob, das Plug-In {\em New}, {\em Activated},
+  \item {\bf Mode} gibt an ob, das Plug-In {\em New}, {\em Activated},
   {\em Deactivated} oder sich im {\em Transfer} Zustand befindet. Im letzteren
   werden die bisher gesammelten Daten für die Übertragung vorbereitet.
-  \item {\em State} gibt an ob, das Plug-In sich im {\em Resolved}, {\em
+  \item {\bf State} gibt an ob, das Plug-In sich im {\em Resolved}, {\em
   Waiting} oder {\em Running} Zustand befindet. Im {\em Resolved} Zustand
   befindet es sich immer, wenn der {\em Mode} {\em New}, {\em Deactivated} oder
   {\em Transfer} ist. Zwischen den Zuständen {\em Waiting} und {\em Running}
   wechselt das Plug-In wenn es sich im {\em Mode} {\em Activated} befindet.
-  \item {\em Last Executed} gibt an, wann das Plug-In das letzte mal ausgeführt
+  \item {\bf Last Executed} gibt an, wann das Plug-In das letzte mal ausgeführt
   wurde.
-  \item {\em Last Activated} gibt an, wann das Plug-In das letzte mal aktiviert
+  \item {\bf Last Activated} gibt an, wann das Plug-In das letzte mal aktiviert
   wurde.
-  \item {\em Total Activation Time} gibt summiert an, wielange das Plug-In
+  \item {\bf Total Activation Time} gibt summiert an, wielange das Plug-In
   activiert war.
-  \item {\em Permissions} gibt an, welche Zugriffsrechte das Plug-In vom Android
+  \item {\bf Permissions} gibt an, welche Zugriffsrechte das Plug-In vom Android
   Betriebssystem benötigt. Dieses Attribut sollte im besten Fall leer sein. So
   das alle aktionen über den Mobile Data Collector geschehen können.
-  \item {\em Log Records} speichert alle Zugriffe die auf die sicheren Versionen
+  \item {\bf Log Records} speichert alle Zugriffe die auf die sicheren Versionen
   der Android System Services stattgefunden haben.
-  \item {\em Transfers} beinhaltet eine Liste von ausstehenden Übertragungen.
-  \item {\em Workspace} beinhaltet alle vom Plug-In gesammelten Daten. Dabie
+  \item {\bf Transfers} beinhaltet eine Liste von ausstehenden Übertragungen.
+  \item {\bf Workspace} beinhaltet alle vom Plug-In gesammelten Daten. Dabie
   handelt es sich um ein {\em Node}-Objekt an dem alle zusätzlichen Daten
   gespeichert werden können.
 \end{itemize}
+
+\subsubsection{Service-Interface Definition}
+Das Service-Interface beinhaltet die folgenden zentralen Methoden:
+
+\begin{lstlisting}[language=java]
+void addListener(PluginListener listener)
+\end{lstlisting}
+
+Erlaubt das hinzufügen von {\em PluginListener} die aufgerufen werden, wenn ein
+neues Plug-In installiert bzw. entfernt wurde wurde und das Plug-In seinen {\em
+Mode} oder seinen {\em State} geändert hat.
+
+\begin{lstlisting}[language=java]
+void addListener(TransferListener listener)
+\end{lstlisting}
+
+Erlaubt das hinzufügen von {\em TransferListener} die aufgerufen werden, wenn
+eine neue Übertragung erstellt bzw. entfernt wurde.
+
+\begin{lstlisting}[language=java]
+void activate(PluginConfiguration configuration)
+\end{lstlisting}
+
+Aktiviert das Plug-In das mit der übergebenen {\em PluginConfiguration}
+assoziiert ist.
+
+\begin{lstlisting}[language=java]
+void deactivate(PluginConfiguration configuration)
+\end{lstlisting}
+
+Deaktiviert das Plug-In das mit der übergebenen {\em PluginConfiguration}
+assoziiert ist.
+
+\begin{lstlisting}[language=java]
+PluginConfiguration getPluginConfiguration(PluginInfo info)
+\end{lstlisting}
+
+Liefert die zur {\em PluginInfo} dazu gehörige {\em PluginConfiguration} zurück.
+Existiert keine dazugehörige {\em PluginConfiguration}, so wird {\em null}
+zurückgegeben.
+
+\begin{lstlisting}[language=java]
+List<PluginConfiguration> getPluginConfigurations()
+\end{lstlisting}
+
+Liefert alle installierten Plug-Ins zurück in Form von {\em
+PluginConfiguration}-Objekten.
+
+\begin{lstlisting}[language=java]
+List<Transfer> getTransfers()
+\end{lstlisting}
+
+Liefert alle noch ausstehenden Übertragungen zurück. Sollten keine Übertragungen
+vorhanden sein, wird eine leere Liste zurückgegeben.
+
+\begin{lstlisting}[language=java]
+void removeTransfer(Transfer transfer)
+\end{lstlisting}
+
+Entfernt den übergebenen Transfer. Diese Methode sollte normal nur dann
+aufgerufen werden, wenn das {\em Transfer}-Objekt auch an einen externen Server
+übertragen wurde.
 
 \subsubsection{Plug-In Registierung}
 Der Vorgang der Plug-In Registierung ist in Abbildung \ref{} genauer
@@ -377,58 +485,6 @@ als Dialog und Mitteilung angezeigt.
 
 Ist der Benutzer nicht mit der Übertragung seiner Daten einverstanden, kann er
 durch die {\em Dismiss} Schaltfläche, die Übertragung löschen.
-
-\section{Aufbau und Verwendung des Mobile Data Collection Frameworks}
-Das {\em Mobile Data Collection Framework} dient zur Erstellung von Plug-Ins. Es
-beinhaltet alle Klassen und Interfaces die zwischen dem {\em Mobile Data
-Collector} und dem Plug-In geteilt werden, um eine Kommunikation zwischen beiden
-Komponenten zu ermöglichen. Das Framework wird als Android Bibliothek zur
-Verfügunng gestellt.
-
-Das Framework ist in drei Teile gegliedert. Zum einen Klassen und
-Interfaces, die es einem Plug-In erlauben sich an dem Plug-In System anzumelden
-und mit diesem über Schnittstellen zu kommunizieren. Zum anderen einer
-Implementierung der in Abschnitt \ref{unifiedrepresentation} beschriebenen
-Datenstruktur. Der letzte Teil beinhaltet die Schnittstellen der in Abschnitt
-\ref{securepluginexecution} beschriebenen sicheren Android Services.
-
-Ein Plug-In wird dadurch definiert, dass die {\em Plugin}
-Schnittstelle implementiert wird. Diese stellt alle für das Plug-In System
-nötigen Methoden zur Verfügung, um mit dem Plug-In zu interagieren. Die
-Schnittstelle selbst besteht aus einer Reihe von {\em Settern} mit denen die
-sicheren Versionen der Android System Services und ein {\em
-PersistenceManager} gesetzt werden, sowie einer {\em run}-Methode mit der
-das Plug-In ausgeführt wird. Da die {\em Setter} implementierung trivial und in
-den meisten Fällen identisch sind, gibt es zur Vereinfachung die Klasse {\em
-AbstractPlugin}. Erbt man von dieser Klasse muss nur noch die {\em run}-Methode
-implementiert werden.
-
-Innerhalb der {\em run}-Methode kann auf die gesetzten Services zugegriffen
-werden. Die Services bieten alle in der Android Dokumentation beschriebenen
-Methoden. Neben den Services kann auch auf einen {\em PersistenceManager}
-zugegriffen werden. Dieser erlaubt das einfache Abfragen aller bisher
-gespeicherter Daten über die {\em getWorkspace}-Methode. Die zurückgebene
-Datenstruktur kann dann innerhalb des Plug-Ins beliebig manipuliert werden.
-Wurden alle Daten erfolgreich manipuliert, kann über die {\em save}-Methode die
-Speicherung der Änderungen erfolgen.
-
-Damit das Plug-In System das Plug-In auffinden kann, muss das Plug-In einen
-{\em Broadcast Receiver} implementieren, der den vom Plug-In System versandten
-Broadcast empfangen kann und mit den Plug-In Informationen antwortet. Zu diesem
-Zweck existiert das {\em AbstractPluginRegister}. Erbt man von dieser Klasse
-muss man die {\em onRegister}-Methode implementieren. Diese muss ein {\em
-PluginInfo}-Objekt zurück liefern, welche die Plug-In Informationen enthält. Bei
-dem {\em PluginInfo}-Objekt handelt es sich um ein Java POJO. Neben der reinen
-Java Konfiguration kann man das Objekt auch aus einer XML-Datei generieren
-lassen. Dazu muss man von der {\em XMLPluginRegister} Klasse erben und den Pfad
-zur Konfigurationsdatei als Konstrukturparameter übergeben. Dabei muss darauf
-geachtet werden, dass die Datei sich im {\em Java Classpath} befindet.
-
-Damit das implementierte Plug-In und der {\em Broadcast Receiver} vom Android
-System gefunden werden können, müssen entsprechende Einträge in der {\em
-AndroidManifest.xml} erfolgen.
-
-Konkrete Beispiele sind dem Kapitel \ref{cha:leitfaden} zu entnehmen.
 
 \section{Aufbau der Serverkomponente}
 Durch die Serverkomponente soll ein Plug-In Entwickler die Möglichkeit erhalten,
