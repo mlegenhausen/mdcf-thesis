@@ -1,8 +1,230 @@
 \chapter{Leitfaden zur Plug-In Entwicklung}
 \label{cha:leitfaden}
+In diesem Kapitel wird erklärt wie man mit Hilfe der Eclipse IDE, Plug-Ins für
+den {\em Mobile Data Collector} entwickeln kann. Dies schließt neben der
+Entwicklung der Smartphone Komponente auch die Serverkomponente mit ein.
 
 \section{Entwicklung eines Plug-Ins}
-\subsection{Entwicklungsumgebung}
+Die Entwicklung eines Plug-Ins gliedert sich in dritte Schritte. Im ersten
+Schritt muss das Framework runtergeladen werden. Im zweiten Schritt wird die
+Entwicklungsumgebung eingerichtet und das Projekt eingerichtet. Im letzten
+Schritt wird erklärt wie ein Plug-In implementiert und installiert wird.
+
+\subsection{Beziehen des Mobile Data Collection Frameworks}
+Das {\em Mobile Data Collection Framework} kann von 
+\url{https://github.com/mlegenhausen/mdcf} bezogen werden. Es ist dabei möglich
+das Framework als Archiv runterzuladen oder per Git zu klonen. Bei Git handelt
+es sich um verteiltes Versionskontrollsystem, das von 
+\url{http://git-scm.com/} heruntergeladen werden kann.
+
+Um das Projekt per Git zu klonen, muss folgendes auf der Kommandozeile
+ausgeführt werden.
+
+\begin{lstlisting}[language=bash]
+git clone git://github.com/mlegenhausen/mdcf.git
+\end{lstlisting}
+
+Man kann nun die aktuelle stabile Version aus der {\em master}-Branch verwenden
+oder die Entwicklerversion aus dem {\em develop}-Branch. Nach dem klonen
+befindet man sich automatisch im {\em master}-Branch, um in den {\em
+develop}-Branch zu wechseln muss folges auf der Kommandozeile ausgeführt werden.
+
+\begin{lstlisting}[language=bash]
+cd mdcf
+git checkout develop
+\end{lstlisting}
+
+Das Framework das im folgenden verwendet wird, befindet sich im {\em
+Mobile\-Data\-Collection\-Framework}-Verzeichnis.
+
+\subsection{Einrichtung der Entwicklungsumgebung}
+Im Folgenden wird die Einrichtung der Entwicklungsumgebung Eclipse erklärt.
+Der Autor empfiehlt die Verwendung von Eclipse, da diese zum Zeitpunkt der
+Arbeit die beste Unterstützung bei der Entwicklung von Android Anwendungen
+geboten hat. Zur Einrichtung der Eclipse IDE sind folgende Schritte
+durchzuführen.
+
+Zur Einrichtung der Entwicklungsumgebung sind folgende Schritte durchzuführen.
+
+\begin{enumerate}
+  \item Installation des Android Software Development Kits (SDK). Dazu müssen
+  die Schritte von \url{http://developer.android.com/sdk/installing.html}
+  befolgt werden.
+  \item Installation des Android Development Tools (ADT) Plug-In für Eclipse.
+  Dazu müssen die Schritte von
+  \url{http://developer.android.com/sdk/eclipse-adt.html} befolgt werden.
+\end{enumerate}
+
+Die Entwicklungsumgebung ist nun vollständig eingerichtet.
+
+Import der Projekte!
+
 \subsection{Das Hallo Welt Plug-In}
+Im Folgenden wird die Entwicklung mit dem {\em Mobile Data Collection Framework}
+anhand eines Hallo Welt Plug-Ins genauer erläutert. Dazu muss im ersten Schritt
+ein neues Android Projekt erstellt werden. Dies geschieht mit Eclipse wie folgt.
+Durch einen Rechtsklick auf den {\em Package Explorer} kann durch die Menüpunkte
+{\em New} und {\em Project\ldots} der {\em New Project}-Dialog geöffnet werden.
+In diesem wählt man unter dem Verzeichnis {\em Android}, {\em Android Project}
+aus. Durch einen klick auf {\em Next} gelangt man zum {\em New Android
+Project}-Dialog. Diesem Dialog trägt man unter {\em Project name}
+``HelloWorldPlugin'' an. Wählt unter {\em Build target} die Android Version
+2.3.3 aus, gibt unter {\em Package name} com.example.helloworld ein und wählt
+den Haken bei {\em Create Activity} ab. Durch einen Klick auf {\em Finish} wird
+das Projekt erstellt.
+
+Im nächsten Schritt muss das {\em Mobile Data Collection Framework} zum Projekt
+hinzugefügt werden. Dazu muss man einen Rechtsklick auf das {\em
+HelloWorldPlugin} machen und {\em Properties} auswählen. In dem sich öffnen
+Dialog wählt auf der linken Seite den Punkt {\em Android} aus. Dort kann man
+durch einen Klick auf {\em Add\ldots} das {\em
+Mobile\-Data\-Collection\-Framework}-Projekt hinzufügen. Durch einen Klick auf
+{\em OK} wird das Framework zum Plug-In hinzugefügt.
+
+Nachdem man das Framework hinzugefügt hat, werden Fehler angezeigt. Um diese
+Fehler zu beseitigen, muss die Simple-XML Bibliothek zum Projekt hinzugefügt
+werden. Dazu erstellt man unterhalb des {\em HelloWorldPlugin}-Projekts einen
+{\em lib}-Verzeichnis. In dieses kopiert man vom {\em lib}-Verzeichnis des {\em
+Mobile\-Data\-Collection\-Framework}-Projekts die {\em simple-xml-2.5.3.jar}.
+Nun muss die Bibliothek noch zum {\em Java Classpath} hinzugefügt werden. Dazu
+geht man wieder in die {\em Properties} des {\em HelloWorldPlugin}-Projekt. Auf
+linken Seite wählt man {\em Java Build Path} aus. Daraufhin wählt man den Tab
+{\em Libraries} aus und klickt dort auf {\em Add Jars\ldots}. In dem sich öffnen
+Dialog navigiert man nun zu der zuvor kopierten Bibliothek und wählt diese aus.
+Durch einen Klick auf {\em OK} wird die Bibliothek zum {\em Java Classpath}
+hinzugefügt und das Projekt ist wieder fehlerfrei.
+
+Nun kann das eigentliche Plug-In entwickelt werden. Hierzu erstellt man im
+Package {\em com.example.helloworld} eine Klasse mit dem Namen {\em
+HelloWorldPlugin}. Dazu macht man einen Rechtsklick auf das Package und wählt
+{\em New} und {\em Class} aus. Unter {\em Name} gibt man den entsprechenden
+Namen an und bei Superclass wählt man mit einem Klick auf Browse die Klasse
+{\em AbstractPlugin}. Durch einen Klick auf {\em Finish} wird die Klasse wie in
+Listening \ref{helloworldplugin} erstellt.
+
+\begin{lstlisting}[label=helloworldplugin,
+caption=HelloWorldPlugin.java, language=java] package com.example.helloworld;
+
+import de.uniluebeck.itm.mdcf.AbstractPlugin;
+
+public class HelloWorldPlugin extends AbstractPlugin {
+
+	@Override
+	protected void onRun() throws Exception {
+		
+	}
+}
+\end{lstlisting}
+
+Als Beispiel soll nun bei jedem Aufruf des Plug-Ins ein ``Hello World''
+gespeichert werden. Dazu fügt man zur {\em onRun}-Methode Code von Listening
+\ref{helloworldonrun} hizu.
+
+\begin{lstlisting}[label=helloworldonrun, caption=Inhalt der
+{\em onRun}-Methode, language=java] 
+PersistenceManager persist = getPersistenceManager();
+Node workspace = persist.getWorkspace();
+
+Node entry = new Node();
+entry.setProperty("Value", "Hello World");
+workspace.addNode(entry);
+
+persist.save(workspace);
+\end{lstlisting}
+
+In Zeile 1 - 2 wird der {\em Workspace} abfragt. An diesem wird in Zeile 4 - 6
+eine neue {\em Node} mit einem {\em Property} hinzugefügt. In der letzten Zeile
+werden alle Änderungen am {\em Workspace} wieder gespeichert.
+
+Als nächstes muss ein {\em Broadcast Receiver} implementiert werden, um das
+Plug-In auffindbar und Plug-In Informationen dem {\em Mobile Data Collector}
+verfügbar zu machen. Dazu erstellt man, im selben Package, eine Klasse {\em
+HelloWorldRegister}, die von {\em XMLPluginRegister} erbt. Dieser Klasse fügt
+man einen {\em Constructor} hinzu, der auf die Datei ``plugin.xml'' verweißt.
+Diese Datei enthält die Plug-In Informationen beschrieben in XML. Die Klasse
+sollte nun wie in Listening \ref{helloworldregister} aussehen.
+
+\begin{lstlisting}[label=helloworldregister,
+caption=HelloWorldRegister.java, language=java]
+package com.example.helloworld;
+
+import de.uniluebeck.itm.mdcf.XMLPluginRegister;
+
+public class HelloWorldRegister extends XMLPluginRegister {
+
+	public HelloWorldRegister() {
+		super("plugin.xml");
+	}
+}
+\end{lstlisting}
+
+Nun muss noch die zuvor genannte ``plugin.xml'' erstellt
+werden. Hierzu erstellt man eine XML-Datei im zuvor erwähnten Package. Es ist
+darauf zu achten, das sich die XML-Datei innerhalb des {\em Java Classpath}
+befindet. In die ``plugin.xml'' ist das Listening \ref{helloworldpluginxml} zu
+kopieren.
+
+\begin{lstlisting}[label=helloworldpluginxml, caption=plugin.xml, language=xml]
+<plugininfo action="com.example.helloworld.HELLO_WORLD_PLUGIN" version="1.0">
+	<name>Hello World</name> 
+	<period>10000</period>
+	<duration>1000</duration>
+	<url>http://192.168.1.142:8888/receiver</url>
+	<transferInterval>600000</transferInterval>
+</plugininfo>
+\end{lstlisting}
+
+Was steht hier drin?
+
+Zu guter letzt muss das Plug-In und der {\em Broadcast Receiver} dem Android
+System bekannt gemacht werden. Dazu muss die {\em AndroidManifest.xml} angepasst
+werden. Die Anpassungen sehen wie in Listining \ref{helloworldmanifest} aus.
+
+\begin{lstlisting}[label=helloworldmanifest, caption=AndroidManifest.xml,
+language=xml] <?xml version="1.0" encoding="utf-8"?>
+<manifest 
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		package="com.example.helloworld"
+		android:versionCode="1"
+		android:versionName="1.0">
+		
+	<application 
+			android:icon="@drawable/icon" 
+			android:label="@string/app_name">
+			
+		<receiver 
+				android:name="com.example.helloworld.HelloWorldRegister">
+			<intent-filter>
+				<action 
+						android:name="de.uniluebeck.itm.mdcf.PLUGIN_FIND"/>
+			</intent-filter>
+		</receiver>
+		
+		<service 
+				android:name="com.example.helloworld.HelloWorldPlugin">
+			<intent-filter>
+				<action 
+						android:name="com.example.helloworld.HELLO_WORLD_PLUGIN"/>
+			</intent-filter>
+		</service>
+		
+	</application>
+</manifest>
+\end{lstlisting}
+
+Die von Eclipse generierte {\em AndroidManifest.xml} wurde hierbei um zwei
+Einträge erweitert. Einmal um einen {\em Broadcast Receiver} (Zeile 12 - 18) und
+dem Plug-In, der als {\em Service} definiert wird (Zeile 20 - 26). Der {\em
+Broadcast Receiver} besitzt eine {\em action} mit dem Namen {\em
+de.uniluebeck.itm.mdcf.PLUGIN\_FIND}. Durch diesen wird der {\em Broadcast
+Receiver} aufgerufen, wenn der {\em Mobile Data Collector} nach Plug-Ins sucht.
+Das Plug-In wiederum besitzt eine {\em action} mit dem Namen {\em
+com.example.helloworld.HELLO\_WORLD\_PLUGIN}. Durch diese kann der {\em Mobile
+Data Collector}, die Plug-In-Schnittstelle aufrufen und das Plug-In somit
+ausführen. Hierbei ist darauf zu achten, dass die {\em action} den selben Namen
+besitzt wie in der ``plugin.xml'' angegeben, da sonst das Plug-In nicht
+aufgerufen werden kann.
+
+Das Plug-In ist nun fertig und kann zum ersten mal ausgeführt werden. 
 
 \section{Entwicklung der Serverkomponente}
