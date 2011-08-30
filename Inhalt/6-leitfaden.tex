@@ -94,6 +94,7 @@ Dialog navigiert man nun zu der zuvor kopierten Bibliothek und wählt diese aus.
 Durch einen Klick auf {\em OK} wird die Bibliothek zum {\em Java Classpath}
 hinzugefügt und das Projekt ist wieder fehlerfrei.
 
+\subsubsection{Implementierung des Plug-Ins}
 Nun kann das eigentliche Plug-In entwickelt werden. Hierzu erstellt man im
 Package {\em com.example.helloworld} eine Klasse mit dem Namen {\em
 HelloWorldPlugin}. Dazu macht man einen Rechtsklick auf das Package und wählt
@@ -136,6 +137,7 @@ In Zeile 1 - 2 wird der {\em Workspace} abfragt. An diesem wird in Zeile 4 - 6
 eine neue {\em Node} mit einem {\em Property} hinzugefügt. In der letzten Zeile
 werden alle Änderungen am {\em Workspace} wieder gespeichert.
 
+\subsubsection{Implementierung des Broadcast Receivers}
 Als nächstes muss ein {\em Broadcast Receiver} implementiert werden, um das
 Plug-In auffindbar und Plug-In Informationen dem {\em Mobile Data Collector}
 verfügbar zu machen. Dazu erstellt man, im selben Package, eine Klasse {\em
@@ -176,6 +178,7 @@ kopieren.
 
 Was steht hier drin?
 
+\subsubsection{Konfiguration der Manifest-Datei}
 Zu guter letzt muss das Plug-In und der {\em Broadcast Receiver} dem Android
 System bekannt gemacht werden. Dazu muss die {\em AndroidManifest.xml} angepasst
 werden. Die Anpassungen sehen wie in Listining \ref{helloworldmanifest} aus.
@@ -224,6 +227,8 @@ Data Collector}, die Plug-In-Schnittstelle aufrufen und das Plug-In somit
 ausführen. Hierbei ist darauf zu achten, dass die {\em action} den selben Namen
 besitzt wie in der ``plugin.xml'' angegeben, da sonst das Plug-In nicht
 aufgerufen werden kann.
+
+\subsubsection{Plug-In installen und ausführen}
 
 Das Plug-In ist nun fertig und kann zum ersten mal ausgeführt werden. 
 
