@@ -11,9 +11,9 @@ Entwicklungsumgebung eingerichtet und das Projekt eingerichtet. Im letzten
 Schritt wird erklärt wie ein Plug-In implementiert und installiert wird.
 
 \subsection{Beziehen des Mobile Data Collection Frameworks}
-Das {\em Mobile Data Collection Framework} kann von 
-\url{https://github.com/mlegenhausen/mdcf} bezogen werden. Es ist dabei möglich
-das Framework als Archiv runterzuladen oder per Git zu klonen. Bei Git handelt
+Das {\em Mobile Data Collection Framework} kann von Github über die URL
+\url{https://github.com/mlegenhausen/mdcf} bezogen werden. Es ist dabei
+möglich das Framework als Archiv runterzuladen oder per Git zu klonen. Bei Git handelt
 es sich um verteiltes Versionskontrollsystem, das von 
 \url{http://git-scm.com/} heruntergeladen werden kann.
 
@@ -44,6 +44,7 @@ Arbeit die beste Unterstützung bei der Entwicklung von Android Anwendungen
 geboten hat. Zur Einrichtung der Eclipse IDE sind folgende Schritte
 durchzuführen.
 
+\subsubsection{Einrichtung von Eclipse}
 Zur Einrichtung der Entwicklungsumgebung sind folgende Schritte durchzuführen.
 
 \begin{enumerate}
@@ -57,21 +58,33 @@ Zur Einrichtung der Entwicklungsumgebung sind folgende Schritte durchzuführen.
 
 Die Entwicklungsumgebung ist nun vollständig eingerichtet.
 
-Import der Projekte!
+\subsubsection{Import des Mobile Data Collection Framework}
+Bevor ein Plug-In entwickelt werden kann, muss das {\em Mobile Data Collection
+Framework} und der {\em Mobile Data Collector} in den Workspace von Eclipse
+importiert werden. Dazu geht man wie folgt vor. Durch einen Rechtsklick auf den
+{\em Package Explorer} kann durch die Menüpunkte {\em New} und {\em
+Project\ldots} der {\em New Project}-Dialog geöffnet werden. In diesem wählt man
+unter dem Verzeichnis {\em Android}, {\em Android Project} aus. Durch einen
+klick auf {\em Next} gelangt man zum {\em New Android Project}-Dialog. In diesemDialog wählt man {\em Create project from existing source} aus und setzt durch{\em Browse\ldots} den Pfad zum {\em Mobile Data Collection Framework}.Durch einen Klick auf {\em Finish} wird das Projekt erstellt und das {\emMobile Data Collection Framework} in den Workspace importiert. Diese Schrittewiederholt man nun für den {\em Mobile Data Collector}.
+Sind beide Projekte importiert, kann das eigentliche Plug-In entwickelt werden.
+Siehe hierzu den nächsten Abschnitt \ref{helloworldplugin}.
 
 \subsection{Das Hallo Welt Plug-In}
+\label{helloworldplugin}
 Im Folgenden wird die Entwicklung mit dem {\em Mobile Data Collection Framework}
-anhand eines Hallo Welt Plug-Ins genauer erläutert. Dazu muss im ersten Schritt
-ein neues Android Projekt erstellt werden. Dies geschieht mit Eclipse wie folgt.
-Durch einen Rechtsklick auf den {\em Package Explorer} kann durch die Menüpunkte
-{\em New} und {\em Project\ldots} der {\em New Project}-Dialog geöffnet werden.
-In diesem wählt man unter dem Verzeichnis {\em Android}, {\em Android Project}
-aus. Durch einen klick auf {\em Next} gelangt man zum {\em New Android
-Project}-Dialog. Diesem Dialog trägt man unter {\em Project name}
-``HelloWorldPlugin'' an. Wählt unter {\em Build target} die Android Version
-2.3.3 aus, gibt unter {\em Package name} com.example.helloworld ein und wählt
-den Haken bei {\em Create Activity} ab. Durch einen Klick auf {\em Finish} wird
-das Projekt erstellt.
+anhand eines Hallo Welt Plug-Ins genauer erläutert. 
+
+\subsubsection{Erstellen des Plug-In Projekts}
+Im ersten Schritt muss ein neues Android Projekt erstellt werden. Dies geschieht
+mit Eclipse wie folgt. Durch einen Rechtsklick auf den {\em Package Explorer} kann
+durch die Menüpunkte {\em New} und {\em Project\ldots} der {\em New
+Project}-Dialog geöffnet werden. In diesem wählt man unter dem Verzeichnis {\em
+Android}, {\em Android Project} aus. Durch einen klick auf {\em Next} gelangt
+man zum {\em New Android Project}-Dialog. Diesem Dialog trägt man unter {\em
+Project name} ``HelloWorldPlugin'' an. Wählt unter {\em Build target} die
+Android Version 2.3.3 aus, gibt unter {\em Package name}
+{\em com.example.helloworld} ein und wählt den Haken bei {\em Create Activity}
+ab. Durch einen Klick auf {\em Finish} wird das Projekt erstellt.
 
 Im nächsten Schritt muss das {\em Mobile Data Collection Framework} zum Projekt
 hinzugefügt werden. Dazu muss man einen Rechtsklick auf das {\em
@@ -176,7 +189,24 @@ kopieren.
 </plugininfo>
 \end{lstlisting}
 
-Was steht hier drin?
+In dieser Konfigurationsdatei wurden folgende Parameter festgelegt.
+
+\begin{itemize}
+  \item Das Plug-In kann innerhalb des Android Systems über die {\em action}\\
+  {\em com.example.helloworld.HELLO\_WORLD\_PLUGIN} per IPC angesprochen werden.
+  \item Das Plug-In trägt die Version 1.0.
+  \item Der Darstellungsname innerhalb des {\em Mobile Data Collectors} ist
+  ``Hello World''.
+  \item Das Plug-In wird alle 10.000ms bzw. alle 10s ausgeführt.
+  \item Die maximale Ausführungsdauer beträgt 1.000ms. Wird diese Zeit
+  über\-schritten wird das Plug-In vom Android System terminiert.
+  \item Alle gesammelten Daten sollen bei einer Übertragung an die URL\\ {\em
+  http://192.168.1.142:8888/receiver} gesendet werden.
+  \item Nach einer Zeit von 600.000ms bzw. 10min sollen alle Daten Übertragen
+  werden. Dies schließt nur die Zeit ein in der das Plug-In aktiv war.
+\end{itemize}
+
+Diese Parameter können je nach Anforderung beliebig abgeändert werden.
 
 \subsubsection{Konfiguration der Manifest-Datei}
 Zu guter letzt muss das Plug-In und der {\em Broadcast Receiver} dem Android
@@ -229,7 +259,25 @@ besitzt wie in der ``plugin.xml'' angegeben, da sonst das Plug-In nicht
 aufgerufen werden kann.
 
 \subsubsection{Plug-In installen und ausführen}
+Das Plug-In ist nun fertig und kann zum ersten mal ausgeführt werden. Dazu muss
+im ersten Schritt der {\em Mobile Data Collector} installiert werden. Dies
+geschieht durch einen Rechtsklick auf das {\em Mobile\-Data\-Collector}-Projekt.
+Durch einen Klick im Menü auf {\em Run As} und {\em Android Application} wird
+der {\em Mobile Data Collector} installiert. Sollte ein Android Smartphone am
+Computer angeschlossen sein, so wird der {\em Mobile Data Collector} auf diesem
+automatisch installiert. Sollte dies nicht der Fall sein, wird der
+Android Emulator gestartet. Es ist zu Empfehlen den {\em Mobile Data Collector}
+auf einem Smartphone zu installieren, da nur bei diesem, die volle Sensorik zur
+Verfügung steht. Nach der installation wird der {\em Mobile Data Collector}
+automatisch gestartet.
 
-Das Plug-In ist nun fertig und kann zum ersten mal ausgeführt werden. 
+Im nächsten Schritt kann nun das eigentliche Plug-In installiert werden. Dazu
+installiert man das {\em Hello\-World\-Plugin} wie zuvor den {\em Mobile Data
+Collector}. Nach der installation wird das Plug-In in der Plug-In Liste des
+{\em Mobile Data Collectors} angezeigt. Aktiviert man nun das Plug-In wird
+dieses das erste mal ausgeführt. Man kann nun in den Plug-In Details sich die
+gespeicherten Daten anschauen. Navigiert man in der Datenhierarchie hierum, wird
+man feststellen, dass bei jeder Ausführung der String ``Hello World''
+gespeichert wurde.
 
 \section{Entwicklung der Serverkomponente}
