@@ -2,15 +2,13 @@
 \label{cha:leitfaden}
 In diesem Kapitel wird erklärt wie man mit Hilfe der Eclipse IDE, Plug-Ins für
 den {\em Mobile Data Collector} entwickeln kann. Dies schließt neben der
-Entwicklung der Smartphone Komponente auch die Serverkomponente mit ein.
+Entwicklung der Smartphone Komponente auch die Serverkomponente mit ein. Dieses
+Kapitel ist in drei Teile gegliedert. Im ersten wird erklärt wie man die nötigen
+Frameworks zur Entwicklung von Plug-Ins, sowie deren Serverkomponente
+beziehen kann. Im zweiten wird erklärt wie man einfaches ``Hallo Welt''-Plugin
+entwickeln kann und im letzten die dazugehörige Serverkomponente.
 
-\section{Entwicklung eines Plug-Ins}
-Die Entwicklung eines Plug-Ins gliedert sich in dritte Schritte. Im ersten
-Schritt muss das Framework runtergeladen werden. Im zweiten Schritt wird die
-Entwicklungsumgebung eingerichtet und das Projekt eingerichtet. Im letzten
-Schritt wird erklärt wie ein Plug-In implementiert und installiert wird.
-
-\subsection{Beziehen des Mobile Data Collection Frameworks}
+\section{Beziehen des Mobile Data Collection Frameworks}
 Das {\em Mobile Data Collection Framework} kann von Github über die URL
 \url{https://github.com/mlegenhausen/mdcf} bezogen werden. Es ist dabei
 möglich das Framework als Archiv runterzuladen oder per Git zu klonen. Bei Git handelt
@@ -18,7 +16,8 @@ es sich um verteiltes Versionskontrollsystem, das von
 \url{http://git-scm.com/} heruntergeladen werden kann.
 
 Um das Projekt per Git zu klonen, muss folgendes auf der Kommandozeile
-ausgeführt werden.
+ausgeführt werden. Vor der Ausführung sollte man sich in einem entsprechenden
+Verzeichnis befinden, in das man das Projekt klonen möchte.
 
 \begin{lstlisting}[language=bash]
 git clone git://github.com/mlegenhausen/mdcf.git
@@ -34,18 +33,21 @@ cd mdcf
 git checkout develop
 \end{lstlisting}
 
-Das Framework das im folgenden verwendet wird, befindet sich im {\em
-Mobile\-Data\-Collection\-Framework}-Verzeichnis.
+Das Framework zur Implementierung des Plug-Ins befindet sich im {\em
+Mobile\-Data\-Collection\-Framework}-Verzeichnis, während sich das Framework zur
+Implementierung der Serverkomponente im {\em mdcf-remote}-Verzeichnis befindet.
 
-\subsection{Einrichtung der Entwicklungsumgebung}
-Im Folgenden wird die Einrichtung der Entwicklungsumgebung Eclipse erklärt.
+\section{Entwicklung eines Plug-Ins}
+Die Entwicklung eines Plug-Ins wird im folgenden anhand eines ``Hallo
+Welt''-Plug-Ins dargestellt. Dabei wird der komplette Umfang der Entwicklung
+beschrieben. Dies schließt das beziehen der nötigen Software, sowie deren
+Einrichtung ein.
+
+\subsection{Einrichtung der Entwicklungsumgebung Eclipse}
 Der Autor empfiehlt die Verwendung von Eclipse, da diese zum Zeitpunkt der
 Arbeit die beste Unterstützung bei der Entwicklung von Android Anwendungen
 geboten hat. Zur Einrichtung der Eclipse IDE sind folgende Schritte
 durchzuführen.
-
-\subsubsection{Einrichtung von Eclipse}
-Zur Einrichtung der Entwicklungsumgebung sind folgende Schritte durchzuführen.
 
 \begin{enumerate}
   \item Installation des Android Software Development Kits (SDK). Dazu müssen
@@ -58,23 +60,17 @@ Zur Einrichtung der Entwicklungsumgebung sind folgende Schritte durchzuführen.
 
 Die Entwicklungsumgebung ist nun vollständig eingerichtet.
 
-\subsubsection{Import des Mobile Data Collection Framework}
+\subsection{Import des Mobile Data Collection Framework}
 Bevor ein Plug-In entwickelt werden kann, muss das {\em Mobile Data Collection
 Framework} und der {\em Mobile Data Collector} in den Workspace von Eclipse
 importiert werden. Dazu geht man wie folgt vor. Durch einen Rechtsklick auf den
 {\em Package Explorer} kann durch die Menüpunkte {\em New} und {\em
 Project\ldots} der {\em New Project}-Dialog geöffnet werden. In diesem wählt man
 unter dem Verzeichnis {\em Android}, {\em Android Project} aus. Durch einen
-klick auf {\em Next} gelangt man zum {\em New Android Project}-Dialog. In diesemDialog wählt man {\em Create project from existing source} aus und setzt durch{\em Browse\ldots} den Pfad zum {\em Mobile Data Collection Framework}.Durch einen Klick auf {\em Finish} wird das Projekt erstellt und das {\emMobile Data Collection Framework} in den Workspace importiert. Diese Schrittewiederholt man nun für den {\em Mobile Data Collector}.
-Sind beide Projekte importiert, kann das eigentliche Plug-In entwickelt werden.
-Siehe hierzu den nächsten Abschnitt \ref{helloworldplugin}.
+klick auf {\em Next} gelangt man zum {\em New Android Project}-Dialog. In diesemDialog wählt man {\em Create project from existing source} aus und setzt durch{\em Browse\ldots} den Pfad zum {\em Mobile Data Collection Framework}.Durch einen Klick auf {\em Finish} wird das Projekt erstellt und das {\emMobile Data Collection Framework} in den Workspace importiert. Diese Schrittewiederholt man nun für den {\em Mobile Data Collector}. Sind beide Projekte
+importiert, kann das eigentliche Plug-In entwickelt werden.
 
-\subsection{Das Hallo Welt Plug-In}
-\label{helloworldplugin}
-Im Folgenden wird die Entwicklung mit dem {\em Mobile Data Collection Framework}
-anhand eines Hallo Welt Plug-Ins genauer erläutert. 
-
-\subsubsection{Erstellen des Plug-In Projekts}
+\subsection{Erstellen des Plug-In Projekts}
 Im ersten Schritt muss ein neues Android Projekt erstellt werden. Dies geschieht
 mit Eclipse wie folgt. Durch einen Rechtsklick auf den {\em Package Explorer} kann
 durch die Menüpunkte {\em New} und {\em Project\ldots} der {\em New
@@ -107,7 +103,8 @@ Dialog navigiert man nun zu der zuvor kopierten Bibliothek und wählt diese aus.
 Durch einen Klick auf {\em OK} wird die Bibliothek zum {\em Java Classpath}
 hinzugefügt und das Projekt ist wieder fehlerfrei.
 
-\subsubsection{Implementierung des Plug-Ins}
+\subsection{Implementierung des Plug-Ins}
+\label{pluginimplementation}
 Nun kann das eigentliche Plug-In entwickelt werden. Hierzu erstellt man im
 Package {\em com.example.helloworld} eine Klasse mit dem Namen {\em
 HelloWorldPlugin}. Dazu macht man einen Rechtsklick auf das Package und wählt
@@ -258,7 +255,7 @@ ausführen. Hierbei ist darauf zu achten, dass die {\em action} den selben Namen
 besitzt wie in der ``plugin.xml'' angegeben, da sonst das Plug-In nicht
 aufgerufen werden kann.
 
-\subsubsection{Plug-In installen und ausführen}
+\subsection{Plug-In installen und ausführen}
 Das Plug-In ist nun fertig und kann zum ersten mal ausgeführt werden. Dazu muss
 im ersten Schritt der {\em Mobile Data Collector} installiert werden. Dies
 geschieht durch einen Rechtsklick auf das {\em Mobile\-Data\-Collector}-Projekt.
@@ -281,3 +278,196 @@ man feststellen, dass bei jeder Ausführung der String ``Hello World''
 gespeichert wurde.
 
 \section{Entwicklung der Serverkomponente}
+Im Folgenden wird beschrieben wie die Daten vom zuvor entwickelten Plug-In
+empfangen und serverseitig weiter verarbeitet werden können. Für die Entwicklung
+der Serverkomponente kann eine beliebige IDE verwendet werden. Zum bauen des
+Projektes wird in diesem Fall {\em Maven} verwendet.
+
+Da die Kommunikation mit dem {\em Mobile Data Collector} über das HTTP Protokoll
+stattfindet, wird die Serverkomponente als Web Anwendung entwickelt. Hierzu
+werden normale Java Servlets verwendet, sowie das {\em Dependecy
+Injection}-Framework {\em Google Guice}.
+
+\subsection{Installation des Remote Frameworks}
+Das {\em Remote Framework} dient zur einfachen Implementierung der
+Serverkomponente. Dieses kann per Maven wie folgt verwendet werden.
+
+\begin{lstlisting}[language=bash]
+cd mdcf-remote
+mvn package
+\end{lstlisting}
+
+Unterhalb des {\em target}-Verzeichnisses befindet sich nun die fertig gebaute
+Bibliothek die in den folgenden Schritten verwendet wird.
+
+\subsection{Erstellen des Projektes}
+Um mit Maven ein Projekt zu erstellen, ist folgendes auf der Kommandozeile
+auszuführen.
+
+\begin{lstlisting}[language=bash]
+mvn archetype:generate \
+	-DgroupId=com.example.helloworld \
+	-DartifactId=server \
+	-Dversion=0.1-SNAPSHOT \
+	-Dpackage=com.example.helloworld.server \
+	-DarchetypeArtifactId=maven-archetype-webapp
+\end{lstlisting}
+
+Alle auftretenden Fragen können durch die Eingabe von {\em Enter} bestättigt
+werden. Leider wird das Projekt unvollständig von Maven generiert. Deswegen wird
+für die weiteren Schritte empfohlen nachträglich ein {\em
+src/main/java}-Verzeichnis hinzuzufügen, sowie ein {\em
+com.example.helloworld.server}-Package.
+
+Bevor nun mit der eigentlichen Implementierung begonnen werden kann, müssen noch
+die in Listing \ref{pomxml} angegebenen Abhängigkeiten zur {\em pom.xml} hinzugefügt
+werden.
+
+\begin{lstlisting}[label=pomxml, caption=pom.xml, language=xml] 
+<dependencies>
+	<dependency>
+		<groupId>de.uniluebeck.itm</groupId>
+		<artifactId>mdcf-remote</artifactId>
+		<version>0.1-SNAPSHOT</version>
+		<scope>system</scope>
+		<systemPath>
+			${basedir}/lib/mdcf-remote-0.1-SNAPSHOT.jar
+		</systemPath>
+	</dependency>
+	<dependency>
+		<groupId>com.google.inject</groupId>
+		<artifactId>guice</artifactId>
+		<version>3.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.inject.extensions</groupId>
+		<artifactId>guice-servlet</artifactId>
+		<version>3.0</version>
+	</dependency>
+</dependencies>
+\end{lstlisting}
+
+Hierbei wird als erstes das {\em Remote Framework} als abhängigkeit definiert,
+als zweites {\em Google Guice} und als letztes eine Erweiterung um {\em Google
+Guice} mit Servlets zu verwenden.
+
+\subsection{Implementierung der Serverkomponente}
+Um die vom Smartphone empfangenen Daten zu verarbeiten, muss ein {\em
+TransferRequestProcessor} implementiert werden. Dieser bekommt beim Aufruf der
+{\em process}-Methode, den deserialisierten {\em TransferRequest}
+übergeben, der vom {\em Mobile Data Collector} übertragen wurde. Siehe hierzu
+Listing \ref{transferequestprocessor}.
+
+\begin{lstlisting}[label=transferrequestprocessor,
+caption=TransferRequestProessorImpl.java, language=java] 
+package com.example.helloworld.server;
+
+import java.util.Iterator;
+
+import de.uniluebeck.itm.mdcf.remote.TransferRequestProcessor;
+import de.uniluebeck.itm.mdcf.remote.model.Node;
+import de.uniluebeck.itm.mdcf.remote.model.TransferRequest;
+
+public class TransferRequestProcessorImpl implements TransferRequestProcessor {
+
+	public void process(TransferRequest request) {
+		String id = request.getId();
+		Node workspace = request.getWorkspace();
+		Iterator<Node> nodes = workspace.getNodes();
+		while (nodes.hasNext()) {
+			Node node = nodes.next();
+			String value = node.getProperty("Value").getValue().getString();
+			System.out.println("Participant-ID: " + id + ", Value: " + value);
+		}
+	}
+}
+\end{lstlisting}
+
+In diesem Listing werden die vom {\em HelloWorldPlugin} empfangenen Daten
+einfach auf der Konsole ausgegeben. Die Zeile 12 angegebene ID ist die
+eindeutige Benutzernutzerkennung des Smartphone-Besitzers und kann dazu
+verwendet werden Datensätze einzelnen Benutzern zuzuordnen.
+
+Damit der zuvor implementierte {\em TransferRequestProcessor} über eine URL
+aufgegrufen werden kann. Muss dieser noch unter zurhilfenahme von {\em Google
+Guice} konfiguriert werden. Hierzu ist ein {\em GuiceServletContextListener} zu
+implementieren. Siehe hierzu Listing \ref{helloworldcontextlistener}.
+
+\begin{lstlisting}[label=helloworldcontextlistener,
+caption=HelloWorldContextListener.java, language=java] 
+package com.example.helloworld.server;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.servlet.GuiceServletContextListener;
+import com.google.inject.servlet.ServletModule;
+
+import de.uniluebeck.itm.mdcf.remote.MdcfRemoteModule;
+import de.uniluebeck.itm.mdcf.remote.TransferRequestReceiver;
+
+public class HelloWorldContextListener extends GuiceServletContextListener {
+
+	@Override
+	protected Injector getInjector() {
+		return Guice.createInjector(new ServletModule() {
+			@Override
+			protected void configureServlets() {
+				install(new MdcfRemoteModule(TransferRequestProcessorImpl.class));
+				serve("/receiver").with(TransferRequestReceiver.class);
+			}
+		});
+	}
+}
+\end{lstlisting}
+
+In dem {\em HelloWorldContextListener} wird ein {\em ServletModule} definiert.
+Dieses definiert zum einen, dass installierte {\em MdcfRemoteModule} den zuvor implementierten {\em
+TransferRequestProcessor} verwenden soll und dass die Daten über das URL-Suffix
+{\em /receiver} empfangen werden können. Bei dem {\em TransferRequestReceiver}
+handelt es sich um ein Servlet, dass die vom Smartphone empfangenen Daten auf
+das {\em TransferRequest}-Objekt überträgt und an den definierten {\em
+TransferRequestProcessor} übergibt. Hierbei ist anzumerken, dass der Suffix mit
+der in Listening \ref{helloworldpluginxml} definierten {\em url} übereinstimmen
+muss. Letzendlich muss dort die URL stehen, unter der das hier definierte
+Servlet erreichbar ist.
+
+Damit das zuvor definierte {\em ServletModule} vom Servlet Container gefunden
+werden kann, muss noch der {\em HelloWorldContextListener} über die {\em
+web.xml} dem Servlet-Container bekannt gemacht werden. Dieses ist in Listing
+\ref{webxml} dargestellt.
+
+\begin{lstlisting}[label=webxml, caption=web.xml, language=xml] 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<filter>
+		<filter-name>guiceFilter</filter-name>
+		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>guiceFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<listener>
+		<listener-class>
+			com.example.helloworld.server.HelloWorldContextListener
+		</listener-class>
+	</listener>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>
+\end{lstlisting}
+
+Die Serverkomponente ist nun komplett. Durch ein {\em mvn install} kann nun das
+Projekt gebaut werden. Dabei wird im {\em target}-Verzeichnis ein {\em
+WAR}-Archive erstellt. Dieses lässt sich einem beliebigen Servlet-Container
+ausführen.
