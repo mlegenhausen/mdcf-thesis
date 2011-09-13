@@ -510,37 +510,37 @@ Beispiele einschließlicher deren Implementierung sind im Kapitel
 \ref{cha:evaluation} genauer beschrieben.
 
 \section{Realisierungsprobleme}
+\label{problemsofimplementation}
 Während der Realisierung des {\em Mobile Data Collectors} tratt bei der Plug-In
-Entwicklung folgendes Problem auf. Viele der von Android verwalteten Hardware
-kann zwischen mehren parallel laufenden Anwendungen konkurrierend zugegriffen
-werden. Diese Hardware wie z.B. GPS wird aus diesen Gründen als System Service
-angeboten. Es gibt aber auch Hardware die nur von einer Anwendung zurzeit
+Entwicklung folgendes Problem auf. Auf viele der von Android verwalteten
+Hardware kann zwischen mehren parallel laufenden Anwendungen konkurrierend zugegriffen
+werden. Diese Hardware wie z.B. GPS oder der Lagesensor werden aus diesen
+Gründen als System Service angeboten. Es gibt aber auch Hardware die nur von einer Anwendung zurzeit
 verwendet werden kann. Dies sind z.B. die Kamera und das Mikrofon. Diese werden
 nicht als System Service angeboten sondern als Schnittstelle zu einer
 nativen Bibliothek, die diese Hardware ansteuern kann.
 
-Das Problem besteht nun darin, dass sich System Services sehr einfach durch eine
-neue implementierung ersetzen lassen. Dies liegt daran, dass Android Services
-selbst zur Kommunikation mit der eigentlichen dahinter liegende Service
-Implementierung den IPC Mechanimus verwenden. Dies ist bei den Klassen zur
-Ansteuerung der Kamera und dem Mikrofon aber nicht der Fall. Das Problem liegt
-darin, dass die Klassen zur Verwendung der Kamera und des Mikrofons die Daten in
-Dateien abspeichern. Man könnte nun diese Klassen wie die Services durch eine
-sichere Implementierung ersetzen, indem man ebenfalls den IPC Mechanimus
-verwendet, um die Ausführung in den {\em Mobile Data Collector} zu verschieben.
-Hierbei ergibt sich aber nun das Problem, dass die aufgenommen Daten im {\em
-Mobile Data Collector} gespeichert werden. Diese Daten wären für ein
-Plug-In durch die Android Sandbox Architektur nicht direkt zugreifbar. Hierfür
-müsste wieder eine weitere Schnittstelle geschaffen werden, um die Daten den
-Plug-Ins zugreifbar zu machen.
+System Services lassen sehr einfach durch eine neue Implementierung ersetzen.
+Dies liegt daran, dass Android Services selbst zur Kommunikation mit der
+eigentlichen dahinter liegende Service Implementierung den IPC Mechanimus
+verwenden. Dies ist bei den Klassen zur Ansteuerung der Kamera und dem Mikrofon
+aber nicht der Fall. Das Problem liegt darin, dass die Klassen zur Verwendung
+der Kamera und des Mikrofons die Daten in Dateien abspeichern. Man könnte nun
+diese Klassen wie die Services durch eine sichere Implementierung ersetzen,
+indem man ebenfalls den IPC Mechanimus verwendet, um die Ausführung in den {\em
+Mobile Data Collector} zu verschieben. Hierbei ergibt sich aber nun das Problem,
+dass die aufgenommen Daten im {\em Mobile Data Collector} gespeichert werden.
+Diese Daten wären für ein Plug-In durch die Android Sandbox Architektur nicht
+direkt zugreifbar. Hierfür müsste eine weitere Schnittstelle geschaffen werden,
+um Plug-Ins den Zugriff die Dateien zu ermöglichen.
 
-Auf diese Lösuung wurde zu Gunsten einer einfacheren Implementierung von
+Auf diese Lösung wurde zu Gunsten einer einfacheren Implementierung von
 Plug-Ins verzichtet. Stattdessen sollte in diesen Fällen die von Android zur
 Verfügung gestellten Implementierungen verwendet werden. Da der Zugriff
-auf Kamera und Mikrofon ebenfalls durch Permissions geregelt wird, wird bei
-Aktivierung der Benutzer darauf hingewiesen. Da die eigentlichen zu
-übertragenden Daten aber weiterhin zentral im Mobile Data Collector gespeichert
-werden, entfällt hierbei nur die Möglichkeit des Loggings.
+auf Kamera und Mikrofon ebenfalls durch {\em Permissions} geregelt wird, wird
+bei Aktivierung der Benutzer darauf hingewiesen. Da die eigentlichen zu
+übertragenden Daten aber weiterhin zentral im {\em Mobile Data Collector}
+gespeichert werden, entfällt hierbei nur die Möglichkeit des Loggings.
 
 Dieses Problem würde sich am besten durch die Verwendung von OSGi lösen lassen.
 Durch OSGi würden der Mobile Data Collector und alle Plug-Ins im

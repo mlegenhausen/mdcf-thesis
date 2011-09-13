@@ -1,5 +1,355 @@
 \chapter{Evaluation}
 \label{cha:evaluation}
+In diesem Kapitel wird gezeigt, dass sich mit Hilfe des {\em Mobile Data
+Collection Frameworks} auch komplexere Plug-Ins zum Sammeln von Sensordaten
+entwickeln lassen. Dies wird anhand zweiter Beispiel gezeigt. Bei diesem
+Beispielen handelt es sich zum einen um ein Plug-In zum Sammeln der aktuellen
+Position eines Benutzers, sowie um eine Erweiterung dieses Plug-Ins, dass
+zusätzlich die Umgebungslautstärke zu jeder Position erfasst. Hierbei wird neben
+den Plug-Ins für das Smartphone auch eine entsprechende Serverkomponente
+entwickelt. Die Serverkomponente beinhaltet dabei, die Persistierung der Daten,
+sowie deren Visualisierung in Form einer Web-Anwendung.
 
 \section{Plug-In zum Sammeln der aktuellen Position}
+\label{locationtracker}
+Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt
+Plug-In'', wird im folgenden ein Plug-In entwickelt, das die aktuelle Position
+des Benutzers speichert und in regelmäßigen Abständen übertragt. Dieses Plug-In
+trägt den Arbeitstitel {\em Location Tracker}. Es werden dabei die wichtigsten
+Punkte bei der Implementierung des Plug-Ins sowie der Serverkomponente
+eingegangen.
+
+\subsection{Implementierung des Plug-Ins}
+Im folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
+durch die es möglich wird die aktuelle Position eines Benutzers zu ermitteln un
+diese Daten zu speichern. Das Plug-In befindet sich im {\em
+LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
+Framework}-Projekts. Es wird sich im folgenden, auf dem im Verzeichnis
+befindlichen Quellcode bezogen.
+
+\subsubsection{Ermittelung der aktuellen Position}
+Um die aktuelle Position des Benutzers zu erfahren, muss der {\em
+LocationManager} abgefragt werden. Siehe hierzu Listing \ref{locationmanager}
+
+\begin{lstlisting}[label=locationmanager,
+caption=Abfragen des LocationManager, language=java]
+String provider = getLocationManager().getBestProvider(new Criteria(), false);
+Location location = getLocationManager().getLastKnownLocation(provider);
+\end{lstlisting}
+
+Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
+genausten zu bestimmen. Die Positionsermittelung wird innerhalb von Android
+durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
+ermittelt werden, der am besten dem gegeben {\em Criteria}-Objekt entspricht.
+Durch dieses können Kriterien wie z.B. Stromverbrauch oder Genauigkeit
+festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
+der zurzeit bestverfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
+die letzte bekannte Position unter zurhilfenahme des gegeben {\em Provider}s
+ermittelt. Das zurückgegebene {\em Location}-Objekt beschreibt die aktuelle
+Position des Benutzers.
+
+\subsubsection{Speichern der Position}
+Die zuvor ermittelte Position kann nun gespeichert werden. In Listing
+\ref{storelocation} wird gezeigt, wie dieses bewerkstelligt werden kann.
+
+\begin{lstlisting}[label=storelocation,
+caption=Speichern der Position, language=java]
+Node workspace = getPersistenceManager().getWorkspace();
+Node node = new Node();
+node.setProperty("Latitude", location.getLatitude());
+node.setProperty("Longitude", location.getLongitude());
+node.setProperty("Altitude", location.getAltitude());
+node.setProperty("Bearing", location.getBearing());
+node.setProperty("Accuracy", location.getAccuracy());
+node.setProperty("Speed", location.getSpeed());
+node.setProperty("Provider", location.getProvider());
+workspace.addNode(node);
+getPersistenceManager().save(workspace);
+\end{lstlisting}
+
+Hier wird im ersten Schritt der {\em Workspace} abgefragt. Dann wird eine neue
+{\em Node} erstellt, an der alle Attribute des {\em Location}-Objectes
+gespeichert werden. Dieses wird im letzten Schritt an den {\em Workspace}
+angehangen bevor dieser gespeichert wird.
+
+\subsubsection{Plug-In Konfiguration}
+Um das Plug-In fertigzustellen, muss im letzten Schritt das Plug-In konfiguriert
+werden. Dies geschieht ebenfalls über die {\em plugin.xml}. Eine Mögliche
+Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt.
+
+\begin{lstlisting}[label=locationtrackerpluginxml, caption=plugin.xml,
+language=xml] 
+<plugininfo action="de.uniluebeck.itm.mdcf.plugin.locationtracker.LOCATION_TRACKER_PLUGIN" version="1.0">
+	<name>Location Tracker</name>
+	<period>10000</period>
+	<duration>1000</duration>
+	<url>http://192.168.1.142:8888/receiver</url>
+	<transferInterval>10000</transferInterval>
+	<services>
+		<service>location</service>
+	</services>
+	<description>Plugin that tracks every 10 seconds the current
+	location.</description> </plugininfo>
+\end{lstlisting}
+
+In dieser Konfiguration befindet sich ein neuer Tag, der {\em services}-Tag. Mit
+diesem wird angegeben, welche Android Services das Plug-In benötigt, um seine
+Aufgabe zu erfüllen. In diesem Fall benöigt das Plug-In den {\em
+location}-Service. Dieser wird daraufhin bei jeder Ausführung dem Plug-In zur
+Verfügung gestellt.
+
+\subsubsection{Verwendung des Plug-Ins}
+Das Plug-In kann nun wie in Kapitel \ref{cha:leitfaden} beschrieben auf dem
+Smartphone installiert und ausgeführt werden. Betrachtet man die gesammelten
+Daten des Plug-Ins wird man feststellen, dass die zuvor definierte Datenstruktur
+mit den entsprechenden Positionsdaten gefüllt wurden.
+
+Dieses Plug-In demonstriert somit, dass es mit dem {\em Mobile Data
+Collection Framework} möglich ist, Plug-Ins zu entwickeln, die
+Positionsdaten sammeln können. Im nächsten Abschnitt wird nun gezeigt, wie diese
+gesammelten Daten von einem Server verarbeitet und visualisiert werden können.
+
+\subsection{Implementierung der Serverkomponente}
+Bei der Implementierung der Serverkomponente wird als Ausgangspunkt eine
+angepasst Version der ``Hallo Welt''-Serverkomponente verwendet. Diese wurde um
+eine Persistierungsschicht erweitert und erlaubt die Visualisierung der Daten
+mit Hilfe einer Web-Anwendung. Die Serverkomponente befindet sich im {\em
+mdcf-locationtracker-remote}-Verzeichnis, des {\em Mobile Data
+Collector}-Projektes.
+
+\subsubsection{Persistierung der Daten}
+Wie in Kapitel \ref{cha:leitfaden} beschrieben, werden nach dem Empfang der
+Daten, die Daten an einen {\em TransferRequestProcessor} übergeben. Die Klasse
+eignet sich zur Persistierung der Daten. Bevor die Daten gespeichert werden,
+sollte aber eine Überführung des allgemeinen Datenformats des {\em Mobile Data
+Collection Frameworks} in ein domänenspezifisches Datenformat stattfinden. Dies
+ist aus den folgenden Gründen zu empfehlen:
+
+\begin{itemize}
+  \item Die Verwaltung des allgemeinen Datenformat ist innerhalb von nicht
+  objektorientierten Datenbanken sehr aufwendig. Dies wird vor allen dingen dann
+  sichtbar, wenn man versucht dieses in relationalen Datenbanken zu speichern.
+  \item Ein domänenspezifisches Datenformat erlaubt die einfachere Verarbeitung
+  der Daten gegenüber dem allgemeinen Datenformat. Auch wird die flexibilität
+  des allgemeinen Datenformats in weiteren Verarbeitungsschritten nicht mehr
+  benötigt. Die Komplexität der Anwendung kann dadurch reduziert werden.
+\end{itemize}
+
+Eine Überführung des allgemeinen Datenformats in ein domänenspezifisches, sowie
+die anschließende Speicherung der Daten, kann dabei wie in Lisiting
+\ref{datenmapping} geschehen.
+
+\begin{lstlisting}[label=datenmapping,
+caption=TransferRequestProcessorImpl.java, language=java] 
+package de.uniluebeck.itm.mdcf.remote.locationtracker.server;
+
+import java.util.Iterator;
+import java.util.List;
+
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
+
+import de.uniluebeck.itm.mdcf.remote.TransferRequestProcessor;
+import de.uniluebeck.itm.mdcf.remote.locationtracker.server.domain.Location;
+import de.uniluebeck.itm.mdcf.remote.locationtracker.server.domain.Participant;
+import de.uniluebeck.itm.mdcf.remote.model.Node;
+import de.uniluebeck.itm.mdcf.remote.model.TransferRequest;
+
+public class TransferRequestProcessorImpl implements TransferRequestProcessor {
+	
+	private final ParticipantRepository repository;
+	
+	@Inject
+	public TransferRequestProcessorImpl(ParticipantRepository repository) {
+		this.repository = repository;
+	}
+	
+	public void process(TransferRequest request) {
+		String id = request.getId();
+		Participant participant = Objects.firstNonNull(repository.findById(id), new Participant(id));
+		
+		Node workspace = request.getWorkspace();
+		Iterator<Node> nodes = workspace.getNodes();
+		List<Location> locations = participant.getLocations();
+		while (nodes.hasNext()) {
+			Node node = nodes.next();
+			Location location = new Location();
+			location.setTimestamp(node.getTimestamp());
+			location.setLatitude(node.getProperty("Latitude").getValue().getDouble());
+			location.setLongitude(node.getProperty("Longitude").getValue().getDouble());
+			location.setAltitude(node.getProperty("Altitude").getValue().getDouble());
+			location.setBearing((float) node.getProperty("Bearing").getValue().getDouble());
+			location.setAccuracy((float) node.getProperty("Accuracy").getValue().getDouble());
+			location.setSpeed((float) node.getProperty("Speed").getValue().getDouble());
+			location.setProvider(node.getProperty("Provider").getValue().getString());
+			locations.add(location);
+		}
+		repository.persist(participant);
+	}
+}
+\end{lstlisting}
+
+In diesem Lisiting wird gezeigt, wie der empfangene {\em TransferRequest} auf
+ein {\em Participant}-Objekt übertragen werden kann. Ein {\em Participant} ist
+in diesem Beispiel ein Benutzer des {\em Mobile Data Collector}. Die
+Identifikation findet anhand der eindeutigen Benutzerkennung statt. Diese kann
+über die {\em getId}-Methode abgefragt werden. Sollte der {\em Participant}
+bereits existierten, werden die gesammelten Daten, an den bereits existierenden
+Benutzer ran gehangen, sonst wird ein neuer {\em Participant} erstellt. Das {\em
+PersistentRepository} stellt die Datenbankabstraktionsschicht dar. In den darauf
+folgenden Schritten werden die Daten aus dem {\em TransferRequest} an ein
+entsprechendes {\em Location}-Objekt übergeben und der {\em Participant} wird
+gespeichert. Die Daten sind nun in einer Datenbank persitiert und stehen somit
+anderen Anwendungen zur Verfügung.
+
+In diesem Beispiel wurde zur Persistierung der Objekt Relationale Mapper (ORM)
+{\em Hibernate} verwendet. Dieser wird vom {\em ParticipantRepsitory}
+abstrahiert. Durch die Abstraktion steht es dem Entwickler frei ein
+beliebiges anderes Persistierungsframework zu verwenden.
+
+\subsubsection{Repräsentation der Daten}
+Als letzter Teil der Evaluation sollen die gespeicherten Daten visualisiert
+werden. Da es sich um Positionsdaten handelt, bietet es sich an, die
+Positionen eines Benutzers auf einer Karte zu visualisieren. Dadurch ist es
+möglich sehr einfach die Daten zu evaluieren.
+
+Für die technischen Realisierung bietet es sich an, auf bereits bestehende
+Infrastruktur und Programmiersprachen zurück zu greifen. Da bisher nur die
+Programmiersprache Java verwendet wurde und bereits ein Java Servlet-Container
+zum Empfang der Daten vorhanden ist, eignet sich ein javabasiertes
+Web-Framework am besten. In diesem Fall, fiel die Wahl auf
+das {\em Google Web Toolkit} (GWT)\cite{gwt}. Bei GWT handelt es sich um einen
+Java-zu-JavaScript-Compiler, der die Implementierung von Web-Anwendung in Java
+erlaubt. Die clientseitige Ausführung der Web-Anwendung findet nach der
+kompilierung nur noch in JavaScript statt. Zur Einbindung von Karten wurde die
+Google Maps API für GWT verwendet\cite{gwtmaps}.
+
+In Abbildung \ref{locationtrackermap} ist die Web-Anwendung dargestellt. Im
+oberen Bereich befinden sich alle Bedienelemente. Über die erste List-Box lassen
+sich unterschiedliche Benutzer anhand ihrer eindeutigen Benutzerkennung
+auswählen. Über die zweite List-Box lassen sich zu jedem Benutzer die
+aufgenommen Positionen auswählen. Die daneben befindlichen Bedienelemente dienen
+zur Navigation durch die Daten, sowie einer Funktion zum automatischen
+Durchlaufen der Positionen. Man kann dadurch die Bewegung eines Benutzer besser
+verfolgen. Zu jeder Position werden außerdem alle gesammelten Informationen
+angezeigt. Der grüne Kreis gibt an, wie genau die Messung
+war. In diesem Fall wurde die Messung auf 57 Meter genau durchgeführt, welches
+sich in dem Radius des Kreises wiederspiegelt.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=13cm]{grafiken/locationtracker-remote_map.png}
+	\caption{Location-Tracker-Datenvisualisierung}
+	\label{locationtrackermap}
+\end{figure}
+
+Um die Web-Anwendung auf dem eigenen Computer zu starten, muss die {\em
+persistence.xml} an die eigene Datenbank angepasst werden. Daraufhin kann
+folgendes auf der Kommandozeile im {\em mdcf-locationtracker-remote}-Verzeichnis
+ausgeführt werden.
+
+\begin{lstlisting}[language=bash]
+mvn gwt:run
+\end{lstlisting}
+
+Daraufhin startet der GWT eigene Webserver. Dies beinhaltet auch das Servlet zum
+Empfang der Daten. Gibt man die entsprechende lokale IP-Adresse innerhalb der
+Plug-In Konfiguration an, so kann der Webserver die Daten vom {\em Mobile Data
+Collector} empfangen und über die Web-Anwendung darstellen.
+
 \section{Plug-In zum Sammeln der Lautstärke an der aktuellen Position}
+Aufbauend auf dem in Abschnitt \ref{locationtracker} beschriebenen {\em
+Location Tracker}, wird im folgenden ein Plug-In entwickelt, das neben der
+aktuellen Position auch die Lautstärke speichert. Dieses Plug-In trägt den
+Arbeitstitel {\em Noise Tracker}.
+
+\subsection{Plug-In Anpassungen}
+Das Plug-In befindet sich im {\em NoiseTrackerPlugin}-Verzeichnis. Es wird sich
+im folgenden auf dem im Verzeichnis befindlichen Quellcode bezogen.
+
+Da der {\em Location Tracker} bereits die aktuelle Position ermittelt, muss noch
+die aktuelle Lautstärke ermittelt werden. Dies ist in Listing \ref{messurenoise}
+dargestellt.
+
+\begin{lstlisting}[label=messurenoise,
+caption=Lautstärkenmessung, language=java] 
+recorder = new MediaRecorder();
+recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+recorder.setOutputFile("/dev/null");
+recorder.prepare();
+recorder.start();
+
+double amplitude = 0.0;
+for (int i = 0; i < 10; i++) {
+	amplitude = getAmplitude();
+	Thread.sleep(100);
+}
+
+recorder.stop();
+recorder.release();
+\end{lstlisting}
+
+Dabei wird zuerst ein {\em MediaRecorder} erstellt. Dieser kann dazu verwendet
+werden, um Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
+Zeilen wird als Audioquelle das Mikrofon verwendet. Die Einstellungen zum
+Ausgabeformat und Audio-Encoder sind in diesem Fall egal, aber notwendig, da wie
+in Zeile 5 angegeben alle Daten in das {\em null-Device} gespeichern werden.
+Durch die {\em prepare} und {\em start}-Methode wird das Mikrofon für
+reserviert und die Aufnahme gestartet. Die Lautstärke wird nun anhand der
+maximalen Amplitude bestimmt. Diese kann über die {\em getAmplitude}-Methode
+abgefragt werden. Damit diese Methode überhaupt einen Wert zurück liefert, muss
+für einen bestimmten Zeitinterval eine Tonaufnahme erfolgen. In diesem Fall
+werden für eine Sekunde lang alle Umgebungsgeräusche aufgenommen und die
+maximale Amplitude bestimmt. Durch die {\em stop} und {\em release}-Methode wird
+die Aufnahme angehalten und das Mikrofon wieder freigegeben. Diese Art der
+Lautstärkenbestimmung wurde dem Beispielprogramm {\em NoiseAlert}
+entnommen\cite{noisealert}. Bei dieser Art der Lautstärkenbestimmung ist zu
+erwähnen, dass die maximale Amplitude zwischen verschiedenen Geräten
+unterschiedlich sein kann. Bei einer Auswertung ist deswegen eine Anpassung der
+Daten erforderlich.
+
+Um die Amplitude nun zum bisherigen Datenmodell hinzuzufügen, ist die Zeile
+aus Lisiting \ref{storeamplitude} hinzuzufügen.
+
+\begin{lstlisting}[label=storeamplitude,
+caption=Speichern der Ampltiude, language=java] 
+node.setProperty("Amplitude", amplitude);
+\end{lstlisting}
+
+Als letzte Anpassung muss dem Plug-In noch die {\em Permission} zur Aufnahme von
+Tonaufnahmen erhalten. Dazu muss die {\em AndroidManifest.xml} um die Zeile aus 
+Listing \ref{recordaudio} ergänzt werden. Bei Verwendung dieser {\em Permission}
+sei darauf hingewiesen, dass der Benutzer eine Warnung bei der Aktivierung
+erhält, da durch die Aufnahme von Ton personenbezogene Daten erhoben werden
+können. Der {\em Mobile Data Collector} ist aber nicht in der Lage zu
+protokollieren, was wann aufgenommen wurde, sondern kann nur das Resultat
+speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
+
+\begin{lstlisting}[label=recordaudio,
+caption=Permission für Tonaufnahmen, language=xml] 
+<uses-permission
+	android:name="android.permission.RECORD_AUDIO" />
+\end{lstlisting}
+
+Das Plug-In ist nun fertig angepasst und kann zur Ermittelung der Lautstärke
+verwendet werden.
+
+\subsection{Anpassungen der Serverkomponente}
+Die Anpassungen an der Serverkomponente halten sich ebenfalls in Grenzen. Bei
+der Übertragung des allgemeinen Datenmodells auf das domänenspezifische muss
+entsprechend ein Attribut für die Ampltiude vorgesehen werden.
+
+Bei der Visualisierung wurde in diesem Fall nur ein weiteres Attribut bei der
+Ausgabe aller Positionsdaten hinzugefügt. Siehe hierzu Abbildung
+\ref{noisetrackermap}.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=13cm]{grafiken/noisetracker-remote_map.png}
+	\caption{Noise-Tracker-Datenvisualisierung}
+	\label{noisetrackermap}
+\end{figure}
+
+\section{Evaluationsergebnisse}
