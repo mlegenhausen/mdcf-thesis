@@ -100,9 +100,27 @@ Verfügung gestellt.
 
 \subsubsection{Verwendung des Plug-Ins}
 Das Plug-In kann nun wie in Kapitel \ref{cha:leitfaden} beschrieben auf dem
-Smartphone installiert und ausgeführt werden. Betrachtet man die gesammelten
-Daten des Plug-Ins wird man feststellen, dass die zuvor definierte Datenstruktur
-mit den entsprechenden Positionsdaten gefüllt wurden.
+Smartphone installiert und ausgeführt werden. Nach der ersten Ausführung können
+wie in Abbildung \ref{log_locationtracker} und
+\ref{collected_data_overview_locationtracker} zu sehen, zum einen die Zugriffe
+auf den {\em LocationManager} bzw. alle gesammelten Daten eingesehen werden.
+Betrachtet man die gesammelten Daten des Plug-Ins wird man feststellen, dass die
+zuvor definierte Datenstruktur mit den entsprechenden Positionsdaten gefüllt
+wurden.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/log.png}
+	\caption{Zugriff auf den LocationManager}
+	\label{log_locationtracker}
+\end{figure}
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/collected_data_overview.png}
+	\caption{Gesammelte Daten}
+	\label{collected_data_overview_locationtracker}
+\end{figure}
 
 Dieses Plug-In demonstriert somit, dass es mit dem {\em Mobile Data
 Collection Framework} möglich ist, Plug-Ins zu entwickeln, die
@@ -207,7 +225,7 @@ In diesem Beispiel wurde zur Persistierung der Objekt Relationale Mapper (ORM)
 abstrahiert. Durch die Abstraktion steht es dem Entwickler frei ein
 beliebiges anderes Persistierungsframework zu verwenden.
 
-\subsubsection{Repräsentation der Daten}
+\subsubsection{Visualisierung der Daten}
 Als letzter Teil der Evaluation sollen die gespeicherten Daten visualisiert
 werden. Da es sich um Positionsdaten handelt, bietet es sich an, die
 Positionen eines Benutzers auf einer Karte zu visualisieren. Dadurch ist es
@@ -320,18 +338,27 @@ node.setProperty("Amplitude", amplitude);
 
 Als letzte Anpassung muss dem Plug-In noch die {\em Permission} zur Aufnahme von
 Tonaufnahmen erhalten. Dazu muss die {\em AndroidManifest.xml} um die Zeile aus 
-Listing \ref{recordaudio} ergänzt werden. Bei Verwendung dieser {\em Permission}
-sei darauf hingewiesen, dass der Benutzer eine Warnung bei der Aktivierung
-erhält, da durch die Aufnahme von Ton personenbezogene Daten erhoben werden
-können. Der {\em Mobile Data Collector} ist aber nicht in der Lage zu
-protokollieren, was wann aufgenommen wurde, sondern kann nur das Resultat
-speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
+Listing \ref{recordaudio} ergänzt werden.
 
 \begin{lstlisting}[label=recordaudio,
 caption=Permission für Tonaufnahmen, language=xml] 
 <uses-permission
 	android:name="android.permission.RECORD_AUDIO" />
 \end{lstlisting}
+
+Bei Verwendung dieser {\em Permission} sei darauf hingewiesen, dass der Benutzer
+wie in Abbildung \ref{activation_recordaudio_warning} eine Warnung bei der
+Aktivierung erhält, da durch die Aufnahme von Ton personenbezogene Daten erhoben
+werden können. Der {\em Mobile Data Collector} ist aber nicht in der Lage zu
+protokollieren, was wann aufgenommen wurde, sondern kann nur das Resultat
+speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/activation_warning.png}
+	\caption{Warnung bei der Aktivierung}
+	\label{activation_recordaudio_warning}
+\end{figure}
 
 Das Plug-In ist nun fertig angepasst und kann zur Ermittelung der Lautstärke
 verwendet werden.
@@ -356,17 +383,28 @@ Ausgabe aller Positionsdaten hinzugefügt. Siehe hierzu Abbildung
 Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
 
 \begin{itemize}
-  \item Das Erstellen von Plug-Ins die praktisch relevante Daten, wie die
+  \item Das Erstellen von Plug-Ins die praxisrelevante Daten, wie die
   Position und Umgebungsinformationen z.B. die Lautstärke erfassen, sind mit
-  dem {\em Mobile Data Collection Frameworks} möglich zu erstellen.
+  dem {\em Mobile Data Collection Framework} möglich zu erstellen.
   \item Das allgemeine Datenformat erlaubt das Speichern von beliebigen
   Informationen und schränkt einen Plug-In Entwickler nur bedingt ein.
   \item Bestehende Plug-Ins lassen sich leicht an neuen Anforderungen anpassen
   bzw. erweitern.
-  \item Die Daten lassen anonym an externe Server übertragen und persistieren.
-  \item Die Visualisierung hat gezeigt, dass die Daten auch Verwertbar sind.
+  \item Bei der Verwendung Android-{\em Permissions} die den Zugriff auf
+  personenbezogene Daten ermöglichen, wird der Benutzer vor der Aktivierung
+  gewarnt.
+  \item Der Zugriff auf personenbezogene Daten bzw. alle gesammelten Daten
+  lassen sich zu jedem Zeitpunkt einsehen.
+  \item Die gesammelten Daten lassen sich anonym an externe Server übertragen
+  und persistieren. Die serverseitige Persistenzart ist frei wählbar.
+  \item Die Visualisierung hat gezeigt, dass die Daten auch Verwertbar sind. Der
+  Visualisierung sind hierbei keine Grenzen gesetzt.
+  \item Es ist zurzeit nicht möglich die Aufnahme vo Ton und Video über den
+  {\em Mobile Data Collector} zu überwachen. Der Benutzer wird aber gewarnt
+  sollte ein Plug-In dieses versuchen.
 \end{itemize}
 
-Anforderungen an Transparenz und Anonymität werden eingehalten
-
-Nicht Perfekt
+Abschließend lässt sich festhalten, dass die in der Anforderungsanalyse und dem
+Konzept festgehaltenden Anforderungen fast vollständig realisiert wurden. Nur im
+Bereich des Loggings beim Zugriff auf Ton und Video müssen bei der derzeitigen
+Implementierung des Plug-Ins-System abstriche gemacht werden.

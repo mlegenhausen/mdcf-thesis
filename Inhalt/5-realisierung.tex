@@ -5,87 +5,6 @@ Die Anwendung trägt dabei den Arbeitstitel {\em Mobile Data Collector}, während
 das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data Collection
 Framework} trägt.
 
-\section{Architektur des Mobile Data Collection Frameworks}
-Das {\em Mobile Data Collection Framework} dient zur Erstellung von Plug-Ins. Es
-beinhaltet alle Klassen und Interfaces die zwischen dem {\em Mobile Data
-Collector} und dem Plug-In geteilt werden, um eine Kommunikation zwischen beiden
-Komponenten zu ermöglichen. Das Framework wird als Android Bibliothek zur
-Verfügunng gestellt.
-
-Das Framework ist in drei Teile gegliedert. Zum einen Klassen und
-Interfaces, die es einem Plug-In erlauben sich an dem Plug-In System anzumelden
-und mit diesem über Schnittstellen zu kommunizieren. Zum anderen einer
-Implementierung der in Abschnitt \ref{unifiedrepresentation} beschriebenen
-Datenstruktur. Der letzte Teil beinhaltet die Schnittstellen der in Abschnitt
-\ref{securepluginexecution} beschriebenen sicheren Android Services.
-
-Ein Plug-In wird dadurch definiert, dass die {\em Plugin}
-Schnittstelle implementiert wird. Diese stellt alle für das Plug-In System
-nötigen Methoden zur Verfügung, um mit dem Plug-In zu interagieren. Die
-Schnittstelle selbst besteht aus einer Reihe von {\em Settern} mit denen die
-sicheren Versionen der Android System Services und ein {\em
-PersistenceManager} gesetzt werden, sowie einer {\em run}-Methode mit der
-das Plug-In ausgeführt wird. Da die {\em Setter} implementierung trivial und in
-den meisten Fällen identisch sind, gibt es zur Vereinfachung die Klasse {\em
-AbstractPlugin}. Erbt man von dieser Klasse muss nur noch die {\em run}-Methode
-implementiert werden.
-
-Innerhalb der {\em run}-Methode kann auf die gesetzten Services zugegriffen
-werden. Die Services bieten alle in der Android Dokumentation beschriebenen
-Methoden. Neben den Services kann auch auf einen {\em PersistenceManager}
-zugegriffen werden. Dieser erlaubt das einfache Abfragen aller bisher
-gespeicherter Daten über die {\em getWorkspace}-Methode. Die zurückgebene
-Datenstruktur kann dann innerhalb des Plug-Ins beliebig manipuliert werden.
-Wurden alle Daten erfolgreich manipuliert, kann über die {\em save}-Methode die
-Speicherung der Änderungen erfolgen.
-
-Damit das Plug-In System das Plug-In auffinden kann, muss das Plug-In einen
-{\em Broadcast Receiver} implementieren, der den vom Plug-In System versandten
-Broadcast empfangen kann und mit den Plug-In Informationen antwortet. Zu diesem
-Zweck existiert das {\em AbstractPluginRegister}. Erbt man von dieser Klasse
-muss man die {\em onRegister}-Methode implementieren. Diese muss ein {\em
-PluginInfo}-Objekt zurück liefern, welche die Plug-In Informationen enthält. Bei
-dem {\em PluginInfo}-Objekt handelt es sich um ein Java POJO. Neben der reinen
-Java Konfiguration kann man das Objekt auch aus einer XML-Datei generieren
-lassen. Dazu muss man von der {\em XMLPluginRegister} Klasse erben und den Pfad
-zur Konfigurationsdatei als Konstrukturparameter übergeben. Dabei muss darauf
-geachtet werden, dass die Datei sich im {\em Java Classpath} befindet.
-
-Damit das implementierte Plug-In und der {\em Broadcast Receiver} vom Android
-System gefunden werden können, müssen entsprechende Einträge in der {\em
-AndroidManifest.xml} erfolgen.
-
-Konkrete Beispiele sind dem Kapitel \ref{cha:leitfaden} zu entnehmen.
-
-\section{Architektur des Mobile Data Collectors}
-Der Mobile Data Collector ist in die folgenden Komponenten aufgeteilt:
-
-\begin{itemize}
-  \item Der {\bf Plug-In Service} ist der zentrale Service-Komponente für alle
-  folgenden Activities. Er beherbergt das gesammte Plug-In System und kümmert
-  sich somit um die Verwaltung und Ausführung von Plug-Ins.
-  \item Der {\bf Plug-In Viewer} dient zur Auflistung von installierten Plug-Ins.
-  \item Die {\bf Plug-In Details} erlauben die darstellung von Plug-In
-  Informationen.
-  \item Der {\bf Log-Viewer} dient zur Auflistung von Aufrufen von Android
-  System Services.
-  \item Der {\bf Data-Viewer} erlaubt die Betrachtung von allen vom Plug-In
-  gesammelten Daten.
-  \item Der {\bf Transfer-Manager} listet alle ausstehenden Übertragungen auf
-  und erlaubt die nachträgliche Betrachtung aller bis zur Übertragung
-  gesammelten Daten, sowie deren Verwaltung.
-\end{itemize}
-
-Der Plug-In Service stellt den eigentlichen {\em Mobile Data Collector} dar.
-Über entsprechende Activities wie z.B. den Plug-In Viewer kann mit diesem
-interagiert werden. Der Plug-In service läuft dabei dauerhaft im Hintergrund und
-führt die Plug-Ins in den vorgebenen Abständen aus. Abbildung \ref{}
-veranschautlich die Interaktion zwischen den einzelnen Komponenten.
-
-ABBILDUNG hier hin!
-
-Noch was zum Bild erzählen.
-
 Der {\em Mobile Data Collector} wird als Open Source Projekt entwickelt und kann
 auf Github unter der Adresse \url{https://github.com/mlegenhausen/mdcf} bezogen
 werden. Das Projekt ist dabei in die folgenden Teile gegliedert:
@@ -107,13 +26,106 @@ werden. Das Projekt ist dabei in die folgenden Teile gegliedert:
   {\em NoiseTrackerPlugin}.
 \end{itemize}
 
+\section{Architektur des Mobile Data Collection Frameworks}
+Das {\em Mobile Data Collection Framework} dient zur Erstellung von Plug-Ins. Es
+beinhaltet alle Klassen und Interfaces die zwischen dem {\em Mobile Data
+Collector} und dem Plug-In geteilt werden, um eine Kommunikation zwischen beiden
+Komponenten zu ermöglichen. Das Framework wird als Android Bibliothek zur
+Verfügunng gestellt.
+
+Das Framework ist in drei Teile gegliedert. Zum einen Klassen und
+Interfaces, die es einem Plug-In erlauben sich an dem Plug-In System anzumelden
+und mit diesem über Schnittstellen zu kommunizieren. Zum anderen einer
+Implementierung der in Abschnitt \ref{unifiedrepresentation} beschriebenen
+Datenstruktur. Der letzte Teil beinhaltet die Schnittstellen der in Abschnitt
+\ref{securepluginexecution} beschriebenen sicheren Android Services.
+
+Ein Plug-In wird dadurch definiert, dass die {\em Plugin}-Schnittstelle
+implementiert wird. Diese stellt alle für das Plug-In System nötigen Methoden
+zur Verfügung, um mit dem Plug-In zu interagieren. Die Schnittstelle selbst
+besteht aus einer Reihe von {\em Settern} mit denen die sicheren Versionen der
+Android System Services und der {\em PersistenceManager} gesetzt werden, sowie
+einer {\em run}-Methode mit der das Plug-In ausgeführt wird. Da die {\em Setter}
+implementierung trivial und in den meisten Fällen identisch sind, gibt es zur
+Vereinfachung die Klasse {\em AbstractPlugin}. Erbt man von dieser Klasse muss
+nur noch eine Vereinfachte Version der {\em run}-Methode, die {\em
+onRun}-Methode implementiert werden.
+
+Innerhalb der {\em run}- bzw. {\em onRun}-Methode kann auf die gesetzten
+Services zugegriffen werden. Die Services bieten alle in der Android Dokumentation beschriebenen
+Methoden. Neben den Services kann auch auf einen {\em PersistenceManager}
+zugegriffen werden. Dieser erlaubt das einfache Abfragen aller bisher
+gespeicherter Daten über die {\em getWorkspace}-Methode. Die zurückgebene
+Datenstruktur kann dann innerhalb des Plug-Ins beliebig manipuliert werden.
+Wurden alle Daten erfolgreich manipuliert, kann über die {\em save}-Methode die
+Speicherung der Änderungen erfolgen.
+
+Die Registrierung eines Plug-Ins, erfolgt durch die Antwort auf den {\em
+Broadcast}, der nach der Installation einer neuen Anwendung vom Plug-In System
+versendet wird. Um auf diesen {\em Broadcast} zu antworten muss ein {\em
+Braodcast Receiver} implementiert werden. Zu diesem Zweck existiert bereits eine
+Implementierung des {\em Broadcast Receiver}, der {\em AbstractPluginRegister}.
+Erbt man von dieser Klasse muss man die {\em onRegister}-Methode implementieren.
+Diese muss ein {\em PluginInfo}-Objekt zurück liefern, welche die Plug-In
+Informationen enthält. Bei dem {\em PluginInfo}-Objekt handelt es sich um ein
+Java POJO. Neben der reinen Java Konfiguration kann man das Objekt auch aus
+einer XML-Datei generieren lassen. Dazu muss man von der {\em XMLPluginRegister}
+Klasse erben und den Pfad zur Konfigurationsdatei als Konstrukturparameter
+übergeben. Dabei muss darauf geachtet werden, dass die Datei sich im {\em Java
+Classpath} befindet.
+
+Damit das implementierte Plug-In und der {\em Broadcast Receiver} vom Android
+System gefunden werden können, müssen entsprechende Einträge in der {\em
+AndroidManifest.xml} erfolgen.
+
+Konkrete Beispiele sind dem Kapitel \ref{cha:leitfaden} zu entnehmen.
+
+\section{Architektur des Mobile Data Collectors}
+Die Architektur des {\em Mobile Data Collector} ist in Abbildung
+\ref{architecture} dargestellt. Wie in der Abbildung zu erkennenm, stellt der
+{\em Plug-In Service} (blau) die zentrale Komponente des {\em Mobile Data
+Collector} dar. Er beherbergt das gesammte Plug-In System und kümmert sich somit
+um die Verwaltung und Ausführung von Plug-Ins. Er speichert alle von den Plug-In
+gesammelten Daten in einer {\em db4o}-Datenbank (gelb). Sollte ein Plug-In auf
+die Android System Services (grau) zugreifen, geschieht dies, aus transparenz
+Gründen, ebenfalls über den Plug-In Service.
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=13cm]{grafiken/architecture.png}
+	\caption{Architektur des Mobile Data Collector}
+	\label{architecture}
+\end{figure}
+
+Für die Interaktion des Benutzers mit dem Plug-In Service stehen eine Fülle von
+{\em Activities} (grün) bereit. Diese {\em Activties} sind:
+
+\begin{itemize}
+  \item Der {\bf Plug-In List} dient zur Auflistung von installierten Plug-Ins.
+  \item Die {\bf Plug-In Details} erlauben die darstellung von Plug-In
+  Informationen.
+  \item Der {\bf Log-Viewer} dient zur Auflistung von Aufrufen von Android
+  System Services.
+  \item Der {\bf Data-Viewer} erlaubt die Betrachtung von allen vom Plug-In
+  gesammelten Daten.
+  \item Der {\bf Transfer-Manager} listet alle ausstehenden Übertragungen auf
+  und erlaubt die nachträgliche Betrachtung aller bis zur Übertragung
+  gesammelten Daten, sowie deren Verwaltung.
+\end{itemize}
+
+Die Pfeile ausgehend vom und zum {\em Plug-In Service} stellen die
+Aufrufsrichtung dar. So ruft z.B. der {\em Plug-In Service} immer die Plug-Ins
+auf und die {\em Activities} den {\em Plug-In Service}.
+
 Im Folgenden wird auf die zurvor beschriebenen Komponenten genauer eingegangen.
 
 \subsection{Plug-In Service}
 Der Plug-In Service stellt die zentrale Komponente zur Verwaltung von Plug-Ins,
 sowie deren Ausführung dar. Er beinhaltet die gesammte Applikationslogik des
 {\em Mobile Data Collectors}. Alle Activities greifen über eine entsprechende
-Service Schnittstelle auf diesen Service zu.
+Service Schnittstelle auf diesen Service zu. Der {\em Plug-In Service} läuft
+dabei dauerhaft im Hintergrund und führt die Plug-Ins in den vorgebenen
+Abständen aus.
 
 Neben der Service-Schnittstelle stellt das {\em PluginConfiguration}-Objekt eine
 wichtige Datenstruktur dar. Alle zusätzlichen Informationen über ein Plug-In,
@@ -145,6 +157,10 @@ PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute.
   handelt es sich um ein {\em Node}-Objekt an dem alle zusätzlichen Daten
   gespeichert werden können.
 \end{itemize}
+
+Da die {\em Plug-Configuration} alle relevanten Plug-In Informationen, {\em Log
+Record} und alle gesammelten Daten enthält, wird diese Datenstruktur ebenfalls
+zur Persistierung verwendet innerhalb des {\em db4o}-Datenbank.
 
 \subsubsection{Service-Interface Definition}
 Das Service-Interface beinhaltet die folgenden zentralen Methoden:
@@ -209,21 +225,28 @@ aufgerufen werden, wenn das {\em Transfer}-Objekt auch an einen externen Server
 übertragen wurde.
 
 \subsubsection{Plug-In Registierung}
-Der Vorgang der Plug-In Registierung ist in Abbildung \ref{} genauer
+Der Vorgang der Plug-In Registierung ist in Abbildung \ref{register} genauer
 dargestellt.
 
-Sendet das Android System einen {\em Broadcast}, dass eine neue Anwendung
-installiert wurde, so wird dieses vom {\em PackageAddedBroadcastReceiver}
-empfangen. Daraufhin versendet dieser ein {\em Intent} an den Plug-In Service
-das eine neue Anwendung installiert wurde. Dieser {\em Intent} wird von der
-{\em onStartCommand}-Methode des Services empfangen. Der Plug-In Service
-versendet daraufhin ein {\em Intent} an die neu installierte Anwendung.
-Antwortet die neuinstallierte Anwendung mit einem {\em PluginInfo}-Objekt, so
-handelt es sich um ein neues Plug-In. Antwortet die Anwendung nicht, so handelt
-es sich nicht um ein Plug-In. Das vom Plug-In empfangene {\em PluginInfo}-Objekt
-wird nun vom Plug-In Service in einem {\em PluginConfiguration}-Objekt
-gespeichert. Die weitere Verwaltung des Plug-Ins findet über das {\em
-PluginConfiguration}-Objekt statt.
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=13cm]{grafiken/register.png}
+	\caption{Plug-In Registierung}
+	\label{register}
+\end{figure}
+
+Wie in dem Sequenzdiagramm zu erkennen, sendet als erstes das Android System
+einen {\em Broadcast}, dass eine neue Anwendung installiert wurde. Dies wird vom
+{\em PackageAddedBroadcastReceiver} empfangen. Daraufhin versendet dieser ein
+{\em Added-Intent} an den Plug-In Service das eine neue Anwendung installiert
+wurde. Dieser {\em Intent} wird von der {\em onStartCommand}-Methode des Services
+empfangen. Der Plug-In Service versendet daraufhin ein {\em Find-Intent} an die
+neu installierte Anwendung. Antwortet die neuinstallierte Anwendung mit einem {\em
+PluginInfo}-Objekt, so handelt es sich um ein neues Plug-In. Antwortet die
+Anwendung nicht, so handelt es sich nicht um ein Plug-In. Das vom Plug-In
+empfangene {\em PluginInfo}-Objekt wird nun vom Plug-In Service in einem {\em
+PluginConfiguration}-Objekt gespeichert und somit als registriert. Die weitere
+Verwaltung des Plug-Ins findet über das {\em PluginConfiguration}-Objekt statt.
 
 \subsubsection{Plug-In Ausführung}
 Die Ausführung des Plug-Ins findet im {\em PluginTaskManager} statt. Diese
@@ -253,8 +276,8 @@ verhindert eine Überlappung der Plug-In Ausführungen.
 Sollte ein Plug-In deaktiviert werden, wird es vom {\em PluginTaskManager} aus
 dem Thread-Pool entfernt.
 
-\subsection{Plug-In Viewer}
-Der Plug-In Viewer dient zur Auflistung aller installierten Plug-Ins. Sind keine
+\subsection{Plug-In List}
+Die Plug-In List dient zur Auflistung aller installierten Plug-Ins. Sind keine
 Plug-Ins installiert, wird wie in Abbildung \ref{pluginlist} zu sehen, der
 Benutzer daraufhin gewiesen.
 
@@ -308,7 +331,7 @@ in Abbildung \ref{activation_warning} dargestellte Warnung darüber informiert.
 \begin{figure}[h!] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/activation_warning.png}
-	\caption{Plug-In aktivierung}
+	\caption{Plug-In Aktivierung}
 	\label{activation_warning}
 \end{figure}
 
@@ -409,7 +432,7 @@ jeder Ausführung jeweils ein neuer Eintrag zu den gesammelten Daten hinzugefügt.
 \begin{figure}[h!] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/collected_data_overview.png}
-	\caption{Plug-In Logs}
+	\caption{Collected Data}
 	\label{collected_data_overview}
 \end{figure}
 
