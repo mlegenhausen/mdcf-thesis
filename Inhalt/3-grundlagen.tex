@@ -1,6 +1,5 @@
 \chapter{Grundlagen}
 \label{cha:grundlagen}
-
 In diesem Kapitel wird auf die grundlegenden Technologien eingegangen, die zur
 Realisierung der Anwendung verwendet wurden.
 
@@ -9,9 +8,9 @@ Bei Android handelt es sich um ein quelloffenes Betriebssystem sowie eine
 Software-Plattform für mobile Endgeräte wie Smartphones, Tablets und Netbooks.
 Android basiert auf dem Linux Kernel 2.6. Die Android Software-Plattform erlaubt
 die Entwicklung von Anwendungen in Java, sowie die Verwendung von C/C++
-Bibliotheken. Anwendungen laufen in einer speziellen Virtuellen Maschine (VM),
-der Dalvik VM. Die Dalvik VM ist eine für den mobilen Einsatz optimmierte
-Virtuelle Maschine.
+Bibliotheken. Anwendungen laufen in einer speziellen \acf{vm},
+der Dalvik \acs{vm}. Die Dalvik \acs{vm} ist eine für den mobilen Einsatz
+optimmierte Virtuelle Maschine.
 
 Die Android Klassenbibliothek ist der, des Java Development Kits nachempfunden
 und enthält alle wichtigen Standardkomponenten, sowie Erweiterungen für z.B. die
@@ -20,7 +19,7 @@ Bereiche Medienwiedergabe, 2D/3D Grafik, SQLite~\cite{whatisandroid}.
 Android Anwendungen bestehen aus eine oder mehren Komponenten. Dies sind {\em
 Activities}, {\em Services}, {\em Content Providers} und {\em Broadcast
 Receiver}. Jede dieser Komponenten spielt jeweils eine spezifische Rolle
-innerhalb der Anwendung. Sie besitzen jeweils einen eigenen Lebenszyklus der
+innerhalb der Anwendung. Sie besitzen jeweils einen eigenen Lebenszyklus, der
 beschreibt wie diese erstellt und zerstört werden.
 
 \begin{itemize}
@@ -28,9 +27,9 @@ beschreibt wie diese erstellt und zerstört werden.
   einer Benutzerschnittstelle. Dies kann z.B. jeweils eine Anzeige zur
   auflistung von E-Mails, zum schreiben einer neuen E-Mail und zum
   lesen einer E-Mail sein. Alle drei {\em Activities} ergeben dabei eine E-Mail
-  Anwendung. Jede {\em Activity} ist dabei unabhängig von der anderen. Dadurch
+  Anwendung. Jede {\em Activity} ist dabei unabhängig von der Anderen. Dadurch
   kann z.B. die Kamera {\em Activity} die {\em Activity} zum schreiben einer
-  neuen E-Mail starten um ein aufgenommenes Foto sofort zu verschicken.
+  neuen E-Mail starten, um ein aufgenommenes Foto sofort zu verschicken.
   \item Ein {\bf Service} ist eine Komponente die im Hintergrund
   läuft, um langlaufende Operationen oder entfernte Prozesse auszuführen. Ein
   Service kann von anderen Komponenten gestartet werden und mit diesem über ein
@@ -43,12 +42,12 @@ beschreibt wie diese erstellt und zerstört werden.
   den Speicherort, so das Daten z.B. in einer SQLite Datenbank, im Internet oder
   an einem beliebigen anderen Ort gespeichert werden können.
   \item Ein {\bf Broadcast Receiver} ist eine Komponente die auf systemweite
-  Broadcasts reagieren kann. Broadcasts kann z.B. die Nachricht sein, dass der
-  Bildschirm aus bzw. ein geschaltet wurde. Anwendungen selbst können ebenfalls
-  Broadcast verschicken, durch die andere Anwendungen über ein Ereignis
+  Broadcasts reagieren kann. Ein Broadcast kann z.B. die Nachricht sein, dass
+  der Bildschirm aus bzw. ein geschaltet wurde. Anwendungen selbst können ebenfalls
+  Broadcasts verschicken, durch die andere Anwendungen über ein Ereignis
   imformiert werden können. {\em Broadcast Receiver} besitzen keine
   Benutzerschnittstelle und führen keine langlaufenden Operationen aus. Sie
-  dienen jediglich dazu andere Komponenten z.B. einen Service zu starten.
+  dienen jediglich dazu, andere Komponenten z.B. einen Service zu starten.
 \end{itemize}
 
 Grundsätzlich kann jede Komponente eine beliebige andere Komponente starten.
@@ -62,14 +61,13 @@ Komponente zur eigenen Anwendung gehört oder nicht. Ein Intent ist ein einfaches
 Objekt, dass eine Nachricht an eine oder mehre Komponenten spezifiert. Dabei
 kann ein {\em Intent} beliebige Daten enthalten, die zur Erfüllung der Aufgabe
 in der anderen Komponente benöigt werden. Dies kann z.B. dazu genutzt werden,
-den Browser mit einer bestimmten URL zu starten, die mit dem {\em Intent}
-gesendet wurde.
+den Browser mit einer bestimmten URL zu starten.
 
 Bevor das Android System eine Anwendung starten kann, muss das System wissen,
 aus welchen Komponenten die Anwendung besteht. Dies wird in einer {\bf Manifest}
 Datei definiert der {\em AndroidManifest.xml}. In dieser Datei müssen alle von
 der Anwendung implementierten Komponenten eingetragen werden, sonst sind diese
-innerhalb der Anwendung nicht verwendetbar. Innerhalb des Manifests werden
+innerhalb der Anwendung nicht verwendtbar. Innerhalb des Manifests werden
 außerdem folgende weitere Dinge beschrieben~\cite{androidfundamentals}:
 
 \begin{itemize}
@@ -83,50 +81,52 @@ außerdem folgende weitere Dinge beschrieben~\cite{androidfundamentals}:
 \end{itemize}
 
 Wie schon zuvor beschrieben werden Komponenten über {\em Intents} gestartet.
-Dies kann direkt geschehen, durch die Angabe der Klasse einer Komponente oder
+Dies kann direkt geschehen, durch die Angabe der Komponenten-Klasse oder
 durch sogenannte {\em Actions}. Durch {\em Actions} ist es möglich einen
-Aufgabentyp zu beschreiben der es dem System erlaubt, die Komponente für die
-beschriebene Aufgabe zu finden und diese zu starten. Sollten mehre Komponenten
-die Aufgabe erfüllen können, so wird der Benutzer gefragt welche Komponente
+Aufgabentyp zu beschreiben, der es dem System erlaubt, die Komponente für die
+beschriebene Aufgabe selbst zu finden und zu starten. Sollten mehre
+Komponenten die Aufgabe erfüllen können, so wird der Benutzer gefragt welche Komponente
 verwendet werden soll. Dieser Mechanismus kann innerhalb des Manifests durch
-{\em intent filters} definiert werden. Dabei werden die entsprechenden {\em
+{\em intent filter} definiert werden. Dabei werden die entsprechenden {\em
 Actions} für jede Komponente definiert, auf die sie reagieren soll.
 
 Die zuvor beschrieben Konzepte sollten einen Einstieg in die Android Plattform
 erlauben. Für eine genauere Beschreibung zur Programmierung von Android
-Anwendungen sei die Dokumentation unter \url{http://developer.android.com}
+Anwendungen, sei die Dokumentation unter \url{http://developer.android.com}
 empfohlen. Im Folgenden wird nur noch vertieft auf das Security-Konzept von
-Android, die Android System Services, sowie die Inter Process Communication
-(IPC) eingegangen, da diese zum Verständnis der Masterarbeit erforderlich sind.
+Android, die Android System Services, sowie die \acf{ipc} eingegangen, da diese
+zum Verständnis der Masterarbeit erforderlich sind.
 
 \subsection{Das Security-Konzept von Android}
 \label{androidsecurity}
 Jede installierte Anwendung läuft auf Android in einer Sanbox. Diese Sandbox
 besitzt die folgenden Eigenschaften~\cite{androidfundamentals}:
+
 \begin{itemize}
-  \item Das Android Betriebssystem ist ein Mehrbenutzer Linux System in der jede
-  Anwendung ein anderer Benutzer ist.
+  \item Das Android Betriebssystem ist ein Mehrbenutzer Linux System, in der
+  jede Anwendung ein anderer Benutzer ist.
   \item Das bedeutet das jede Applikation eine eindeutige Linux User ID erhält.
   Das System setzt dabei Zugriffsrechte für jede Datei der Anwendung, so dass
   nur die Anwendung selbst diese Dateien zugreifen darf.
-  \item Jede Anwendung läuft in ihrer eigenen Virtuellen Maschine, so das
-  Anwendungens isoliert von anderen Anwendungen läuft.
+  \item Jede Anwendung läuft in ihrer eigenen \acs{vm}, so das jede
+  Anwendung isoliert von anderen Anwendungen läuft.
 \end{itemize}
 
 Diese Sandbox erlaubt es sogar nativen Code einer Anwendung auszuführen, ohne
 größere Schäden am Gesamtsystems zu befürchten. Durch diese Eigenschaften
 beschreibt das Android System das {\em principle of least
 privilege}~\cite{principleofleastprivilege}. Dies besagt, dass ein Prozess, ein
-Benutzer oder ein Programm nur auf die Informationen und Resourcen Zugriff haben
-muss, die nötigt sind, um die eigentliche Aufgabe zu lösen und nicht mehr.
+Benutzer oder ein Programm, nur auf die Informationen und Ressourcen Zugriff
+haben muss, die nötigt sind, um die eigentliche Aufgabe zu lösen und nicht mehr.
 
-Die gemeinsame Nutzung von Resourcen, wie z.B. die Kamera, GPS oder der
+Die gemeinsame Nutzung von Ressourcen, wie z.B. die Kamera, \acs{gps} oder der
 Internetzugriff, werden über ein zusätzliches Rechtesystem geregelt. Bei diesem
-müssen Anwendungen bei der installation dem System und dem Benutzer mitteilen
-auf welche gemeinsamgenutzen Resourcen diese zugreifen möchte. Diese Rechte
+müssen Anwendungen, bei der Installation, dem System und dem Benutzer mitteilen
+auf welche gemeinsamgenutzen Ressourcen diese zugreifen möchten. Diese Rechte
 werden in dem jeweiligen Manifest der Anwendung definiert und werden mit der
-nach der Installation generierten User ID der Anwendung verknüpft. Diese lassen
-sich nach der Installation nicht mehr ändern~\cite{isecsecuringandroidapps}.
+nach der Installation generierten User ID der Anwendung verknüpft. Die erteilten
+Rechte lassen sich nach der Installation nicht mehr
+ändern~\cite{isecsecuringandroidapps}.
 
 \subsection{Inter Process Communication (IPC)}
 Die Kommunikation mit einem Service kann über zwei Wege passieren, synchron und
@@ -134,8 +134,8 @@ asynchron. Im asynchronen Fall werden {\em Intents} an den entsprechenden
 Service verschickt. Innerhalb des {\em Intents} befinden sich die Nutzdaten. Hat
 ein Service den entsprechenden {\em Intent} verarbeitet kann dieser als Antwort
 einen entsprechenden {\em Intent} an den Sender zurückschicken. Dieses Prinzip
-funktioniert bei der Kommunikation mit Komponenten der selben Anwendung, sowie
-mit Komponenten anderer Anwendungen, also über Prozessgrenzen hinaus. 
+funktioniert sowohl bei der Kommunikation mit Komponenten der selben Anwendung,
+sowie mit Komponenten anderer Anwendungen, also über Prozessgrenzen hinaus. 
 
 Im synchronen Fall wird über ein Service-Interface mit dem Service interagiert.
 Hierbei ist aber zu unterscheiden, ob sich beide Komponenten im selben Prozess
@@ -143,52 +143,51 @@ befinden oder nicht. Befinden sich beide im selben Prozess kann die
 Kommunikation direkt über das Service-Interface stattfinden. Im anderen Fall ist
 eine direkte Kommunikation nicht möglich. Dies liegt am zuvor beschriebenen
 Security-Konzept von Android (Siehe Kapitel \ref{androidsecurity}). Zu diesem
-Zweck gibt es die Inter Process Communication (IPC). Bei dieser wird über eine Interface
-Definition Language (IDL), der Android Interface Definition Language (AIDL), die
-Schnittstelle definiert, über die die Kommunikation stattfinden soll. Bei der
-Verwendung von AIDL kümmert sich Android um die Serialiserung alle Parameter und
-Rückgabewerte~\cite{androidaidl}.
+Zweck gibt es die \acf{ipc}. Bei dieser wird über eine \acf{idl}, der
+\acf{aidl}, die Schnittstelle definiert, über die die Kommunikation stattfinden
+soll. Bei der Verwendung von \acs{aidl} kümmert sich Android um die
+Serialiserung alle Parameter und Rückgabewerte~\cite{androidaidl}.
 
 \subsection{Android System Services}
-Zur Verwendung von gemeinsamen Resourcen, wie z.B. der Kamera, GPS usw.
+Zur Verwendung von gemeinsamen Ressourcen, wie z.B. der Kamera, \acs{gps} usw.
 existieren systemweite Services. Jeder Service stellt eine entsprechende
-Schnittstelle zur Verfügung. Der Zugriff auf die Resource kann dabei
+Schnittstelle zur Verfügung. Der Zugriff auf die Ressource kann dabei
 konkurrierend stattfinden. Über die Services kann zum einen auf die Sensorik
-zugegriffen werden, aber auch auf systeminterne Dienste. Da über die Sensorik
-und die systeminternen Dienste auf personenbezogene Daten und systemkritische
-Konfigurationen zugegriffen werden kann, sind diese Services durch
-Zugriffsrechte geschützt. Die überprüfung der Zugriffsrechte findet dabei
+zugegriffen werden, aber auch auf systeminterne Dienste. Da über diese auf
+personenbezogene Daten und systemkritische Konfigurationen zugegriffen werden kann, sind diese Services durch
+Zugriffsrechte geschützt. Die Überprüfung der Zugriffsrechte findet dabei
 innerhalb des Services statt. Dabei wird sehr feingranular zwischen
 verschiedenen Rechten unterschieden. So wird z.B. beim Service zur Ermittlung
 der aktuellen Position zwischen den Rechten zur Standortbestimmung per Mobilfunk
-und per GPS unterschieden, da die Bestimmung per Mobilfunk um einiges ungenauer
-ist als per GPS.
+und per \acs{gps} unterschieden, da die Bestimmung per Mobilfunk um einiges
+ungenauer ist als per \acs{gps}.
 
 Eine genaue Auflistung aller Services kann der Android Dokumentation entnommen
 werden~\cite{androidservices}.
 
 \section{OSGi für Android}
-Die von der OSGi Alliance (Früher Open Services Gateway initiative) spezifizierte
-Service Plattform ist ein dynamisches Modulsystem für Java, das die dynamische Integration
-und das Fernmanagement von Softwarekomponenten (Bundles) und Diensten
-(Services) ermöglicht~\cite[Seite 21]{osgiwuetherich}.
+Die von der \acs{osgi} Alliance (Früher \acl{osgi}) spezifizierte Service
+Plattform ist ein dynamisches Modulsystem für Java, das die dynamische
+Integration und das Fernmanagement von Softwarekomponenten (Bundles) und
+Diensten (Services) ermöglicht~\cite[Seite 21]{osgiwuetherich}.
 
-Die OSGi Service Plattform Spezifikation existiert in verschiedenen
+Die \acs{osgi} Service Plattform Spezifikation existiert in verschiedenen
 Versionen. Zurzeit ist der Release 4, kurz R4, in der Version 4.2 der
 aktuellste~\cite[Seiten 15--16]{osgiwuetherich}.
 
-\subsection{Aufbau der OSGi Service Plattform}
+\subsection{Aufbau der \acs{osgi} Service Plattform}
 \begin{figure}[h!] \centering \includegraphics[width=10cm]{grafiken/osgi.png}
-	\caption{OSGi Archetkur~\cite{osgiarch}}
+	\caption{\acs{osgi} Archetkur~\cite{osgiarch}}
 	\label{osgiarch}
 \end{figure}
 
-Wie in Abbildung \ref{osgiarch} zu erkennen, ist die OSGi Service Plattform als
-eine Schichtenarchitektur aufgebaut. Die Architektur setzt sich aus den
+Wie in Abbildung \ref{osgiarch} zu erkennen, ist die \acs{osgi} Service
+Plattform als Schichtenarchitektur aufgebaut. Die Architektur setzt sich aus den
 folgenden Schichten zusammen~\cite{osgiarch}:
+
 \begin{itemize}
   \item \textbf{\em Bundles:} Bundles stellen die
-  Modularisierungseinheit der OSGi Service Plattform dar. Diese
+  Modularisierungseinheit der \acs{osgi} Service Plattform dar. Diese
   können dynamisch in die Plattform installiert und gestartet, gestoppt und 
   deinstalliert werden, ohne dass die Plattform neugestartet oder angehalten 
   werden muss. 
@@ -206,26 +205,27 @@ folgenden Schichten zusammen~\cite{osgiarch}:
   So kann dieselbe Schnittstelle in unterschiedlichen Versionen parallel
   verwendet werden.
   \item \textbf{\em Security:} Die Security-Schicht kümmert sich um das
-  Rechtemanagement innerhalb der OSGi Service Plattform. So lassen sich
+  Rechtemanagement innerhalb der \acs{osgi} Service Plattform. So lassen sich
   Bundles soweit einschränken, dass bestimmte Aktionen erlaubt oder verboten
   sind. Diese Schicht gehört nicht zur Kernkomponenten der
-  OSGi-Plattform und ist somit optional.
+  \acs{osgi}-Plattform und ist somit optional.
   \item \textbf{\em Execution Environment:} Diese Schicht spezifiziert die
-  Mindestanforderungen an die Laufzeitumgebung, zur Ausführung der OSGi
+  Mindestanforderungen an die Laufzeitumgebung, zur Ausführung der \acs{osgi}
   Service Plattform.
 \end{itemize}
 
-\subsection{Verfügbare OSGi Container für Android}
+\subsection{Verfügbare \acs{osgi} Container für Android}
 Dadurch das Android auf einer Teilmenge des Apache Harmony Projektes basiert,
 deckt es einen Großteil der Standard Java
-Klassenbibliothek~\cite{apacheharmony}. Dies erlaubt die Ausführung von OSGi auf
-Android. Die Ausführungsumgebung der Bundles wird auch als OGSi Container
-bezeichnet. Folgende OSGi Container sind unter Android lauffähig.
+Klassenbibliothek~\cite{apacheharmony}. Dies erlaubt die Ausführung von
+\acs{osgi} auf Android. Die Ausführungsumgebung der Bundles wird auch als OGSi
+Container bezeichnet. Folgende \acs{osgi} Container sind unter Android
+lauffähig.
 
 \subsubsection{Apache Felix}
-Apache Felix ist eine Open-Source-Implementierung des OSGi R4 Version 4.2
+Apache Felix ist eine Open-Source-Implementierung des \acs{osgi} R4 Version 4.2
 Standards~\cite{apachefelix}. Es ist der zurzeit einzige auf Android lauffähig
-freie OSGi Container. Leider bietet Apache Felix keine integration in das
+freie \acs{osgi} Container. Leider bietet Apache Felix keine integration in das
 Android System. Es lässt sich zurzeit nur per Konsole starten und verwalten.
 Dies macht es aufwendig Android Applikationen zu entwickeln die in Apache Felix
 laufen~\cite{apachefelixandroid}.
@@ -237,30 +237,31 @@ Framework läuft im Hintergrund auf dem Android Smartphone. Durch die verwendung
 von dynamisch installierten Plug-Ins, die durch die Dynamix Infrastruktur zur
 Verfügung gestellt werden, modelliert das Framework Kontextinformationen.
 Kontextinformationen werden dabei durch die Sensorik oder andere externe Systeme
-zur Verfügung gestellt. Diese Informationen können dann anderen auf dem
-Smartphone installierten Anwendungen in einer sicheren Art und Weise zur
+zur Verfügung gestellt. Diese Informationen können dann Anderen auf dem
+Smartphone installierten Anwendungen, in einer sicheren Art und Weise zur
 Verfügung gestellt werden.
 
-Das Dynamix Framework basiert auf dem OSGi Container Apache Felix. Plug-Ins
-werden dabei in Form von Bundles installiert. Das Framework kümmert dabei um den
-Lebenszyklus eines Plug-Ins und erlaubt das senden von Kontextinformationen an
-registrierte Anwendungen. Der vom Dynamix Framework zur Verfügung gestellt OSGi
-Container bietet eine integration in das Android System. Er läuft dabei als
-Service im Hintergrund. Er erlaubt durch die sogenannte Context-Firewall, einen
-durch den Anwender geregelten Zugriff, auf die von den Plug-Ins generierten
-Kontextinformationen durch registrierte Anwendungen~\cite{dynamixframework}.
+Das Dynamix Framework basiert auf dem \acs{osgi} Container Apache Felix.
+Plug-Ins werden dabei in Form von Bundles installiert. Das Framework kümmert
+dabei um den Lebenszyklus eines Plug-Ins und erlaubt das Senden von
+Kontextinformationen an registrierte Anwendungen. Der vom Dynamix Framework zur
+Verfügung gestellt \acs{osgi} Container bietet eine Integration in das Android
+System. Er läuft dabei als Service im Hintergrund und erlaubt durch die
+sogenannte Context-Firewall, einen durch den Anwender geregelten Zugriff durch
+registrierte Anwendungen, auf die von den Plug-Ins generierten
+Kontextinformationen~\cite{dynamixframework}.
 
-\section{Datenpersistierung mit Db4o}
-db4o ist eine Objektdatenbank für die Java und .NET Plattform, die sich durch
-ihre geringe Größe von nur 600KB für die Einbettung in Anwendungen eignet. Durch
-ihre geringe Größe eignet sie sich auch für die Verwendung von mobilen Geräten
-wie Smartphones, in diesem Fall Android. db4o bietet hierbei eine alternative zu
-der in Android enthaltenden relationalen Datenbank SQLite. So ist db4o
-schemafrei und erlaubt die Speicherung beliebig komplexer Objekte ohne die
-Verwendung eines Objekt Relationalen Mappers (ORM). Die Datenspeicherung erfolgt
-wie bei SQLite in einer Datei. db4o verwendet im Gegensatz zu relationalen
-Datenbanken kein SQL, sondern Query By Example (QBE), Critera Queries sowie
-Native Anfragen. Bei Query By Example wird anhand eines Beispiel Objektes nach
-ähnlichen Objekten gesucht. Bei Critera Queries werden SQL Queries anhand von
-entsprechenden Methodenaufrufen nachgebildet und bei Nativen Queries können
+\section{Datenpersistierung mit db4o}
+\acs{db4o} ist eine Objektdatenbank für die Java und .NET Plattform, die sich
+durch ihre geringe Größe von nur 600KB für die Einbettung in Anwendungen eignet. Durch
+ihre geringe Größe eignet sie sich auch für die Verwendung auf mobilen Geräten
+wie Smartphones, in diesem Fall Android. \acs{db4o} bietet hierbei eine
+Alternative zu der in Android enthaltenden relationalen Datenbank SQLite. So ist
+\acs{db4o} schemafrei und erlaubt die Speicherung beliebig komplexer Objekte,
+ohne die Verwendung eines \acfp{orm}. Die Datenspeicherung erfolgt
+wie bei SQLite in einer Datei. \acs{db4o} verwendet im Gegensatz zu relationalen
+Datenbanken kein \acs{sql}, sondern \acf{qbe}, Critera Queries
+sowie Native Anfragen. Bei \acs{qbe} wird anhand eines Beispiel Objektes nach
+ähnlichen Objekten gesucht. Bei Critera Queries werden \acs{sql} Queries anhand
+von entsprechenden Methodenaufrufen nachgebildet und bei Nativen Queries können
 beliebig komplexe Suchanfragen in Java direkt implementiert werden.

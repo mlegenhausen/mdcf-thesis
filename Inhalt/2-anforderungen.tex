@@ -15,18 +15,18 @@ Transparenz. Mit Transparenz wird hierbei nicht, wie oft in der Informatik
 gemeint, dass ein bestimmte Prozesse ``unsichtbar'' für den Benutzer
 abläuft~\cite{transparenz}. Im Rahmen der Erhebung von personenbezogenen Daten
 bedeutet Transparenz, dass der Benutzer einen tiefen Einblick darin erhält,
-welche Daten, wie über ihn gesammelt werden. Dies bedeutet das folgende
+welche Daten, wie über ihn gesammelt werden. Dies bedeutet, dass folgende
 Anforderungen an die transparente Datenerhebung gestellt werden:
 
 \begin{itemize}
-  \item Der Benutzer erhält zu jedem Zeitpunkt einblick in die bisher
+  \item Der Benutzer erhält zu jedem Zeitpunkt, Einblick in die bisher
   gesammelten personenbezogenen Daten.
   \item Vor der ersten Datenerhebung kann sich der Benutzer darüber informieren,
   welche persönlichen Daten, wann über ihn gesammelt werden.
   \item Eine Verschleierung, also das erheben von persönlichen Daten
-  und deren Übertragung ohne die Zustimmung des Benutzers, soll verhindert
+  und deren Übertragung, ohne die Zustimmung des Benutzers soll verhindert
   werden.
-  \item Der Benutzer soll kontrolle darüber haben, wann Daten über ihn erhoben
+  \item Der Benutzer soll Kontrolle darüber haben, wann Daten über ihn erhoben
   werden sollen und wann nicht.
   \item Vor einer Übertragung der Daten an einen exteren Server muss der
   Benutzer zustimmen. Sollte er der Übertragung nicht zustimmen, sollen die
@@ -35,30 +35,30 @@ Anforderungen an die transparente Datenerhebung gestellt werden:
 
 \section{Anonymität}
 \label{anonym}
-Anonymität beschreibt den Zustand, einer Person oder Gruppe die
-nicht identifiziert werden kann. Bei der Art von Anonymität
-gibt unterscheidet man verschiedene Abstufungen~\cite{anonymitaet}:
+Anonymität beschreibt den Zustand einer Person oder Gruppe, die
+nicht identifiziert werden kann. Bei der Art von Anonymität unterscheidet man
+verschiedene Abstufungen~\cite{anonymitaet}:
 \begin{itemize}
-  \item formal anonym: Eindeutige Zuordnungsmerkmale (z.B. Namen usw.) sind
+  \item Formal anonym: Eindeutige Zuordnungsmerkmale (z.B. Namen usw.) sind
   entfernt, die Daten ansonsten unverändert (das heißt leichte Zuordbarkeit der Einheiten).
-  \item faktisch anonym: Daten sind nur nur mit unverhältnismäßigem Zeit- und
+  \item Faktisch anonym: Daten sind nur nur mit unverhältnismäßigem Zeit- und
   Arbeitsaufwand zuordbar.
-  \item komplett anonym: die Zuordnung zu einzelnen Personen ist ausgeschlossen.
+  \item Komplett anonym: die Zuordnung zu einzelnen Personen ist ausgeschlossen.
 \end{itemize}
 
-Im Rahmen der Aufgabenstellung soll eine Anonymisierung der Benutzers
+Im Rahmen der Aufgabenstellung soll eine Anonymisierung des Benutzers
 von ``formal anonym'' bis ``faktisch anonym'' ermöglicht werden. Dies bdeutet,
 dass es nicht möglich sein soll, eindeutige Merkmale eines Benutzers zu sammeln (z.B.
-IMEI, Telefonnummer) und zum anderen, eine Zuordnung zu realen Personen anhand
-der Daten erschwert wird.
+\acs{imsi}, Telefonnummer) und zum anderen, eine Zuordnung zu realen Personen
+anhand der Daten erschwert wird.
 
 Bei der Anonymisierung der Daten ergibt sich aber ein Problem, bei der
-zurordbarkeit von einzelnen Datensätzen, die in regelmäßigen Abständen an einen
+Zurordbarkeit von einzelnen Datensätzen, die in regelmäßigen Abständen an einen
 Server übertragen werden. Werden zwei Datensätze A und B zu zwei
 unterschiedlichen Zeitpunkten übertragen, ist es nicht möglich die
-Datensätze A und B einander zuzurodnen. Eine Zuordnung auf dieser Ebene gefährte
-aber nicht die Anonymität der Benutzers. Hierbei ergibt sich nun die Anforderung
-eine Verfahren zu entwickeln, dass dieses Problem löst.
+Datensätze A und B einander zuzuordnen. Hierbei ergibt sich nun die
+Anforderung, ein Verfahren zu entwickeln, dass dieses Problem löst und die
+trotzdem die Anonymität des Benutzers bewahrt.
 
 \section{Erweiterungssystem}
 Aus der Aufgabenstellung ist zu entnehmen, dass die zu entwickelnde Anwendung,
@@ -71,7 +71,7 @@ Anforderungen an das Erweiterungssystem:
 \begin{itemize}
   \item Der Benutzer soll die möglichkeit haben neue Erweiterungen zu
   installieren und zu deinstallieren.
-   \item Die Installation neuer Erweiterungen, soll für den Benutzer der
+   \item Die Installation neuer Erweiterungen soll für den Benutzer der
    Anwendung möglichst einfach sein z.B. durch die Bereitstellung eines Markets.
   \item Das Erweiterungssystem soll eine Bibliothek liefern, über die es möglich
   ist neue Erweiterungen möglichst einfach zu erstellen.
@@ -84,18 +84,18 @@ nämlich die Möglichkeit besitzen, sich die gesammelten Daten, vor einer
 Übertragung zu kontrollieren. Deswegen ist ein Datenmodell zu entwickeln, dass
 es ermöglicht, Daten von beliebigen Erweiterungen zu speichern. Der Entwickler
 einer Erweiterung soll dabei aber so wenig wie möglich bei der Wahl seines
-Datenmodell eingeschränkt werden.
+Datenmodells eingeschränkt werden.
 
 \section{Datenübertragung}
 Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Ab-ständen,
 an einen Server übertragen werden. Dies soll aber nicht automatisch geschehen,
 sondern es soll der Benutzer darauf hingewiesen werden, das neue Daten zur
-Übermittung bereit stehen. Dadurch soll der Benutzer die möglichkeit haben vor
-einer Übertragung die Daten zu kontrollen. Ist ein Benutzer nicht mit der
+Übermittung bereit stehen. Dadurch soll der Benutzer die Möglichkeit haben, vor
+einer Übertragung die Daten zu kontrollieren. Ist ein Benutzer nicht mit der
 Übertragung der Daten einverstanden, so soll diese Übertragung verworfen werden
 können (Siehe \ref{sec:transparenz}). Des Weiteren soll die Möglichkeit bestehen
-die Übertragung zu einem späteren Zeitpunkt auszuführen. Dies kann der Fall
-sein, wenn eine Übertragung z.B. über das Mobilfunknetz für den Benutzer zu
+die Übertragung zu einem späteren Zeitpunkt auszuführen. Dies ist dann nützlich,
+wenn eine Übertragung z.B. über das Mobilfunknetz für den Benutzer zu
 kostenintensiv ist.
 
 Für die Übertragung der Daten ist ein entsprechendes Datenformat und
@@ -104,5 +104,6 @@ Format zu wählen, dass einen geringen Overhead aufweist, da die Bandbreite im
 mobilen Bereich stark limitiert ist.
 
 Zum Empfangen der Daten ist eine entsprechende Serverkomponente zu entwickeln.
-Neben dem Empfang soll die Serverkomponente es erlaubt die empfangenen Daten
-weiter zu verarbeiten um sie z.B. in einer Datenbank zu speichern.
+Neben dem Empfang soll die Serverkomponente es erlauben, die empfangenen Daten
+weiter zu verarbeiten, um sie z.B. in einer Datenbank zu speichern und zu
+visualisieren.
