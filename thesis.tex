@@ -78,14 +78,15 @@
 		%\printnomenclature
 		%\sectionfin
 		%Abkürzungsverzeichnis
-		\phantomsection
+		
+		%\phantomsection
 		\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 		\markboth{Abkürzungsverzechnis}{Abkürzungsverzechnis}
 		\section*{Abkürzungsverzeichnis}
 		\begin{acronym}[MMORPG]
-		\setlength{\itemsep}{-\parsep}
-		\renewcommand{\bflabel}[1]{\normalfont{\normalsize{\textbf{#1}}}\hfill}
-		\input{abkuerzungen.tex}
+			\setlength{\itemsep}{-\parsep}
+			\renewcommand{\bflabel}[1]{\normalfont{\normalsize{\textbf{#1}}}\hfill}
+			\input{abkuerzungen.tex}
 		\end{acronym}
 		\sectionfin
 		%---------------------------------------------------------------------------
