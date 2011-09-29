@@ -5,7 +5,7 @@ Anforderungen genauer analysiert. Es wird dabei geklärt, in welchem Umfang die
 einzelnen Anforderungen bearbeitet werden müssen.
 
 Die sich aus der Aufgabenstellung ergeben Anforderungen sind Transparenz,
-Anonymität, ein Erweitungssystem, die möglichkeit der Datenspeicherung, sowie
+Anonymität, ein Erweiterungssystem, die Möglichkeit der Datenspeicherung, sowie
 die regelmäßige Übertragung von Daten an einen Server.
 
 \section{Transparenz}
@@ -28,7 +28,7 @@ Anforderungen an die transparente Datenerhebung gestellt werden:
   werden.
   \item Der Benutzer soll Kontrolle darüber haben, wann Daten über ihn erhoben
   werden sollen und wann nicht.
-  \item Vor einer Übertragung der Daten an einen exteren Server muss der
+  \item Vor einer Übertragung der Daten, an einen externen Server, muss der
   Benutzer zustimmen. Sollte er der Übertragung nicht zustimmen, sollen die
   erhobenen Daten verworfen werden.
 \end{itemize}
@@ -41,19 +41,19 @@ verschiedene Abstufungen~\cite{anonymitaet}:
 \begin{itemize}
   \item Formal anonym: Eindeutige Zuordnungsmerkmale (z.B. Namen usw.) sind
   entfernt, die Daten ansonsten unverändert (das heißt leichte Zuordbarkeit der Einheiten).
-  \item Faktisch anonym: Daten sind nur nur mit unverhältnismäßigem Zeit- und
+  \item Faktisch anonym: Daten sind nur mit unverhältnismäßigem Zeit- und
   Arbeitsaufwand zuordbar.
   \item Komplett anonym: die Zuordnung zu einzelnen Personen ist ausgeschlossen.
 \end{itemize}
 
 Im Rahmen der Aufgabenstellung soll eine Anonymisierung des Benutzers
-von ``formal anonym'' bis ``faktisch anonym'' ermöglicht werden. Dies bdeutet,
+von ``formal anonym'' bis ``faktisch anonym'' ermöglicht werden. Dies bedeutet,
 dass es nicht möglich sein soll, eindeutige Merkmale eines Benutzers zu sammeln (z.B.
 \acs{imsi}, Telefonnummer) und zum anderen, eine Zuordnung zu realen Personen
 anhand der Daten erschwert wird.
 
 Bei der Anonymisierung der Daten ergibt sich aber ein Problem, bei der
-Zurordbarkeit von einzelnen Datensätzen, die in regelmäßigen Abständen an einen
+Zuordbarkeit von einzelnen Datensätzen, die in regelmäßigen Abständen an einen
 Server übertragen werden. Werden zwei Datensätze A und B zu zwei
 unterschiedlichen Zeitpunkten übertragen, ist es nicht möglich die
 Datensätze A und B einander zuzuordnen. Hierbei ergibt sich nun die
@@ -62,17 +62,18 @@ trotzdem die Anonymität des Benutzers bewahrt.
 
 \section{Erweiterungssystem}
 Aus der Aufgabenstellung ist zu entnehmen, dass die zu entwickelnde Anwendung,
-nur ein Grundgerüst darstellen soll. Es soll sich durch Erweitungen erweitern
-lassen. Die Anforderung besteht also darin, ein bestehendes Erweitungssystem in
-Android zu integrieren, oder ein eigenes zu entwickeln.
+nur ein Grundgerüst darstellen soll. Es soll sich durch Erweiterungen erweitern
+lassen. Die Anforderung besteht also darin, ein bestehendes Erweiterungssystem
+in Android zu integrieren, oder ein eigenes zu entwickeln.
 
 Anforderungen an das Erweiterungssystem:
 
 \begin{itemize}
-  \item Der Benutzer soll die möglichkeit haben neue Erweiterungen zu
+  \item Der Benutzer soll die Möglichkeit haben neue Erweiterungen zu
   installieren und zu deinstallieren.
    \item Die Installation neuer Erweiterungen soll für den Benutzer der
-   Anwendung möglichst einfach sein z.B. durch die Bereitstellung eines Markets.
+   Anwendung möglichst einfach sein z.B. durch die Bereitstellung eines
+   {\em Markets}.
   \item Das Erweiterungssystem soll eine Bibliothek liefern, über die es möglich
   ist neue Erweiterungen möglichst einfach zu erstellen.
 \end{itemize}
@@ -90,8 +91,8 @@ Datenmodells eingeschränkt werden.
 Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Ab-ständen,
 an einen Server übertragen werden. Dies soll aber nicht automatisch geschehen,
 sondern es soll der Benutzer darauf hingewiesen werden, das neue Daten zur
-Übermittung bereit stehen. Dadurch soll der Benutzer die Möglichkeit haben, vor
-einer Übertragung die Daten zu kontrollieren. Ist ein Benutzer nicht mit der
+Übermittelung bereit stehen. Dadurch soll der Benutzer die Möglichkeit haben,
+vor einer Übertragung die Daten zu kontrollieren. Ist ein Benutzer nicht mit der
 Übertragung der Daten einverstanden, so soll diese Übertragung verworfen werden
 können (Siehe \ref{sec:transparenz}). Des Weiteren soll die Möglichkeit bestehen
 die Übertragung zu einem späteren Zeitpunkt auszuführen. Dies ist dann nützlich,

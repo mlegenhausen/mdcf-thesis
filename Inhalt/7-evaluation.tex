@@ -20,11 +20,11 @@ Punkte bei der Implementierung des Plug-Ins sowie der Serverkomponente
 eingegangen.
 
 \subsection{Implementierung des Plug-Ins}
-Im folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
+Im Folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
 durch die es möglich wird die aktuelle Position eines Benutzers zu ermitteln und
 diese Daten zu speichern. Das Plug-In befindet sich im {\em
 LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
-Framework}-Projekts. Es wird sich im folgenden, auf dem im Verzeichnis
+Framework}-Projekts. Es wird sich im Folgenden, auf dem im Verzeichnis
 befindlichen Quellcode bezogen.
 
 \subsubsection{Ermittelung der aktuellen Position}
@@ -38,13 +38,13 @@ Location location = getLocationManager().getLastKnownLocation(provider);
 \end{lstlisting}
 
 Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
-genausten zu bestimmen. Die Positionsermittelung wird innerhalb von Android
+genausten zu bestimmen. Die Positionsermittlung wird innerhalb von Android
 durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
 ermittelt werden, der am Besten dem gegeben {\em Criteria}-Objekt entspricht.
 Durch dieses können Kriterien wie z.B. Stromverbrauch oder Genauigkeit
 festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
 der zurzeit bestverfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
-die letzte bekannte Position unter Zurhilfenahme des gegeben {\em Provider}s
+die letzte bekannte Position unter Zuhilfenahme des gegeben {\em Provider}s
 ermittelt. Das zurückgegebene {\em Location}-Objekt beschreibt die aktuelle
 Position des Benutzers.
 
@@ -68,7 +68,7 @@ getPersistenceManager().save(workspace);
 \end{lstlisting}
 
 Hier wird im ersten Schritt der {\em Workspace} abgefragt. Dann wird eine neue
-{\em Node} erstellt, an der alle Attribute des {\em Location}-Objectes
+{\em Node} erstellt, an der alle Attribute des {\em Location}-Objekts
 gespeichert werden. Dieses wird im letzten Schritt an den {\em Workspace}
 angehangen bevor dieser gespeichert wird.
 
@@ -96,7 +96,7 @@ language=xml]
 
 In dieser Konfiguration befindet sich ein neuer Tag, der {\em services}-Tag. Mit
 diesem wird angegeben, welche Android Services das Plug-In benötigt, um seine
-Aufgabe zu erfüllen. In diesem Fall benöigt das Plug-In den {\em
+Aufgabe zu erfüllen. In diesem Fall benötigt das Plug-In den {\em
 location}-Service. Dieser wird daraufhin bei jeder Ausführung dem Plug-In zur
 Verfügung gestellt. Folgende Services können zurzeit angefordert werden:
 
@@ -167,7 +167,7 @@ ist aus den folgenden Gründen zu empfehlen:
 \end{itemize}
 
 Eine Überführung des allgemeinen Datenformats in ein domänenspezifisches, sowie
-die anschließende Speicherung der Daten, kann dabei wie in Lisiting
+die anschließende Speicherung der Daten, kann dabei wie in Listing
 \ref{datenmapping} geschehen.
 
 \begin{lstlisting}[label=datenmapping,
@@ -220,7 +220,7 @@ public class TransferRequestProcessorImpl implements TransferRequestProcessor {
 }
 \end{lstlisting}
 
-In diesem Lisiting wird gezeigt, wie der empfangene {\em TransferRequest} auf
+In diesem Listing wird gezeigt, wie der empfangene {\em TransferRequest} auf
 ein {\em Participant}-Objekt übertragen werden kann. Ein {\em Participant} ist
 in diesem Beispiel ein Benutzer des {\em Mobile Data Collector}. Die
 Identifikation findet anhand der eindeutigen Benutzerkennung statt. Diese kann
@@ -230,7 +230,7 @@ Benutzer ran gehangen, sonst wird ein neuer {\em Participant} erstellt. Das {\em
 PersistentRepository} stellt die Datenbankabstraktionsschicht dar. In den darauf
 folgenden Schritten werden die Daten aus dem {\em TransferRequest} an ein
 entsprechendes {\em Location}-Objekt übergeben und der {\em Participant} wird
-gespeichert. Die Daten sind nun in einer Datenbank persitiert und stehen somit
+gespeichert. Die Daten sind nun in einer Datenbank persistiert und stehen somit
 anderen Anwendungen zur Verfügung. In diesem Beispiel wurde zur Persistierung
 der \acf{orm} {\em Hibernate} verwendet. Dieser wird vom {\em ParticipantRepsitory}
 abstrahiert. Durch die Abstraktion steht es dem Entwickler frei ein
@@ -242,7 +242,7 @@ werden. Da es sich um Positionsdaten handelt, bietet es sich an, die
 Positionen eines Benutzers auf einer Karte zu visualisieren. Dadurch ist es
 möglich sehr einfach die Daten zu evaluieren.
 
-Für die technischen Realisierung bietet es sich an, auf bereits bestehende
+Für die technische Realisierung bietet es sich an, auf bereits bestehende
 Infrastruktur und Programmiersprachen zurück zu greifen. Da bisher nur die
 Programmiersprache Java verwendet wurde und bereits ein Java Servlet-Container
 zum Empfang der Daten vorhanden ist, eignet sich ein javabasiertes
@@ -250,7 +250,7 @@ Web-Framework am besten. In diesem Fall, fiel die Wahl auf
 das \acf{gwt}\cite{gwt}. Bei \acs{gwt} handelt es sich um einen
 Java-zu-JavaScript-Compiler, der die Implementierung von Web-Anwendung in Java
 erlaubt. Die clientseitige Ausführung der Web-Anwendung findet nach der
-kompilierung nur noch in JavaScript statt. Zur Einbindung von Karten wurde die
+Kompilierung nur noch in JavaScript statt. Zur Einbindung von Karten wurde die
 Google Maps \acs{api} für \acs{gwt} verwendet\cite{gwtmaps}.
 
 In Abbildung \ref{locationtrackermap} ist die Web-Anwendung dargestellt. Im
@@ -288,13 +288,13 @@ Collector} empfangen und über die Web-Anwendung darstellen.
 
 \section{Plug-In zum Sammeln der Lautstärke an der aktuellen Position}
 Aufbauend auf dem in Abschnitt \ref{locationtracker} beschriebenen {\em
-Location Tracker}, wird im folgenden ein Plug-In entwickelt, das neben der
+Location Tracker}, wird im Folgenden ein Plug-In entwickelt, das neben der
 aktuellen Position auch die Lautstärke speichert. Dieses Plug-In trägt den
 Arbeitstitel {\em Noise Tracker}.
 
 \subsection{Plug-In Anpassungen}
 Das Plug-In befindet sich im {\em NoiseTrackerPlugin}-Verzeichnis. Es wird sich
-im folgenden auf dem im Verzeichnis befindlichen Quellcode bezogen.
+im Folgenden auf dem im Verzeichnis befindlichen Quellcode bezogen.
 
 Da der {\em Location Tracker} bereits die aktuelle Position ermittelt, muss noch
 die aktuelle Lautstärke ermittelt werden. Dies ist in Listing \ref{messurenoise}
@@ -324,23 +324,22 @@ Dabei wird zuerst ein {\em MediaRecorder} erstellt. Dieser kann dazu verwendet
 werden, um Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
 Zeilen wird als Audioquelle das Mikrofon verwendet. Die Einstellungen zum
 Ausgabeformat und Audio-Encoder sind zwar notwendig aber in diesem Fall egal, da
-wie in Zeile 5 angegeben alle Daten im {\em null-Device} gespeichern werden.
-Durch die {\em prepare} und {\em start}-Methode wird das Mikrofon reserviert
-und die Aufnahme gestartet. Die Lautstärke wird nun anhand der maximalen
-Amplitude bestimmt. Diese kann über die {\em getAmplitude}-Methode abgefragt
-werden. Damit diese Methode überhaupt einen Wert zurückliefert, muss für einen
-bestimmten Zeitinterval eine Tonaufnahme erfolgen. In diesem Fall werden für
-eine Sekunde lang alle Umgebungsgeräusche aufgenommen und die maximale Amplitude
-bestimmt. Durch die {\em stop} und {\em release}-Methode wird die Aufnahme
-angehalten und das Mikrofon wieder freigegeben. Diese Art der
-Lautstärkenbestimmung wurde dem Beispielprogramm {\em NoiseAlert}
-entnommen\cite{noisealert}. Bei dieser Art der Lautstärkenbestimmung ist zu
-erwähnen, dass die maximale Amplitude zwischen verschiedenen Geräten
-unterschiedlich sein kann. Bei einer Auswertung ist deswegen eine Anpassung der
-Daten erforderlich.
+wie in Zeile 5 angegeben alle Daten im {\em null-Device} gespeichert werden.
+Durch die {\em prepare} und {\em start}-Methode wird das Mikrofon reserviert und
+die Aufnahme gestartet. Die Lautstärke wird nun anhand der maximalen Amplitude
+bestimmt. Diese kann über die {\em getAmplitude}-Methode abgefragt werden. Damit
+diese Methode einen Wert zurückliefert, muss für einen bestimmten Zeitintervall
+eine Tonaufnahme erfolgen. In diesem Fall werden für eine Sekunde lang alle
+Umgebungsgeräusche aufgenommen und die maximale Amplitude bestimmt. Durch die
+{\em stop} und {\em release}-Methode wird die Aufnahme angehalten und das
+Mikrofon wieder freigegeben. Diese Art der Lautstärkenbestimmung wurde dem
+Beispielprogramm {\em NoiseAlert} entnommen\cite{noisealert}. Bei dieser Art der
+Lautstärkenbestimmung ist zu erwähnen, dass die maximale Amplitude zwischen
+verschiedenen Geräten unterschiedlich sein kann. Bei einer Auswertung ist
+deswegen eine Anpassung der Daten erforderlich.
 
 Um die Amplitude nun zum bisherigen Datenmodell hinzuzufügen, ist die Zeile
-aus Lisiting \ref{storeamplitude} hinzuzufügen.
+aus Listing \ref{storeamplitude} hinzuzufügen.
 
 \begin{lstlisting}[label=storeamplitude,
 caption=Speichern der Ampltiude, language=java] 
@@ -371,13 +370,13 @@ speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
 	\label{activation_recordaudio_warning}
 \end{figure}
 
-Das Plug-In ist nun fertig angepasst und kann zur Ermittelung der Lautstärke
+Das Plug-In ist nun fertig angepasst und kann zur Ermittlung der Lautstärke
 verwendet werden.
 
 \subsection{Anpassungen der Serverkomponente}
 Die Anpassungen an der Serverkomponente halten sich ebenfalls in Grenzen. Bei
 der Übertragung des allgemeinen Datenmodells auf das domänenspezifische muss
-entsprechend ein Attribut für die Ampltiude vorgesehen werden.
+entsprechend ein Attribut für die Amplitude vorgesehen werden.
 
 Bei der Visualisierung wurde in diesem Fall nur ein weiteres Attribut bei der
 Ausgabe aller Positionsdaten hinzugefügt. Siehe hierzu Abbildung
@@ -417,5 +416,5 @@ Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
 
 Abschließend lässt sich festhalten, dass die in der Anforderungsanalyse und dem
 Konzept festgehaltenden Anforderungen fast vollständig realisiert wurden. Nur im
-Bereich des Loggings beim Zugriff auf Ton und Video müssen bei der derzeitigen
-Implementierung des Plug-Ins-System abstriche gemacht werden.
+Bereich des Loggings müssen, beim Zugriff auf Ton und Video, bei der
+derzeitigen Implementierung des Plug-Ins-System, Abstriche gemacht werden.

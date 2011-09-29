@@ -6,8 +6,8 @@ das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data Collection
 Framework} trägt.
 
 Der {\em Mobile Data Collector} wird als Open Source Projekt entwickelt und kann
-auf Github unter der Adresse \url{https://github.com/mlegenhausen/mdcf} bezogen
-werden. Das Projekt ist dabei in die folgenden Teile gegliedert:
+auf Github unter der Adresse \url{https://github.com/mlegenhausen/mdcf}
+bezogen werden. Das Projekt ist dabei in die folgenden Teile gegliedert:
 
 \begin{itemize}
   \item {\bf MobileDataCollector}: Die {\em Mobile Data Collector} Android
@@ -31,7 +31,7 @@ Das {\em Mobile Data Collection Framework} dient zur Erstellung von Plug-Ins. Es
 beinhaltet alle Klassen und Schnittstellen die zwischen dem {\em Mobile Data
 Collector} und dem Plug-In geteilt werden, um eine Kommunikation zwischen beiden
 Komponenten zu ermöglichen. Das Framework wird als Android Bibliothek zur
-Verfügunng gestellt.
+Verfügung gestellt.
 
 Das Framework ist in drei Teile gegliedert. Zum einen Klassen und Interfaces,
 die es einem Plug-In erlauben sich an dem Plug-In System anzumelden und mit
@@ -54,13 +54,13 @@ Innerhalb der {\em run}- bzw. {\em onRun}-Methode kann auf die gesetzten
 Services zugegriffen werden. Die Services bieten alle in der Android Dokumentation beschriebenen
 Methoden. Neben den Services kann auch auf einen {\em PersistenceManager}
 zugegriffen werden. Dieser erlaubt das einfache Abfragen aller bisher
-gespeicherter Daten über die {\em getWorkspace}-Methode. Die zurückgebene
+gespeicherter Daten über die {\em getWorkspace}-Methode. Die zurückgegebene
 Datenstruktur kann dann innerhalb des Plug-Ins beliebig manipuliert werden.
-Wurden alle Daten erfolgreich manipuliert, kann über die {\em save}-Methode die
-Speicherung der Änderungen erfolgen.
+Wurden alle Daten erfolgreich manipuliert, können die Änderungen mit der {\em
+save}-Methode gespeichert werden.
 
 Die Registrierung eines Plug-Ins, erfolgt durch die Antwort auf den vom Plug-In
-System versendeten {\em Broadcast}, der nach der installation einer neuen
+System versendeten {\em Broadcast}, der nach der Installation einer neuen
 Anwendung versendet wird. Um auf diesen {\em Broadcast} zu antworten, muss ein
 {\em Braodcast Receiver} implementiert werden. Zu diesem Zweck existiert bereits
 eine Implementierung des {\em Broadcast Receiver}, der {\em
@@ -68,10 +68,10 @@ AbstractPluginRegister}. Erbt man von dieser Klasse, muss man die {\em
 onRegister}-Methode implementieren. Diese muss ein {\em PluginInfo}-Objekt
 zurück liefern, welche die Plug-In Informationen enthält. Bei dem {\em
 PluginInfo}-Objekt handelt es sich um ein Java \acs{pojo}, dass die in Abschnitt
-\ref{pluginsystemforandroid} beschriebenen Attribute beistzt. Neben der reinen
+\ref{pluginsystemforandroid} beschriebenen Attribute besitzt. Neben der reinen
 Java Konfiguration kann man das Objekt auch aus einer \acs{xml}-Datei generieren
 lassen. Dazu muss man von der {\em XMLPluginRegister}-Klasse erben und den Pfad
-zur Konfigurationsdatei als Konstrukturparameter übergeben. Dabei muss darauf
+zur Konfigurationsdatei als Konstruktorparameter übergeben. Dabei muss darauf
 geachtet werden, dass die Datei sich im {\em Java Classpath} befindet.
 
 Damit das implementierte Plug-In und der {\em Broadcast Receiver} vom Android
@@ -85,11 +85,11 @@ Konkrete Beispiele zur Implementierung und Konfiguration sind dem Kapitel
 Die Architektur des {\em Mobile Data Collector} ist in Abbildung
 \ref{architecture} dargestellt. Wie in der Abbildung zu erkennen, stellt der
 {\em Plug-In Service} (blau) die zentrale Komponente des {\em Mobile Data
-Collector} dar. Er beherbergt das gesammte Plug-In System und kümmert sich somit
-um die Verwaltung und Ausführung von Plug-Ins. Er speichert alle von den Plug-In
-gesammelten Daten in einer \acs{db4o}-Datenbank (gelb). Sollte ein
-Plug-In auf die Android System Services (grau) zugreifen, geschieht dies, aus transparenz
-Gründen, ebenfalls über den Plug-In Service.
+Collector} dar. Er beherbergt das gesamte Plug-In System und kümmert sich somit
+um die Verwaltung und Ausführung von Plug-Ins. Er speichert alle von den
+Plug-Ins gesammelten Daten in einer \acs{db4o}-Datenbank (gelb). Sollte ein
+Plug-In auf die Android System Services (grau) zugreifen, geschieht dies, aus
+Transparenzgründen, ebenfalls über den Plug-In Service.
 
 \begin{figure}[h!] 
 	\centering
@@ -118,14 +118,14 @@ Die Pfeile ausgehend vom und zum {\em Plug-In Service} stellen die
 Aufrufrichtung dar. So ruft z.B. der {\em Plug-In Service} immer die Plug-Ins
 auf und die {\em Activities} den {\em Plug-In Service}.
 
-Im Folgenden wird auf die zurvor beschriebenen Komponenten genauer eingegangen.
+Im Folgenden wird auf die zuvor beschriebenen Komponenten genauer eingegangen.
 
 \subsection{Plug-In Service}
 Der Plug-In Service stellt die zentrale Komponente zur Verwaltung von Plug-Ins,
-sowie deren Ausführung dar. Er beinhaltet die gesammte Applikationslogik des
-{\em Mobile Data Collectors}. Alle Activities greifen über eine entsprechende
-Schnittstelle auf diesen Service zu. Der {\em Plug-In Service} läuft
-dabei dauerhaft im Hintergrund und führt die Plug-Ins in den vorgebenen
+sowie deren Ausführung dar. Er beinhaltet die gesamte Applikationslogik des
+{\em Mobile Data Collectors}. Alle {\em Activities} greifen über eine
+entsprechende Schnittstelle auf diesen Service zu. Der {\em Plug-In Service} läuft
+dabei dauerhaft im Hintergrund und führt die Plug-Ins in den vorgegebenen
 Abständen aus.
 
 Neben der Service-Schnittstelle stellt das {\em PluginConfiguration}-Objekt eine
@@ -142,14 +142,14 @@ PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute:
   befindet es sich immer, wenn der {\em Mode} {\em New}, {\em Deactivated} oder
   {\em Transfer} ist. Zwischen den Zuständen {\em Waiting} und {\em Running}
   wechselt das Plug-In, wenn es sich im {\em Mode} {\em Activated} befindet.
-  \item {\bf Last Executed} gibt an, wann das Plug-In das letzte mal ausgeführt
+  \item {\bf Last Executed} gibt an, wann das Plug-In das letzte Mal ausgeführt
   wurde.
-  \item {\bf Last Activated} gibt an, wann das Plug-In das letzte mal aktiviert
+  \item {\bf Last Activated} gibt an, wann das Plug-In das letzte Mal aktiviert
   wurde.
-  \item {\bf Total Activation Time} gibt summiert an, wielange das Plug-In
-  activiert war.
+  \item {\bf Total Activation Time} gibt summiert an, wie lange das Plug-In
+  aktiviert war.
   \item {\bf Permissions} gibt an, welche Zugriffsrechte das Plug-In vom Android
-  Betriebssystem benötigt. Dieses Attribut sollte im besten Fall leer sein, da
+  Betriebssystem benötigt. Im besten Fall ist dieses Attribut leer, da
   dies bedeutet, dass das Plug-In nicht auf reglementierte Ressourcen zugreifen
   muss.
   \item {\bf Log Records} speichert alle Zugriffe, die auf die sicheren
@@ -226,7 +226,8 @@ aufgerufen werden, wenn das {\em Transfer}-Objekt auch an einen externen Server
 übertragen wurde.
 
 \subsubsection{Plug-In Registierung}
-Der Vorgang der Plug-In Registierung ist in Abbildung \ref{register} dargestellt.
+Der Vorgang der Plug-In Registrierung ist in Abbildung \ref{register}
+dargestellt.
 
 \begin{figure}[h!] 
 	\centering
@@ -271,7 +272,7 @@ diese Zeit überschritten werden, so wird das Plug-In vom Android System
 terminiert. Nach der Ausführung wird das Plug-In wieder zum Thread-Pool
 hinzugefügt, um ihn aber diesmal erst nach dem vom Plug-In definierten Abstand
 auszuführen. Dies wiederholt sich solange bis das Plug-In deaktiviert wurde oder
-eine Übertragung vorbereitet wird. Dadurch, dass das Plug-In immer im nachhinein
+eine Übertragung vorbereitet wird. Dadurch, dass das Plug-In immer im Nachhinein
 wieder zum Thread-Pool hinzugefügt und nicht automatisch periodisch ausgeführt
 wird, wird eine Überlappung der Plug-In Ausführungen verhindert.
 
@@ -287,7 +288,7 @@ Benutzer daraufhin gewiesen.
 \end{figure}
 
 Neue Plug-Ins können über Eclipse, dem Android Market oder von der SD-Card
-installert werden. Um den Android Market schneller zu erreichen, kann wie in
+installiert werden. Um den Android Market schneller zu erreichen, kann wie in
 Abbildung \ref{more_plugins}, über die hardwareseitige {\em Menü}-Taste direkt
 auf diesen zugegriffen werden.
 
@@ -312,7 +313,7 @@ aktiviert wird, werden wie in Abbildung \ref{activation} zu sehen, die Plug-In
 Informationen angezeigt. Hat man alle Informationen kontrolliert und ist mit
 diesen einverstanden, kann man durch das Drücken der {\em Activate} Schaltfläche
 das Plug-In aktivieren. Durch das drücken von {\em Cancel} kann man den
-Aktivierugsprozess abbrechen.
+Aktivierungsprozess abbrechen.
 
 \begin{figure}[h!] 
 	\centering
@@ -322,7 +323,7 @@ Aktivierugsprozess abbrechen.
 \end{figure}
 
 Hierbei ist besonders auf die sogenannten {\em Dangerous Permissions} zu achten.
-Diese weisen den Benutzer darauf hin, dass das Plug-In auf Rechte zugreifen
+Diese weisen den Benutzer daraufhin, dass das Plug-In auf Rechte zugreifen
 möchte, die es normalerweise nicht braucht bzw. über diese auf personenbezogene
 Daten zugreifen könnte. Vor der Aktivierung wird deswegen der Benutzer durch die
 in Abbildung \ref{activation_warning} dargestellte Warnung darüber informiert.
@@ -339,10 +340,10 @@ gefährlich sein könnte, so kann er durch das Drücken der {\em OK} Schaltfläche
 das Plug-In trotzdem aktivieren. Durch die {\em Cancel} Schaltfläche kann die
 Aktivierung abgebrochen werden.
 
-Nach der Aktivierug eines Plug-In wechselt entsprechend die Anzeige von {\em
+Nach der Aktivierung eines Plug-In wechselt entsprechend die Anzeige von {\em
 New} zu {\em Activated}. Siehe Abbildung \ref{activate}, wo in diesem Fall das
 {\em Noise Tracker} Plug-In aktiviert wurde. Die Anzeige für Datum und
-Uhrzeit zeigt an, wann das Plug-In zum letzten mal ausgeführt wurde.
+Uhrzeit zeigt an, wann das Plug-In zum letzten Mal ausgeführt wurde.
 
 \begin{figure}[h!] 
 	\centering
@@ -395,7 +396,7 @@ Log-Viewer} und {\em Data-Viewer} genauer erläutert werden.
 \subsubsection{Log-Viewer}
 Der Log-Viewer dient zur Anzeige aller Aktivitäten eines Plug-Ins. Mit
 Aktivitäten ist der Zugriff auf alle Android System Services gemeint. Greift ein
-Plug-In auf eine Methode der System Services zu, so wird ein Log eintrag
+Plug-In auf eine Methode der System Services zu, so wird ein Log-Eintrag
 erstellt. Dieser enthält in benutzerverständlicher Sprache, welche Informationen
 abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log} dargestellt.
 
@@ -408,7 +409,7 @@ abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log} dargestellt.
 
 Der Log ist dabei wie folgt aufgebaut. Jede Zeile zeigt an, wann das Plug-In
 ausgeführt wurde. Durch die Auswahl eines Eintrags erweitern sich die Einträge
-um die eigendlichen Log einträge. In diesem Fall sagen die Log Einträge aus, das
+um die eigentlichen Log-Einträge. In diesem Fall sagen die Log Einträge aus, das
 am 16.08.2011 um 5:58:40 Uhr das Plug-In ausgeführt wurde. Während dieser
 Ausführung wurde zur Lokalisierung des Benutzers das GSM/UMTS Netz ({\em
 network}) verwendet und als Position wurden die Koordinaten am 53.8477729
@@ -423,7 +424,7 @@ Die im Konzept beschriebene hierarchische Datenstruktur lässt sich durch den
 Data-Viewer anzeigen. Dabei wird jede Ebene der Datenstruktur als Liste
 dargestellt. In Abbildung \ref{collected_data_overview} wird die erste Ebene
 angezeigt. Jede anklickbare {\em Node} wird dabei als Datum angezeigt. Dieses
-Datum gibt an, wann der entsprechende Datensatz das letzte mal modifiziert
+Datum gibt an, wann der entsprechende Datensatz das letzte Mal modifiziert
 wurde. In diesem Fall werden drei Einträge dargestellt. In diesem Beispiel
 überschneiden sich die Daten mit denen die im Log stehen. Es wurde also bei
 jeder Ausführung jeweils ein neuer Eintrag zu den gesammelten Daten hinzugefügt.
@@ -435,7 +436,7 @@ jeder Ausführung jeweils ein neuer Eintrag zu den gesammelten Daten hinzugefügt.
 	\label{collected_data_overview}
 \end{figure}
 
-Wählt man einen {\em Node}-Eintrag aus, so gelangt man in der hierarchie eine
+Wählt man einen {\em Node}-Eintrag aus, so gelangt man in der Hierarchie eine
 Ebene tiefer. Die sich dabei ergebenen Daten können wie in Abbildung
 \ref{collected_data_details} aussehen. In diesem Beispiel befinden sich auf
 dieser Ebene nur {\em Properties}. Diese {\em Properties} beschreiben von oben
@@ -476,7 +477,7 @@ wie in Abbildung \ref{transfer_pending} aussehen.
 Wählt der Benutzer den entsprechenden Eintrag aus, so gelangt dieser in die, in
 Abbildung \ref{transfer_details} dargestellte, Detailansicht der Übertragung. In
 dieser kann der Benutzer nochmal alle Informationen und Aktivitäten des Plug-Ins
-betrachten. Hierbei handelt es sich um einen Schnapschuss des aktuellen
+betrachten. Hierbei handelt es sich um einen Schnappschuss des aktuellen
 Zustandes des Plug-Ins, den es hatte als die Übertragung vorbereitet wurde.
 
 \begin{figure}[h!] 
@@ -508,7 +509,7 @@ zu sehen, als Dialog und Mitteilung angezeigt.
 
 Ist der Benutzer nicht mit der Übertragung seiner Daten einverstanden, kann er
 durch die {\em Dismiss} Schaltfläche, die Übertragung löschen. Alle in der
-Übertragung angezeigt Daten gehen daraufhin unwiederruflich verloren.
+Übertragung angezeigt Daten gehen daraufhin unwiderruflich verloren.
 
 Intern wird bei der Übertragung zu einem Server eine HTTP Verbindung aufgebaut.
 Das Verbindungsziel wird hierbei dem URL Attribut der Plug-In Informationen
@@ -520,11 +521,11 @@ um eine Zeichenkette handelt, kann dieser einfach per HTTP versendet werden.
 Durch die Serverkomponente soll ein Plug-In Entwickler die Möglichkeit erhalten,
 sehr schnell und einfach einen eigenen Server zu entwickeln, um Daten von
 einem Plug-In zu empfangen und zu verarbeiten. Die Serverkomponente steht als
-Java Bibliothek bereit und soll die einfache integration in bestehende
+Java Bibliothek bereit und soll die einfache Integration in bestehende
 Applikationsserver erlauben.
 
 Die Serverkomponente ist wie folgt aufgebaut. Das {\em TransferRequestReceiver
-Servlet} empängt die vom {\em Mobile Data Collector} versandte \acs{json}
+Servlet} empfängt die vom {\em Mobile Data Collector} versandte \acs{json}
 Datenstruktur und konvertiert diese in eine äquivalente Java Datenstruktur. Zur
 Konvertierung wurde wie auf der Smartphone Seite, die GSON Bibliothek verwendet.
 Diese Java Datenstruktur kann nun vom {\em TransferRequestProzessor} weiter
@@ -533,32 +534,32 @@ Datenstruktur in eine spezifischere Datenstruktur zu überführen, die sich
 leichter verarbeiten und speichern lässt. Wie die Daten persistiert werden muss
 der Entwickler selbst entscheiden.
 
-Die Serverkompoente wurde dabei mit Hilfe des {\em Dependency Injection}
+Die Serverkomponente wurde dabei mit Hilfe des {\em Dependency Injection}
 Frameworks {\em Google Guice} und dem Java-Build-Werkzeug Maven entwickelt.
 
-Beispiele einschließlicher deren Implementierung sind im Kapitel
+Beispiele einschließlich deren Implementierung sind im Kapitel
 \ref{cha:evaluation} genauer beschrieben.
 
 \section{Realisierungsprobleme}
 \label{problemsofimplementation}
-Während der Realisierung des {\em Mobile Data Collectors} tratt bei der Plug-In
+Während der Realisierung des {\em Mobile Data Collectors} trat bei der Plug-In
 Entwicklung folgendes Problem auf. Auf viele der von Android verwalteten
-Hardware kann zwischen mehren parallel laufenden Anwendungen konkurrierend zugegriffen
-werden. Diese Hardware wie z.B. \acs{gps} oder der Lagesensor werden aus diesen
-Gründen als System Service angeboten. Es gibt aber auch Hardware die nur von einer Anwendung zurzeit
-verwendet werden kann. Dies sind z.B. die Kamera und das Mikrofon. Diese werden
-nicht als System Service angeboten, sondern als Schnittstelle zu einer
-nativen Bibliothek, die diese Hardware ansteuern kann.
+Hardware kann zwischen mehreren parallel laufenden Anwendungen konkurrierend
+zugegriffen werden. Diese Hardware wie z.B. \acs{gps} oder der Lagesensor werden
+aus diesen Gründen als System Service angeboten. Es gibt aber auch Hardware die
+nur von einer Anwendung zurzeit verwendet werden kann. Dies sind z.B. die Kamera
+und das Mikrofon. Diese werden nicht als System Service angeboten, sondern als
+Schnittstelle zu einer nativen Bibliothek, die diese Hardware ansteuern kann.
 
 System Services lassen sehr einfach durch eine neue Implementierung ersetzen.
 Dies liegt daran, dass Android Services selbst zur Kommunikation mit der
-eigentlichen dahinter liegende Service Implementierung den \acs{ipc} Mechanimus
+eigentlichen dahinter liegende Service Implementierung den \acs{ipc} Mechanismus
 verwenden. Dies ist bei den Klassen zur Ansteuerung der Kamera und dem Mikrofon
 aber nicht der Fall. Das Problem liegt darin, dass die Klassen zur Verwendung
 der Kamera und des Mikrofons, die Daten in Dateien abspeichern. Man könnte nun
 diese Klassen wie die Services durch eine sichere Implementierung ersetzen,
-indem man ebenfalls den \acs{ipc} Mechanimus verwendet, um die Ausführung in den
-{\em Mobile Data Collector} zu verschieben. Hierbei ergibt sich aber nun das Problem,
+indem man ebenfalls den \acs{ipc} Mechanismus verwendet, um die Ausführung in
+den {\em Mobile Data Collector} zu verschieben. Hierbei ergibt sich aber nun das Problem,
 dass die aufgenommen Daten im {\em Mobile Data Collector} gespeichert werden.
 Diese Daten wären für ein Plug-In durch die Android Sandbox Architektur nicht
 direkt zugreifbar. Hierfür müsste eine weitere Schnittstelle geschaffen werden,

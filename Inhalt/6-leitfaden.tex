@@ -51,7 +51,7 @@ geboten hat. Zur Einrichtung der Eclipse \acs{ide} sind folgende Schritte
 durchzuführen.
 
 \begin{enumerate}
-  \item Installation des Android \acfs{sdk}. Dazu müssen
+  \item Installation des Android \acfp{sdk}. Dazu müssen
   die Schritte auf \url{http://developer.android.com/sdk/installing.html}
   befolgt werden.
   \item Installation des Android Development Tools (ADT) Plug-In für Eclipse.
@@ -118,7 +118,7 @@ HelloWorldPlugin}. Dazu macht man einen Rechtsklick auf das Package und wählt
 {\em New} und {\em Class} aus. Unter {\em Name} gibt man den Namen {\em
 HelloWorldPlugin} ein und bei {\em Superclass} wählt man mit einem Klick auf
 Browse die Klasse {\em AbstractPlugin} aus. Durch einen Klick auf {\em Finish} wird die
-Klasse wie in Listening \ref{helloworldplugin} erstellt.
+Klasse wie in Listing \ref{helloworldplugin} erstellt.
 
 \begin{lstlisting}[label=helloworldplugin,
 caption=HelloWorldPlugin.java, language=java] package com.example.helloworld;
@@ -135,7 +135,7 @@ public class HelloWorldPlugin extends AbstractPlugin {
 \end{lstlisting}
 
 Als Beispiel soll nun bei jedem Aufruf des Plug-Ins ein ``Hello World''
-gespeichert werden. Dazu fügt man zur {\em onRun}-Methode den Code von Listening
+gespeichert werden. Dazu fügt man zur {\em onRun}-Methode den Code von Listing
 \ref{helloworldonrun} hinzu.
 
 \begin{lstlisting}[label=helloworldonrun, caption=Inhalt der
@@ -160,9 +160,9 @@ Als nächstes muss ein {\em Broadcast Receiver} implementiert werden, um das
 Plug-In auffindbar und Plug-In Informationen dem {\em Mobile Data Collector}
 verfügbar zu machen. Dazu erstellt man, im selben Package, eine Klasse {\em
 HelloWorldRegister}, die von {\em XMLPluginRegister} erbt. Dieser Klasse fügt
-man einen {\em Constructor} hinzu, der auf die Datei ``plugin.xml'' verweißt.
+man einen {\em Constructor} hinzu, der auf die Datei ``plugin.xml'' verweist.
 Diese Datei enthält die Plug-In Informationen beschrieben in \acs{xml}. Die
-Klasse sollte nun wie in Listening \ref{helloworldregister} aussehen.
+Klasse sollte nun wie in Listing \ref{helloworldregister} aussehen.
 
 \begin{lstlisting}[label=helloworldregister,
 caption=HelloWorldRegister.java, language=java]
@@ -181,7 +181,7 @@ public class HelloWorldRegister extends XMLPluginRegister {
 Nun muss noch die zuvor genannte ``plugin.xml'' erstellt
 werden. Hierzu erstellt man eine \acs{xml}-Datei im zuvor erwähnten Package. Es
 ist darauf zu achten, das sich die \acs{xml}-Datei innerhalb des {\em Java
-Classpath} befindet. In die ``plugin.xml'' ist das Listening \ref{helloworldpluginxml} zu
+Classpath} befindet. In die ``plugin.xml'' ist das Listing \ref{helloworldpluginxml} zu
 kopieren.
 
 \begin{lstlisting}[label=helloworldpluginxml, caption=plugin.xml, language=xml]
@@ -215,9 +215,9 @@ In dieser Konfigurationsdatei wurden folgende Parameter festgelegt.
 Diese Parameter können je nach Anforderung beliebig abgeändert werden.
 
 \subsubsection{Konfiguration der Manifest-Datei}
-Zu guter letzt muss das Plug-In und der {\em Broadcast Receiver} dem Android
+Zu guter Letzt muss das Plug-In und der {\em Broadcast Receiver} dem Android
 System bekannt gemacht werden. Dazu muss die {\em AndroidManifest.xml} angepasst
-werden. Die Anpassungen sehen wie in Listining \ref{helloworldmanifest} aus.
+werden. Die Anpassungen sehen wie in Listing \ref{helloworldmanifest} aus.
 
 \begin{lstlisting}[label=helloworldmanifest, caption=AndroidManifest.xml,
 language=xml] <?xml version="1.0" encoding="utf-8"?>
@@ -260,12 +260,12 @@ Receiver} aufgerufen, wenn der {\em Mobile Data Collector} nach Plug-Ins sucht.
 Das Plug-In wiederum besitzt eine {\em action} mit dem Namen {\em
 com.example.helloworld.HELLO\_WORLD\_PLUGIN}. Durch diese kann der {\em Mobile
 Data Collector}, die Plug-In-Schnittstelle aufrufen und das Plug-In somit
-ausführen. Hierbei ist darauf zu achten, dass die {\em action} den selben Namen
+ausführen. Hierbei ist darauf zu achten, dass die {\em action} denselben Namen
 besitzt wie in der ``plugin.xml'' angegeben, da sonst das Plug-In nicht
 aufgerufen werden kann.
 
 \subsection{Plug-In installieren und ausführen}
-Das Plug-In ist nun fertig und kann zum ersten mal ausgeführt werden. Dazu muss
+Das Plug-In ist nun fertig und kann zum ersten Mal ausgeführt werden. Dazu muss
 im ersten Schritt der {\em Mobile Data Collector} installiert werden. Dies
 geschieht durch einen Rechtsklick auf das {\em Mobile\-Data\-Collector}-Projekt.
 Durch einen Klick im Menü auf {\em Run As} und {\em Android Application} wird
@@ -274,12 +274,12 @@ Computer angeschlossen sein, so wird der {\em Mobile Data Collector} auf diesem
 automatisch installiert. Sollte dies nicht der Fall sein, wird der
 Android Emulator gestartet. Es ist zu Empfehlen den {\em Mobile Data Collector}
 auf einem Smartphone zu installieren, da nur bei diesem, die volle Sensorik zur
-Verfügung steht. Nach der installation wird der {\em Mobile Data Collector}
+Verfügung steht. Nach der Installation wird der {\em Mobile Data Collector}
 automatisch gestartet.
 
 Im nächsten Schritt kann nun das eigentliche Plug-In installiert werden. Dazu
 installiert man das {\em Hello\-World\-Plugin} wie zuvor den {\em Mobile Data
-Collector}. Nach der installation wird das Plug-In in der Plug-In Liste des {\em
+Collector}. Nach der Installation wird das Plug-In in der Plug-In Liste des {\em
 Mobile Data Collectors} angezeigt. Aktiviert man nun das Plug-In wird dieses das
 erste mal ausgeführt. Man kann sich nun in den Plug-In Details die gespeicherten
 Daten anschauen. Navigiert man in der Datenhierarchie hierum, wird man
@@ -322,15 +322,15 @@ mvn archetype:generate \
 	-DarchetypeArtifactId=maven-archetype-webapp
 \end{lstlisting}
 
-Alle auftretenden Fragen können durch die Eingabe von {\em Enter} bestättigt
+Alle auftretenden Fragen können durch die Eingabe von {\em Enter} bestätigt
 werden. Leider wird das Projekt unvollständig von Maven generiert. Deswegen wird
 für die weiteren Schritte empfohlen nachträglich ein {\em
 src/main/java}-Verzeichnis hinzuzufügen, sowie ein {\em
 com.example.helloworld.server}-Package.
 
 Bevor nun mit der eigentlichen Implementierung begonnen werden kann, müssen noch
-die in Listing \ref{pomxml} angegebenen Abhängigkeiten zur {\em pom.xml} hinzugefügt
-werden.
+die in Listing \ref{pomxml} angegebenen Abhängigkeiten zur {\em pom.xml}
+hinzugefügt werden.
 
 \begin{lstlisting}[label=pomxml, caption=pom.xml, language=xml] 
 <dependencies>
@@ -398,7 +398,7 @@ eindeutige Benutzernutzerkennung des Smartphone-Besitzers und kann dazu
 verwendet werden Datensätze einzelnen Benutzern zuzuordnen.
 
 Damit der zuvor implementierte {\em TransferRequestProcessor} über eine URL
-aufgegrufen werden kann. Muss dieser noch unter zurhilfenahme von {\em Google
+aufgerufen werden kann. Muss dieser noch unter Zuhilfenahme von {\em Google
 Guice} konfiguriert werden. Hierzu ist ein {\em GuiceServletContextListener} zu
 implementieren. Siehe hierzu Listing \ref{helloworldcontextlistener}.
 
@@ -436,8 +436,8 @@ Daten über das URL-Suffix {\em /receiver} empfangen werden können. Bei dem {\em
 TransferRequestReceiver} handelt es sich um ein Servlet, dass die vom Smartphone
 empfangenen Daten, auf das {\em TransferRequest}-Objekt überträgt und an den
 definierten {\em TransferRequestProcessor} übergibt. Hierbei ist anzumerken,
-dass der Suffix mit der in Listening \ref{helloworldpluginxml} definierten {\em
-url} übereinstimmen muss. Letzendlich muss in der ``plugin.xml'' des Plug-Ins
+dass der Suffix mit der in Listing \ref{helloworldpluginxml} definierten {\em
+url} übereinstimmen muss. Letztendlich muss in der ``plugin.xml'' des Plug-Ins
 die URL stehen, unter der das hier definierte Servlet erreichbar ist.
 
 Damit das zuvor definierte {\em ServletModule} vom Servlet Container gefunden
