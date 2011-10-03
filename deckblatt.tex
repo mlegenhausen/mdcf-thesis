@@ -103,3 +103,52 @@ Through this application the user should get back control over his data and
 enable other institutions to collect personalized data.
 
 \cleardoublepage
+
+% Aufgabenstellung
+
+\section*{Aufgabenstellung}
+Die Aufgabenstellung besteht in der Entwicklung einer Android Anwendug zum
+transparenten und anonymen Sammeln von Sensordaten. Vorbild für die Anwendung
+soll hierbei das \acf{boinc} sein. Die \acs{boinc}-Plattform ermöglicht die
+ungenutze Rechenleistung von vielen tausend Computern über das Internet
+verfügbar zu machen. Dadurch lassen sich wie beim Grid-Computing komplexe
+wissenschaftliche Probleme lösen. Welchem wissenschaftlichen Projekt man seine
+Rechenleistung zur Verfügung stellt bleibt dem Benutzer selbst überlassen. In
+Analogie daran soll die in dieser Masterarbeit entwickelte Anwendung es
+ebenfalls dem Benutzer ermöglichen welchem Projekt, er seine Sensordaten zur
+Verfügung stellt.
+
+Als technische Grundvoraussetzung um selbst zu entscheiden, welchem Projekt man
+seine Daten zur Verfügung stellt, soll die Android Anwendung ein
+Erweiterungssystem zur Verfügung stellen. Erweiterungen können dabei von
+beliebigen Projekten entwickelt werden. Dieses System soll die
+kontrollierte und transparente Ausführung von Erweiterungen ermöglichen. Die von
+einer Erweiterung gesammelten Daten sollen sich dann zu einem
+projektspezifischen Server übertragen lassen. Dabei soll sicher gestellt werden
+das keine Daten übertragen werden, die einen Smartphone-Besitzer eindeutig
+identifizieren. Zur Realisierung von Erweiterungen und dem Empfang von Daten auf
+der Serverseite sollen entsprechende Frameworks zur Verfügung gestellt werden.
+
+Das Ziel soll es sein, anhand von Transparenz und Anonymität die Motivation zu
+schaffen, eine Anwendung zu verwenden, die es öffentlichen und privaten
+Institutionen erlaubt, beliebige Sensordaten und damit verbunden, auch
+persönliche Daten über einen Benutzer zu Sammeln.
+
+Der Umfang der Arbeit soll dabei die folgenden Punkte umfassen:
+
+\begin{itemize}
+  \item Anforderungsanalyse: Extraktion alle Anforderungen an die Android
+  Anwendung aus der Aufgabenstellung.
+  \item Konzeption: Für Android Plattform soll ein entsprechender
+  Programmentwurf stattfinden. Hierbei sollen auch mögliche
+  verwendbare Technologien (z.B. OSGi) evaluiert werden.
+  \item Implementierung: Das entworfene Konzept soll in ein reales Programm
+  überführt werden. Dabei soll auch dokumentiert werden wie sich die Anwendung
+  erweitern lässt.
+  \item Evaluation: Es soll anhand zweier Erweiterungen gezeigt werden, dass die
+  implementierte Anwendung auch für praktische Anwendungsszenarien verwendbar
+  ist. Die erste Erweiterung soll die Position von Smartphone besitzern
+  protokollieren. Die zweite Erweiterung soll entsprechend der Position noch die
+  Lautstärke ermitteln. Die von den beiden Erweiterugen gesammelten Daten sollen
+  zu Evaluationszwecken entsprechend visualisiert werden.
+\end{itemize}
