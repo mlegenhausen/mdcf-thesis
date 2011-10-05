@@ -68,19 +68,20 @@ Lübeck, den \today
 \centerline{\bf Kurzfassung}
 \bigskip
 In der heutigen Zeit erfassen Smartphones sehr viele personenbezogene Daten
-(z.B. Standort, Benutzerverhalten) über ihren Besitzer. Diese Daten besitzen
-einen relativ hohen Wert für öffentliche Einrichtungen und die Industrie. In den
-meisten Fällen, werden diese Daten ohne das Wissen des Benutzers, aber nur an
-wenige externe dritte Übertragen (z.B. Mobilfunkanbieter, Google, Apple). Die in
-dieser Arbeit entwickelte Lösung, soll eine Android Anwendung darstellen, die
-das transparente und anonyme Sammeln von Sensordaten ermöglicht. Die Anwendung
-stellt dazu ein Erweiterungssystem bereit, das die kontrollierte Ausführungs von
-Plug-Ins erlaubt. Plug-Ins können von externen Einrichtung entwickelt
-werden und beliebige Daten über den Benutzer sammeln. Der Benutzer erhält die
+(z.~B. Standort, Benutzerverhalten) über ihren Besitzer. Diese Daten besitzen
+einen hohen Wert für öffentliche Einrichtungen und die Industrie. In vielen
+Fällen werden diese Daten ohne das Wissen des Benutzers von Herstellern von
+Hardware, Betriebssystem und Applikationen gesammelt und an diese übertragen. 
+Im Rahmen dieser Arbeit wurde ein Framework für das Smartphone-Betriebssystem
+Android entwickelt welches die Erstellung von Anwendungen zum transparenten und
+anonymen Sammeln personenbezogener Daten ermöglicht. Der Benutzer erhält die
 Möglichkeit zu jedem Zeitpunkt alle gesammelten Daten einzusehen und kann selbst
-bestimmen welche Daten übertragen werden sollen und welche nicht. Durch diese
-Anwendung soll der Benutzer die Kontrolle über seine Daten wiedererlangen und es
-auch anderen Instritutionen ermöglichen personenbezogene Daten zu sammeln.
+bestimmen, welche Daten zur Übertragung freigegeben werden sollen und welche
+nicht. Die Verwendung des Frameworks stellt sicher, dass der Benutzer die
+Kontrolle über seine persönlichen Daten hat. Anwendungen auf Basis des
+entwickelten Frameworks können somit von einem gestärkten Vertrauen der Benutzer
+profitieren.
+
 
 %
 \vskip 3cm
@@ -89,66 +90,48 @@ auch anderen Instritutionen ermöglichen personenbezogene Daten zu sammeln.
 \centerline{\bf Abstract}
 \bigskip
 Today's smartphones collect a high amount of personalized data (e.g. position,
-user behaviour) from the owner. This data has a relativly high value for public
-institutions and the industry. But in most cases this data is transmitted
-without the knowledge of the user only to few external thrid parties (e.g. 
-provider of mobile telecom services, Google, Apple). The solution developed in
-this thesis is an Android application that is able to collect personalized data
-in a transparent and anonymous way. The application provides an extensible
-system that allows the controlled executions of plug-ins. Plug-Ins can be
-developed by external institutions that can collect arbitary data about the
-user. At any point in time the user has the possibility to review all
-the collected data and can decide which data is transfered and which not.
-Through this application the user should get back control over his data and
-enable other institutions to collect personalized data.
+user behaviour) from the owner. This data has a high value for public
+institutions and the industry. But in most cases this data is collected and
+transmitted without the knowledge of the user to manufacturers of hardware,
+operating systems and applications. This paper focusses the development of a
+framework for the smartphone operating system Android which enables the creation
+of applications that collect personalized data in a transparent and anonymous
+way. At any point in time the user has the possibility to review all
+the collected data and he can decide which data he wants to approve for
+transfer and which not. The usage of the framework guaranteed that the user is in
+control of his personalized data.
 
 \cleardoublepage
 
 % Aufgabenstellung
 
 \section*{Aufgabenstellung}
-Die Aufgabenstellung besteht in der Entwicklung einer Android Anwendug zum
-transparenten und anonymen Sammeln von Sensordaten. Vorbild für die Anwendung
-soll hierbei das \acf{boinc} sein. Die \acs{boinc}-Plattform ermöglicht die
-ungenutze Rechenleistung von vielen tausend Computern über das Internet
-verfügbar zu machen. Dadurch lassen sich wie beim Grid-Computing komplexe
-wissenschaftliche Probleme lösen. Welchem wissenschaftlichen Projekt man seine
-Rechenleistung zur Verfügung stellt bleibt dem Benutzer selbst überlassen. In
-Analogie daran soll die in dieser Masterarbeit entwickelte Anwendung es
-ebenfalls dem Benutzer ermöglichen welchem Projekt, er seine Sensordaten zur
-Verfügung stellt.
+Die \acf{boinc} ermöglicht es die ungenutzte Rechenleistung vieler tausender
+Computer für die Lösung komplexer wissenschaftlicher Probleme zu nutzen. Dabei
+installieren Benutzer auf Ihren privat oder beruflich genutzten Computern die
+\acs{boinc} Software und in Zeiten, in denen die Rechner nicht ausgelastet sind,
+nutzt \acs{boinc} die Rechenzeit zur Lösung wissenschaftlicher Probleme. Welchem
+wissenschaftlichen Projekt man seine Rechenleistung zur Verfügung stellt bleibt
+dem Benutzer selbst überlassen.
 
-Als technische Grundvoraussetzung um selbst zu entscheiden, welchem Projekt man
-seine Daten zur Verfügung stellt, soll die Android Anwendung ein
-Erweiterungssystem zur Verfügung stellen. Erweiterungen können dabei von
-beliebigen Projekten entwickelt werden. Dieses System soll die
-kontrollierte und transparente Ausführung von Erweiterungen ermöglichen. Die von
-einer Erweiterung gesammelten Daten sollen sich dann zu einem
-projektspezifischen Server übertragen lassen. Dabei soll sicher gestellt werden
-das keine Daten übertragen werden, die einen Smartphone-Besitzer eindeutig
-identifizieren. Zur Realisierung von Erweiterungen und dem Empfang von Daten auf
-der Serverseite sollen entsprechende Frameworks zur Verfügung gestellt werden.
+In Anlehnung an dieses Prinzip soll im Rahmen dieser Arbeit eine Anwendung
+geschaffen werden welche es ermöglicht die auf Smartphones anfallenden
+(potenziell personenbezogenen) Daten wissenschaftlichen Projekten zur Verfügung
+zu stellen. Dies können zum Beispiel die aktuelle Temperatur, der Lärmpegel der
+Umgebung, die aktuelle Position, die verfügbaren Netzwerkverbindungen oder die
+Daten des Beschleunigungssensors sein. Die Erfassung und Übertragung von Daten
+soll dabei möglichst transparent für den Benutzer sein, sodass dieser Kenntnis
+und volle Kontrolle über die erhobenen Daten hat. Die Lösung soll dabei die
+Realisierung einer Vielzahl unterschiedlicher Datenerfassungsanwendungen
+ermöglichen. Das Smartphone-Betriebssystem Android soll technische Basis der zu
+entwickelnden Lösung sein.
 
-Das Ziel soll es sein, anhand von Transparenz und Anonymität die Motivation zu
-schaffen, eine Anwendung zu verwenden, die es öffentlichen und privaten
-Institutionen erlaubt, beliebige Sensordaten und damit verbunden, auch
-persönliche Daten über einen Benutzer zu Sammeln.
-
-Der Umfang der Arbeit soll dabei die folgenden Punkte umfassen:
-
-\begin{itemize}
-  \item Anforderungsanalyse: Extraktion alle Anforderungen an die Android
-  Anwendung aus der Aufgabenstellung.
-  \item Konzeption: Für Android Plattform soll ein entsprechender
-  Programmentwurf stattfinden. Hierbei sollen auch mögliche
-  verwendbare Technologien (z.B. OSGi) evaluiert werden.
-  \item Implementierung: Das entworfene Konzept soll in ein reales Programm
-  überführt werden. Dabei soll auch dokumentiert werden wie sich die Anwendung
-  erweitern lässt.
-  \item Evaluation: Es soll anhand zweier Erweiterungen gezeigt werden, dass die
-  implementierte Anwendung auch für praktische Anwendungsszenarien verwendbar
-  ist. Die erste Erweiterung soll die Position von Smartphone besitzern
-  protokollieren. Die zweite Erweiterung soll entsprechend der Position noch die
-  Lautstärke ermitteln. Die von den beiden Erweiterugen gesammelten Daten sollen
-  zu Evaluationszwecken entsprechend visualisiert werden.
-\end{itemize}
+Im Rahmen einer Anforderungsanalyse sollen zunächst Anforderungen an Transparenz
+und Anonymität sowie technische Anforderungen abgeleitet werden. Anschließend
+sollen in der Konzeptionsphase mögliche Technologien zur Umsetzung evaluiert und
+eine dieser für die Realisierung ausgewählt werden. Auf Basis der gewählten
+Technologie erfolgt dann ein Programmentwurf welcher in der
+Implementierungsphase in ein ausführbares Programm überführt werden soll. Anhand
+zweier zu implementierender Demonstrator-Anwendungen soll abschließend im Rahmen
+der Evaluation gezeigt werden dass die entwickelte Lösung für reale
+Anwendungsszenarien geeignet ist.
