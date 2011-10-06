@@ -570,12 +570,13 @@ Datei im {\em Mobile Data Collector} gespeichert werden. Diese Datei wäre für
 ein Plug-In durch die Android Sandbox-Architektur nicht direkt zugreifbar.
 Hierfür müsste eine weitere Schnittstelle geschaffen werden, um Plug-Ins den
 Zugriff auf die Datei zu ermöglichen. Auf diese Lösung wurde zugunsten einer
-einfacheren Implementierung von Plug-Ins verzichtet. Stattdessen sollte in diesen Fällen die von Android zur
-Verfügung gestellten Implementierungen verwendet werden. Da der Zugriff
-auf Kamera und Mikrofon ebenfalls durch {\em Permissions} geregelt wird, wird
-bei Aktivierung der Benutzer darauf hingewiesen. Da die eigentlichen zu
-übertragenden Daten aber weiterhin zentral im {\em Mobile Data Collector}
-gespeichert werden müssen, entfällt hierbei nur die Möglichkeit des Loggings.
+einfacheren Implementierung von Plug-Ins verzichtet. Stattdessen sollte in
+diesen Fällen die von Android zur Verfügung gestellten Implementierungen
+verwendet werden. Da der Zugriff auf Kamera und Mikrofon ebenfalls durch {\em
+Permissions} geregelt wird, wird bei Aktivierung der Benutzer darauf
+hingewiesen. Da die eigentlichen zu übertragenden Daten aber weiterhin zentral
+im {\em Mobile Data Collector} gespeichert werden müssen, entfällt hierbei nur
+die Möglichkeit des Loggings.
 
 Dieses Problem würde sich am besten durch die Verwendung von \acs{osgi} lösen
 lassen. Durch \acs{osgi} würden der Mobile Data Collector und alle Plug-Ins im
