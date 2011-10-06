@@ -224,14 +224,26 @@ Weitere mögliche Konfigurationsparameter innderhalb des {\em
 plugininfo}-Tags sind:
 
 \begin{itemize}
-  \item {\bf services}: Gibt an, welche sicheren Android Services beim Plug-In
-  gesetzt werden sollen. Mögliche {\em services} sind {\em location}, {\em
-  wifi}, {\em connectivity} und {\em telephony}.
   \item {\bf resetWorkspaceAfterTransfer}: Gibt an, ob der {\em Workspace}
   automatisch gelöscht werden soll, nachdem das Plug-In im {\em Transfer}-Mode
   war. Der {\em Workspace} wird Standardmäßig nach der Erstellung einer
   Übertragung gelöscht.
   \item {\bf description}: Eine längere Plug-In Beschreibung.
+  \item {\bf services}: Gibt an, welche sicheren Android Services beim Plug-In
+  gesetzt werden sollen.
+\end{itemize}
+
+Die zurzeit verfügbaren sicheren Android System Services sind:
+
+\begin{itemize}
+  \item {\bf location}: Zur Anforderung des {\em LocationManager}, um die
+  aktuelle Position des Benutzers zu ermitteln.
+  \item {\bf connectivity}: Zur Anforderung des {\em ConnectivityManager}, um
+  den aktuellen Zustand der Netzwerkverbindung abzufragen.
+  \item {\bf wifi}: Zur Anforderung des {\em WifiManager}, um Zugriff auf
+  Wireless \acs{lan} zu erhalten.
+  \item {\bf phone}: Zur Anforderung des {\em TelephonyManager}, um
+  Informationen über alle Mobilfunkaspekte abzufragen.
 \end{itemize}
 
 Ein Beispiel für die Verwendung der Parameter ist in Lisiting

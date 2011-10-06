@@ -1,28 +1,28 @@
 \chapter{Evaluation}
 \label{cha:evaluation}
-In diesem Kapitel wird gezeigt, dass sich mit Hilfe des {\em Mobile Data
+In diesem Kapitel wird gezeigt, dass sich mithilfe des {\em Mobile Data
 Collection Frameworks} auch komplexere Plug-Ins zum Sammeln von Sensordaten
-entwickeln lassen. Dies wird anhand zweiter Beispiel gezeigt. Bei diesem
-Beispielen handelt es sich, zum einen um ein Plug-In zum Sammeln der aktuellen
-Position eines Benutzers, sowie um eine Erweiterung dieses Plug-Ins, dass
-zusätzlich die Umgebungslautstärke zu jeder Position erfasst. Hierbei wird neben
-den Plug-Ins für das Smartphone auch eine entsprechende Serverkomponente
-entwickelt. Die Serverkomponente beinhaltet dabei, die Persistierung der Daten,
-sowie deren Visualisierung in Form einer Web-Anwendung.
+entwickeln lassen. Dies wird anhand zweier Beispiele gezeigt. Bei diesen
+Beispielen handelt es sich zum einen um ein Plug-In zur Positionsverfolgung
+eines Benutzers sowie um eine Erweiterung des Plug-Ins, dass zusätzlich die
+Umgebungslautstärke zu jeder Position erfasst. Hierbei wird neben den Plug-Ins
+für das Smartphone auch eine entsprechende Serverkomponente entwickelt. Die
+Serverkomponente beinhaltet dabei, die Persistierung der Daten sowie deren
+Visualisierung in Form einer Web-Anwendung.
 
-\section{Plug-In zum Sammeln der aktuellen Position}
+\section{Plug-In zur Positionsverfolgung}
 \label{locationtracker}
 Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt
-Plug-In'', wird im Folgenden ein Plug-In entwickelt, das die aktuelle Position
+Plug-In'', wurde ein Plug-In entwickelt, dass die aktuelle Position
 des Benutzers speichert und in regelmäßigen Abständen übertragt. Dieses Plug-In
-trägt den Arbeitstitel {\em Location Tracker}. Es werden dabei die wichtigsten
-Punkte bei der Implementierung des Plug-Ins sowie der Serverkomponente
+trägt den Arbeitstitel {\em Location Tracker}. Es wird dabei auf die
+wichtigsten Punkte bei der Implementierung des Plug-Ins sowie der Serverkomponente
 eingegangen.
 
 \subsection{Implementierung des Plug-Ins}
 Im Folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
-durch die es möglich wird die aktuelle Position eines Benutzers zu ermitteln und
-diese Daten zu speichern. Das Plug-In befindet sich im {\em
+durch die es möglich wird, die aktuelle Position eines Benutzers zu verfolgen
+und diese Daten zu speichern. Das Plug-In befindet sich im {\em
 LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
 Framework}-Projekts. Es wird sich im Folgenden, auf dem im Verzeichnis
 befindlichen Quellcode bezogen.
@@ -40,17 +40,20 @@ Location location = getLocationManager().getLastKnownLocation(provider);
 Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
 genausten zu bestimmen. Die Positionsermittlung wird innerhalb von Android
 durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
-ermittelt werden, der am Besten dem gegeben {\em Criteria}-Objekt entspricht.
-Durch dieses können Kriterien wie z.B. Stromverbrauch oder Genauigkeit
+ermittelt werden, der am Besten dem gegebenen {\em Criteria}-Objekt entspricht.
+Durch dieses können Kriterien wie z.~B. Stromverbrauch oder Genauigkeit
 festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
-der zurzeit bestverfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
-die letzte bekannte Position unter Zuhilfenahme des gegeben {\em Provider}s
+der zurzeit beste verfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
+die letzte bekannte Position unter Zuhilfenahme des gegebenen {\em Providers}
 ermittelt. Das zurückgegebene {\em Location}-Objekt beschreibt die aktuelle
 Position des Benutzers.
 
 \subsubsection{Speichern der Position}
 Die zuvor ermittelte Position kann nun gespeichert werden. In Listing
-\ref{storelocation} wird gezeigt, wie dieses bewerkstelligt werden kann.
+\ref{storelocation} wird dazu im ersten Schritt der {\em Workspace} abgefragt.
+Dann wird eine neue {\em Node} erstellt, an der alle Attribute des {\em
+Location}-Objekts gespeichert werden. Dieses wird im letzten Schritt an den {\em
+Workspace} angehangen bevor dieser gespeichert wird.
 
 \begin{lstlisting}[label=storelocation,
 caption=Speichern der Position, language=java]
@@ -67,14 +70,9 @@ workspace.addNode(node);
 getPersistenceManager().save(workspace);
 \end{lstlisting}
 
-Hier wird im ersten Schritt der {\em Workspace} abgefragt. Dann wird eine neue
-{\em Node} erstellt, an der alle Attribute des {\em Location}-Objekts
-gespeichert werden. Dieses wird im letzten Schritt an den {\em Workspace}
-angehangen bevor dieser gespeichert wird.
-
 \subsubsection{Plug-In Konfiguration}
 Um das Plug-In fertigzustellen, muss im letzten Schritt das Plug-In konfiguriert
-werden. Dies geschieht ebenfalls über die {\em plugin.xml}. Eine Mögliche
+werden. Dies geschieht ebenfalls über die {\em plugin.xml}. Eine mögliche
 Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt.
 
 \begin{lstlisting}[label=locationtrackerpluginxml, caption=plugin.xml,
@@ -94,28 +92,16 @@ language=xml]
 </plugininfo>
 \end{lstlisting}
 
-In dieser Konfiguration befindet sich ein neuer Tag, der {\em services}-Tag. Mit
-diesem wird angegeben, welche Android Services das Plug-In benötigt, um seine
-Aufgabe zu erfüllen. In diesem Fall benötigt das Plug-In den {\em
-location}-Service. Dieser wird daraufhin bei jeder Ausführung dem Plug-In zur
-Verfügung gestellt. Folgende Services können zurzeit angefordert werden:
-
-\begin{itemize}
-  \item {\bf location}: Zur Anforderung des {\em LocationManager}, um die
-  aktuelle Position des Benutzers zu ermitteln.
-  \item {\bf connectivity}: Zur Anforderung des {\em ConnectivityManager}, um
-  den aktuellen Zustand der Netzwerkverbindung abzufragen.
-  \item {\bf wifi}: Zur Anforderung des {\em WifiManager}, um Zugriff auf
-  Wireless \acs{lan} zu erhalten.
-  \item {\bf phone}: Zur Anforderung des {\em TelephonyManager}, um
-  Informationen über alle Mobilfunkaspekte abzufragen.
-\end{itemize}
+Diese Konfiguration unterscheidet sich zum ``Hallo Welt''-Plug-In dadurch, dass
+der {\em LocationManager} angefordert wird und eine Beschreibung angegeben ist.
+Der {\em LocationManager} wird zur Ermittlung der aktuellen Position benötigt.
 
 \subsubsection{Verwendung des Plug-Ins}
-Das Plug-In kann nun wie in Kapitel \ref{cha:leitfaden} beschrieben auf dem
+Das Plug-In kann nun wie in Kapitel \ref{cha:leitfaden} beschrieben, auf dem
 Smartphone installiert und ausgeführt werden. Nach der ersten Ausführung können
-wie in Abbildung \ref{log_locationtracker} und
-\ref{collected_data_overview_locationtracker} zu sehen, zum einen die Zugriffe
+wie in Abbildung \ref{log_locationtracker},
+\ref{collected_data_overview_locationtracker} und
+\ref{collected_data_details_locationtracker} zu sehen, zum einen die Zugriffe
 auf den {\em LocationManager} bzw. alle gesammelten Daten eingesehen werden.
 Betrachtet man die gesammelten Daten des Plug-Ins wird man feststellen, dass die
 zuvor definierte Datenstruktur mit den entsprechenden Positionsdaten gefüllt
@@ -124,15 +110,22 @@ wurden.
 \begin{figure}[h!] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/log.png}
-	\caption{Zugriff auf den LocationManager}
+	\caption{Zugriffsprotokoll auf den LocationManager}
 	\label{log_locationtracker}
 \end{figure}
 
 \begin{figure}[h!] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/collected_data_overview.png}
-	\caption{Gesammelte Daten}
+	\caption{Überblick über alle gesammelten Positionen}
 	\label{collected_data_overview_locationtracker}
+\end{figure}
+
+\begin{figure}[h!] 
+	\centering
+	\includegraphics[width=5cm]{grafiken/collected_data_details.png}
+	\caption{Detailierte Ansicht einer Position}
+	\label{collected_data_details_locationtracker}
 \end{figure}
 
 Dieses Plug-In demonstriert somit, dass es mit dem {\em Mobile Data
@@ -153,21 +146,9 @@ Wie in Kapitel \ref{cha:leitfaden} beschrieben, werden nach dem Empfang der
 Daten, die Daten an einen {\em TransferRequestProcessor} übergeben. Die Klasse
 eignet sich zur Persistierung der Daten. Bevor die Daten gespeichert werden,
 sollte aber eine Überführung des allgemeinen Datenformats des {\em Mobile Data
-Collection Frameworks} in ein domänenspezifisches Datenformat stattfinden. Dies
-ist aus den folgenden Gründen zu empfehlen:
-
-\begin{itemize}
-  \item Die Verwaltung des allgemeinen Datenformat ist innerhalb von nicht
-  objektorientierten Datenbanken sehr aufwendig. Dies wird vor allen dingen dann
-  sichtbar, wenn man versucht dieses in relationalen Datenbanken zu speichern.
-  \item Ein domänenspezifisches Datenformat erlaubt die einfachere Verarbeitung
-  der Daten gegenüber dem allgemeinen Datenformat. Auch wird die Flexibilität
-  des allgemeinen Datenformats in weiteren Verarbeitungsschritten nicht mehr
-  benötigt. Die Komplexität der Anwendung kann dadurch reduziert werden.
-\end{itemize}
-
-Eine Überführung des allgemeinen Datenformats in ein domänenspezifisches, sowie
-die anschließende Speicherung der Daten, kann dabei wie in Listing
+Collection Frameworks} in ein domänenspezifisches Datenformat stattfinden. Eine
+Überführung des allgemeinen Datenformats in ein domänenspezifisches, sowie die
+anschließende Speicherung der Daten, kann dabei wie in Listing
 \ref{datenmapping} geschehen.
 
 \begin{lstlisting}[label=datenmapping,
@@ -240,13 +221,13 @@ beliebiges anderes Persistierungsframework zu verwenden.
 Als letzter Teil der Evaluation sollen die gespeicherten Daten visualisiert
 werden. Da es sich um Positionsdaten handelt, bietet es sich an, die
 Positionen eines Benutzers auf einer Karte zu visualisieren. Dadurch ist es
-möglich sehr einfach die Daten zu evaluieren.
+sehr einfach möglich, die Daten zu evaluieren.
 
 Für die technische Realisierung bietet es sich an, auf bereits bestehende
-Infrastruktur und Programmiersprachen zurück zu greifen. Da bisher nur die
+Infrastruktur und Programmiersprachen zurückzugreifen. Da bisher nur die
 Programmiersprache Java verwendet wurde und bereits ein Java Servlet-Container
 zum Empfang der Daten vorhanden ist, eignet sich ein javabasiertes
-Web-Framework am besten. In diesem Fall, fiel die Wahl auf
+Web-Framework am besten. In diesem Fall fiel die Wahl auf
 das \acf{gwt}\cite{gwt}. Bei \acs{gwt} handelt es sich um einen
 Java-zu-JavaScript-Compiler, der die Implementierung von Web-Anwendung in Java
 erlaubt. Die clientseitige Ausführung der Web-Anwendung findet nach der
@@ -257,13 +238,13 @@ In Abbildung \ref{locationtrackermap} ist die Web-Anwendung dargestellt. Im
 oberen Bereich befinden sich alle Bedienelemente. Über die erste List-Box lassen
 sich unterschiedliche Benutzer anhand ihrer eindeutigen Benutzerkennung
 auswählen. Über die zweite List-Box lassen sich zu jedem Benutzer die
-aufgenommen Positionen auswählen. Die daneben befindlichen Bedienelemente dienen
-zur Navigation durch die Daten, sowie einer Funktion zum automatischen
+aufgenommenen Positionen auswählen. Die daneben befindlichen Bedienelemente
+dienen zur Navigation durch die Daten sowie einer Funktion zum automatischen
 Durchlaufen der Positionen. Man kann dadurch die Bewegung eines Benutzers besser
 verfolgen. Zu jeder Position werden außerdem alle gesammelten Informationen
 angezeigt. Der grüne Kreis gibt an, wie genau die Messung
 war. In diesem Fall wurde die Messung auf 57 Meter genau durchgeführt, welches
-sich in dem Radius des Kreises wiederspiegelt.
+sich in dem Radius des Kreises widerspiegelt.
 
 \begin{figure}[h!] 
 	\centering
@@ -274,7 +255,7 @@ sich in dem Radius des Kreises wiederspiegelt.
 
 Um die Web-Anwendung auf dem eigenen Computer zu starten, muss die {\em
 persistence.xml} an die eigene Datenbank angepasst werden. Dann kann
-folgendes auf der Kommandozeile im {\em mdcf-locationtracker-remote}-Verzeichnis
+Folgendes auf der Kommandozeile im {\em mdcf-locationtracker-remote}-Verzeichnis
 ausgeführt werden.
 
 \begin{lstlisting}[language=bash]
@@ -325,18 +306,18 @@ werden, um Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
 Zeilen wird als Audioquelle das Mikrofon verwendet. Die Einstellungen zum
 Ausgabeformat und Audio-Encoder sind zwar notwendig aber in diesem Fall egal, da
 wie in Zeile 5 angegeben alle Daten im {\em null-Device} gespeichert werden.
-Durch die {\em prepare} und {\em start}-Methode wird das Mikrofon reserviert und
-die Aufnahme gestartet. Die Lautstärke wird nun anhand der maximalen Amplitude
+Durch die {\em prepare}- und {\em start}-Methode wird das Mikrofon reserviert
+und die Aufnahme gestartet. Die Lautstärke wird nun anhand der maximalen Amplitude
 bestimmt. Diese kann über die {\em getAmplitude}-Methode abgefragt werden. Damit
-diese Methode einen Wert zurückliefert, muss für einen bestimmten Zeitintervall
+diese Methode einen Wert zurückliefert, muss für eine bestimmte Zeitspanne
 eine Tonaufnahme erfolgen. In diesem Fall werden für eine Sekunde lang alle
 Umgebungsgeräusche aufgenommen und die maximale Amplitude bestimmt. Durch die
-{\em stop} und {\em release}-Methode wird die Aufnahme angehalten und das
-Mikrofon wieder freigegeben. Diese Art der Lautstärkenbestimmung wurde dem
-Beispielprogramm {\em NoiseAlert} entnommen\cite{noisealert}. Bei dieser Art der
-Lautstärkenbestimmung ist zu erwähnen, dass die maximale Amplitude zwischen
-verschiedenen Geräten unterschiedlich sein kann. Bei einer Auswertung ist
-deswegen eine Anpassung der Daten erforderlich.
+{\em stop}- und {\em release}-Methode wird die Aufnahme angehalten und das
+Mikrofon wieder freigegeben. Diese Art zur Bestimmung der Lautstärke wurde dem
+Beispielprogramm {\em NoiseAlert} entnommen\cite{noisealert}. Dabei ist zu
+erwähnen, dass die maximale Amplitude zwischen verschiedenen Geräten
+unterschiedlich sein kann. Bei einer Auswertung ist deswegen eine Normalisierung
+der Daten erforderlich.
 
 Um die Amplitude nun zum bisherigen Datenmodell hinzuzufügen, ist die Zeile
 aus Listing \ref{storeamplitude} hinzuzufügen.
@@ -393,9 +374,9 @@ Ausgabe aller Positionsdaten hinzugefügt. Siehe hierzu Abbildung
 Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
 
 \begin{itemize}
-  \item Das Erstellen von Plug-Ins die praxisrelevante Daten, wie die
-  Position und Umgebungsinformationen z.B. die Lautstärke erfassen, sind mit
-  dem {\em Mobile Data Collection Framework} möglich zu erstellen.
+  \item Das Erstellen von Plug-Ins für reale Anwendungsszenarien, wie die
+  Erfassung von Position und Umgebungsinformationen z.~B. die Lautstärke, sind
+  mit dem {\em Mobile Data Collection Framework} möglich.
   \item Das allgemeine Datenformat erlaubt das Speichern von beliebigen
   Informationen und schränkt einen Plug-In Entwickler nur bedingt ein.
   \item Bestehende Plug-Ins lassen sich leicht an neuen Anforderungen anpassen
@@ -407,14 +388,13 @@ Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
   lassen sich zu jedem Zeitpunkt einsehen.
   \item Die gesammelten Daten lassen sich anonym an externe Server übertragen
   und persistieren. Die serverseitige Persistenzart ist frei wählbar.
-  \item Die Visualisierung hat gezeigt, dass die Daten auch Verwertbar sind. Der
+  \item Die Visualisierung hat gezeigt, dass die Daten auch verwertbar sind. Der
   Visualisierung sind hierbei keine Grenzen gesetzt.
-  \item Es ist zurzeit nicht möglich die Aufnahme von Ton und Video über den
-  {\em Mobile Data Collector} zu überwachen. Der Benutzer wird aber gewarnt
+  \item Es ist zurzeit nicht möglich, die Aufnahme von Ton und Video über den
+  {\em Mobile Data Collector} zu protokollieren. Der Benutzer wird aber gewarnt
   sollte ein Plug-In dieses versuchen.
 \end{itemize}
 
 Abschließend lässt sich festhalten, dass die in der Anforderungsanalyse und dem
-Konzept festgehaltenden Anforderungen fast vollständig realisiert wurden. Nur im
-Bereich des Loggings müssen, beim Zugriff auf Ton und Video, bei der
-derzeitigen Implementierung des Plug-Ins-System, Abstriche gemacht werden.
+Konzept definierten Anforderungen fast vollständig realisiert wurden, mit
+Ausnahme der Protokollierung beim Zugriff auf Ton- und Videodaten.

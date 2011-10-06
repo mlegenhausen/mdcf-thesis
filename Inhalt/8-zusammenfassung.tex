@@ -3,16 +3,16 @@
 Im Rahmen dieser Masterarbeit wurde ein dreiteiliges Software-System
 entwickelt, dass das transparente und anonyme Sammeln von Sensordaten auf
 Android-Smartphones ermöglicht. Diese drei Teile sind der {\em Mobile Data
-Collector}, das {\em Mobile Data Collection Framework}, sowie ein
+Collector}, das {\em Mobile Data Collection Framework} sowie ein
 serverseitiges Framework zum Empfang der gesammelten Sensordaten.
 
 Kern der Arbeit war es eine vertrauenswürdige Plattform zu schaffen, für die
-Entwicklung von Plug-Ins zum Sammeln von Sensordaten (die zwangläufig
-personenbezogene Daten erheben), die es aber dem Benutzer erlaubt, alle
-Aktivitäten und gesammelten Daten des Plug-Ins einzusehen. Durch diese
-Transparenz sollen Smartphone-Besitzer, Vertrauen in den {\em Mobile Data
-Collector} erlangen und einen Teil ihrer persönlichen Daten an Plug-Ins
-preisgeben, ohne einen direkten Mehrwert von den Plug-Ins zu erhalten.
+Entwicklung von Plug-Ins zum Sammeln von Sensordaten (potenziell
+personenbezogenen), die es aber dem Benutzer erlaubt, alle Aktivitäten und
+gesammelten Daten des Plug-Ins einzusehen. Durch diese Transparenz sollen
+Smartphone-Besitzer, Vertrauen in den {\em Mobile Data Collector} erlangen und
+einen Teil ihrer persönlichen Daten an Plug-Ins preisgeben, ohne einen direkten
+Mehrwert von den Plug-Ins zu erhalten.
 
 Die Realisierung der erarbeiteten Anforderungen und Konzepte hat eine
 erweiterbare Android-Anwendung hervorgebracht, die das bereits existierende
@@ -20,11 +20,11 @@ Security-System von Android durch Monitoring-Mechanismen erweitert. Der {\em
 Mobile Data Collector} lässt sich durch Sensordaten sammelnde Plug-Ins
 erweitern, die mit dem {\em Mobile Data Collection Framework} entwickelt werden.
 Vor der ersten Ausführung eines Plug-In werden diese analysiert und der Benutzer
-wird über Gefahren die vom Plug-In ausgehen können informiert. Der Benutzer
+wird über Gefahren, die vom Plug-In ausgehen können informiert. Der Benutzer
 behält hierbei, wie im Konzept beschrieben, immer die Kontrolle über seine
 Daten. Er kann die Ausführungszeit eines Plug-In bestimmen und wird über die
-Ausführung informiert, kann einsehen auf welche personenbezogenen Daten
-zugegriffen wurden, sowie welche Daten an den Plug-In spezifischen Server
+Ausführung informiert, kann einsehen, auf welche personenbezogenen Daten
+zugegriffen wurden sowie welche Daten an den Plug-In spezifischen Server
 übertragen werden sollen. Die Anonymität des Benutzers wird dadurch
 sichergestellt, dass das Framework den Zugriff auf eindeutige Benutzerdaten gar
 nicht erst zur Verfügung stellt. Die bei der Übertragung verwendete eindeutige
@@ -32,23 +32,23 @@ Benutzerkennung erlaubt zwar die Zuordnung von Daten zu bereits empfangen
 Daten, erlaubt aber nicht die Zuordnung zu realen Personen.
 
 Die Evaluation hat gezeigt, dass sich mit dem {\em Mobile Data Collection
-Framework} praxisrelevante Plug-Ins entwickeln lassen. So ist die Aufnahme von
-Positionsdaten, die wohl wichtigste Art von Daten im Bereich der mobilen
-Datenerfassung, relativ einfach möglich. Auch lassen sich diese Daten einfach um
-zusätzliche Daten erweitern. Hierbei wurde bewusst darauf geachtet, dem
-Entwickler möglichst nicht bei der Entwicklung von Plug-Ins einzuschränken.
+Framework} Plug-Ins für reale Anwendungsszenarien entwickeln lassen. So ist die
+Aufnahme von Positionsdaten, die wohl wichtigste Art von Daten im Bereich der
+mobilen Datenerfassung, relativ einfach möglich. Auch lassen sich diese Daten
+einfach um zusätzliche Daten erweitern. Hierbei wurde bewusst darauf geachtet,
+dem Entwickler möglichst nicht bei der Entwicklung von Plug-Ins einzuschränken.
 
 Die Evaluation zeigt aber auch die zurzeit bestehenden Monitoring-Grenzen des
 {\em Mobile Data Collector}. So ist ein Monitoring der Kamera und des Mikrofons
 nicht bzw. nur mit relativ großem Aufwand möglich. Dieses Problem lässt sich am
-besten durch die Einführung von OSGi lösen. Hierbei bleibt aber Abzuwarten bis
+besten durch die Einführung von OSGi lösen. Hierbei bleibt aber abzuwarten bis
 Frameworks wie Dynamix den nötigen Reifegrad erreicht haben, um diese im
 produktiven Einsatz zu verwenden.
 
 Das zukünftige Anwendungsgebiet des {\em Mobile Data Collector} liegen in
-erster Linie im Bereich der Forschung. Hier existieren eine Vielzahl von
+erster Linie im Bereich der Forschung. Hier existiert eine Vielzahl von
 Projekten, die auf die Erhebung von personenbezogenen Daten angewiesen sind.
 Aber auch in der Industrie ergeben sich viele Anwendungsfelder. Vor
-allen Dingen kann der {\em Mobile Data Collector} ein Möglichkeit liefern, an
-Daten zu gelangen, die normalerweise nur Mobilefunkunternehmen oder
-Smartphone-Betriebssystemhersteller wie Google oder Apple besitzen.
+allen Dingen kann der {\em Mobile Data Collector} eine Möglichkeit schaffen, an
+Daten zu gelangen, die normalerweise nur Mobilfunkunternehmen oder
+Smartphone-Betriebssystemhersteller wie Google oder Apple vorbehalten sind.

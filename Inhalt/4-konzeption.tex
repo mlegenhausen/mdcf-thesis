@@ -282,9 +282,17 @@ Da die Daten von der Anwendung in dem zuvor beschriebenen sehr allgemeinen
 Datenformat empfangen werden, ist eine Konvertierung der Daten in ein
 spezifisches Datenformat vorzunehmen. Die Konvertierung sollte in ein
 domänenspezifisches Datenformat stattfinden und muss vom Plug-In Entwickler
-selbst vorgenommen werden. Dadurch soll eine einfachere Speicherung der Daten in
-einer relationalen Datenbanken stattfinden können, da sich hierarchische
-Datenstrukturen nur schwer relational abbilden lassen.
+selbst vorgenommen werden. Dies ist aus den folgenden Gründen zu empfehlen:
+
+\begin{itemize}
+  \item Die Verwaltung des allgemeinen Datenformat ist innerhalb von nicht
+  objektorientierten Datenbanken sehr aufwendig. Dies wird vor allen dingen dann
+  sichtbar, wenn man versucht dieses in relationalen Datenbanken zu speichern.
+  \item Ein domänenspezifisches Datenformat erlaubt die einfachere Verarbeitung
+  der Daten gegenüber dem allgemeinen Datenformat. Auch wird die Flexibilität
+  des allgemeinen Datenformats in weiteren Verarbeitungsschritten nicht mehr
+  benötigt. Die Komplexität der Anwendung kann dadurch reduziert werden.
+\end{itemize}
 
 \section{Anonymisierung des Benutzers}
 \label{anonymisation}
