@@ -4,157 +4,116 @@ Diese Masterarbeit stellt die Abschlussarbeit des Autors zum Master of Science
 dar, die im Rahmen des Studienganges Informatik an der Universität zu Lübeck
 absolviert wurde. Die Themenbearbeitung fand an der Universität zu Lübeck im
 \acf{itm} statt. Der Themenschwerpunkt dieser Masterarbeit ist die Entwicklung
-einer Applikation zum transparenten und anonymen Sammeln von Sensordaten auf
-Android-Smartphones.
-
-Dieses Projekt zielt auf die Entwicklung einer Anwendung für den Bereich der
-mobilen Datenerfassung ab. Es soll dabei eine Software für Android-Smartphones
-entwickelt werden, die Daten über die im Smartphone enthaltenden Sensoren (z.B.
-GPS, Lagesensor, Mikrofon, Kamera) und Empfangseinheiten (z.B. Mobilfunk,
-Wireless LAN, Bluetooth) sammelt, diese dem Benutzer anzeigt und nach
-Einverständnis des Benutzers an eine spezifische Einrichtung über das
-Internet überträgt.
+einer Android Anwendung zum transparenten und anonymen Sammeln von Sensordaten.
 
 Diese Anwendung soll die Nachteile bisherige Ansätze der mobilen Datenerfassung
-lösen, die auf sehr persönliche Daten eines Smartphone-Benutzers zugreifen. Denn
-über einen Smartphone-Benutzer werden heutzutage eine Vielzahl unterschiedlicher
-Daten gesammelt. Dies reicht von der aktuellen Position, bis hin zu den
-Gewohnheiten wie ein Benutzer sein Smartphone verwendet. In den meisten Fällen
-weiß ein Smartphone-Benutzer nicht welche Daten über ihn Daten gesammelt werden
-bzw. das dies überhaupt geschieht. Auch fehlt in den meisten Fällen eine
-Möglichkeit die gesammelten Daten einzusehen, geschweige denn einer Übertragung
-der Daten zu wiedersprechen. Ob hierbei eine Anonymisierung der Daten
-stattfindet liegt ebenfalls in der Hand des Software-Herstellers. Diese Umstände
-führen dazu, dass sich viele Smartphone-Benutzer ihrer Daten entmachtet fühlen
-und somit das Vertrauen in Anwendungen der mobilen Datenerfassung schwindet.
-Auch sind die erhobenen Daten nur einer geringen Anzahl von Institutionen
-zugänglich. Hierbei handelt es sich meistens um Mobilefunkanbieter (z.B.
-T-Mobile, Vodafone, O2, E-Plus), sowie Herstellern von Smartphones (z.B.
-Samsung, HTC, Nokia, Apple) und deren Betriebssystemen (z.B. Apple, Google).
-Anderen Institutionen, gerade aus dem Bereich der Forschung, fällt es dagegen
-schwer an solche Daten zu gelangen bzw. ist dieses mit einem hohen Finanziellen
-und Zeitlichen Aufwand verbunden. Motivation ist es daher, ein Grundgerüst zu
-schaffen, auf dem Aufbauend andere Institutionen Erweiterungen entwickeln, mit
-denen beliebige Sensordaten gesammelt werden können. Der Benutzer soll dabei die
-Möglichkeit haben, zu entscheiden wann Daten gesammelt werden. Er soll zu jedem
-Zeitpunkt einsehen können welche Daten gesammelt wurden und kann entscheiden ob
-die gesammelten Daten überhaupt übertragen werden sollen. Ziel ist es die
-Entmachtung über die eigenen Daten aufzuheben und dem Benutzer die Kontrolle
-über seine Daten wieder zu geben und somit das Vertrauen in die mobile
-Datenerfassung zu steigern. Des Weiteren soll das Monopol der großen Konzerne
-über die Daten aufgehoben werden und es auch anderen Institutionen ermöglicht
-werden preiswert Daten zu sammeln.
+lösen, die auf potenziell persönliche Daten eines Smartphone-Benutzers
+zugreifen. Denn heutzutage werden über einen Benutzer, eine
+Vielzahl unterschiedlicher Daten gesammelt. Dies reicht von der aktuellen Position, bis
+hin zu den Gewohnheiten wie ein Benutzer sein Smartphone verwendet. In vielen
+Fällen weiß ein Smartphone-Benutzer nicht, welche Anwendung welche Daten über
+ihn sammelt bzw. dass dies überhaupt geschieht. Auch fehlt eine Möglichkeit die
+gesammelten Daten einzusehen, geschweige denn einer Übertragung der Daten zu
+widersprechen. Ob bei der Übertragung eine Anonymisierung der Daten
+stattfindet, liegt ebenfalls in der Hand des Anwendungsherstellers.
 
-\section{Ausgangssituation}
-Der Marktanteil von Smartphones wächst Weltweit rapide an. Alleine in
-Deutschland ist bereits jedes vierte Mobiltelefon ein Smartphone. Dieser Trend
-wird sich in den kommenden Jahren noch weiter steigern~\cite{smartphonemarkt}.
-Innerhalb des weltweiten Smartphone-Marktes sind Google mit Android und Apple
-mit iOS die größten Plattformen. So besitzt aktuell Android einen Marktanteil
-von fast 40\% und iOS einen Marktanteil von fast 20\%. Gerade der Anteil von
-Android soll sich, laut Gartner dabei bis 2012 auf bis zu 50\%
-steigern~\cite{smartphonemarktgartner}. Das Smartphone an sich entwickelt sich
-somit zur wichtigsten mobilen Plattform.
+Diese Umstände führen dazu, dass sich viele Smartphone-Benutzer ihrer Daten
+entmachtet fühlen und somit das Misstrauen in Anwendungen der mobilen
+Datenerfassung steigt. Dies kann zu einem Problem werden, wenn immer weniger
+Benutzer Daten (ob personenbezogenen oder nicht) freigeben wollen,
+obwohl der Bedarf nach solchen Daten in einer Vielzahl von Industrie und
+Forschungsprojekten steigt.
 
-Die Hardware-Ausstattung von Smartphones entwickelt sich dabei kontinuierlich
-weiter. Nicht nur die Leistung steigert sich, sondern auch die Möglichkeiten
-der Sensorik, sowie den Kommunikationmöglichkeiten. So besitzen Smartphones
-mittlerweile eine hohe Anzahl von Sensoren und Kommunikationsmöglichkeiten. So
-besitzt das Referenztelefon von Google, das Google Nexus S folgende Sensoren und
-Kommunikationsmöglichkeiten~\cite{googlenexuss}:
+Motivation ist es daher, eine vertrauenswürdige Plattform zu schaffen, auf der
+aufbauend andere Institutionen Anwendungen zum Sammeln von Sensordaten
+entwickeln können. Sensordaten sind im Rahmen dieser Arbeit z.~B. der Lärmpegel
+der Umgebung, die aktuelle Position, die verfügbaren Netzwerkverbindungen oder
+die Daten des Beschleunigungssensors. Die Plattform soll dabei dem Benutzer
+ermöglichen selbst zu entscheiden, wann welche Daten über ihn gesammelt werden
+sollen. Transparenz soll die Plattform dadurch bieten, dass zu
+jedem Zeitpunkt, der Benutzer einsehen kann, welche Daten gesammelt
+wurden und er kann entscheiden, ob die gesammelten Daten überhaupt an die
+Institution freigegeben werden sollen. Anonymität wird dabei dadurch garantiert,
+dass keine Daten übermittelt werden, die einen Benutzer eindeutig
+identifizieren. Diese Daten können z.~B. der Name, Telefonnummer oder die
+Adresse sein.
 
-\begin{itemize}
-  \item Mobilfunk (GSM, HSDPA)
-  \item WLAN
-  \item Bluetooth
-  \item Nahfeldkommunikation (NFC)
-  \item GPS
-  \item Lagesensor
-  \item Beschleunigungsmesser
-  \item Digitaler Kompass
-  \item Näherungssensor
-  \item Lichtsensor
-  \item Kamera
-  \item Mikrofon
-\end{itemize}
+Ziel ist es, die Entmachtung über die eigenen Daten aufzuheben und dem Benutzer
+die Kontrolle über seine Daten wieder zu geben und somit das Vertrauen in die
+mobile Datenerfassung zu steigern.
 
-Diese Hardware Ausstattung macht ein Smartphone vergleichbar mit einem
-Sensorknoten und im Verbund mit anderen Smartphones sogar zum
-Sensornetz~\cite{sensornetz}. Im Gegensatz zum Sensorknoten interagiert ein
-Smartphone aber aktiv mit dem Benutzer und enthält personliche Daten. Neben den
-reinen Daten die über die Sensoren aufgenommen werden, kann ein Smartphone auch
-Informationen über das Verhalten des Benutzers sammeln (z.B.
-Lieblingsapplikationen). Das heißt Daten die mit dem Smartphone gesammelt
-werden, steht auch immer in Verbindung mit einem Benutzer und sind somit
-personenbezogen. Das Smartphone ist also eine ideale Quelle für personenbezogene
-Daten.
+\section{Ähnliche Arbeiten}
+Im Folgenden sollen auf ähnliche Arbeiten eingegangen werden, die bereits
+einzelne Aspekte der zu entwickelnden Anwendung realisiert haben. 
 
-Diese Möglichkeiten der personenbezogenen Datenerfassung haben ihre Vor- und
-Nachteile. Es ergeben sich durch diese Daten zwar neuartige Dienste (z.B.
-Standortbezogene Dienste), aber erlaubt dabei Anderen einen Einblick in
-sein ``Leben''. Diese Anderen sind zum einen Anwendungsentwickler und zum
-anderen Konzerne wie Google und Apple. So übertragen Android Smartphones bei
-falscher Konfiguration in regelmäßigen Abständen die aktuelle Position des
-Benutzers an Google~\cite{androidsammelt}. Im Fall von Apple übertragen seid dem
-22. Juni 2010 sogar alle auf iOS basierenden Systeme die aktuelle Position des
-Benutzers, ohne das dieses deaktiviert werden kann~\cite{applegps}. Ein Einblick
-in diese gesammelten Daten ist nur über spezielle Software
-möglich~\cite{iphonetracker}\cite{androidlocdump}. Dies sind aber Sonderfälle,
-in den meisten Fällen weiss man nicht, wann Daten gesammelt wurden und wie diese
-Daten aussehen. Man weiss auch nicht wann eine Übertragung stattfindet und ob
-die Daten anonymisiert wurden. Dies führt dazu das man keine Kontrolle mehr über
-seine eigenen Daten besitzt. Durch die fehlende Transparenz bei der Erhebung
-personenbezogener Daten, entsteht ein Misstrauen beim Benutzer gegenüber
-Anwendungen die personenbezogene Daten sammeln.
+\subsection{Sensorly}
+Bei {\em Sensorly} handelt es sich um eine Android Anwendung, mit der die
+Netzwerkabdeckung von Mobilfunknetzen mithilfe von Android-Smartphones ermittelt
+wird. Dazu lädt man sich als Benutzer eine Gratisanwendung aus dem {\em
+Android Market} herunter und installiert diese. Die Anwendung sammelt im
+Hintergrund Daten über die Netzabdeckung vom gerade verbundenen
+Mobilfunkanbieter. Diese Daten werden in regelmäßigen Abständen an einen
+zentralen Server übermittelt, wo diese Daten mit den Daten anderer Anwender
+kombiniert werden, um die Daten anschließend in einer Karte auf der
+Internetseite \url{sensorly.com} zu visualisiert.
 
-Der Benutzer muss in diesen Fällen einen Kompromiss eingehen, um neueartige
-Dienste zu nutzen die auf personenbezogenen Daten beruhen. So erhält ein
-Anwender z.B. von Google Maps nach übermittlung seiner aktuellen Position diese
-auf einer Karte angezeigt. Dabei ergibt sich aber ein Problem für Applikationen
-deren Mehrwert man nicht direkt feststellen kann. So sind viele Institutionen
-auf personenbezogene Daten angewiesen, z.B. Bewegungsdaten von Personengruppen.
-Diese Daten können z.B. im Bereich der Städeplanung angewendet werden, um
-gezielt eine bessere Infrastruktur zu schaffen, die den aktuellen Anforderungen
-genügt oder im Marketing um persönliche Werbung dort zu plazieren, wo sie die
-den größten Nutzen erzeugt. Anwendungen die solche Daten sammeln haben es
-schwer, da wie vorhergehend beschrieben ein Misstrauen vorhanen ist. Selbst wenn
-diese Anwendungen die Möglichkeit liefern die gesammelten Daten zu betrachten,
-kann nicht sicher gestellt werden, dass diese Daten nicht Mutwillig manipuliert
-wurden, um einen vertrauenswürdigen Eindruck zu erwecken. Das Problem hierbei
-ist, dass keine vertrauenswürdige Instanz existiert, die sicherstellt, dass eine
-solche Täuschung geschehen kann.
+{\em Sensorly} repräsentiert einen möglichen Anwendungsfall für die zu
+entwickelnde Anwendung. Es ist mit {\em Sensorly} aber nicht möglich die Daten
+vor der Übertragung einzusehen oder dieser Übertragung zu widersprechen. {\em
+Sensorly} stellt also eine klassische Anwendung zum Sammeln von Daten dar.
 
-\section{Aufgabenstellung}
-\label{problem}
-Die Aufgabe besteht in der Entwicklung einer Android Applikation zum
-transparenten und anonymen Sammeln von Sensordaten. Die Anwendung soll ein
-Grundgerüst bieten, auf dem aufbauend Erweiterungen entwickelt werden können,
-die Daten über die zur Verfügung stehenden Sensoren eines Android-Smartphones
-sammeln. Der Benutzer soll dabei die Kontrolle behalten, wann über ihn Daten
-gesammelt werden. Die von den Erweiterungen gesammelten Daten sollen
-entsprechend dem Benutzer visualisiert werden können und sollen in regelmäßigen Abständen an
-einen Server zur Auswertung übertragen werden.
+\subsection{Flexible Android Permissions}
+\acf{flexp} ist eine Anpassung des Android Betriebssystems, die es ermöglicht,
+die Rechte die einer Anwendung bei der Installation gegeben werden, nachträglich zu
+verändern. Ein Benutzer hat also die Möglichkeit nachträglich zu bestimmen, auf
+welche Ressourcen eine Anwendungen zugreifen darf und auf welche nicht. Um nun
+mögliche Seiteneffekte zu vermeiden, wird den Anwendungen suggeriert, dass sie
+trotzdem Zugriff auf die Ressourcen haben~\cite{flexp}.
 
-Folgende Bereiche sollen hierbei bearbeitet werden:
+\acs{flexp} deckt den Aspekt ab, dass durch diese Anpassung der Benutzer mehr
+Möglichkeiten hat, zu entscheiden auf welche Ressourcen (z.~B. die Sensorik),
+die Anwendung zugreifen darf. Der Benutzer hat aber hier ebenfalls nicht die
+Möglichkeit einsehen, was passiert, wenn ein Recht trotzdem vergeben wurde. Die
+Kontrollmöglichkeiten über eine Anwendung steigen zwar, die Transparenz bleibt
+aber dieselbe.
 
-\begin{itemize}
-  \item Erarbeitung von Konzepten, wie das Sammeln von personenbezogenen Daten
-  möglichst Transparent und Anonym gestaltet werden kann.
-  \item Evaluierung der Android Plattform und Beschreibung zur generellen
-  Entwicklung von Android Anwendungen.
-  \item Implementierung einer Anwendung der die erarbeiteten Anforderungen
-  erfüllt und ein Framework zur Verfügung stellt, mit dem die Entwicklung von
-  Erweiterungen vereinfacht wird. Darüber hinaus ist ein Leitfaden zu erstellen,
-  der Beschreibt wie man Erweiterungen implementiert.
-  \item Evaluierung der entwickelten Anwendung anhand zweier Beispiele. Die
-  erste Erweiterung soll die Positionsdaten eines Benutzers in regelmäßigen
-  Abständen aufnehmen. Die zweite Anwendung soll neben den Positionsdaten noch
-  die aktuelle Lautstärke der Umgebung aufnehmen. Zu beiden Beispielen ist eine
-  entspreche Serveranwendung zu entwickeln, zur Validierung der gesammelten
-  Daten.
-\end{itemize}
+\subsection{iPhone Tracker}
+Der {\em iPhone Tracker} erlaubt die Visualisierung von Daten, die durch das
+Smartphone-Betriebssystem iOS von Apple erhoben werden~\cite{iphonetracker}.
+Diese Daten werden laut Apple dazu verwendet, die Lokalisierung des Benutzers zu
+beschleunigen. Die Daten erlauben aber die einfache Generierung von
+Bewegungsprofilen. Eine Einsicht dieser Daten ohne spezielle Programme ist
+aber nicht möglich~\cite{applegps}.
+
+Der Fall des {\em iPhone Tracker} zeigt, die Problematik bei fehlender
+Transparenz. Dem Benutzer ist nicht bewusst, welche Daten über ihn gesammelt
+werden. Kommt dieses zutage, bedeutet dies oft ein Vertrauensbruch mit dem
+Benutzer. Die zu entwickelnde Anwendung soll nun diese Transparenz als
+Standardfunktionalität liefern. Anwendungen, die auf dieser aufbauen, müssen
+sich nur um das eigentliche Sammeln von Daten kümmern.
 
 \section{Aufbau der Masterarbeit}
 Diese Masterarbeit gliedert sich in die folgenden Kapitel:
 
-Folgt zum Schluss wenn die Masterarbeit fertig ist.
+\begin{itemize}
+  \item In der {\bf Anforderungsanalyse} wird die Aufgabenstellung in ihre
+  einzelnen Bestandteile zerlegt und Begrifflichkeiten geklärt. Dies erlaubt in
+  den Nachfolgenden Kapiteln die bearbeitung der in der Aufgabenstellung
+  enthaltenden Anforderungen.
+  \item Die {\bf Grundlagen} befassen sich mit den verwendeten Technologien.
+  Dieses Kapitel beschäftigt sich zu einem großen Teil mit der Android
+  Plattform.
+  \item Die {\bf Konzeption} beschreibt einen weitestgehenden technologie
+  unabhängigen Aufbau der Anwendung. Dabei werden die Anforderungen in eine
+  Architektur übersetzt. Hierbei wird aber auch geklärt, ob in den Grundlagen
+  erwähnte Technologien sich tatsächlich zur Realisierung verwenden lassen.
+  \item In der {\bf Realisierung} wird die entwickelte Anwendung vorgestellt.
+  Dies schließt interne Abläufe und Details ein, wie auch die Präsentation der
+  Benutzerschnittstelle.
+  \item Der {\bf Leitfaden} dient Entwicklern als Anleitung um ihre Anwendungen
+  (Plug-Ins) zu entwickeln und diese auf der Plattform auszuführen.
+  \item Die {\bf Evaluation} dient bestättigung, dass die entwickelte Anwendung
+  auch in realen Anwendungsszenarien einsetzbar ist.
+  \item Im Kapitel {\bf Zusammenfassung und Ausblick} werden die Ergebnisse der
+  Arbeit zusammen gefasst und abschließendes Fazit gegeben.
+\end{itemize}
