@@ -88,7 +88,21 @@ Aufgabe selbst zu finden und zu starten. Sollten mehre Komponenten die Aufgabe
 erfüllen können, so wird der Benutzer gefragt, welche Komponente verwendet
 werden soll. Dieser Mechanismus kann innerhalb des Manifests durch {\em intent
 filter} definiert werden. Dabei werden die entsprechenden {\em Actions} für jede
-Komponente definiert, auf die sie reagieren soll.
+Komponente definiert, auf die sie reagieren soll. Ein Beispiel für einen {\em
+intent-filter} ist in Listing \ref{intentfilter} dargestellt. In diesem Fall
+kann die {\em Activity} über ein {\em Intent} gestartet bzw. aufgerufen werden,
+der den Namen {\em com.example.plugin.ACTION} besitzt.
+
+\begin{lstlisting}[label=intentfilter, caption=Beispiel für einen intent-filter,
+language=xml] 
+...
+<activity android:name="com.example.plugin.Activity">
+	<intent-filter>
+		<action android:name="com.example.plugin.ACTION"/>
+	</intent-filter>
+</activity>
+...
+\end{lstlisting}
 
 Die zuvor beschriebenen Konzepte sollten einen Einstieg in die Android Plattform
 erlauben. Für eine genauere Beschreibung zur Programmierung von Android
