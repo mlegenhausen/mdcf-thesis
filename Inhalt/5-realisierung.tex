@@ -153,7 +153,7 @@ PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute:
   Betriebssystem benötigt. Im besten Fall ist dieses Attribut leer, da
   dies bedeutet, dass das Plug-In nicht auf reglementierte Ressourcen zugreifen
   muss.
-  \item {\bf Log Records} speichert alle Zugriffe, die auf die sicheren
+  \item {\bf Log Records} protokolliert alle Zugriffe, die auf die sicheren
   Versionen der Android System Services stattgefunden haben.
   \item {\bf Transfers} beinhaltet eine Liste von ausstehenden Übertragungen.
   \item {\bf Workspace} beinhaltet alle vom Plug-In gesammelten Daten. Dabei
@@ -162,7 +162,7 @@ PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute:
 \end{itemize}
 
 Da die {\em PluginConfiguration} alle relevanten Plug-In Informationen, {\em
-Log Record} und alle gesammelten Daten enthält, wird diese Datenstruktur 
+Log Records} und alle gesammelten Daten enthält, wird diese Datenstruktur 
 zur Persistierung verwendet innerhalb der {\em db4o}-Datenbank.
 
 \subsubsection{Service-Interface Definition}
@@ -397,8 +397,8 @@ Log-Viewer} und {\em Data-Viewer} genauer erläutert werden.
 \end{figure}
 
 \subsubsection{Log-Viewer}
-Der Log-Viewer dient zur Anzeige aller Aktivitäten eines Plug-Ins. Mit
-Aktivitäten ist der Zugriff auf die sicheren Android System Services gemeint.
+Der Log-Viewer dient zur Anzeige aller protokollierten Aktivitäten eines
+Plug-Ins. Mit Aktivitäten ist der Zugriff auf die sicheren Android System Services gemeint.
 Greift ein Plug-In auf eine Methode der Services zu, so wird ein Log-Eintrag
 erstellt. Dieser enthält in benutzerverständlicher Sprache, welche Informationen
 abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log} dargestellt.
@@ -429,8 +429,9 @@ dargestellt. In Abbildung \ref{collected_data_overview} wird die erste Ebene
 angezeigt. Jeder anklickbare Knoten wird dabei als Datum angezeigt. Dieses
 Datum gibt an, wann der entsprechende Datensatz das letzte Mal modifiziert
 wurde. In diesem Fall werden drei Einträge dargestellt. In diesem Beispiel
-überschneiden sich die Daten mit denen die im Log stehen. Es wurde also bei
-jeder Ausführung jeweils ein neuer Eintrag zu den gesammelten Daten hinzugefügt.
+überschneiden sich die Daten mit denen die im Log stehen. Damit ist gemeint,
+dass nach jedem Zugriff auf den {\em LocationManager}, ein neuer Eintrag zu
+den gesammelten Daten hinzugefügt wurde.
 
 \begin{figure}[h!] 
 	\centering
