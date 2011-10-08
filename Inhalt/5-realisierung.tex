@@ -45,11 +45,23 @@ implementiert. Diese stellt alle für das Plug-In System nötigen Methoden
 zur Verfügung, um mit dem Plug-In zu interagieren. Die Schnittstelle selbst
 besteht aus einer Reihe von {\em Settern}, mit denen die sicheren Versionen der
 Android System Services und der {\em PersistenceManager} gesetzt werden, sowie
-einer {\em run}-Methode, mit der das Plug-In ausgeführt wird. Da die {\em
-Setter}-Implementierungen trivial und in den meisten Fällen identisch sind, gibt
-es zur Vereinfachung die Klasse {\em AbstractPlugin}. Erbt man von dieser
-Klasse, muss nur noch eine vereinfachte Version der {\em run}-Methode, die {\em
-onRun}-Methode implementiert werden.
+einer {\em run}-Methode, mit der das Plug-In ausgeführt wird. Auf Folgende
+sichere Versionen der Android System Services kann ein Plug-In zugreifen:
+
+\begin{itemize}
+  \item {\bf ConnectivityManager}: Erlaubt den Zugriff, auf aktuelle
+  Netzwerkinformationen, auf die der Benutzer zugreifen kann.
+  \item {\bf LocationManager}: Erlaubt den Zugriff auf, Methoden zur
+  Positionsbestimmung des Benutzers.
+  \item {\bf TelephonyManager}: Erlaubt den Zugriff auf Telefonfunktionalitäten.
+  \item {\bf WifiManager}: Erlaubt das Auffinden und den Zugriff auf
+  \acsp{wlan}.
+\end{itemize}
+
+Da die {\em Setter}-Implementierungen trivial und in den meisten Fällen
+identisch sind, gibt es zur Vereinfachung die Klasse {\em AbstractPlugin}. Erbt
+man von dieser Klasse, muss nur noch eine vereinfachte Version der {\em
+run}-Methode, die {\em onRun}-Methode implementiert werden.
 
 Innerhalb der {\em run}- bzw. {\em onRun}-Methode kann auf die gesetzten
 Services zugegriffen werden. Die Services bieten alle in der Android Dokumentation beschriebenen
@@ -268,9 +280,10 @@ Runnable}-Interface implementiert. Dieser Task wird nun an den zuvor erwähnten
 Thread-Pool zur sofortigen Ausführung übergeben. Bei der Ausführung wird aus der
 {\em PluginInfo} die {\em Action} ausgelesen. Mit dieser ist es möglich, die
 Service-Schnittstelle des Plug-Ins aufzurufen. Konnte eine Verbindung zum
-Plug-In hergestellt werden, werden zuerst alle für die Ausführung nötigen
-Objekte gesetzt, um daraufhin das Plug-In auszuführen. Das Plug-In wird dabei
-nur maximal für die im {\em PluginInfo} angegebene Zeit ausgeführt. Sollte diese
+Plug-In hergestellt werden, werden zuerst die in den Plug-In Informationen
+angegebenen sicheren Android System Services sowie der {\em PersistenceManager}
+gesetzt, um daraufhin das Plug-In auszuführen. Das Plug-In wird dabei nur
+maximal für die im {\em PluginInfo} angegebene Zeit ausgeführt. Sollte diese
 Zeit überschritten werden, so wird das Plug-In vom Android System terminiert.
 Nach der Ausführung wird das Plug-In wieder zum Thread-Pool hinzugefügt, um ihn
 aber diesmal erst nach dem vom Plug-In definierten Abstand auszuführen. Dies
@@ -278,6 +291,19 @@ wiederholt sich solange, bis das Plug-In deaktiviert wurde oder eine Übertragung
 vorbereitet wird. Dadurch, dass das Plug-In immer im Nachhinein wieder zum
 Thread-Pool hinzugefügt und nicht automatisch periodisch ausgeführt wird, wird
 eine Überlappung der Plug-In Ausführungen verhindert.
+
+Über den {\em PersistenceManager} können während der Ausführung beliebige
+Informationen innerhalb der Datenbank des {\em Mobile Data Collectors}
+gespeichert werden.
+
+Sollte während der Ausführung ein Plug-In auf Methoden der sicheren Android
+System Services zugreifen, so wird dieser Zugriff protokolliert. Dazu wird vor
+jeder Ausführung ein neuer Eintrag zu den {\em Log Records} der {\em
+PluginConfiguration} hinzugefügt. In einen solchen {\em Log Record} können nun
+beliebig viele Einträge hinzugefügt werden, die den Zugriff in
+menschenverständlicher Sprache protokollieren. Diese Einträge lassen sich dann
+über den in Abschnitt \ref{plugin_details} beschriebenen {\em Log-Viewer}
+einsehen.
 
 \subsection{Plug-In List}
 Die Plug-In List dient zur Auflistung aller installierten Plug-Ins. Sind keine

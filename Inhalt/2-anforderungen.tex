@@ -4,9 +4,60 @@ In diesem Kapitel werden die aus der Aufgabenstellung sich ergebenen
 Anforderungen genauer analysiert. Es wird dabei geklärt, in welchem Umfang die
 einzelnen Anforderungen bearbeitet werden müssen.
 
-Die sich aus der Aufgabenstellung ergeben Anforderungen sind Transparenz,
-Anonymität, ein Erweiterungssystem, die Möglichkeit der Datenspeicherung sowie
-die regelmäßige Übertragung von Daten an einen Server.
+Die sich aus der Aufgabenstellung ergeben Anforderungen sind das Sammeln von
+Sensordaten,Transparenz, Anonymität, ein Erweiterungssystem, die
+Möglichkeit der Datenspeicherung sowie die regelmäßige Übertragung von Daten an
+einen Server.
+
+\section{Sammeln von Sensordaten}
+Generell sollen die von den Sensoren anfallenden Daten mit Hilfe der zu
+entwickelnden Anwendung gesammelt werden. Über folgende Sensorik verfügen
+aktuelle Smartphones:
+
+\begin{itemize}
+  \item Mobilfunk (\acs{gsm}, \acs{umts})
+  \item \acf{wlan}
+  \item Bluetooth
+  \item Nahfeldkommunikation (\acs{nfc})
+  \item \acf{gps}
+  \item Lagesensor
+  \item Beschleunigungsmesser
+  \item Digitaler Kompass
+  \item Näherungssensor
+  \item Lichtsensor
+  \item Kamera
+  \item Mikrofon
+\end{itemize}
+
+Die Anwendung soll in der Lage sein entsprechend auf die Sensorik zuzugreifen
+(falls vorhanden) und diese Daten zu verarbeiten und zu sammeln. Hierbei ist
+aber zwischen Sensoren zu unterscheiden, die potenziell personenbezogene Daten
+sammeln und die die keine personenbezogenen Daten sammeln. Nach §3 des
+Bundesdatenschutzgesetzes wird der Begriff der personenbezogenen Daten wie folgt
+definiert:
+
+\begin{quote}
+Personenbezogene Daten sind Einzelangaben über persönliche oder
+sachliche Verhältnisse einer bestimmten oder bestimmbaren natürlichen Person.
+\end{quote}
+
+Unter Einzelangaben sind z. B. der Name, Telefonnummer, Adresse zu verstehen
+während sachliche Verhältnisse bedeutet, dass sich über bestimmte Daten auf
+bestimmte Personen schließen lässt. Letzteres ist im Rahmen dieser Arbeit von
+größter Bedeutung.
+
+Die Sensorik die potenziell personenbezogene Daten sammeln sind
+Mobilfunk, \acs{gps}, \acs{wlan}, Bluetooth, Kamera und Mikrofon. Die
+hierbei anfallenden Daten sind die Position, verfügbare Netzwerke in der
+Umgebung, Ton sowie Bildaufnahmen. Über entsprechende Auswertung dieser Daten
+lässt sich auf bestimmte Personen schließen. Diese Daten sind somit besonders
+schützenswert. Die zu entwickelnde Anwendung sollte somit entsprechende
+Schutzmechanismen verfügen, die den Zugriff auf diese Daten regelt.
+
+Hierbei ist anzumerken, dass die Anwendung, nach Definition der
+Aufgabenstellung, nur in der Lage sein muss Daten zu sammeln, die von der
+Sensorik stammt. Die Ermittlung von Daten wie z. B. dem Benutzerverhalten ist
+nicht zu berücksichtigen.
 
 \section{Transparenz}
 \label{sec:transparenz}

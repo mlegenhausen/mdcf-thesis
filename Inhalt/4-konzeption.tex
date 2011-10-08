@@ -143,8 +143,9 @@ Voraussetzungen:
   \item Bevor die Daten übertragen werden, muss der Benutzer darauf hingewiesen
   werden, damit eine Kontrolle vor der Übertragung stattfinden kann.
   \item Der Zugriff auf die Android System Services, die gemeinsamgenutze
-  Ressourcen des Systems darstellen, wird protokolliert und kann zu jedem
-  Zeitpunkt vom Benutzer eingesehen werden.
+  Ressourcen des Systems darstellen und potenziell personenbezogene Daten
+  sammeln, wird protokolliert und kann zu jedem Zeitpunkt vom Benutzer
+  eingesehen werden.
 \end{itemize}
 
 Diese Voraussetzungen werden im Folgenden genauer erläutert.
@@ -160,9 +161,20 @@ Weiteren sollte der Zugriff auf bestimmte Daten, die den Benutzer eindeutig
 identifizieren (z.~B. \acs{imsi}, Telefonnummer) komplett unterbunden werden.
 Aus diesem Grund sollen dem Plug-In nicht die original Android System Services
 zur Verfügung gestellt werden, sondern stattdessen überwachte bzw. sichere
-Implementierungen der Android Services. Diese Services sollen jeden
+Implementierungen der Android Services. Diese sicheren Services sollen jeden
 Methodenzugriff protokollieren und zuvor beschriebene gefährliche Methoden gar
-nicht erst anbieten.
+nicht erst anbieten. Folgende Android System Services müssen durch sichere
+Implementierung ersetzt werden:
+
+\begin{itemize}
+  \item {\bf ConnectivityManager}: Erlaubt den Zugriff, auf aktuelle
+  Netzwerkinformationen, auf die der Benutzer zugreifen kann.
+  \item {\bf LocationManager}: Erlaubt den Zugriff auf, Methoden zur
+  Positionsbestimmung des Benutzers.
+  \item {\bf TelephonyManager}: Erlaubt den Zugriff auf Telefonfunktionalitäten.
+  \item {\bf WifiManager}: Erlaubt das Auffinden und den Zugriff auf
+  \acsp{wlan}.
+\end{itemize}
 
 Dabei sollen einem Plug-In nicht von vorne rein alle Services übergeben werden,
 sondern nur die, die in den Plug-In Informationen angegebenen wurden. Sollte ein
