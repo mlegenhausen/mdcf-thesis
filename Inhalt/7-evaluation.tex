@@ -6,26 +6,26 @@ entwickeln lassen. Dies wird anhand zweier Beispiele gezeigt. Bei diesen
 Beispielen handelt es sich zum einen um ein Plug-In zur Positionsverfolgung
 eines Benutzers sowie um eine Erweiterung des Plug-Ins, dass zusätzlich die
 Umgebungslautstärke zu jeder Position erfasst. Hierbei wird neben den Plug-Ins
-für das Smartphone auch eine entsprechende Serverkomponente entwickelt. Die
-Serverkomponente beinhaltet dabei, die Persistierung der Daten sowie deren
-Visualisierung in Form einer Web-Anwendung.
+für den {\em Mobile Data Collector} auch eine entsprechende Serverkomponente
+entwickelt. Die Serverkomponente besteht aus der Persistierung der Daten
+sowie der Visualisierung der Daten in Form einer Web-Anwendung.
 
 \section{Plug-In zur Positionsverfolgung}
 \label{locationtracker}
-Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt
-Plug-In'', wurde ein Plug-In entwickelt, dass die aktuelle Position
+Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt''-
+Plug-In, wurde ein Plug-In entwickelt, dass die aktuelle Position
 des Benutzers speichert und in regelmäßigen Abständen übertragt. Dieses Plug-In
 trägt den Arbeitstitel {\em Location Tracker}. Es wird dabei auf die
-wichtigsten Punkte bei der Implementierung des Plug-Ins sowie der Serverkomponente
-eingegangen.
+wichtigsten Punkte bei der Implementierung des Plug-Ins sowie der
+Serverkomponente eingegangen.
 
 \subsection{Implementierung des Plug-Ins}
 Im Folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
 durch die es möglich wird, die aktuelle Position eines Benutzers zu verfolgen
 und diese Daten zu speichern. Das Plug-In befindet sich im {\em
 LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
-Framework}-Projekts. Es wird sich im Folgenden, auf dem im Verzeichnis
-befindlichen Quellcode bezogen.
+Framework}-Projekts. Es wird sich im Folgenden, auf dem im {\em
+mdcf/LocationTracker}-Verzeichnis befindlichen Quellcode bezogen.
 
 \subsubsection{Ermittelung der aktuellen Position}
 Um die aktuelle Position des Benutzers zu erfahren, muss der {\em
@@ -43,7 +43,7 @@ Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
 genausten zu bestimmen. Die Positionsermittlung wird innerhalb von Android
 durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
 ermittelt werden, der am Besten dem gegebenen {\em Criteria}-Objekt entspricht.
-Durch dieses können Kriterien wie z.~B. Stromverbrauch oder Genauigkeit
+Durch dieses können Kriterien wie z.~B. Stromverbrauch und Genauigkeit
 festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
 der zurzeit beste verfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
 die letzte bekannte Position unter Zuhilfenahme des gegebenen {\em Providers}
@@ -53,9 +53,9 @@ Position des Benutzers.
 \subsubsection{Speichern der Position}
 Die zuvor ermittelte Position kann nun gespeichert werden. In Listing
 \ref{storelocation} wird dazu im ersten Schritt der {\em Workspace} abgefragt.
-Dann wird eine neue {\em Node} erstellt, an der alle Attribute des {\em
-Location}-Objekts gespeichert werden. Dieses wird im letzten Schritt an den {\em
-Workspace} angehangen bevor dieser gespeichert wird.
+Dann wird eine neuer Knoten erstellt, an der alle Attribute des {\em
+Location}-Objekts gespeichert werden. Der Knoten wird im letzten Schritt an den
+{\em Workspace} angehangen und gespeichert.
 
 \begin{lstlisting}[label=storelocation,
 caption=Speichern der Position, language=java]
@@ -133,8 +133,9 @@ wurden.
 
 Dieses Plug-In demonstriert somit, dass es mit dem {\em Mobile Data
 Collection Framework} möglich ist, Plug-Ins zu entwickeln, die
-Positionsdaten sammeln können. Im nächsten Abschnitt wird nun gezeigt, wie diese
-gesammelten Daten von einem Server verarbeitet und visualisiert werden können.
+Positionsdaten sammeln können. Im nächsten Abschnitt wird gezeigt, wie die
+gesammelten Daten von einem Server empfangen, verarbeitet und visualisiert
+werden können.
 
 \subsection{Implementierung der Serverkomponente}
 Bei der Implementierung der Serverkomponente wird als Ausgangspunkt die ``Hallo
