@@ -1,9 +1,9 @@
 \chapter{Realisierung}
 \label{cha:realisierung}
 In diesem Kapitel wird die aus dem Konzept entwickelte Realisierung beschrieben.
-Die Anwendung trägt dabei den Arbeitstitel {\em Mobile Data Collector}, während
-das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data Collection
-Framework} trägt.
+Die Anwendung trägt dabei den Arbeitstitel {\em Mobile Data Collector},
+wäh\-rend das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data
+Collection Framework} trägt.
 
 Der {\em Mobile Data Collector} wird als Open Source Projekt entwickelt und kann
 entweder von der beiliegenden CD oder von GitHub unter der Adresse
@@ -12,15 +12,16 @@ in die folgenden Teile gegliedert:
 
 \begin{itemize}
   \item {\bf MobileDataCollector}: Die {\em Mobile Data Collector} Android
-  Anwendung.
+  Anwendung, die die komplette Anwendungslogik zur Ausführung von Erweiterungen
+  enthält.
   \item {\bf MobileDataCollectionFramework}: Das Framework zur Entwicklung von
-  Plug-Ins.
+  Erweiterungen (Plug-Ins).
   \item {\bf LocationTrackerPlugin}: Ein Beispiel Plug-In zum Sammeln von
   Standortdaten.
   \item {\bf NoiseTrackerPlugin}: Eine Erweiterung des {\em
   LoationTrackerPlugin}, bei dem neben der aktuellen Position, auch die
   Lautstärke gespeichert wird.
-  \item {\bf mdcf-remote}: Framework zur Entwicklung der Serverkomponente.
+  \item {\bf mdcf-remote}: Das Framework zur Entwicklung der Serverkomponente.
   \item {\bf mdcf-locationtracker-remote}: Eine Beispielserverkomponente für
   das {\em LocationTrackerPlugin}.
   \item {\bf mdcf-noisetracker-remote}: Eine Beispielserverkomponente für das
@@ -50,7 +51,7 @@ sichere Versionen der Android System Services kann ein Plug-In zugreifen:
 
 \begin{itemize}
   \item {\bf ConnectivityManager}: Erlaubt den Zugriff, auf aktuelle
-  Netzwerkinformationen, auf die der Benutzer zugreifen kann.
+  Netzwerkinformationen.
   \item {\bf LocationManager}: Erlaubt den Zugriff auf, Methoden zur
   Positionsbestimmung des Benutzers.
   \item {\bf TelephonyManager}: Erlaubt den Zugriff auf Telefonfunktionalitäten.
@@ -64,13 +65,13 @@ man von dieser Klasse, muss nur noch eine vereinfachte Version der {\em
 run}-Methode, die {\em onRun}-Methode implementiert werden.
 
 Innerhalb der {\em run}- bzw. {\em onRun}-Methode kann auf die gesetzten
-Services zugegriffen werden. Die Services bieten alle in der Android Dokumentation beschriebenen
-Methoden. Neben den Services kann auch auf einen {\em PersistenceManager}
-zugegriffen werden. Dieser erlaubt über die {\em getWorkspace}-Methode den
-einfachen Zugriff auf alle bisher gespeicherten Daten. Die zurückgegebene
-Datenstruktur kann dann innerhalb des Plug-Ins beliebig manipuliert werden.
-Wurden alle Daten erfolgreich manipuliert, können die Änderungen mit der {\em
-save}-Methode gespeichert werden.
+Services zugegriffen werden. Die Services bieten weitestgehend alle in der
+Android Dokumentation beschriebenen Methoden. Neben den Services kann auch auf
+einen {\em PersistenceManager} zugegriffen werden. Dieser erlaubt über die {\em
+getWorkspace}-Methode den einfachen Zugriff auf alle bisher gespeicherten Daten.
+Die zurückgegebene Datenstruktur kann dann innerhalb des Plug-Ins beliebig
+manipuliert werden. Wurden alle Daten erfolgreich manipuliert, können die
+Änderungen mit der {\em save}-Methode gespeichert werden.
 
 Die Registrierung eines Plug-Ins erfolgt durch die Antwort auf den vom Plug-In
 System versendeten {\em Broadcast}, der nach der Installation einer neuen
@@ -118,8 +119,8 @@ Fülle von {\em Activities} (grün) zur Verfügung. Diese {\em Activities} sind:
   \item Der {\bf Plug-In List} dient zur Auflistung von installierten Plug-Ins.
   \item Die {\bf Plug-In Details} erlaubt die Einsicht von Plug-In
   Informationen.
-  \item Der {\bf Log-Viewer} dient zur Auflistung von Aufrufen von Android
-  System Services.
+  \item Der {\bf Log-Viewer} dient zur Auflistung aller protokollierten Zugriffe
+  auf die sicheren Android System Services vom {\em Mobile Data Collector}.
   \item Der {\bf Data-Viewer} erlaubt die Betrachtung von allen vom Plug-In
   gesammelten Daten.
   \item Der {\bf Transfer-Manager} listet alle ausstehenden Übertragungen auf
@@ -149,7 +150,7 @@ PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute:
 \begin{itemize}
   \item {\bf Mode} gibt an, ob sich das Plug-In im {\em New}, {\em
   Activated}, {\em Deactivated} oder {\em Transfer} Zustand befindet. Im Letzteren
-  werden die bisher gesammelten Daten für die Übertragung vorbereitet.
+  werden die bisher gesammelten Daten für eine Übertragung vorbereitet.
   \item {\bf State} gibt an ob, das Plug-In sich im {\em Resolved}, {\em
   Waiting} oder {\em Running} Zustand befindet. Im {\em Resolved} Zustand
   befindet es sich immer dann, wenn der {\em Mode} {\em New}, {\em Deactivated}
@@ -164,7 +165,8 @@ PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute:
   \item {\bf Permissions} gibt an, welche Zugriffsrechte das Plug-In vom Android
   Betriebssystem benötigt. Im besten Fall ist dieses Attribut leer, da
   dies bedeutet, dass das Plug-In nicht auf reglementierte Ressourcen zugreifen
-  muss.
+  muss, sondern alle Aufgaben kontrolliert über den {\em Mobile Data Collector}
+  ausführen kann.
   \item {\bf Log Records} protokolliert alle Zugriffe, die auf die sicheren
   Versionen der Android System Services stattgefunden haben.
   \item {\bf Transfers} beinhaltet eine Liste von ausstehenden Übertragungen.
