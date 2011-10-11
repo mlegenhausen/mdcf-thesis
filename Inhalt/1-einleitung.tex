@@ -33,7 +33,7 @@ ermöglichen selbst zu entscheiden, wann welche Daten über ihn gesammelt werden
 sollen. Transparenz soll die Plattform dadurch bieten, dass zu
 jedem Zeitpunkt, der Benutzer einsehen kann, welche Daten gesammelt
 wurden und er kann entscheiden, ob die gesammelten Daten überhaupt an die
-Institution freigegeben werden sollen. Anonymität wird dabei dadurch garantiert,
+Institution freigegeben werden sollen. Anonymität wird dadurch garantiert,
 dass keine Daten übermittelt werden, die einen Benutzer eindeutig
 identifizieren. Diese Daten können z.~B. der Name, Telefonnummer oder die
 Adresse sein.
@@ -50,9 +50,9 @@ einzelne Aspekte der zu entwickelnden Anwendung realisiert haben.
 Bei {\em Sensorly} handelt es sich um eine Android Anwendung, mit der die
 Netzwerkabdeckung von Mobilfunknetzen mithilfe von Android-Smartphones ermittelt
 wird. Dazu lädt man sich als Benutzer eine Gratisanwendung aus dem {\em
-Android Market} herunter und installiert diese. Die Anwendung sammelt im
-Hintergrund Daten über die Netzabdeckung vom gerade verbundenen
-Mobilfunkanbieter. Diese Daten werden in regelmäßigen Abständen an einen
+Android Market} herunter und installiert diese. Nach dem ersten Start sammelt
+die Anwendung automatisch im Hintergrund Daten über die Netzabdeckung vom gerade
+verbundenen Mobilfunkanbieter. Diese Daten werden in regelmäßigen Abständen an einen
 zentralen Server übermittelt, wo diese Daten mit den Daten anderer Anwender
 kombiniert werden, um die Daten anschließend in einer Karte auf der
 Internetseite \url{sensorly.com} zu visualisieren.
@@ -60,15 +60,16 @@ Internetseite \url{sensorly.com} zu visualisieren.
 {\em Sensorly} repräsentiert einen möglichen Anwendungsfall für die zu
 entwickelnde Anwendung. Es ist mit {\em Sensorly} aber nicht möglich die Daten
 vor der Übertragung einzusehen oder dieser Übertragung zu widersprechen. {\em
-Sensorly} stellt also eine klassische Anwendung zum Sammeln von Daten dar.
+Sensorly} stellt also eine klassische Anwendung zum Sammeln von Sensordaten dar.
 
 \subsection{Flexible Android Permissions}
 \acf{flexp} ist eine Anpassung des Android Betriebssystems, die es ermöglicht,
 die Rechte die einer Anwendung bei der Installation gegeben werden, nachträglich zu
 verändern. Ein Benutzer hat also die Möglichkeit nachträglich zu bestimmen, auf
 welche Ressourcen eine Anwendungen zugreifen darf und auf welche nicht. Um nun
-mögliche Seiteneffekte zu vermeiden, wird den Anwendungen suggeriert, dass sie
-trotzdem Zugriff auf die Ressourcen haben~\cite{flexp}.
+mögliche Probleme zu vermeiden, die nach dem Rechteentzug auftreten
+können, wird den Anwendungen suggeriert, dass sie trotzdem Zugriff auf die
+Ressourcen haben~\cite{flexp}.
 
 \acs{flexp} deckt den Aspekt ab, dass durch diese Anpassung der Benutzer mehr
 Möglichkeiten hat, zu entscheiden auf welche Ressourcen (z.~B. die Sensorik),
@@ -78,12 +79,12 @@ Kontrollmöglichkeiten über eine Anwendung steigen zwar, die Transparenz bleibt
 aber dieselbe.
 
 \subsection{iPhone Tracker}
-Der {\em iPhone Tracker} erlaubt die Visualisierung von Daten, die durch das
-Smartphone-Betriebssystem iOS von Apple erhoben werden~\cite{iphonetracker}.
-Diese Daten werden laut Apple dazu verwendet, die Lokalisierung des Benutzers zu
-beschleunigen. Die Daten erlauben aber die einfache Generierung von
-Bewegungsprofilen. Eine Einsicht dieser Daten ohne spezielle Programme ist
-aber nicht möglich~\cite{applegps}.
+Der {\em iPhone Tracker} erlaubt die Visualisierung von Daten auf dem Computer,
+die durch das Smartphone-Betriebssystem iOS auf dem Apple iPhone erhoben
+werden~\cite{iphonetracker}. Diese Daten werden laut Apple dazu verwendet, die
+Lokalisierung des Benutzers zu beschleunigen. Die Daten erlauben aber die
+einfache Generierung von Bewegungsprofilen. Eine Einsicht dieser Daten ohne
+spezielle Programme ist aber nicht möglich~\cite{applegps}.
 
 Der Fall des {\em iPhone Tracker} zeigt, die Problematik bei fehlender
 Transparenz. Dem Benutzer ist nicht bewusst, welche Daten über ihn gesammelt
@@ -98,22 +99,23 @@ Diese Masterarbeit gliedert sich in die folgenden Kapitel:
 \begin{itemize}
   \item In der {\bf Anforderungsanalyse} wird die Aufgabenstellung in ihre
   einzelnen Bestandteile zerlegt und Begrifflichkeiten geklärt. Dies erlaubt in
-  den Nachfolgenden Kapiteln die bearbeitung der in der Aufgabenstellung
+  den nachfolgenden Kapiteln die Bearbeitung der in der Aufgabenstellung
   enthaltenden Anforderungen.
   \item Die {\bf Grundlagen} befassen sich mit den verwendeten Technologien.
   Dieses Kapitel beschäftigt sich zu einem großen Teil mit der Android
   Plattform.
-  \item Die {\bf Konzeption} beschreibt einen weitestgehenden technologie
-  unabhängigen Aufbau der Anwendung. Dabei werden die Anforderungen in eine
-  Architektur übersetzt. Hierbei wird aber auch geklärt, ob in den Grundlagen
-  erwähnte Technologien sich tatsächlich zur Realisierung verwenden lassen.
+  \item Die {\bf Konzeption} beschreibt einen weitestgehenden
+  techno\-logie\-unab\-hän\-gigen Aufbau der Anwendung. Dabei werden die
+  Anforderungen in eine Architektur überführt. Es wird aber auch geklärt, ob die
+  in den Grundlagen erwähnten Technologien sich tatsächlich zur Realisierung
+  verwenden lassen.
   \item In der {\bf Realisierung} wird die entwickelte Anwendung vorgestellt.
-  Dies schließt interne Abläufe und Details ein, wie auch die Präsentation der
+  Dies schließt interne Abläufe ein, wie auch die Präsentation der
   Benutzerschnittstelle.
   \item Der {\bf Leitfaden} dient Entwicklern als Anleitung um ihre Anwendungen
   (Plug-Ins) zu entwickeln und diese auf der Plattform auszuführen.
-  \item Die {\bf Evaluation} dient bestättigung, dass die entwickelte Anwendung
-  auch in realen Anwendungsszenarien einsetzbar ist.
+  \item Die {\bf Evaluation} dient als Bestätigung, dass die entwickelte
+  Anwendung auch in realen Anwendungsszenarien einsetzbar ist.
   \item Im Kapitel {\bf Zusammenfassung und Ausblick} werden die Ergebnisse der
-  Arbeit zusammen gefasst und abschließendes Fazit gegeben.
+  Arbeit zusammengefasst und ein abschließendes Fazit gegeben.
 \end{itemize}
