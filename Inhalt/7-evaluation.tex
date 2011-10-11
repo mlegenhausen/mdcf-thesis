@@ -33,8 +33,10 @@ LocationManager} abgefragt werden. Siehe hierzu Listing \ref{locationmanager}
 
 \begin{lstlisting}[label=locationmanager,
 caption=Abfragen des LocationManager, language=java]
-String provider = getLocationManager().getBestProvider(new Criteria(), false);
-Location location = getLocationManager().getLastKnownLocation(provider);
+String provider = getLocationManager().getBestProvider(
+	new Criteria(), false);
+Location location = getLocationManager()
+	.getLastKnownLocation(provider);
 \end{lstlisting}
 
 Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
@@ -73,7 +75,12 @@ getPersistenceManager().save(workspace);
 \subsubsection{Plug-In Konfiguration}
 Um das Plug-In fertigzustellen, muss im letzten Schritt das Plug-In konfiguriert
 werden. Dies geschieht ebenfalls über die {\em plugin.xml}. Eine mögliche
-Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt.
+Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt. Diese
+Konfiguration unterscheidet sich zum ``Hallo Welt''-Plug-In dadurch, dass der
+{\em LocationManager} angefordert wird und eine Beschreibung angegeben ist. Der
+{\em LocationManager} wird zur Ermittlung der aktuellen Position benötigt. Es
+ist darauf zu achten, dass die angegebene \acs{url} mit der des Empfangsserver
+übereinstimmt.
 
 \begin{lstlisting}[label=locationtrackerpluginxml, caption=plugin.xml,
 language=xml] 
@@ -91,10 +98,6 @@ language=xml]
 	</description>
 </plugininfo>
 \end{lstlisting}
-
-Diese Konfiguration unterscheidet sich zum ``Hallo Welt''-Plug-In dadurch, dass
-der {\em LocationManager} angefordert wird und eine Beschreibung angegeben ist.
-Der {\em LocationManager} wird zur Ermittlung der aktuellen Position benötigt.
 
 \subsubsection{Verwendung des Plug-Ins}
 Das Plug-In kann nun wie in Kapitel \ref{cha:leitfaden} beschrieben, auf dem
@@ -172,13 +175,15 @@ public class TransferRequestProcessorImpl implements TransferRequestProcessor {
 	private final ParticipantRepository repository;
 	
 	@Inject
-	public TransferRequestProcessorImpl(ParticipantRepository repository) {
+	public TransferRequestProcessorImpl(
+			ParticipantRepository repository) {
 		this.repository = repository;
 	}
 	
 	public void process(TransferRequest request) {
 		String id = request.getId();
-		Participant participant = Objects.firstNonNull(repository.findById(id), new Participant(id));
+		Participant participant = Objects.firstNonNull(
+			repository.findById(id), new Participant(id));
 		
 		Node workspace = request.getWorkspace();
 		Iterator<Node> nodes = workspace.getNodes();
@@ -187,13 +192,20 @@ public class TransferRequestProcessorImpl implements TransferRequestProcessor {
 			Node node = nodes.next();
 			Location location = new Location();
 			location.setTimestamp(node.getTimestamp());
-			location.setLatitude(node.getProperty("Latitude").getValue().getDouble());
-			location.setLongitude(node.getProperty("Longitude").getValue().getDouble());
-			location.setAltitude(node.getProperty("Altitude").getValue().getDouble());
-			location.setBearing((float) node.getProperty("Bearing").getValue().getDouble());
-			location.setAccuracy((float) node.getProperty("Accuracy").getValue().getDouble());
-			location.setSpeed((float) node.getProperty("Speed").getValue().getDouble());
-			location.setProvider(node.getProperty("Provider").getValue().getString());
+			location.setLatitude(node.getProperty("Latitude")
+				.getValue().getDouble());
+			location.setLongitude(node.getProperty("Longitude")
+				.getValue().getDouble());
+			location.setAltitude(node.getProperty("Altitude")
+				.getValue().getDouble());
+			location.setBearing((float) node.getProperty("Bearing")
+				.getValue().getDouble());
+			location.setAccuracy((float) node.getProperty("Accuracy")
+				.getValue().getDouble());
+			location.setSpeed((float) node.getProperty("Speed")
+				.getValue().getDouble());
+			location.setProvider(node.getProperty("Provider")
+				.getValue().getString());
 			locations.add(location);
 		}
 		repository.persist(participant);

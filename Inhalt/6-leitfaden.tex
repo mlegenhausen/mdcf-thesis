@@ -14,11 +14,11 @@ aus Einfachheitsgründen, auf die Verwendung von System Services. Beispiele
 dazu können aber dem Abschnitt \ref{cha:evaluation} entnommen werden.
 
 \section{Beziehen des Mobile Data Collection Frameworks}
-Das {\em Mobile Data Collection Framework} kann von Github über die URL
-\url{https://github.com/mlegenhausen/mdcf} bezogen werden. Es ist dabei
-möglich, das Framework als Archiv runterzuladen oder per Git zu klonen. Bei Git
-handelt es sich um verteiltes Versionskontrollsystem, das von 
-\url{http://git-scm.com/} heruntergeladen werden kann.
+Das {\em Mobile Data Collection Framework} kann entweder von der beiliegenden CD
+oder von GitHub über die \acs{url} \url{https://github.com/mlegenhausen/mdcf}
+bezogen werden. Es ist dabei möglich, das Framework als Archiv runterzuladen oder per
+Git zu klonen. Bei Git handelt es sich um verteiltes Versionskontrollsystem, das
+von \url{http://git-scm.com/} heruntergeladen werden kann.
 
 Um das Projekt per Git zu klonen, muss Folgendes auf der Kommandozeile
 ausgeführt werden. Vor der Ausführung sollte man sich in einem entsprechenden
@@ -284,13 +284,10 @@ language=xml] <?xml version="1.0" encoding="utf-8"?>
 <manifest 
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		package="com.example.helloworld"
-		android:versionCode="1"
-		android:versionName="1.0">
-		
+		android:versionCode="1" android:versionName="1.0">	
 	<application 
 			android:icon="@drawable/icon" 
 			android:label="@string/app_name">
-			
 		<receiver 
 				android:name="com.example.helloworld.HelloWorldRegister">
 			<intent-filter>
@@ -298,7 +295,6 @@ language=xml] <?xml version="1.0" encoding="utf-8"?>
 						android:name="de.uniluebeck.itm.mdcf.PLUGIN_FIND"/>
 			</intent-filter>
 		</receiver>
-		
 		<service 
 				android:name="com.example.helloworld.HelloWorldPlugin">
 			<intent-filter>
@@ -306,7 +302,6 @@ language=xml] <?xml version="1.0" encoding="utf-8"?>
 						android:name="com.example.helloworld.HELLO_WORLD_PLUGIN"/>
 			</intent-filter>
 		</service>
-		
 	</application>
 </manifest>
 \end{lstlisting}
@@ -425,7 +420,7 @@ Um die vom Smartphone empfangenen Daten zu verarbeiten, muss ein {\em
 TransferRequestProcessor} implementiert werden. Dieser bekommt beim Aufruf der
 {\em process}-Methode, den deserialisierten {\em TransferRequest}
 übergeben, der vom {\em Mobile Data Collector} übertragen wurde. Siehe hierzu
-Listing \ref{transferequestprocessor}.
+Listing \ref{transferrequestprocessor}.
 
 \begin{lstlisting}[label=transferrequestprocessor,
 caption=TransferRequestProessorImpl.java, language=java] 
@@ -445,7 +440,8 @@ public class TransferRequestProcessorImpl implements TransferRequestProcessor {
 		Iterator<Node> nodes = workspace.getNodes();
 		while (nodes.hasNext()) {
 			Node node = nodes.next();
-			String value = node.getProperty("Value").getValue().getString();
+			String value = node.getProperty("Value").getValue()
+				.getString();
 			System.out.println("Participant-ID: " + id + ", Value: " + value);
 		}
 	}
@@ -481,7 +477,8 @@ public class HelloWorldContextListener extends GuiceServletContextListener {
 		return Guice.createInjector(new ServletModule() {
 			@Override
 			protected void configureServlets() {
-				install(new MdcfRemoteModule(TransferRequestProcessorImpl.class));
+				install(
+					new MdcfRemoteModule(TransferRequestProcessorImpl.class));
 				serve("/receiver").with(TransferRequestReceiver.class);
 			}
 		});
@@ -508,14 +505,16 @@ web.xml} dem Servlet-Container bekannt gemacht werden. Dieses ist in Listing
 \begin{lstlisting}[label=webxml, caption=web.xml, language=xml] 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd">
+	PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+	"http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
 
 	<filter>
 		<filter-name>guiceFilter</filter-name>
-		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+		<filter-class>
+			com.google.inject.servlet.GuiceFilter
+		</filter-class>
 	</filter>
 
 	<filter-mapping>
