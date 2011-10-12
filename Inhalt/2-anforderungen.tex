@@ -91,10 +91,10 @@ Anforderungen an die transparente Datenerhebung gestellt werden:
 \label{anonym}
 Anonymität beschreibt den Zustand einer Person oder Gruppe, die
 nicht identifiziert werden kann. Bei der Art von Anonymität unterscheidet man
-verschiedene Kategorien~\cite{anonymitaet}:
+zwischen verschiedenen Kategorien~\cite{anonymitaet}:
 \begin{itemize}
   \item Formal anonym: Eindeutige Zuordnungsmerkmale (z.~B. Namen usw.) sind
-  entfernt, die Daten ansonsten unverändert (das heißt eine leichte Zuordnung
+  entfernt, die Daten ansonsten unverändert (d.~h. eine leichte Zuordnung
   der Einheiten).
   \item Faktisch anonym: Die Daten lassen sich nur mit unverhältnismäßigem Zeit-
   und Arbeitsaufwand zuordnen.
@@ -107,9 +107,9 @@ einen, dass es nicht möglich sein soll, eindeutige Merkmale eines Benutzers zu
 sammeln (z.~B. \acs{imsi}, Telefonnummer) und zum anderen, eine Zuordnung zu
 realen Personen anhand der Daten zu erschweren.
 
-Beim regelmäßigen übersenden von Datensätzen an den Server, treten durch die
-Anonymisierung Probleme beim zuordnen auf.Werden zwei Datensätze A und B zu zwei
-unterschiedlichen Zeitpunkten übertragen, ist es nicht möglich, die
+Beim regelmäßigen übersenden von Datensätzen an den Server treten durch die
+Anonymisierung Probleme beim Zuordnen auf. Werden zwei Datensätze A und B zu
+zwei unterschiedlichen Zeitpunkten übertragen, ist es nicht möglich, die
 Datensätze A und B einander zuzuordnen. Hierbei ergibt sich nun die
 Anforderung, ein Verfahren zu entwickeln, dass das Problem löst und
 trotzdem die Anonymität des Benutzers wahrt.
@@ -118,16 +118,16 @@ trotzdem die Anonymität des Benutzers wahrt.
 Wie \acs{boinc} soll die zu entwickelnde Anwendung,
 nur ein Grundgerüst darstellen und sich durch Erweiterungen ausbauen
 lassen. Die Aufgabe besteht also darin, ein bestehendes Erweiterungssystem
-in Android zu integrieren, oder ein eigenes zu entwickeln.
+in Android zu integrieren bzw. ein eigenes zu entwickeln.
 
 Anforderungen an das Erweiterungssystem:
 
 \begin{itemize}
-  \item Der Benutzer soll die Möglichkeit haben neue Erweiterungen zu
+  \item Der Benutzer soll die Möglichkeit haben, neue Erweiterungen zu
   installieren und zu deinstallieren.
    \item Die Installation neuer Erweiterungen soll für den Benutzer der
-   Anwendung möglichst unproblematisch sein z.~B. durch die Bereitstellung eines
-   {\em Markets}.
+   Anwendung möglichst unproblematisch sein, z.~B. durch die Bereitstellung
+   eines {\em Markets}.
   \item Das Erweiterungssystem soll eine Bibliothek liefern, über die es möglich
   ist, neue Erweiterungen möglichst einfach zu erstellen.
 \end{itemize}
@@ -135,25 +135,25 @@ Anforderungen an das Erweiterungssystem:
 \section{Datenspeicherung}
 Die von den Erweiterungen gesammelten Daten müssen auf dem Gerät
 zwischengespeichert werden, bevor eine Übertragung stattfinden darf. Der
-Benutzer soll die Möglichkeit besitzen, die gesammelten Daten, vor einer
-Übertragung zu kontrollieren. Deswegen ist ein Datenmodell zu entwickeln, das
-es ermöglicht, Daten von beliebigen Erweiterungen zu speichern. Der Entwickler
-einer Erweiterung soll aber so wenig wie möglich bei der Wahl seines
-Datenmodells eingeschränkt werden.
+Benutzer soll die Möglichkeit besitzen, die gesammelten Daten vor einer
+Übertragung zu kontrollieren. Deswegen ist ein Datenmodell zu entwickeln,
+welches das Speichern von Daten beliebiger Erweiterungen ermöglicht. Zu beachten
+ist hierbei, dass der Entwickler einer Erweiterung so wenig wie möglich bei der
+Wahl seines Datenmodells eingeschränkt werden soll.
 
 \section{Datenübertragung}
 Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Ab\-ständen
-an einen Server übertragen werden. Das soll aber nicht automatisch geschehen,
-sondern es soll der Benutzer darauf hingewiesen werden, dass neue Daten zur
-Übermittelung bereitstehen. Dadurch soll der Benutzer die Möglichkeit haben,
-vor einer Übertragung die Daten zu kontrollieren. Ist ein Benutzer nicht mit der
+an einen Server übertragen werden. Dies soll jedoch nicht automatisch geschehen.
+Stattdessen soll der Benutzer darauf hingewiesen werden, dass neue Daten zur
+Übermittelung bereitstehen, sodass er die Möglichkeit hat, die Daten
+vor einer Übertragung zu kontrollieren. Ist ein Benutzer nicht mit der
 Übertragung der Daten einverstanden, so soll die Übertragung verworfen werden
 können (Siehe \ref{sec:transparenz}). Des Weiteren soll die Möglichkeit bestehen
 die Übertragung zu einem späteren Zeitpunkt auszuführen. Das ist dann notwendig,
 wenn eine Übertragung z.~B. über das Mobilfunknetz für den Benutzer zu
 kostenintensiv ist.
 
-Für die Übertragung der Daten ist ein entsprechendes Datenformat und
+Für die Übertragung der Daten sind ein entsprechendes Datenformat und
 Über\-tragungsprotokoll zu wählen. Beim Datenformat ist darauf zu achten, ein
 Format zu wählen, das einen geringen Overhead aufweist, da die Bandbreite im
 mobilen Bereich stark limitiert ist.
