@@ -4,7 +4,7 @@ In diesem Kapitel werden die sich aus der Aufgabenstellung ergebenen
 Anforderungen genauer analysiert. Es wird dabei geklärt, in welchem Umfang die
 einzelnen Aspekte bearbeitet werden müssen.
 
-Die sich aus der Aufgabenstellung ergeben Anforderungen sind das Sammeln von
+Die für die Arbeit relevanten Anforderungen sind das Sammeln von
 Sensordaten, Transparenz, Anonymität, ein Erweiterungssystem, die
 Mög\-lich\-keit der Datenspeicherung sowie die regelmäßige Übertragung von Daten
 an einen Server.
@@ -29,11 +29,11 @@ aktuelle Smartphones:
   \item Mikrofon
 \end{itemize}
 
-Die Anwendung soll in der Lage sein entsprechend auf die Sensorik zuzugreifen
-(falls vorhanden) und alle anfallenden Daten zu verarbeiten und zu speichern.
-Hierbei ist jedoch zwischen Sensoren zu unterscheiden, die potenziell
-personenbezogene Daten sammeln und die, die keine personenbezogenen Daten
-sammeln. Nach §3 des Bundesdatenschutzgesetzes wird der Begriff der personenbezogenen Daten wie folgt
+Die Anwendung soll in der Lage sein, entsprechend auf die Sensorik zuzugreifen
+(falls vorhanden) sowie alle anfallenden Daten zu verarbeiten und zu speichern.
+Hierbei ist zwischen zwei unterschiedlichen Sensortypen zu unterscheiden: Denjenigen, die potenziell
+personenbezogene Daten sammeln, und diejenigen, die keine personenbezogenen
+Daten sammeln. Nach §3 des Bundesdatenschutzgesetzes wird der Begriff der personenbezogenen Daten wie folgt
 definiert:
 
 \begin{quote}
@@ -42,11 +42,11 @@ sachliche Verhältnisse einer bestimmten oder bestimmbaren natürlichen Person.
 \end{quote}
 
 Unter Einzelangaben sind z.~B. der Name, die Telefonnummer und die Adresse zu
-verstehen, während sachliche Verhältnisse bedeutet, dass sich über
+verstehen, während ``sachliche Verhältnisse'' bedeutet, dass sich über
 Daten auf eindeutige Personen schließen lässt. Letzteres ist im Rahmen der
-Arbeit von größter Bedeutung.
+Arbeit von wesentlicher Bedeutung.
 
-Die Sensorik die potenziell personenbezogene Daten sammeln, sind
+Die Sensorik, die potenziell personenbezogene Daten sammelt, sind
 Mobilfunk, \acs{gps}, \acs{wlan}, Bluetooth, Kamera und Mikrofon. Die
 hierbei anfallenden Daten sind die Position, verfügbare Netzwerke in der
 Umgebung, Ton sowie Bildaufnahmen. Über entsprechende Auswertung der Daten
@@ -55,34 +55,34 @@ schützenswert. Die zu entwickelnde Anwendung sollte somit über entsprechende
 Schutzmechanismen verfügen, die den Zugriff auf solche Daten regelt.
 
 Hierbei ist anzumerken, dass die Anwendung, nach Definition der
-Aufgabenstellung, nur in der Lage sein muss Daten zu sammeln, die von der
-Sensorik stammen. Die Ermittlung von Daten wie z.~B. dem Benutzerverhalten ist
-nicht zu berücksichtigen.
+Aufgabenstellung, nur in der Lage sein muss, Daten zu sammeln, die von der
+Sensorik stammen. Die Ermittlung von Daten wie beispielsweise das
+Benutzerverhalten ist nicht zu berücksichtigen.
 
 \section{Transparenz}
 \label{sec:transparenz}
-Das größte Gewicht im Rahmen der Masterarbeit hat die Anforderung der
-Transparenz. Mit Transparenz ist hierbei nicht gemeint, wie oft in der
-Informatik, dass ein bestimmter Prozess ``unsichtbar'' für den Benutzer
+Die Forderung nach Transparenz hat im Rahmen der vorliegenden Arbeit das größte
+Gewicht. Mit Transparenz ist hierbei nicht gemeint, wie oft in der Informatik,
+dass ein bestimmter Prozess ``unsichtbar'' für den Benutzer
 abläuft~\cite{transparenz}. Im Rahmen der Erhebung von personenbezogenen Daten
-bedeutet Transparenz, dass der Benutzer einen tiefen Einblick darin erhält,
-welche Daten, wie über ihn gesammelt werden. Das bedeutet, dass folgende
+bedeutet Transparenz vielmehr, dass der Benutzer einen genauen Einblick
+erhält, welche Daten wie über ihn gesammelt werden. Das bedeutet, dass folgende
 Anforderungen an die transparente Datenerhebung gestellt werden:
 
 \begin{itemize}
   \item Der Benutzer erhält zu jedem Zeitpunkt Einblick in die bisher
   gesammelten personenbezogenen Daten.
-  \item Der Zugriff auf System Ressourcen, wie z.~B. auf das \acs{gps} wird 
+  \item Der Zugriff auf Systemressourcen, wie z.~B. auf das \acs{gps} wird 
   protokolliert. Dadurch kann ein Benutzer nachvollziehen, auf welche Daten
   zugegriffen und welche Daten gespeichert wurden.
   \item Vor der ersten Datenerhebung kann sich der Benutzer darüber informieren,
-  wann welche persönlichen Daten, über ihn gesammelt werden.
-  \item Eine Verschleierung, also das Erheben persönlichen Daten
+  wann welche persönlichen Daten über ihn gesammelt werden.
+  \item Eine Verschleierung, also das Erheben persönlicher Daten
   und deren Über\-tragung, ohne die Zustimmung des Benutzers, soll verhindert
   werden.
   \item Der Benutzer erhält Kontrolle darüber, zu welchem Zeitpunkt Daten über
   ihn erhoben werden und wann nicht.
-  \item Vor einer Übertragung der Daten, an einen externen Server, muss der
+  \item Vor einer Übertragung der Daten an einen externen Server muss der
   Benutzer zustimmen. Sollte er der Übertragung nicht zustimmen, müssen die
   erhobenen Daten verworfen werden.
 \end{itemize}

@@ -1,22 +1,21 @@
 \chapter{Einleitung}
 \label{cha:einleitung}
-Diese Masterarbeit stellt die Abschlussarbeit des Autors zum Master of Science
-dar, die im Rahmen des Studienganges Informatik an der Universität zu Lübeck
+Die vorliegende Arbeit stellt die Abschlussarbeit des Autors zum Master of
+Science dar, die im Rahmen des Studienganges Informatik an der Universität zu Lübeck
 absolviert wurde. Die Themenbearbeitung fand an der Universität zu Lübeck im
-\acf{itm} statt. Der Themenschwerpunkt dieser Masterarbeit ist die Entwicklung
+\acf{itm} statt. Der Themenschwerpunkt der Masterarbeit ist die Entwicklung
 einer Android Anwendung zum transparenten und anonymen Sammeln von Sensordaten.
 
 Die Anwendung soll einige Nachteile der bisherigen Ansätze der mobilen
 Datenerfassung lösen, die auf potenziell persönliche Daten eines
-Smartphone-Benut\-zers zugreifen. Denn heutzutage werden über einen Benutzer,
-eine Vielzahl unterschiedlicher Daten gesammelt. Das reicht von der aktuellen
-Position, bis hin zu den Gewohnheiten wie ein Benutzer sein Smartphone
-verwendet. In vielen Fällen weiß ein Smartphone-Benutzer nicht, welche Anwendung
-welche Daten über ihn sammelt bzw. dass dies überhaupt geschieht. Auch fehlt
-eine Möglichkeit die gesammelten Daten einzusehen, geschweige denn einer
-Übertragung der Daten zu widersprechen. Ob bei der Übertragung eine
-Anonymisierung der Daten stattfindet, liegt ebenfalls in der Hand des
-Anwendungsherstellers.
+Smartphone-Benut\-zers zugreifen. Heutzutage werden über einen Benutzer eine
+Vielzahl von Daten gesammelt -- vom aktuellen Standort des Smartphone-Nutzers
+bis hin zu seiner gewohnheitsmäßigen Anwendung des Smartphones. In vielen Fällen
+weiß ein Smartphone-Benutzer nicht, welche Anwendung welche Daten über ihn
+sammelt bzw. dass dies überhaupt geschieht. Auch fehlt eine Möglichkeit, die
+gesammelten Daten einzusehen, geschweige denn einer Übertragung der Daten zu
+widersprechen. Ob bei der Übertragung eine Anonymisierung der Daten stattfindet,
+liegt ebenfalls in der Hand des Anwendungsherstellers.
 
 Diese Umstände führen dazu, dass sich viele Smartphone-Benutzer ihrer Daten
 entmachtet fühlen und somit das Misstrauen in Anwendungen der mobilen
@@ -25,27 +24,27 @@ Benutzer Daten (ob personenbezogenen oder nicht) freigeben wollen,
 obwohl der Bedarf nach solchen Daten in einer Vielzahl von Industrie und
 Forschungsprojekten steigt.
 
-Motivation ist es daher, eine vertrauenswürdige Plattform zu schaffen, auf der
-aufbauend andere Institutionen Anwendungen zum Sammeln von Sensordaten
+Das Hauptanliegen der vorliegenden Arbeit ist daher, eine vertrauenswürdige
+Plattform zu schaffen, auf der aufbauend andere Institutionen Anwendungen zum Sammeln von Sensordaten
 entwickeln können. Sensordaten sind im Rahmen dieser Arbeit z.~B. der Lärmpegel
-der Umgebung, die aktuelle Position, die verfügbaren Netzwerkverbindungen oder
+der Umgebung, die aktuelle Standort, die verfügbaren Netzwerkverbindungen oder
 die Daten des Beschleunigungssensors. Die Plattform soll dem Benutzer erlauben
 selbst zu entscheiden, wann welche Daten über ihn gesammelt werden. Transparenz
 soll der Benutzer dadurch erhalten, dass er zu jedem Zeitpunkt einsehen kann,
 welche Daten über ihn gesammelt wurden. Des Weiteren soll der Benutzer auch
 entscheiden können, ob die gesammelten Daten überhaupt an eine andere
-Institution freigegeben werden. Anonymität soll dadurch erreicht werden,
+Institution freigegeben werden können. Anonymität soll dadurch erreicht werden,
 dass der Zugriff auf eindeutige Benutzerdaten geregelt wird. Diese Daten können
 z.~B. der Name, die Telefonnummer oder die Adresse sein.
 
 Ziel ist es die informationelle Selbstbestimmung des Benutzers zu festigen und
-somit, auch das Vertrauen in die mobile Datenerfassung zu steigern. Durch dieses
+somit auch das Vertrauen in die mobile Datenerfassung zu steigern. Durch dieses
 Vertrauen sollen gerade öffentliche Forschungseinrichtungen die Möglichkeit
-erhalten personenbezogene Daten zu sammeln, die z.~B. im Bereich der
+erhalten, personenbezogene Daten zu sammeln, die z.~B. im Bereich der
 Städte- und Verkehrsplanung neue Erkenntnisse liefern können.
 
 \section{Gliederung der Masterarbeit}
-Die Masterarbeit gliedert sich in die folgenden Kapitel:
+Die Masterarbeit gliedert sich in folgende Kapitel:
 
 \begin{itemize}
   \item In der {\bf Anforderungsanalyse} wird die Aufgabenstellung in ihre
@@ -56,20 +55,19 @@ Die Masterarbeit gliedert sich in die folgenden Kapitel:
   Projekten betrachtet, die verschiedene Aspekte der zu entwickelnden Anwendung
   bereits realisiert haben.
   \item Die {\bf Grundlagen} befassen sich mit den verwendeten Technologien.
-  Dieses Kapitel beschäftigt sich zu einem großen Teil mit der Android
-  Plattform.
-  \item Die {\bf Konzeption} beschreibt einen weitestgehenden
+  Dieses Kapitel beschäftigt sich zu einem großen Teil mit der Android-Plattform.
+  \item Die {\bf Konzeption} beschreibt einen weitestgehend
   techno\-logie\-unab\-hän\-gigen Aufbau der Anwendung. Dabei werden die
-  Anforderungen in eine Architektur überführt. Es wird aber auch geklärt, ob die
-  in den Grundlagen erwähnten Technologien sich tatsächlich zur Realisierung
-  verwenden lassen.
+  Anforderungen in eine Architektur überführt. Darüber hinaus wird geklärt, ob
+  die in den Grundlagen erwähnten Technologien tatsächlich zur Realisierung
+  geeignet sind.
   \item In der {\bf Realisierung} wird die entwickelte Anwendung vorgestellt.
-  Das schließt interne Abläufe ein, wie auch die Präsentation der
+  Das schließt sowohl interne Abläufe ein als auch die Präsentation der
   Benutzerschnittstelle.
-  \item Der {\bf Leitfaden} dient Entwicklern als Anleitung um ihre Anwendungen
-  (Plug-Ins) zu entwickeln und auf der Plattform auszuführen.
+  \item Der {\bf Leitfaden} dient Entwicklern als Anleitung zur Entwicklung
+  ihrer Anwendung (Plug-Ins) und zur Ausführung dieser auf der Plattform.
   \item Die {\bf Evaluation} dient als Bestätigung, dass die entwickelte
   Anwendung in realen Anwendungsszenarien einsetzbar ist.
   \item Im Kapitel {\bf Zusammenfassung und Ausblick} werden die Ergebnisse der
-  Arbeit resümiert und ein abschließendes Fazit gezogen.
+  Arbeit zusammengefasst und ein abschließendes Fazit gezogen.
 \end{itemize}

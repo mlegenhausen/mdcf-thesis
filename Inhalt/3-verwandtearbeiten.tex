@@ -1,6 +1,6 @@
 \chapter{Verwandte Arbeiten}
 \label{cha:relatedwork}
-Im Folgenden sollen auf ähnliche Arbeiten eingegangen werden, die bereits
+Im Folgenden soll auf Arbeiten eingegangen werden, die bereits
 einzelne Aspekte der zu entwickelnden Anwendung realisiert haben. 
 
 \section{Sensorly}
@@ -10,30 +10,30 @@ wird. Dazu lädt man sich als Benutzer eine Gratisanwendung aus dem {\em
 Android Market} herunter und installiert diese. Nach dem ersten Start sammelt
 die Anwendung automatisch im Hintergrund Daten über die Netzabdeckung vom gerade
 verbundenen Mobilfunkanbieter. Die Daten werden in regelmäßigen Abständen an
-einen zentralen Server übermittelt, wo diese mit den Daten anderer Anwender
+einen zentralen Server übermittelt, auf dem diese mit den Daten anderer Anwender
 kombiniert werden. Auf der Internetseite \url{sensorly.com} werden die
 gesammelten Daten auf einer Karte übersichtlich visualisieren.
 
-{\em Sensorly} repräsentiert einen möglichen Anwendungsfall für die zu
+{\em Sensorly} repräsentiert einen Anwendungsfall für die zu
 entwickelnde Anwendung. Es ist mit {\em Sensorly} aber nicht möglich die Daten
 vor der Übertragung einzusehen oder der Übertragung zu widersprechen. {\em
 Sensorly} stellt also eine klassische Anwendung zum Sammeln von Sensordaten dar.
 
 \section{Flexible Android Permissions}
-\acf{flexp} ist eine Anpassung des Android Betriebssystems, die es ermöglicht,
-die Rechte die einer Anwendung bei der Installation gegeben werden, nachträglich zu
-verändern. Ein Benutzer hat also die Möglichkeit nachträglich zu bestimmen, auf
+{\em \acf{flexp}} ist eine Anpassung des Android-Betriebssystems, die es
+ermöglicht, die Rechte, die einer Anwendung bei der Installation gegeben werden,
+nachträglich zu verändern. Ein Benutzer hat also die Möglichkeit nachträglich zu bestimmen, auf
 welche Ressourcen eine Anwendungen zugreifen darf und auf welche nicht. Um
-mögliche Probleme zu vermeiden, die nach dem Rechteentzug auftreten
-können, wird den Anwendungen suggeriert, dass sie trotzdem Zugriff auf die
-Ressourcen haben~\cite{flexp}.
+mögliche Probleme, die nach dem Rechteentzug auftreten
+können, zu vermeiden, wird den Anwendungen suggeriert, dass sie Zugriff
+auf die Ressourcen haben~\cite{flexp}.
 
-\acs{flexp} deckt den Aspekt ab, dass durch die Anpassung der Benutzer mehr
-Möglichkeiten hat, zu entscheiden auf welche Ressourcen (z.~B. die Sensorik),
-die Anwendung zugreifen darf. Der Benutzer kann aber hier ebenfalls nicht die
-einzusehen, was passiert, wenn ein Recht trotzdem vergeben wurde.
-Die Kontrollmöglichkeiten über eine Anwendung steigen zwar, die Transparenz bleibt
-aber dieselbe.
+Durch die Anpassung, welche {\em \acf{flexp}} ermöglicht, hat der Besitzer
+bessere Möglichkeiten, zu entscheiden, auf welche Ressourcen (z.B. die Sensorik)
+die Anwendung zugreifen darf. Dennoch hat der Nutzer -- wie auch bei {\em
+Sensorly} -- nicht die Möglichkeit, einzusehen, was passiert, wenn ein Recht
+trotzdem vergeben wurde. Die Kontrollmöglichkeiten über eine Anwendung steigen
+zwar, eine vollständige Transparenz ist aber noch immer nicht gegeben.
 
 \section{iPhone Tracker}
 Der {\em iPhone Tracker} erlaubt die Visualisierung von Daten auf einem
@@ -43,10 +43,10 @@ detailierte Informationen über das Mobilfunknetz und in der Umgebung befindliche
 \acs{wlan}-Zugangspunkte. Diese Daten werden laut Apple dazu verwendet, die
 Lokalisierung des Benutzers zu beschleunigen. Im Gegenzug erlauben die Daten
 aber die einfache Generierung von Bewegungsprofilen. Eine Einsicht der Daten
-ohne spezielle Programme ist aber nicht möglich~\cite{applegps}.
+ohne spezielle Programme ist nicht möglich~\cite{applegps}.
 
 Der Fall des {\em iPhone Tracker} zeigt die Problematik bei fehlender
-Transparenz. Dem Benutzer ist nicht bewusst, welche Daten über ihn gesammelt
+Transparenz: Dem Benutzer ist nicht bewusst, welche Daten über ihn gesammelt
 werden. Kommt dies zutage, bedeutet das oft einen Vertrauensbruch mit dem
-Benutzer. Die zu entwickelnde Anwendung dagegen soll Transparenz als
-Standardfunktionalität bieten.
+Benutzer. Aus diesem Grund soll die zu entwickelnde Anwendung dagegen
+Transparenz als Standardfunktionalität bieten.
