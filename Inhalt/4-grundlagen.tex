@@ -57,8 +57,8 @@ Betriebssystem kann dies. Um eine andere Komponente zu starten, muss deswegen
 eine Nachricht an das Betriebssystem gesendet werden. Diese Nachricht wird {\bf
 Intent} genannt. {\em Intents} erlauben die Kommunikation mit anderen
 Komponenten zur Laufzeit, egal ob die Komponente zur eigenen Anwendung gehört
-oder nicht. Ein Intent ist ein einfaches Objekt, das eine Nachricht an eine oder
-mehrere Komponenten spezifiziert. Dabei kann ein {\em Intent} beliebige Daten
+oder nicht. Ein {\em Intent} ist ein einfaches Objekt, das eine Nachricht an
+eine oder mehrere Komponenten spezifiziert. Dabei kann ein {\em Intent} beliebige Daten
 enthalten, die zur Erfüllung der Aufgabe in der anderen Komponente benötigt
 werden. Das kann z.~B. dazu genutzt werden, den Browser mit einer bestimmten
 \acs{url} zu starten.
@@ -146,7 +146,7 @@ Rechte lassen sich nach der Installation nicht mehr
 Die Kommunikation mit einem Service kann über zwei Wege passieren, synchron und
 asynchron. Im asynchronen Fall werden {\em Intents} an den entsprechenden
 Service verschickt. Innerhalb des {\em Intents} befinden sich die Nutzdaten. Hat
-ein Service den entsprechenden {\em Intent} verarbeitet kann dieser als Antwort
+ein Service den entsprechenden {\em Intent} verarbeitet, kann dieser als Antwort
 einen entsprechenden {\em Intent} an den Sender zurückschicken. Dieses Prinzip
 funktioniert sowohl bei der Kommunikation mit Komponenten derselben Anwendung
 sowie mit Komponenten anderer Anwendungen, also über Prozessgrenzen hinaus. 
