@@ -1,0 +1,52 @@
+\chapter{Verwandte Arbeiten}
+\label{cha:relatedwork}
+Im Folgenden sollen auf ähnliche Arbeiten eingegangen werden, die bereits
+einzelne Aspekte der zu entwickelnden Anwendung realisiert haben. 
+
+\section{Sensorly}
+Bei {\em Sensorly} handelt es sich um eine Android Anwendung, mit der die
+Netzwerkabdeckung von Mobilfunknetzen mithilfe von Android-Smartphones ermittelt
+wird. Dazu lädt man sich als Benutzer eine Gratisanwendung aus dem {\em
+Android Market} herunter und installiert diese. Nach dem ersten Start sammelt
+die Anwendung automatisch im Hintergrund Daten über die Netzabdeckung vom gerade
+verbundenen Mobilfunkanbieter. Die Daten werden in regelmäßigen Abständen an
+einen zentralen Server übermittelt, wo diese mit den Daten anderer Anwender
+kombiniert werden. Auf der Internetseite \url{sensorly.com} werden die
+gesammelten Daten auf einer Karte übersichtlich visualisieren.
+
+{\em Sensorly} repräsentiert einen möglichen Anwendungsfall für die zu
+entwickelnde Anwendung. Es ist mit {\em Sensorly} aber nicht möglich die Daten
+vor der Übertragung einzusehen oder der Übertragung zu widersprechen. {\em
+Sensorly} stellt also eine klassische Anwendung zum Sammeln von Sensordaten dar.
+
+\section{Flexible Android Permissions}
+\acf{flexp} ist eine Anpassung des Android Betriebssystems, die es ermöglicht,
+die Rechte die einer Anwendung bei der Installation gegeben werden, nachträglich zu
+verändern. Ein Benutzer hat also die Möglichkeit nachträglich zu bestimmen, auf
+welche Ressourcen eine Anwendungen zugreifen darf und auf welche nicht. Um
+mögliche Probleme zu vermeiden, die nach dem Rechteentzug auftreten
+können, wird den Anwendungen suggeriert, dass sie trotzdem Zugriff auf die
+Ressourcen haben~\cite{flexp}.
+
+\acs{flexp} deckt den Aspekt ab, dass durch die Anpassung der Benutzer mehr
+Möglichkeiten hat, zu entscheiden auf welche Ressourcen (z.~B. die Sensorik),
+die Anwendung zugreifen darf. Der Benutzer kann aber hier ebenfalls nicht die
+einzusehen, was passiert, wenn ein Recht trotzdem vergeben wurde.
+Die Kontrollmöglichkeiten über eine Anwendung steigen zwar, die Transparenz bleibt
+aber dieselbe.
+
+\section{iPhone Tracker}
+Der {\em iPhone Tracker} erlaubt die Visualisierung von Daten auf einem
+Desktop-Computer, die durch das Smartphone-Betriebssystem iOS auf dem Apple
+iPhone erhoben werden~\cite{iphonetracker}. Bei diesen Daten handelt es sich um
+detailierte Informationen über das Mobilfunknetz und in der Umgebung befindliche
+\acs{wlan}-Zugangspunkte. Diese Daten werden laut Apple dazu verwendet, die
+Lokalisierung des Benutzers zu beschleunigen. Im Gegenzug erlauben die Daten
+aber die einfache Generierung von Bewegungsprofilen. Eine Einsicht der Daten
+ohne spezielle Programme ist aber nicht möglich~\cite{applegps}.
+
+Der Fall des {\em iPhone Tracker} zeigt die Problematik bei fehlender
+Transparenz. Dem Benutzer ist nicht bewusst, welche Daten über ihn gesammelt
+werden. Kommt dies zutage, bedeutet das oft einen Vertrauensbruch mit dem
+Benutzer. Die zu entwickelnde Anwendung dagegen soll Transparenz als
+Standardfunktionalität bieten.

@@ -36,63 +36,13 @@ welche Daten über ihn gesammelt wurden. Des Weiteren soll der Benutzer auch
 entscheiden können, ob die gesammelten Daten überhaupt an eine andere
 Institution freigegeben werden. Anonymität soll dadurch erreicht werden,
 dass der Zugriff auf eindeutige Benutzerdaten geregelt wird. Diese Daten können
-z.~B. der Name, Telefonnummer oder die Adresse sein.
+z.~B. der Name, die Telefonnummer oder die Adresse sein.
 
 Ziel ist es die informationelle Selbstbestimmung des Benutzers zu festigen und
 somit, auch das Vertrauen in die mobile Datenerfassung zu steigern. Durch dieses
 Vertrauen sollen gerade öffentliche Forschungseinrichtungen die Möglichkeit
 erhalten personenbezogene Daten zu sammeln, die z.~B. im Bereich der
 Städte- und Verkehrsplanung neue Erkenntnisse liefern können.
-
-\section{Verwandte Arbeiten}
-Im Folgenden sollen auf ähnliche Arbeiten eingegangen werden, die bereits
-einzelne Aspekte der zu entwickelnden Anwendung realisiert haben. 
-
-\subsection{Sensorly}
-Bei {\em Sensorly} handelt es sich um eine Android Anwendung, mit der die
-Netzwerkabdeckung von Mobilfunknetzen mithilfe von Android-Smartphones ermittelt
-wird. Dazu lädt man sich als Benutzer eine Gratisanwendung aus dem {\em
-Android Market} herunter und installiert diese. Nach dem ersten Start sammelt
-die Anwendung automatisch im Hintergrund Daten über die Netzabdeckung vom gerade
-verbundenen Mobilfunkanbieter. Die Daten werden in regelmäßigen Abständen an
-einen zentralen Server übermittelt, wo diese mit den Daten anderer Anwender
-kombiniert werden. Auf der Internetseite \url{sensorly.com} werden die Daten
-auf einer Karte visualisieren.
-
-{\em Sensorly} repräsentiert einen möglichen Anwendungsfall für die zu
-entwickelnde Anwendung. Es ist mit {\em Sensorly} aber nicht möglich die Daten
-vor der Übertragung einzusehen oder der Übertragung zu widersprechen. {\em
-Sensorly} stellt also eine klassische Anwendung zum Sammeln von Sensordaten dar.
-
-\subsection{Flexible Android Permissions}
-\acf{flexp} ist eine Anpassung des Android Betriebssystems, die es ermöglicht,
-die Rechte die einer Anwendung bei der Installation gegeben werden, nachträglich zu
-verändern. Ein Benutzer hat also die Möglichkeit nachträglich zu bestimmen, auf
-welche Ressourcen eine Anwendungen zugreifen darf und auf welche nicht. Um
-mögliche Probleme zu vermeiden, die nach dem Rechteentzug auftreten
-können, wird den Anwendungen suggeriert, dass sie trotzdem Zugriff auf die
-Ressourcen haben~\cite{flexp}.
-
-\acs{flexp} deckt den Aspekt ab, dass durch die Anpassung der Benutzer mehr
-Möglichkeiten hat, zu entscheiden auf welche Ressourcen (z.~B. die Sensorik),
-die Anwendung zugreifen darf. Der Benutzer hat aber hier ebenfalls nicht die
-Möglichkeit einzusehen, was passiert, wenn ein Recht trotzdem vergeben wurde.
-Die Kontrollmöglichkeiten über eine Anwendung steigen zwar, die Transparenz bleibt
-aber dieselbe.
-
-\subsection{iPhone Tracker}
-Der {\em iPhone Tracker} erlaubt die Visualisierung von Daten auf einem
-Desktop-Computer, die durch das Smartphone-Betriebssystem iOS auf dem Apple
-iPhone erhoben werden~\cite{iphonetracker}. Diese Daten werden laut Apple dazu
-verwendet, die Lokalisierung des Benutzers zu beschleunigen. Die Daten erlauben
-aber die einfache Generierung von Bewegungsprofilen. Eine Einsicht der Daten
-ohne spezielle Programme ist aber nicht möglich~\cite{applegps}.
-
-Der Fall des {\em iPhone Tracker} zeigt die Problematik bei fehlender
-Transparenz. Dem Benutzer ist nicht bewusst, welche Daten über ihn gesammelt
-werden. Kommt dies zutage, bedeutet das oft ein Vertrauensbruch mit dem
-Benutzer. Die zu entwickelnde Anwendung soll Transparenz als
-Standardfunktionalität bieten.
 
 \section{Aufbau der Masterarbeit}
 Die Masterarbeit gliedert sich in die folgenden Kapitel:

@@ -2,12 +2,12 @@
 \label{cha:evaluation}
 In diesem Kapitel wird gezeigt, dass sich mithilfe des {\em Mobile Data
 Collection Frameworks} auch komplexere Plug-Ins zum Sammeln von Sensordaten
-entwickeln lassen. Das wird anhand zweier Beispiele gezeigt. Bei den
-Beispielen handelt es sich zum einen um ein Plug-In zur Positionsverfolgung
-eines Benutzers sowie um eine Erweiterung des Plug-Ins, dass zusätzlich die
-Umgebungslautstärke zu jeder Position erfasst. Hierbei wird neben den Plug-Ins
+entwickeln lassen. Das wird anhand zweier Beispiele gezeigt. Das erste Beispiel
+ist ein Plug-In zur Positionverfolgung des Benutzers. Das zweite Beispiel ist
+eine Erweiterung des Ersten bei der Zusätzlich noch die Umgebungslautstärke zu
+jeder Position erfasst wird. Hierbei wird neben den Plug-Ins
 für den {\em Mobile Data Collector} auch eine entsprechende Serverkomponente
-entwickelt. Die Serverkomponente besteht aus der Persistierung der Daten
+entwickelt. Die Serverkomponente besteht aus der Persistierung
 sowie der Visualisierung der Daten in Form einer Web-Anwendung.
 
 \section{Plug-In zur Positionsverfolgung}
@@ -16,16 +16,15 @@ Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt''-
 Plug-In, wurde ein Plug-In entwickelt, dass die aktuelle Position
 des Benutzers speichert und in regelmäßigen Abständen übertragt. Das Plug-In
 trägt den Arbeitstitel {\em Location Tracker}. Es wird im Folgenden auf die
-wichtigsten Punkte bei der Implementierung des Plug-Ins sowie der
-Serverkomponente eingegangen.
+wichtigsten Punkte bei der Implementierung eingegangen.
 
 \subsection{Implementierung des Plug-Ins}
 Im Folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
 durch die es möglich wird, die aktuelle Position eines Benutzers zu verfolgen
 und die Daten zu speichern. Das Plug-In befindet sich im {\em
 LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
-Framework}-Projekts. Es wird sich im Folgenden, auf dem im {\em
-mdcf/LocationTracker}-Verzeichnis befindlichen Quellcode bezogen.
+Framework}-Projekts. Es wird sich im Folgenden, auf dem im Verzeichnis
+befindlichen Quellcode bezogen.
 
 \subsubsection{Ermittelung der aktuellen Position}
 Um die aktuelle Position des Benutzers zu erfahren, muss der {\em
@@ -39,7 +38,7 @@ Location location = getLocationManager()
 	.getLastKnownLocation(provider);
 \end{lstlisting}
 
-Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
+In Zeile 1 wird die Methode ermittelt, um die Position des Benutzers am
 genausten zu bestimmen. Die Positionsermittlung wird innerhalb von Android
 durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
 ermittelt werden, der am Besten dem gegebenen {\em Criteria}-Objekt entspricht.
