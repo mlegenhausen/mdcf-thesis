@@ -1,13 +1,13 @@
 \chapter{Realisierung}
 \label{cha:realisierung}
 In diesem Kapitel wird die aus dem Konzept entwickelte Realisierung beschrieben.
-Die Anwendung trägt dabei den Arbeitstitel {\em Mobile Data Collector},
+Die Anwendung trägt den Arbeitstitel {\em Mobile Data Collector},
 wäh\-rend das Framework zur Erstellung von Plug-Ins den Namen {\em Mobile Data
 Collection Framework} trägt.
 
 Der {\em Mobile Data Collector} wird als Open Source Projekt entwickelt und kann
 entweder von der beiliegenden CD oder von GitHub unter der Adresse
-\url{https://github.com/mlegenhausen/mdcf} bezogen werden. Das Projekt ist dabei
+\url{https://github.com/mlegenhausen/mdcf} bezogen werden. Das Projekt ist
 in die folgenden Teile gegliedert:
 
 \begin{itemize}
@@ -69,7 +69,7 @@ Services zugegriffen werden. Die Services bieten weitestgehend alle in der
 Android Dokumentation beschriebenen Methoden. Neben den Services kann auch auf
 einen {\em PersistenceManager} zugegriffen werden. Dieser erlaubt über die {\em
 getWorkspace}-Methode den einfachen Zugriff auf alle bisher gespeicherten Daten.
-Die zurückgegebene Datenstruktur kann dann innerhalb des Plug-Ins beliebig
+Die zurück\-gegebene Datenstruktur kann dann innerhalb des Plug-Ins beliebig
 manipuliert werden. Wurden alle Daten erfolgreich manipuliert, können die
 Änderungen mit der {\em save}-Methode gespeichert werden.
 
@@ -139,13 +139,13 @@ Der Plug-In Service stellt die zentrale Komponente zur Verwaltung von Plug-Ins
 sowie deren Ausführung dar. Er beinhaltet die gesamte Applikationslogik des
 {\em Mobile Data Collectors}. Alle {\em Activities} greifen über eine
 entsprechende Schnittstelle auf den Service zu. Der {\em Plug-In Service} läuft
-dabei dauerhaft im Hintergrund und führt die Plug-Ins in den vorgegebenen
-Abständen aus.
+dauerhaft im Hintergrund und führt die Plug-Ins in den vorgegebenen
+Zeitabständen aus.
 
-Neben der Service-Schnittstelle stellt das {\em PluginConfiguration}-Objekt eine
-wichtige Datenstruktur dar. Alle zusätzlichen Informationen über ein Plug-In,
+Neben der Service-Schnittstelle stellt das {\em PluginConfiguration}-Ob\-jekt
+eine wichtige Datenstruktur dar. Alle zusätzlichen Informationen über ein Plug-In,
 die zur internen Verwaltung benötigt werden, werden im {\em
-PluginConfiguration}-Objekt gespeichert. Dieses besitzt folgende Attribute:
+PluginConfiguration}-Ob\-jekt gespeichert. Dieses besitzt folgende Attribute:
 
 \begin{itemize}
   \item {\bf Mode} gibt an, ob sich das Plug-In im {\em New}, {\em
@@ -278,7 +278,7 @@ Java Concurrency Bibliothek verwendet.
 Wurde ein Plug-In aktiviert, wird dessen {\em PluginConfiguration}-Objekt an den
 {\em PluginTaskManager} übergeben. Dieser kapselt das {\em
 PluginConfiguration}-Objekt zu einem {\em PluginTask}-Objekt. Beim {\em
-PluginTask} handelt es sich um ein ausführbares Objekt, dass das {\em
+PluginTask} handelt es sich um ein aus\-führ\-bares Objekt, dass das {\em
 Runnable}-Interface implementiert. Der Task wird nun an den zuvor erwähnten
 Thread-Pool zur sofortigen Ausführung übergeben. Bei der Ausführung wird aus der
 {\em PluginInfo} die {\em Action} ausgelesen. Mit dieser ist es möglich, die
@@ -427,42 +427,44 @@ Log-Viewer} und {\em Data-Viewer} genauer erläutert werden.
 
 \subsubsection{Log-Viewer}
 Der Log-Viewer dient zur Anzeige aller protokollierten Aktivitäten eines
-Plug-Ins. Mit Aktivitäten ist der Zugriff auf die sicheren Android System Services gemeint.
-Greift ein Plug-In auf eine Methode der Services zu, so wird ein Log-Eintrag
-erstellt. Dieser enthält in benutzerverständlicher Sprache, welche Informationen
-abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log} dargestellt.
+Plug-Ins. Mit Aktivitäten ist der Zugriff auf die sicheren Android System
+Services gemeint. Greift ein Plug-In auf eine Methode der Services zu, so wird
+ein Log-Eintrag erstellt. Dieser enthält in benutzerverständlicher Sprache,
+welche Informationen abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log}
+dargestellt. Der Log ist wie folgt aufgebaut. Jede Zeile zeigt an, wann das
+Plug-In ausgeführt wurde. Durch die Auswahl eines Eintrags erweitern sich die
+Einträge um die eigentlichen Log-Einträge. In diesem Fall sagen die Log-Einträge
+aus, dass am 16.08.2011 um 5:58:40 Uhr das Plug-In ausgeführt wurde. Während
+dieser Ausführung wurde zur Lokalisierung des Benutzers das GSM/UMTS Netz ({\em
+network}) verwendet und als Position wurden die Koordinaten am 53.8477729
+Längengrad und am 10.6977904 Breitengrad ermittelt.
 
-\begin{figure}[h!] 
+\begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/log.png}
 	\caption{Plug-In Logs}
 	\label{log}
 \end{figure}
 
-Der Log ist dabei wie folgt aufgebaut. Jede Zeile zeigt an, wann das Plug-In
-ausgeführt wurde. Durch die Auswahl eines Eintrags erweitern sich die Einträge
-um die eigentlichen Log-Einträge. In diesem Fall sagen die Log-Einträge aus,
-dass am 16.08.2011 um 5:58:40 Uhr das Plug-In ausgeführt wurde. Während dieser
-Ausführung wurde zur Lokalisierung des Benutzers das GSM/UMTS Netz ({\em
-network}) verwendet und als Position wurden die Koordinaten am 53.8477729
-Längengrad und am 10.6977904 Breitengrad ermittelt.
+\vspace*{1cm}
 
 \subsubsection{Data-Viewer}
 Der Data-Viewer dient zur Anzeige aller vom Plug-In gesammelten Daten bzw. aller
 Daten, welche das Plug-In später übertragen möchte. Einem Plug-In steht es frei,
-beliebig viele private Daten für interne Zwecke zu sammeln.
+beliebig viele private Daten für interne Zwecke zu sammeln, diese lassen dann
+aber nicht durch den {\em Mobile Data Collector} übertragen.
 
 Die im Konzept beschriebene hierarchische Datenstruktur lässt sich durch den
 Data-Viewer anzeigen. Dabei wird jede Ebene der Datenstruktur als Liste
 dargestellt. In Abbildung \ref{collected_data_overview} wird die erste Ebene
-angezeigt. Jeder anklickbare Knoten wird dabei als Datum angezeigt. Das
+angezeigt. Jeder anklickbare Knoten wird als Datum angezeigt. Das
 Datum gibt an, wann der entsprechende Datensatz das letzte Mal modifiziert
 wurde. In diesem Fall werden drei Einträge dargestellt, die sich mit denen die
 im Log stehen überschneiden. Damit ist gemeint, dass nach jedem Zugriff auf den
 {\em LocationManager}, ein neuer Eintrag zu den gesammelten Daten hinzugefügt
 wurde.
 
-\begin{figure}[h!] 
+\begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/collected_data_overview.png}
 	\caption{Collected Data}
@@ -477,7 +479,7 @@ oben nach unten die Höhe, Geschwindigkeit, Lautstärke, Längengrad, Genauigkeit,
 Breitengrad, Drehrichtung und die Art der Positionsbestimmung. Um wieder auf
 eine höhere Ebene zu gelangen, kann die Zurücktaste verwendet werden.
 
-\begin{figure}[h!] 
+\begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/collected_data_details.png}
 	\caption{Gesammelte Daten eines Plug-Ins}
@@ -541,15 +543,15 @@ zu sehen, als Dialog und Mitteilung angezeigt.
 \end{figure}
 
 Ist der Benutzer nicht mit der Übertragung seiner Daten einverstanden, kann er
-durch die {\em Dismiss} Schaltfläche, die Übertragung löschen. Alle in der
+durch die {\em Dismiss} Schaltfläche, die Über\-trag\-ung löschen. Alle in der
 Übertragung angezeigt Daten gehen daraufhin unwiderruflich verloren.
 
 Intern wird bei der Übertragung zu einem Server eine \acs{http}-Verbindung
 aufgebaut. Das Verbindungsziel wird hierbei dem \acs{url}-Attribut der Plug-In
 Informationen entnommen. Die Daten, die in Form von Java-Objekten vorliegen, werden dann
 mithilfe der GSON-Bibliothek in ein \acs{json}-Objekt übersetzt~\cite{gson}. Da
-es sich dabei nur um eine Zeichenkette handelt, kann diese einfach per
-\acs{http} versendet werden.
+ein \acs{json}-Objekt sich optimal als Zeichenkette abbilden lässt, kann diese
+ohne großen Aufwand per \acs{http} versendet werden.
 
 \section{Aufbau der Serverkomponente}
 Durch die Serverkomponente soll ein Plug-In Entwickler die Möglichkeit erhalten,
@@ -563,12 +565,12 @@ TransferRequestReceiver}-Servlet empfängt die vom {\em Mobile Data Collector}
 versandte \acs{json}-Datenstruktur und konvertiert diese in eine äquivalente
 Java-Datenstruktur. Zur Konvertierung wird wie auf dem Smartphone, die
 GSON-Bibliothek verwendet. Die Java-Datenstruktur kann nun vom {\em
-TransferRequestProzessor} weiter verarbeitet werden. Es wird dabei empfohlen,
+TransferRequestProzessor} weiter verarbeitet werden. Es wird empfohlen,
 die sehr allgemeine empfangene Datenstruktur in eine spezifischere Datenstruktur
 zu überführen, die sich leichter verarbeiten und speichern lässt. Wie die Daten
 persistiert werden, muss der Entwickler selbst entscheiden.
 
-Die Serverkomponente wurde dabei mithilfe des \acf{di}
+Die Serverkomponente wurde mithilfe des \acf{di}
 Frameworks {\em Google Guice}~\cite{guice} und dem Java-Build-Werkzeug
 {\em Maven}~\cite{maven} entwickelt.
 

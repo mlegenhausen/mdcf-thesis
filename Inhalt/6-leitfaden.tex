@@ -16,9 +16,9 @@ dazu können dem Abschnitt \ref{cha:evaluation} entnommen werden.
 \section{Beziehen des Mobile Data Collection Frameworks}
 Das {\em Mobile Data Collection Framework} kann entweder von der beiliegenden CD
 oder von GitHub über die \acs{url} \url{https://github.com/mlegenhausen/mdcf}
-bezogen werden. Es ist dabei möglich, das Framework als Archiv runterzuladen oder per
-Git zu klonen. Bei Git handelt es sich um verteiltes Versionskontrollsystem, das
-von \url{http://git-scm.com/} heruntergeladen werden kann.
+bezogen werden. Das Framework kann als Archiv heruntergeladen oder per
+Git geklont werden. Bei Git handelt es sich um verteiltes
+Versionskontrollsystem, das von \url{http://git-scm.com/} heruntergeladen werden kann.
 
 Um das Projekt per Git zu klonen, muss Folgendes auf der Kommandozeile
 ausgeführt werden. Vor der Ausführung sollte man sich in einem entsprechenden
@@ -28,9 +28,9 @@ Verzeichnis befinden, in das man das Projekt klonen möchte.
 git clone git://github.com/mlegenhausen/mdcf.git
 \end{lstlisting}
 
-Man kann nun die aktuelle stabile Version aus der {\em master}-Branch verwenden
-oder die Entwicklerversion aus dem {\em develop}-Branch. Nach dem Klonen
-befindet man sich automatisch im {\em master}-Branch. Um in den {\em
+Nach dem Klonen kann man die aktuelle stabile Version aus der {\em
+master}-Branch oder die Entwicklerversion aus dem {\em develop}-Branch verwenden. Nach dem
+Klonen befindet man sich automatisch im {\em master}-Branch. Um in den {\em
 develop}-Branch zu wechseln, muss Folgendes auf der Kommandozeile ausgeführt
 werden.
 
@@ -78,7 +78,7 @@ Dialog wählt man {\em Create project from existing source} aus und setzt durch
 {\em Browse\ldots} den Pfad zum {\em MobileDataCollectionFramework}-Verzeichnis,
 das sich im {\em mdcf}-Verzeichnis befindet. Durch einen Klick auf {\em Finish}
 wird das Projekt erstellt und das {\em Mobile Data Collection Framework} in den
-Workspace importiert. Diese Schritte wiederholt man nun für das {\em
+Workspace importiert. Diese Schritte wiederholt man im Anschluss für das {\em
 MobileDataCollector}-Verzeichnis. Sind beide Projekte importiert, kann das
 eigentliche Plug-In erstellt werden.
 
@@ -107,8 +107,8 @@ Fehler zu beseitigen, muss die Simple-\acs{xml} Bibliothek zum Projekt
 hinzugefügt werden. Dazu erstellt man unterhalb des {\em HelloWorldPlugin}-Projekts ein
 {\em lib}-Verzeichnis. In dieses kopiert man vom {\em lib}-Verzeichnis des {\em
 Mobile\-Data\-Collection\-Framework}-Projekts die {\em simple-xml-2.5.3.jar}.
-Nun muss die Bibliothek noch zum {\em Java Classpath} hinzugefügt werden. Dazu
-geht man wieder in die {\em Properties} des {\em HelloWorldPlugin}-Projekts. Auf
+Danach muss die Bibliothek noch zum {\em Java Classpath} hinzugefügt werden.
+Dazu geht man wieder in die {\em Properties} des {\em HelloWorldPlugin}-Projekts. Auf
 der linken Seite wählt man {\em Java Build Path} aus. Daraufhin wählt man den
 Tab {\em Libraries} aus und klickt dort auf {\em Add Jars\ldots}. In dem sich öffnen
 Dialog navigiert man zu der zuvor kopierten Bibliothek und wählt diese aus.
@@ -117,13 +117,14 @@ hinzugefügt und das Projekt ist fehlerfrei.
 
 \subsection{Implementierung des Plug-Ins}
 \label{pluginimplementation}
-Nun kann das eigentliche Plug-In implementiert werden. Hierzu erstellt man im
-Package {\em com.example.helloworld} eine Klasse mit dem Namen {\em
-HelloWorldPlugin}. Dazu macht man einen Rechtsklick auf das Package und wählt
-{\em New} und {\em Class} aus. Unter {\em Name} gibt man den Namen {\em
-HelloWorldPlugin} ein und bei {\em Superclass} wählt man mit einem Klick auf
-Browse die Klasse {\em AbstractPlugin} aus. Durch einen Klick auf {\em Finish} wird die
-Klasse wie in Listing \ref{helloworldplugin} erstellt.
+Nach der Erstellung des Projekts kann jetzt das eigentliche Plug-In
+implementiert werden. Hierzu erstellt man im Package {\em
+com.example.helloworld} eine Klasse mit dem Namen {\em HelloWorldPlugin}. Dazu
+macht man einen Rechtsklick auf das Package und wählt {\em New} und {\em Class}
+aus. Unter {\em Name} gibt man den Namen {\em HelloWorldPlugin} ein und bei {\em
+Superclass} wählt man mit einem Klick auf Browse die Klasse {\em AbstractPlugin}
+aus. Durch einen Klick auf {\em Finish} wird die Klasse wie in Listing
+\ref{helloworldplugin} erstellt.
 
 \begin{lstlisting}[label=helloworldplugin,
 caption=HelloWorldPlugin.java, language=java] package com.example.helloworld;
@@ -139,7 +140,7 @@ public class HelloWorldPlugin extends AbstractPlugin {
 }
 \end{lstlisting}
 
-Als Beispiel soll nun bei jedem Aufruf des Plug-Ins ein ``Hello World''
+Als Beispiel soll bei jedem Aufruf des Plug-Ins, ein ``Hello World''
 gespeichert werden. Dazu fügt man zur {\em onRun}-Methode den Code von Listing
 \ref{helloworldonrun} hinzu.
 
@@ -164,10 +165,10 @@ wieder gespeichert.
 Als nächstes muss ein {\em Broadcast Receiver} implementiert werden, um das
 Plug-In auffindbar und Plug-In Informationen dem {\em Mobile Data Collector}
 verfügbar zu machen. Dazu erstellt man, im selben Package, eine Klasse {\em
-HelloWorldRegister}, die von {\em XMLPluginRegister} erbt. Zu dieser Klasse fügt
+HelloWorldRegister}, die von {\em XMLPluginRegister} erbt. Zu der Klasse fügt
 man einen {\em Constructor} hinzu, der auf die Datei ``plugin.xml'' verweist.
 Die Datei enthält die Plug-In Informationen im \acs{xml}-Format. Die
-Klasse sollte nun wie in Listing \ref{helloworldregister} aussehen.
+Klasse sollte danach wie in Listing \ref{helloworldregister} aussehen.
 
 \begin{lstlisting}[label=helloworldregister,
 caption=HelloWorldRegister.java, language=java]
@@ -212,7 +213,7 @@ In der Konfigurationsdatei wurden folgende Parameter festgelegt.
   \item {\bf duration}: Die maximale Ausführungsdauer beträgt 1.000ms. Wird
   die Zeit über\-schritten wird das Plug-In vom Android System terminiert.
   \item {\bf url}: Alle gesammelten Daten sollen bei einer Übertragung an die
-  URL\\ {\em http://HOSTNAME:PORT/receiver} gesendet werden.
+  \acs{url}\\ {\em http://HOSTNAME:PORT/receiver} gesendet werden.
   \item {\bf transferInterval}: Nach einer Zeit von 600.000ms bzw. 10min sollen
   alle Daten Übertragen werden. Das schließt nur die Zeit ein in der das Plug-In
   aktiv war.
@@ -331,7 +332,7 @@ auf einem Smartphone zu installieren, da nur auf diesem, die volle Sensorik zur
 Verfügung steht. Nach der Installation wird der {\em Mobile Data Collector}
 automatisch gestartet.
 
-Im nächsten Schritt kann nun das eigentliche Plug-In installiert werden. Dazu
+Im nächsten Schritt kann jetzt das eigentliche Plug-In installiert werden. Dazu
 installiert man das {\em Hello\-World\-Plugin} wie zuvor den {\em Mobile Data
 Collector}. Nach der Installation wird das Plug-In in der Plug-In Liste des {\em
 Mobile Data Collectors} angezeigt. Aktiviert man das Plug-In, wird
@@ -347,8 +348,8 @@ der Serverkomponente kann eine beliebige \acs{ide} verwendet werden. Zum Bauen
 des Projektes wird in diesem Fall {\em Maven} verwendet~\cite{maven}.
 
 Da die Kommunikation mit dem {\em Mobile Data Collector} über das
-\acs{http}-Protokoll stattfindet, wird die Serverkomponente als Web-Anwendung
-entwickelt. Hierzu werden normale Java Servlets verwendet, sowie das
+\acs{http}-Pro\-to\-koll stattfindet, wird die Serverkomponente als
+Web-Anwendung entwickelt. Hierzu werden normale Java Servlets verwendet, sowie das
 \acs{di}-Framework {\em Google Guice}~\cite{guice}.
 
 \subsection{Installation des Remote Frameworks}
@@ -382,7 +383,7 @@ Deswegen wird für die weiteren Schritte empfohlen nachträglich ein {\em
 src/main/java}-Verzeichnis hinzuzufügen sowie ein {\em
 com.example.helloworld.server}-Package.
 
-Bevor nun mit der eigentlichen Implementierung begonnen werden kann, müssen noch
+Bevor mit der eigentlichen Implementierung begonnen werden kann, müssen noch
 die in Listing \ref{pomxml} angegebenen Abhängigkeiten zur {\em pom.xml}
 hinzugefügt werden.
 
@@ -534,7 +535,7 @@ web.xml} dem Servlet-Container bekannt gemacht werden. Das ist in Listing
 </web-app>
 \end{lstlisting}
 
-Die Serverkomponente ist nun komplett. Durch ein {\em mvn install} kann das
+Die Serverkomponente ist jetzt komplett. Durch ein {\em mvn install} kann das
 Projekt gebaut werden. Dabei wird im {\em target}-Verzeichnis ein {\em
 WAR}-Archive erstellt. Dieses lässt sich in einem beliebigen Servlet-Container
 ausführen. Führt man die Serverkomponente aus und übertragt Daten vom {\em

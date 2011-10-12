@@ -20,17 +20,17 @@ Rahmenwerk mit dem Entwickler Erweiterungen bzw. Plug-Ins zum Sammeln von Daten,
 für den {\em Mobile Data Collector} entwickeln können. 
 
 Der {\em Mobile Data Collector} erlaubt durch seine grafische Oberfläche die
-einfache Verwaltung von Plug-Ins. Er kann Plug-Ins aktivieren und deaktivieren
-und kann somit entscheiden, wann Daten über ihn gesammelt werden sollen. Des
+einfache Verwaltung von Plug-Ins. Der Benutzer kann Plug-Ins aktivieren
+und deaktivieren und kann somit entscheiden, wann Daten über ihn gesammelt werden sollen. Des
 Weiteren kann er über die grafische Oberfläche zu jedem Zeitpunkt einsehen,
 welche Daten über ihn angefordert und letztendlich gesammelt wurden. Dazu werden
 möglichst viele Aktivitäten des Plug-Ins protokolliert. War ein Plug-In für
-einen bestimmten Zeitraum aktiv und möchte seine Daten übertragen, so kann der
+einen bestimmte Zeitspanne aktiv und möchte seine Daten übertragen, so kann der
 Benutzer vor der Übertragung entscheiden, ob er die gesammelten Daten freigeben
-will oder nicht. Auch kann er die Übertragung beliebig verzögern, um den
+will oder nicht. Er kann auch die Übertragung beliebig verzögern, um den
 Übertragungszeitpunkt selbst wählen zu können. Dadurch kann bei der Verwendung
-mobiler Datenverbindungen bares Geld gespart werden. Gefahren, die von einem
-Plug-In ausgehen könnten, werden dabei dem Benutzer vor der ersten Aktivierung
+mobiler Datenverbindungen Geld bzw. Datenvolumen gespart werden. Gefahren, die
+von einem Plug-In ausgehen könnten, werden dem Benutzer vor der ersten Aktivierung
 angezeigt. Dadurch soll der Schaden der durch die Ausführung eines Plug-Ins
 entstehen kann minimiert werden.
 
@@ -39,7 +39,7 @@ einem aus dem {\em Mobile Data Collection Framework}, das zur Entwicklung von
 Plug-Ins verwendet wird sowie einem serverseitigen Framework zum Empfang der
 gesammelten Daten. Die Frameworks erlauben die einfache Entwicklung von
 Anwendungen zum Sammeln von Sensordaten und einer dazugehörigen
-Serverkomponente, um die Daten zu empfangen.
+Serverkomponente, um die Daten vom {\em Mobile Data Collector} zu empfangen.
 
 Um die Anonymität des Benutzers zu waren, wird der Zugriff auf eindeutige
 Benutzerdaten durch den {\em Mobile Data Collector} erschwert. Um aber eine
@@ -50,15 +50,15 @@ Im Rahmen der Evaluation wurde anhand eines Plug-Ins zur Positionsverfolgung
 gezeigt, dass sich mit dem {\em Mobile Data Collection Framework} Plug-Ins für
 reale Anwendungsszenarien entwickeln lassen. So ist die Aufnahme von
 Positionsdaten (die wohl wichtigste Art von Daten im Bereich der mobilen
-Datenerfassung) relativ einfach möglich. Auch lässt sich das Plug-In, einfach um
+Datenerfassung) relativ einfach möglich. Auch lässt sich das Plug-In einfach um
 die Erfassung zusätzlicher Daten erweitern. In diesem Fall um die aktuelle
 Umgebungslautstärke. Hierbei wurde bewusst darauf geachtet, den Entwickler so
 wenig wie möglich bei der Entwicklung von Plug-Ins einzuschränken. Die
 Evaluation zeigt aber auch die zurzeit bestehenden Überwachungsgrenzen des {\em
 Mobile Data Collectors}. So ist eine Protokollierung von Zugriffen auf die
 Kamera und das Mikrofon nicht bzw. nur mit relativ großem Aufwand möglich.
-Das Problem lässt sich am besten durch den Einsatz des OSGi Frameworks lösen.
-Hierbei bleibt abzuwarten bis Frameworks wie Dynamix den nötigen Reifegrad
+Das Problem lässt sich am besten durch den Einsatz des \acs{osgi}-Frameworks
+lösen. Hierbei bleibt abzuwarten bis Frameworks wie Dynamix den nötigen Reifegrad
 erreicht haben, um diese im produktiven Einsatz zu verwenden.
 
 Das zukünftige Anwendungsgebiet des {\em Mobile Data Collector} liegen in

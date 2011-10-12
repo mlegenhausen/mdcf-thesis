@@ -15,7 +15,7 @@ sowie der Visualisierung der Daten in Form einer Web-Anwendung.
 Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt''-
 Plug-In, wurde ein Plug-In entwickelt, dass die aktuelle Position
 des Benutzers speichert und in regelmäßigen Abständen übertragt. Das Plug-In
-trägt den Arbeitstitel {\em Location Tracker}. Es wird dabei auf die
+trägt den Arbeitstitel {\em Location Tracker}. Es wird im Folgenden auf die
 wichtigsten Punkte bei der Implementierung des Plug-Ins sowie der
 Serverkomponente eingegangen.
 
@@ -45,9 +45,9 @@ durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
 ermittelt werden, der am Besten dem gegebenen {\em Criteria}-Objekt entspricht.
 Durch das Objekt können Kriterien wie z.~B. Stromverbrauch und Genauigkeit
 festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
-der zurzeit beste verfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
-die letzte bekannte Position unter Zuhilfenahme des gegebenen {\em Providers}
-ermittelt. Das zurückgegebene {\em Location}-Objekt beschreibt die aktuelle
+der zurzeit beste verfügbare {\em Provider} zurückgegeben. In Zeile 2 wird
+daraufhin die letzte bekannte Position unter Zuhilfenahme des gegebenen {\em
+Providers} ermittelt. Das zurückgegebene {\em Location}-Objekt beschreibt die aktuelle
 Position des Benutzers.
 
 \subsubsection{Speichern der Position}
@@ -100,7 +100,7 @@ language=xml]
 \end{lstlisting}
 
 \subsubsection{Verwendung des Plug-Ins}
-Das Plug-In kann nun wie in Kapitel \ref{cha:leitfaden} beschrieben, auf dem
+Das Plug-In kann jetzt wie in Kapitel \ref{cha:leitfaden} beschrieben, auf dem
 Smartphone installiert und ausgeführt werden. Nach der ersten Ausführung können
 wie in Abbildung \ref{log_locationtracker},
 \ref{collected_data_overview_locationtracker} und
@@ -151,8 +151,8 @@ Daten an einen {\em TransferRequestProcessor} übergeben. In der Klasse kann
 z.~B. die Persistierung der Daten stattfinden. Bevor die Daten gespeichert
 werden, sollte aber eine Überführung des allgemeinen Datenformats des {\em Mobile Data Collection
 Frameworks} in ein domänenspezifisches stattfinden. Eine Überführung
-des allgemeinen Datenformats in ein domänenspezifisches, sowie die anschließende
-Speicherung, kann dabei wie in Listing \ref{datenmapping} implementiert werden.
+des allgemeinen Datenformats in ein domänenspezifisches sowie die anschließende
+Speicherung, kann wie in Listing \ref{datenmapping} implementiert werden.
 
 \begin{lstlisting}[label=datenmapping,
 caption=TransferRequestProcessorImpl.java, language=java] 
@@ -363,7 +363,7 @@ speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
 	\label{activation_recordaudio_warning}
 \end{figure}
 
-Das Plug-In ist nun vollständig implementiert und kann zur Ermittlung der
+Das Plug-In ist jetzt vollständig implementiert und kann zur Ermittlung der
 Lautstärke verwendet werden.
 
 \subsection{Anpassungen der Serverkomponente}

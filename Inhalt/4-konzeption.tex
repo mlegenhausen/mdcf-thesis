@@ -16,7 +16,7 @@ Erste umfasst die Verwendung eines bereits existierenden Plug-Ins Systems (z.~B.
 \acs{osgi}) und der Zweite die Entwicklung eines eigenen Plug-Ins Systems. Im
 Folgenden sollen die zwei Ansätze genauer betrachtet werden.
 
-\subsection{Evaluation der \acs{osgi} Plattform für Android}
+\subsection{Evaluation der \acs{osgi}-Plattform für Android}
 Die Verwendung von \acs{osgi} als Modularisierung bzw. Plug-In System würde
 folgende Vorteile bieten:
 
@@ -48,7 +48,7 @@ Bei der Entwicklung eines Plug-In Systems für Android gibt es zwei Ansätze:
 
 \begin{itemize}
   \item Man lädt zur Laufzeit das Plug-In aus einem nachträglich
-  heruntergeladenen \acf{jar}. Das wäre der \acs{osgi} Ansatz.
+  heruntergeladenen \acf{jar}. Das wäre der Ansatz von \acs{osgi}.
   \item Man sieht ein Plug-In als Android Service an und kommuniziert mit diesem
   über {\em Intents} oder per \acs{ipc}.
 \end{itemize}
@@ -59,11 +59,11 @@ Plug-In als einfache Android Anwendung aus dem Android Market heruntergeladen un
 installiert werden kann. Die Infrastruktur ist also schon vorhanden. Auch ist
 Letzteres der Ansatz, der vom Android System am besten unterstützt wird.
 
-Plug-Ins können somit als Service angesehen werden. Nach der Installation eines
-Plug-Ins sollen sich neue Plug-Ins beim Plug-In System registrieren. Dazu soll
-das Plug-In System, nachdem es per Broadcast mitbekommen hat, dass ein neues
-Plug-In installiert wurde, einen Broadcast an das neu installierte Plug-In
-schicken. Das neue Plug-In soll daraufhin mit entsprechenden Plug-In
+Plug-Ins können somit als {\em Service} angesehen werden. Nach der Installation
+eines Plug-Ins sollen sich neue Plug-Ins beim Plug-In System registrieren. Dazu soll
+das Plug-In System, nachdem über die Installation eines neuen Plug-Ins per
+{\em Broadcast} benachichtigt wurde, einen {\em Broadcast} an das neu installierte
+Plug-In schicken. Das neue Plug-In soll daraufhin mit entsprechenden Plug-In
 Informationen antworten. Folgende Informationen sollen bei der Anmeldung
 übermittelt werden:
 
@@ -71,7 +71,8 @@ Informationen antworten. Folgende Informationen sollen bei der Anmeldung
   \item Der {\bf Name} des Plug-Ins.
   \item Die {\bf Action}, über die der Service per \acs{ipc} aufrufbar ist.
   \item Die {\bf Version} des Plug-Ins.
-  \item Die {\bf URL}, an die die gesammelten Daten übertragen werden sollen.
+  \item Die {\bf \acs{url}}, an die die gesammelten Daten übertragen werden
+  sollen.
   \item Die {\bf Periode}, die angibt, in welchen Zeitabständen Daten gesammelt
   werden sollen.
   \item Die maximale {\bf Ausführungsdauer} des Plug-Ins, bevor es gestoppt
@@ -80,8 +81,8 @@ Informationen antworten. Folgende Informationen sollen bei der Anmeldung
   \item Der {\bf Intervall}, in dem die Daten regelmäßig übertragen werden
   sollen.
   \item Eine Liste von {\bf Services}, auf die das Plug-In zugreifen will.
-  \item Eine Flag die angibt, ob die {\bf gesammelten Daten nach der Übertragung
-  gelöscht} werden sollen.
+  \item Eine Flag die angibt, ob die {\bf gesammelten Daten nach der
+  Über\-tragung gelöscht} werden sollen.
 \end{itemize}
 
 Hierbei ist anzumerken, dass Android nicht zwischen einem Plug-In und einer
@@ -97,7 +98,7 @@ beschriebenen Informationen anzuschauen. Dadurch soll der Benutzer die
 Möglichkeit erhalten zu entscheiden, ob ein Plug-In wirklich verwendet werden
 soll oder nicht.
 
-Ein Plug-In soll dabei bestimmte Zustände einnehmen können. Nach der
+Ein Plug-In soll bestimmte Zustände einnehmen können. Nach der
 Installation soll ein Plug-In als neu dargestellt werden. Das bedeutet der
 Benutzer hat das Plug-In bisher nur installiert und noch keine weiteren
 Einstellungen am Plug-In vorgenommen. Von diesem Zustand aus soll das Plug-In
@@ -125,8 +126,8 @@ Anwendungsmanager von Android machen. Der Benutzer soll aber auch direkt die
 Möglichkeit besitzen, das Plug-In aus der Übersicht zu entfernen. 
 
 Bei der Deinstallation eines Plug-Ins erhält das Plug-In System ebenfalls einen
-Broadcast darüber, dass eine Anwendung entfernt wurde. Das erlaubt dem Plug-In
-System die gespeicherten Daten vom Plug-In zu löschen und die Plug-In
+{\em Broadcast} darüber, dass eine Anwendung entfernt wurde. Das erlaubt dem
+Plug-In System die gespeicherten Daten vom Plug-In zu löschen und die Plug-In
 Informationen konsistent zu den anderen installierten Plug-Ins zu halten.
 
 \section{Transparentes Sammeln von personenbezogenen Daten}
@@ -197,10 +198,10 @@ entsprechendes Datenformat gewählt werden, an das sich alle Plug-Ins halten
 müssen. Da die Struktur der Daten nicht bekannt ist, muss ein Datenformat
 verwendet werden, dass unstrukturierte Daten abbilden kann. Ein solches
 Datenformat wird in dem \acf{jsr} 170 beschrieben~\cite{jsr170}. Der
-\acs{jsr} beschreibt die Speicherung von Daten im \acf{jcr}. Das dabei
-verwendete Datenformat basiert auf Knoten ({\em Nodes}) und Eigenschaften ({\em
-Properties}) die sich zu einer beliebigen hierarchischen Datenstruktur
-zusammensetzen lassen. Im Rahmen dieser Masterarbeit soll eine eingeschränkte
+\acs{jsr} beschreibt die Speicherung von Daten im \acf{jcr}. Das im
+\acs{jsr}-170 beschriebene Datenformat basiert auf Knoten ({\em Nodes}) und
+Eigenschaften ({\em Properties}), die sich zu einer beliebigen hierarchischen
+Datenstruktur zusammensetzen lassen. Im Rahmen dieser Masterarbeit soll eine eingeschränkte
 Implementierung des Standards stattfinden, die Funktionalitäten wie z.~B.
 Versionierung und Locking nicht berücksichtigt. Diese sind für die Erfüllung der
 Aufgabenstellung nicht nötig.
@@ -218,8 +219,8 @@ mit dem Namen {\em Item}. Die Klasse enthält eine Obermenge von Attributen die
 Knoten und Eigenschaften besitzen. Die Attribute sind eine eindeutige ID,
 ein Modifizierungsdatum sowie der Elternknoten. Ein Knoten kann beliebige viele
 Kinderknoten und Eigenschaften besitzen. Eine Eigenschaft besteht aus
-einem Namen und einem Wert. Der Wert selbst besteht dabei aus dem eigentlichen
-zu speichernden Wert sowie dem Typen des Wertes. Der Wert kann dabei vom Typ
+einem Namen und einem Wert. Der Wert selbst besteht aus dem eigentlichen
+zu speichernden Wert sowie dem Typen des Wertes. Ein Wert kann vom Typ
 {\em String}, {\em Date}, {\em Binary}, {\em Double}, {\em Decimal}, {\em Long}
 oder {\em Boolean} sein.
 
@@ -239,8 +240,8 @@ zentrale und unmittelbare Speicherung der Daten als vereinheitlichte
 Datenstruktur kann eine sofortige Präsentation der Daten geschehen, ohne die
 Daten beim Plug-In selbst nachzufragen zu müssen. So müssen keine Daten vom
 Plug-In selbst gespeichert werden, die Persistierung wird von der Anwendung
-übernommen. Die Speicherung der Daten soll per db4o erfolgen. db4o erlaubt dabei
-die einfache Speicherung von komplexen hierarchischen Datenstrukturen, wie sie
+übernommen. Die Speicherung der Daten soll per \acs{db4o} erfolgen. \acs{db4o}
+erlaubt die einfache Speicherung von komplexen hierarchischen Datenstrukturen, wie sie
 im Abschnitt \ref{unifiedrepresentation} beschrieben ist.
 
 Bei der Ausführung eines Plug-Ins soll dises vollen Zugriff, auf die
@@ -252,7 +253,7 @@ gespeicherte Daten nachträglich zu bearbeiten und neue Datensätze hinzuzufügen.
 Im Gegensatz zu anderen Anwendungen, in dem die Daten sofort ohne Rückfrage des
 Benutzers übertragen werden, sollen sie in dieser Anwendung nur in regelmäßigen
 Abständen und nur nach Erlaubnis des Benutzers übertragen werden. Die Abstände
-sollen dabei durch das Plug-In definiert werden. Wird als Übertragungsintervall
+sollen durch das Plug-In selbst definiert werden. Wird als Übertragungsintervall
 z.~B. ein Tag angegeben, so soll der Benutzer, wenn das Plug-In ein Tag lang
 aktiv war, in den zuvor beschriebenen Transferzustand übergehen. Sollte das
 Plug-In in dieser Zeit deaktiviert worden sein, soll diese Zeit nicht in die
@@ -268,8 +269,8 @@ Daten.
 
 Ist der Benutzer mit einer Übertragung der Daten einverstanden, kann er die
 Daten zu einem beliebigen Zeitpunkt in der Zukunft übertragen. Die Daten sollen
-dabei an die, in den Plug-In Information enthaltenen URL übertragen werden.
-Sollte der Benutzer nicht mit der Übertragung der Daten einverstanden sein, so
+daraufhin an die, in den Plug-In Information enthaltenen \acs{url} übertragen
+werden. Sollte der Benutzer nicht mit der Übertragung der Daten einverstanden sein, so
 soll er die Möglichkeit besitzen, die vom Plug-In gesammelten Daten zu
 verwerfen. Da eine Übertragung zu einem beliebigen Zeitpunkt in der Zukunft
 stattfinden kann, kann es passieren, dass sich mehrere Übertragungen ansammeln
@@ -277,9 +278,9 @@ können. Die Übertragungen sollen übersichtlich aufgelistet werden.
 
 Bei der Übertragung müssen neben den gesammelten Daten, auch
 Informationen über das verwendete Plug-In und eine eindeutige Benutzerkennung
-übertragen werden. Dadurch kann auf der Serverseite eine eindeutige Zuordnung
+versendet werden. Dadurch kann auf der Serverseite eine eindeutige Zuordnung
 zu einem Plug-In stattfinden sowie zu einem Benutzer. Die Benutzerkennung soll
-dabei anonymisiert sein. Hierzu mehr in Abschnitt \ref{anonymisation}.
+anonymisiert sein (siehe Abschnitt \ref{anonymisation}).
 
 \section{Serverseitiger Empfang und Verarbeitung der Daten}
 Neben der reinen Android Anwendung soll auch eine Serverkomponente ent\-wickelt
@@ -322,7 +323,7 @@ lösen, ist eine eindeutige Benutzerkennung nötig, die bei jeder Übertragung mit
 gesendet wird. Bei der Benutzerkennung ist auf Folgendes zu achten:
 
 \begin{itemize}
-  \item Die Benutzerkennung darf auf keine reale Person übertragen werden
+  \item Durch die Benutzerkennung darf man auf keine reale Person schließen
   können.
   \item Die Benutzerkennung muss zwischen verschiedenen Plug-Ins unterschiedlich
   sein.
@@ -346,6 +347,6 @@ nur mit sehr hohem Aufwand umkehrbar. Als Hashfunktion soll eine aus der Gruppe 
 \acs{sha}-2 Algorithmen verwendet werden, da jene das zurzeit sicherste
 Verfahren verwenden. Die eindeutige Benutzerkennung kann nun durch die
 Konkatenation aus Plug-In Action und \acs{imsi} und der anschließenden Anwendung eines
-\acs{sha}-2 Algorithmus berechnet werden. Die sich dabei ergebene
+\acs{sha}-2 Algorithmus berechnet werden. Die sich dadurch ergebene
 Benutzerkennung bietet maximale Anonymität bei maximalem Komfort des Benutzers.
 Die Kennung soll nun bei jeder Übertragung mit übertragen werden.

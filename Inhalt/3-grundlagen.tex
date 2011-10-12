@@ -6,15 +6,15 @@ Realisierung der Anwendung verwendet wurden.
 \section{Mobile Anwendungsentwicklung mit Android}
 Bei Android handelt es sich um ein quelloffenes Betriebssystem sowie eine
 Software-Plattform für mobile Endgeräte wie Smartphones, Tablets und Netbooks.
-Android basiert auf dem Linux Kernel 2.6. Die Android Software-Plattform erlaubt
-die Entwicklung von Anwendungen in Java sowie die Verwendung von C/C++
+Android basiert auf dem Linux Kernel 2.6. Die Android Software-Platt\-form
+erlaubt die Entwicklung von Anwendungen in Java sowie die Verwendung von C/C++
 Bibliotheken. Anwendungen laufen in einer speziellen \acf{vm},
 der Dalvik \acs{vm}. Die Dalvik \acs{vm} ist eine für den mobilen Einsatz
 optimierte virtuelle Maschine.
 
 Die Android Klassenbibliothek ist dem {\em Java Development Kit}
 nachempfunden und enthält alle wichtigen Standardkomponenten sowie Erweiterungen für z.~B.
-die Bereiche Medienwiedergabe, 2D/3D Grafik, SQLite~\cite{whatisandroid}.
+die Bereiche Medienwiedergabe, 2D/3D Grafik, {\em SQLite}~\cite{whatisandroid}.
 
 Android Anwendungen bestehen aus einer oder mehreren Komponenten. Die
 Komponenten sind {\em Activities}, {\em Services}, {\em Content Providers} und {\em Broadcast
@@ -26,8 +26,8 @@ beschreibt wie diese erstellt und zerstört werden.
   \item Eine {\bf Activity} repräsentiert einen Bildschirm mit
   einer Benutzerschnittstelle. Das kann z.~B. jeweils eine Anzeige zur
   Auflistung von E-Mails, zum Schreiben einer neuen E-Mail und zum
-  Lesen einer E-Mail sein. Alle drei {\em Activities} ergeben dabei eine E-Mail
-  Anwendung. Jede {\em Activity} ist dabei unabhängig von der anderen. Dadurch
+  Lesen einer E-Mail sein. Alle drei {\em Activities} zusammen ergeben eine
+  E-Mail Anwendung. Jede {\em Activity} ist unabhängig von der anderen. Dadurch
   kann z.~B. die Kamera {\em Activity} die {\em Activity} zum Schreiben einer
   neuen E-Mail starten, um ein aufgenommenes Foto sofort zu verschicken.
   \item Ein {\bf Service} ist eine Komponente, die im Hintergrund
@@ -38,14 +38,14 @@ beschreibt wie diese erstellt und zerstört werden.
   Anwendungsdaten, die von anderen Anwendungen zugegriffen und bearbeitet werden
   sollen. Das kann z.~B. ein gemeinsam benutztes Adressbuch sein, das von der
   E-Mail- und der Telefonanwendung verwendet wird, um an die Adresse bzw.
-  die Telefonnummer zu gelangen. Der {\em Content Provider} abstrahiert dabei
-  den Speicherort, sodass Daten z.~B. in einer SQLite Datenbank, im Internet
-  oder an einem beliebigen anderen Ort gespeichert werden können.
-  \item Ein {\bf Broadcast Receiver} ist eine Komponente, die auf systemweite
-  Broadcasts reagieren kann. Ein Broadcast kann z.~B. die Nachricht sein, dass
-  der Bildschirm aus- bzw. eingeschaltet wurde. Anwendungen selbst können
-  ebenfalls Broadcasts verschicken, durch die andere Anwendungen über ein Ereignis
-  informiert werden können. {\em Broadcast Receiver} besitzen keine
+  die Telefonnummer zu gelangen. Der {\em Content Provider} abstrahiert
+  den Speicherort, sodass Daten z.~B. in einer {\em SQLite} Datenbank, im
+  Internet oder an einem beliebigen anderen Ort gespeichert werden können.
+  \item Ein {\bf Broadcast Receiver} ist eine Komponente, die  
+  {\em Broadcasts} empfangen kann. Ein {\em Broadcast} kann z.~B. die Nachricht
+  sein, dass der Bildschirm aus- bzw. eingeschaltet wurde. Anwendungen selbst können
+  ebenfalls {\em Broadcasts} verschicken, durch die andere Anwendungen über ein
+  Ereignis informiert werden können. {\em Broadcast Receiver} besitzen keine
   Benutzerschnittstelle und führen keine langlaufenden Operationen aus. Sie
   dienen lediglich dazu, andere Komponenten z.~B. einen {\em Service} zu
   starten.
@@ -121,8 +121,8 @@ besitzt die folgenden Eigenschaften~\cite{androidfundamentals}:
   \item Das Android Betriebssystem ist ein Mehrbenutzer Linux System, in der
   jede Anwendung ein anderer Benutzer ist.
   \item Das bedeutet, dass jede Applikation eine eindeutige Linux User ID
-  erhält. Das System setzt dabei Zugriffsrechte für jede Datei der Anwendung, sodass
-  nur die Anwendung selbst diese Dateien zugreifen darf.
+  erhält und alle Anwendungsdateien nur von der Anwendung selbst zugegriffen
+  werden können.
   \item Jede Anwendung läuft in ihrer eigenen \acs{vm}, sodass jede
   Anwendung isoliert von anderen Anwendungen läuft.
 \end{itemize}
@@ -166,12 +166,12 @@ Serialisierung alle Parameter und Rückgabewerte~\cite{androidaidl}.
 \subsection{Android System Services}
 Zur Verwendung von gemeinsamen Ressourcen, wie z.~B. der Kamera, \acs{gps} usw.
 existieren systemweite Services. Jeder Service stellt eine entsprechende
-Schnittstelle zur Verfügung. Der Zugriff auf die Ressource kann dabei
-konkurrierend stattfinden. Über die Services kann zum einen auf die Sensorik
-zugegriffen werden, aber auch auf systeminterne Dienste. Da über diese auf
+Schnittstelle zur Verfügung. Der Zugriff auf eine Ressource über einen
+Service kann konkurrierend stattfinden. Über die Services kann zum einen auf die
+Sensorik zugegriffen werden, aber auch auf systeminterne Dienste. Da über diese auf
 personenbezogene Daten und systemkritische Konfigurationen zugegriffen werden
 kann, sind jene Services durch Zugriffsrechte geschützt. Die Überprüfung der
-Zugriffsrechte findet dabei innerhalb des Services statt. Dabei wird sehr
+Zugriffsrechte findet innerhalb des Services statt. Dabei wird sehr
 feingranular zwischen verschiedenen Rechten unterschieden. So wird z.~B. beim
 Service zur Ermittlung der aktuellen Position zwischen den Rechten zur
 Standortbestimmung per Mobilfunk und per \acs{gps} unterschieden, da die
@@ -180,7 +180,7 @@ Bestimmung per Mobilfunk um einiges ungenauer ist als per \acs{gps}.
 Eine genaue Auflistung aller Services kann der Android Dokumentation entnommen
 werden~\cite{androidservices}.
 
-\section{OSGi für Android}
+\section{\acs{osgi} für Android}
 Die von der \acs{osgi} Alliance (früher \acl{osgi}) spezifizierte Service
 Plattform ist ein dynamisches Modulsystem für Java, das die dynamische
 Integration und das Fernmanagement von Softwarekomponenten (Bundles) und
@@ -229,12 +229,12 @@ folgenden Schichten zusammen~\cite{osgiarch}:
   Service Plattform.
 \end{itemize}
 
-\subsection{Verfügbare \acs{osgi} Container für Android}
+\subsection{Verfügbare \acs{osgi}-Container für Android}
 Dadurch das Android auf einer Teilmenge des Apache Harmony Projektes basiert,
 deckt es einen Großteil der Standard Java
 Klassenbibliothek~\cite{apacheharmony}. Das erlaubt die Ausführung von
 \acs{osgi} auf Android. Die Ausführungsumgebung der Bundles wird auch als
-\acs{osgi} Container bezeichnet. Folgende \acs{osgi} Container sind unter
+\acs{osgi}-Container bezeichnet. Folgende \acs{osgi} Container sind unter
 Android lauffähig.
 
 \subsubsection{Apache Felix}
@@ -251,18 +251,18 @@ kontextsensitiven Anwendungen für Android Smartphones zu vereinfachen. Das
 Framework läuft im Hintergrund auf dem Android Smartphone. Durch die Verwendung
 von dynamisch installierten Plug-Ins, die durch die Dynamix Infrastruktur zur
 Verfügung gestellt werden, modelliert das Framework Kontextinformationen.
-Kontextinformationen werden dabei durch die Sensorik oder andere externe Systeme
+Kontextinformationen werden durch die Sensorik oder andere externe Systeme
 zur Verfügung gestellt. Die Informationen können dann anderen auf dem
 Smartphone installierten Anwendungen, in einer sicheren Art und Weise zur
 Verfügung gestellt werden.
 
 Das Dynamix Framework basiert auf dem \acs{osgi}-Container Apache Felix.
-Plug-Ins werden dabei in Form von Bundles installiert. Das Framework kümmert
-dabei um den Lebenszyklus eines Plug-Ins und erlaubt das Senden von
+Plug-Ins werden in Form von Bundles installiert. Das Framework kümmert
+um den Lebenszyklus eines Plug-Ins und erlaubt das Senden von
 Kontextinformationen an registrierte Anwendungen. Der vom Dynamix Framework zur
 Verfügung gestellt \acs{osgi}-Container bietet eine Integration in das Android
-System. Er läuft dabei als Service im Hintergrund und erlaubt durch die
-sogenannte Context-Firewall, einen geregelten Zugriff durch registrierte
+System. Dynamix läuft als Service im Hintergrund und erlaubt durch
+die sogenannte Context-Firewall, einen kontrollierten Zugriff durch registrierte
 Anwendungen, auf die von den Plug-Ins generierten Kontextinformationen. Der
 Zugriff kann durch den Anwender geregelt werden~\cite{dynamixframework}.
 
@@ -271,11 +271,11 @@ Zugriff kann durch den Anwender geregelt werden~\cite{dynamixframework}.
 durch ihre geringe Größe von nur 600~KB für die Einbettung in Anwendungen
 eignet. Durch ihre geringe Größe eignet sie sich auch für die Verwendung auf mobilen Geräten
 wie Smartphones, in diesem Fall Android. \acs{db4o} ist eine
-Alternative zu der in Android enthaltenden relationalen Datenbank SQLite. So ist
-\acs{db4o} schemafrei und erlaubt die Speicherung beliebig komplexer Objekte,
+Alternative zu der in Android enthaltenden relationalen Datenbank {\em SQLite}.
+So ist \acs{db4o} schemafrei und erlaubt die Speicherung beliebig komplexer Objekte,
 ohne die Verwendung eines \acfp{orm}. Die Datenspeicherung erfolgt
-wie bei SQLite in einer Datei. \acs{db4o} verwendet im Gegensatz zu relationalen
-Datenbanken kein \acs{sql}, sondern \acf{qbe}, Critera Queries
+wie bei {\em SQLite} in einer Datei. \acs{db4o} verwendet im Gegensatz zu
+relationalen Datenbanken kein \acs{sql}, sondern \acf{qbe}, Critera Queries
 sowie native Anfragen. Bei \acs{qbe} wird anhand eines Beispielobjektes nach
 ähnlichen Objekten gesucht. Bei Critera Queries werden \acs{sql} Anfragen durch
 eine Verkettung von Methodenaufrufen nachgebildet und bei nativen Queries können
