@@ -7,7 +7,7 @@ mehr Möglichkeiten hat zur informationellen Selbstbestimmung. Er kann selbst
 entscheiden, wann, welche Daten, er wem freigeben möchte und kann der Freigabe
 auch widersprechen. Der Entwickler im Gegenzug erhält eine Plattform, auf der er
 Anwendungen zum Sammeln von Sensordaten entwickeln kann, ohne sich selbst um das
-Thema Transparenz kümmern zu müssen. Dies kann Zeit und somit auch Geld sparen.
+Thema Transparenz kümmern zu müssen. Das kann Zeit und somit auch Geld sparen.
 Auch kann er das mögliche Vertrauen, welches in das System gesetzt wird, auf
 seine Anwendung übertragen. Ein Benutzer ist dadurch eher gewillt, eine für die
 Plattform entwickelte Anwendung zu verwenden, die personenbezogene Daten
@@ -37,15 +37,14 @@ entstehen kann minimiert werden.
 Das Rahmenwerk für Entwickler besteht selbst auch aus zwei Komponenten. Zum
 einem aus dem {\em Mobile Data Collection Framework}, das zur Entwicklung von
 Plug-Ins verwendet wird sowie einem serverseitigen Framework zum Empfang der
-gesammelten Daten. Diese Frameworks erlauben die einfache Entwicklung von
+gesammelten Daten. Die Frameworks erlauben die einfache Entwicklung von
 Anwendungen zum Sammeln von Sensordaten und einer dazugehörigen
-Serverkomponente, um diese zu empfangen.
+Serverkomponente, um die Daten zu empfangen.
 
 Um die Anonymität des Benutzers zu waren, wird der Zugriff auf eindeutige
 Benutzerdaten durch den {\em Mobile Data Collector} erschwert. Um aber eine
 Zuordnung zwischen einzelnen Datensätzen auf dem Server zu ermöglichen, stellt
-der {\em Mobile Data Collector} eine eindeutige Benutzerkennung bereit,
-die keine Zuordnung zu einer realen Person erlaubt.
+der {\em Mobile Data Collector} eine anonyme eindeutige Benutzerkennung bereit.
 
 Im Rahmen der Evaluation wurde anhand eines Plug-Ins zur Positionsverfolgung
 gezeigt, dass sich mit dem {\em Mobile Data Collection Framework} Plug-Ins für
@@ -58,7 +57,7 @@ wenig wie möglich bei der Entwicklung von Plug-Ins einzuschränken. Die
 Evaluation zeigt aber auch die zurzeit bestehenden Überwachungsgrenzen des {\em
 Mobile Data Collectors}. So ist eine Protokollierung von Zugriffen auf die
 Kamera und das Mikrofon nicht bzw. nur mit relativ großem Aufwand möglich.
-Dieses Problem lässt sich am besten durch den Einsatz des OSGi Frameworks lösen.
+Das Problem lässt sich am besten durch den Einsatz des OSGi Frameworks lösen.
 Hierbei bleibt abzuwarten bis Frameworks wie Dynamix den nötigen Reifegrad
 erreicht haben, um diese im produktiven Einsatz zu verwenden.
 

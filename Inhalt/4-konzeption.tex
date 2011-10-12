@@ -14,7 +14,7 @@ Sensordaten sammeln.
 Zur Realisierung eines Plug-Ins Systems auf Android gibt er zwei Ansätze. Der
 Erste umfasst die Verwendung eines bereits existierenden Plug-Ins Systems (z.~B.
 \acs{osgi}) und der Zweite die Entwicklung eines eigenen Plug-Ins Systems. Im
-Folgenden sollen diese zwei Ansätze genauer betrachtet werden.
+Folgenden sollen die zwei Ansätze genauer betrachtet werden.
 
 \subsection{Evaluation der \acs{osgi} Plattform für Android}
 Die Verwendung von \acs{osgi} als Modularisierung bzw. Plug-In System würde
@@ -31,11 +31,11 @@ folgende Vorteile bieten:
 Eine eigenständige Integration von \acs{osgi} in Android war im Rahmen dieser
 Masterarbeit aus zeitlichen Gründen nicht möglich. Grund hierfür ist die
 abweichende Entwicklung von Anwendungen für Android und Java SE und die daraus
-resultierende nötige Anpassung von \acs{osgi} an Android. Dieser Aufwand war
+resultierende nötige Anpassung von \acs{osgi} an Android. Der Aufwand war
 zeitlich nur schwer abschätzbar. Die Verwendung eines bereits für Android
 optimierten Frameworks ist somit unumgänglich. Als einziges freies Framework
 steht zurzeit nur das Dynamix Framework zur Verfügung. Eine Verwendung des
-Dynamix Frameworks war aber zum Bearbeitungszeitpunkt dieser Arbeit leider nicht
+Dynamix Frameworks war aber zum Bearbeitungszeitpunkt der Arbeit leider nicht
 möglich. Dem Autor wurde in einem persönlichen Gespräch mit dem Dynamix
 Entwickler Dr.-Ing. Darren Carlson von dessen Verwendung abgeraten. Der Grund
 hierfür war das recht frühe Stadium des Frameworks und die damit verbundene
@@ -48,7 +48,7 @@ Bei der Entwicklung eines Plug-In Systems für Android gibt es zwei Ansätze:
 
 \begin{itemize}
   \item Man lädt zur Laufzeit das Plug-In aus einem nachträglich
-  heruntergeladenen \acf{jar}. Dies wäre der \acs{osgi} Ansatz.
+  heruntergeladenen \acf{jar}. Das wäre der \acs{osgi} Ansatz.
   \item Man sieht ein Plug-In als Android Service an und kommuniziert mit diesem
   über {\em Intents} oder per \acs{ipc}.
 \end{itemize}
@@ -77,7 +77,7 @@ Informationen antworten. Folgende Informationen sollen bei der Anmeldung
   \item Die maximale {\bf Ausführungsdauer} des Plug-Ins, bevor es gestoppt
   wird.
   \item Eine Plug-In {\bf Beschreibung}.
-  \item Das {\bf Intervall}, in dem die Daten regelmäßig übertragen werden
+  \item Der {\bf Intervall}, in dem die Daten regelmäßig übertragen werden
   sollen.
   \item Eine Liste von {\bf Services}, auf die das Plug-In zugreifen will.
   \item Eine Flag die angibt, ob die {\bf gesammelten Daten nach der Übertragung
@@ -87,31 +87,31 @@ Informationen antworten. Folgende Informationen sollen bei der Anmeldung
 Hierbei ist anzumerken, dass Android nicht zwischen einem Plug-In und einer
 anderen neu installierten Anwendung unterscheiden kann. Das Plug-In System
 sendet somit an alle neu installierten Anwendungen eine Aufforderung zur
-Registrierung. Dies ist aber kein Problem, da alle nicht Plug-Ins auf diese
-Aufforderung nicht antworten werden.
+Registrierung. Alle Anwendungen die kein Plug-In sind antworten auf die
+Anfrage nicht.
 
 Hat sich ein Plug-In erfolgreich registriert, werden die vom Plug-In
 erhaltenden Informationen gespeichert und dem Benutzer in Form einer Plug-In
 Übersicht präsentiert. Der Benutzer hat nun die Möglichkeit sich alle zuvor
-beschriebenen Informationen anzuschauen. Dadurch soll er die Möglichkeit
-erhalten zu entscheiden, ob ein Plug-In wirklich verwendet werden soll oder ob
-der Benutzer dieses nicht will.
+beschriebenen Informationen anzuschauen. Dadurch soll der Benutzer die
+Möglichkeit erhalten zu entscheiden, ob ein Plug-In wirklich verwendet werden
+soll oder nicht.
 
 Ein Plug-In soll dabei bestimmte Zustände einnehmen können. Nach der
-Installation soll ein Plug-In als neu dargestellt werden. Dies bedeutet der
+Installation soll ein Plug-In als neu dargestellt werden. Das bedeutet der
 Benutzer hat das Plug-In bisher nur installiert und noch keine weiteren
-Einstellungen am Plug-In vorgenommen. Von diesem Zustand soll das Plug-In
+Einstellungen am Plug-In vorgenommen. Von diesem Zustand aus soll das Plug-In
 aktiviert werden können. Das heißt, das Plug-In wird in der, bei der
 Registrierung angegebenen Periode ausgeführt. Soll ein Plug-In keine Daten mehr
 sammeln, kann der Benutzer das Plug-In deaktivieren. Sollte ein aktiviertes
-Plug-In nach einer bestimmten Zeit genug Daten gesammelt haben, soll es in den
-Transferzustand übergeben. Diese Zeit soll bei der Plug-In
+Plug-In nach einer bestimmten Zeitspanne genug Daten gesammelt haben, soll es in
+den Transferzustand übergeben. Die Zeitspanne soll bei der Plug-In
 Registrierung angegeben werden. In diesem Zustand sollen die Daten für die
-Übertragung aufbereitet und lokal gespeichert werden. Wann die Daten nun
+Übertragung aufbereitet und lokal gespeichert werden. Wann die Daten
 endgültig übertragen werden, kann der Benutzer selbst entscheiden. Siehe hierzu
 den Abschnitt \ref{periodicallytransfer}. Sind die Daten aufbereitet und
 gespeichert worden, geht das Plug-In wieder in den aktivierten Zustand über.
-Dieser Lebenszyklus des Plug-Ins ist in Grafik \ref{states} dargestellt.
+Der Lebenszyklus des Plug-Ins ist in Grafik \ref{states} dargestellt.
 
 \begin{figure}[h!] 
 	\centering
@@ -120,14 +120,14 @@ Dieser Lebenszyklus des Plug-Ins ist in Grafik \ref{states} dargestellt.
 	\label{states}
 \end{figure}
 
-Möchte ein Benutzer ein Plug-In wieder entfernen, kann er dieses über den
+Möchte ein Benutzer ein Plug-In wieder entfernen, kann er das über den
 Anwendungsmanager von Android machen. Der Benutzer soll aber auch direkt die
-Möglichkeit besitzen, das Plug-In aus der Übersicht zu entfernen. Da es sich
-beim Entfernen eines Plug-Ins um die Deinstallation einer Android-Anwendung
-handelt, erhält das Plug-In System ebenfalls Broadcasts vom Android System. Dies
-erlaubt dem Plug-In System die gespeicherten Daten vom Plug-In zu löschen und
-die Plug-In Informationen konsistent zu den anderen installierten Plug-Ins zu
-halten.
+Möglichkeit besitzen, das Plug-In aus der Übersicht zu entfernen. 
+
+Bei der Deinstallation eines Plug-Ins erhält das Plug-In System ebenfalls einen
+Broadcast darüber, dass eine Anwendung entfernt wurde. Das erlaubt dem Plug-In
+System die gespeicherten Daten vom Plug-In zu löschen und die Plug-In
+Informationen konsistent zu den anderen installierten Plug-Ins zu halten.
 
 \section{Transparentes Sammeln von personenbezogenen Daten}
 Transparenz beim Sammeln von personenbezogenen Daten erhält man durch folgende
@@ -148,20 +148,20 @@ Voraussetzungen:
   eingesehen werden.
 \end{itemize}
 
-Diese Voraussetzungen werden im Folgenden genauer erläutert.
+Die Voraussetzungen werden im Folgenden genauer erläutert.
 
 \subsection{Sichere und kontrollierte Ausführung von Plug-Ins}
 \label{securepluginexecution}
 Ein Plug-In wird dann sicher ausgeführt, wenn der Zugriff auf personenbezogene
-Daten kontrolliert wird. Da der Zugriff auf diese Daten innerhalb von Android
-über System Services geschieht, muss dieser Zugriff kontrolliert stattfinden. Es
+Daten kontrolliert wird. Da der Zugriff auf die Daten innerhalb von Android
+über System Services geschieht, muss der Zugriff kontrolliert stattfinden. Es
 sollte also geregelt werden, auf welche Services zugegriffen werden darf und
-wenn ein Zugriff stattfindet, sollte dieser Zugriff protokolliert werden. Des
+wenn ein Zugriff stattfindet, sollte der Zugriff protokolliert werden. Des
 Weiteren sollte der Zugriff auf bestimmte Daten, die den Benutzer eindeutig
 identifizieren (z.~B. \acs{imsi}, Telefonnummer) komplett unterbunden werden.
 Aus diesem Grund sollen dem Plug-In nicht die original Android System Services
 zur Verfügung gestellt werden, sondern stattdessen überwachte bzw. sichere
-Implementierungen der Android Services. Diese sicheren Services sollen jeden
+Implementierungen der Android Services. Die sicheren Services sollen jeden
 Methodenzugriff protokollieren und zuvor beschriebene gefährliche Methoden gar
 nicht erst anbieten. Folgende Android System Services müssen durch sichere
 Implementierung ersetzt werden:
@@ -178,13 +178,13 @@ Implementierung ersetzt werden:
 
 Dabei sollen einem Plug-In nicht von vorne rein alle Services übergeben werden,
 sondern nur die, die in den Plug-In Informationen angegebenen wurden. Sollte ein
-Plug-In trotzdem versuchen auf einen Android System Service zuzugreifen, soll dieses dem
-Benutzer bei der Aktivierung angezeigt werden. Der unerlaubte Versuch, Zugriff
+Plug-In trotzdem versuchen auf einen Android System Service zuzugreifen, soll
+das dem Benutzer bei der Aktivierung angezeigt werden. Der unerlaubte Versuch Zugriff
 auf einen Android System Service zu erlangen, kann über die angeforderten
 Rechte des Plug-Ins entnommen werden. Es muss also vor der Aktivierung eine
-Kontrolle dieser stattfinden.
+Kontrolle stattfinden.
 
-Das hierbei entwickelte Konzept erweitert die von Android zur Verfügung
+Das entwickelte Konzept erweitert die von Android zur Verfügung
 gestellte Sandbox, um weitere Überwachungsmechanismen, um den Schaden, der durch
 ein Plug-In entstehen kann zu verringern. Der hierbei größte anzunehmende
 Schaden ist die Übertragung von personenbezogenen Daten, ohne das Wissen und die
@@ -196,7 +196,7 @@ Um die von einem Plug-In gesammelten Daten präsentieren zu können, muss ein
 entsprechendes Datenformat gewählt werden, an das sich alle Plug-Ins halten
 müssen. Da die Struktur der Daten nicht bekannt ist, muss ein Datenformat
 verwendet werden, dass unstrukturierte Daten abbilden kann. Ein solches
-Datenformat wird in dem \acf{jsr} 170 beschrieben~\cite{jsr170}. Dieses
+Datenformat wird in dem \acf{jsr} 170 beschrieben~\cite{jsr170}. Der
 \acs{jsr} beschreibt die Speicherung von Daten im \acf{jcr}. Das dabei
 verwendete Datenformat basiert auf Knoten ({\em Nodes}) und Eigenschaften ({\em
 Properties}) die sich zu einer beliebigen hierarchischen Datenstruktur
@@ -214,8 +214,8 @@ Aufgabenstellung nicht nötig.
 
 Abbildung \ref{jsr170} zeigt in einem UML-Diagramm die Zusammenhänge zwischen
 den einzelnen Klassen. Wie zu erkennen gibt es eine gemeinsam genutzte Klasse
-mit dem Namen {\em Item}. Diese Klasse enthält eine Obermenge von Attributen die
-Knoten und Eigenschaften besitzen. Diese Attribute sind eine eindeutige ID,
+mit dem Namen {\em Item}. Die Klasse enthält eine Obermenge von Attributen die
+Knoten und Eigenschaften besitzen. Die Attribute sind eine eindeutige ID,
 ein Modifizierungsdatum sowie der Elternknoten. Ein Knoten kann beliebige viele
 Kinderknoten und Eigenschaften besitzen. Eine Eigenschaft besteht aus
 einem Namen und einem Wert. Der Wert selbst besteht dabei aus dem eigentlichen
@@ -228,7 +228,7 @@ Daten darstellen kann. Dabei soll jede Hierarchiestufe in Form einer Liste angez
 werden. Innerhalb der Liste werden alle Knoten und Eigenschaften gelistet.
 Drückt man auf einen Knoten, soll man in die nächste Hierarchiestufe gelangen.
 Über die Zurücktaste soll man eine Hierarchiestufe zurück gelangen. Als
-Darstellungswert innerhalb der Liste soll bei einem Knoten das Editierungsdatum
+Darstellungswert innerhalb der Liste soll bei einem Knoten das Modifizierungsdatum
 und bei einer Eigenschaft eine Kombination aus dem Namen und der
 String-Repräsentation des Wertes verwendet werden.
 
@@ -243,8 +243,8 @@ Plug-In selbst gespeichert werden, die Persistierung wird von der Anwendung
 die einfache Speicherung von komplexen hierarchischen Datenstrukturen, wie sie
 im Abschnitt \ref{unifiedrepresentation} beschrieben ist.
 
-Bei der Ausführung eines Plug-Ins soll dieses vollen Zugriff besitzen, auf die
-zuvor gespeicherten Daten. Dadurch soll die Möglichkeit bestehen zuvor
+Bei der Ausführung eines Plug-Ins soll dises vollen Zugriff, auf die
+zuvor gespeicherten Daten, besitzen. Dadurch soll die Möglichkeit bestehen zuvor
 gespeicherte Daten nachträglich zu bearbeiten und neue Datensätze hinzuzufügen.
 
 \subsection{Regelmäßige Übertragung der gesammelten Daten}
@@ -259,11 +259,11 @@ Plug-In in dieser Zeit deaktiviert worden sein, soll diese Zeit nicht in die
 Übertragungszeit mit eingerechnet werden. Es wird nur die Zeit beachtet, in der
 das Plug-In aktiv war.
 
-Befindet sich das Plug-In im Transferzustand, sollen die bis dahin vom Plug-In
-gesammelten Daten gesichert und für die Übertragung vorbereitet werden. Das
+Befindet sich das Plug-In im Transferzustand, sollen die bis zu diesem Zeitpunkt
+vom Plug-In gesammelten Daten gesichert und für die Übertragung vorbereitet werden. Das
 Plug-In kann nun wieder aktiviert werden und weiter Daten sammeln. Der Benutzer
-soll nun vor der Übertragung alle Aktivitäten des Plug-Ins betrachten können.
-Das bedeutet, alle Zugriffe auf die Services, sowie die vom Plug-In gesammelten
+soll vor der Übertragung alle Aktivitäten des Plug-Ins betrachten können.
+Das bedeutet, alle Zugriffe auf die Services sowie die vom Plug-In gesammelten
 Daten.
 
 Ist der Benutzer mit einer Übertragung der Daten einverstanden, kann er die
@@ -272,13 +272,13 @@ dabei an die, in den Plug-In Information enthaltenen URL übertragen werden.
 Sollte der Benutzer nicht mit der Übertragung der Daten einverstanden sein, so
 soll er die Möglichkeit besitzen, die vom Plug-In gesammelten Daten zu
 verwerfen. Da eine Übertragung zu einem beliebigen Zeitpunkt in der Zukunft
-stattfinden kann, kann es passieren, dass sich mehre Übertragungen ansammeln
-können. Diese Übertragungen sollen übersichtlich aufgelistet werden.
+stattfinden kann, kann es passieren, dass sich mehrere Übertragungen ansammeln
+können. Die Übertragungen sollen übersichtlich aufgelistet werden.
 
-Bei der Übertragung müssen neben den von dem Plug-In gesammelten Daten, auch
+Bei der Übertragung müssen neben den gesammelten Daten, auch
 Informationen über das verwendete Plug-In und eine eindeutige Benutzerkennung
 übertragen werden. Dadurch kann auf der Serverseite eine eindeutige Zuordnung
-zu einem Plug-In stattfinden, sowie zu einem Benutzer. Die Benutzerkennung soll
+zu einem Plug-In stattfinden sowie zu einem Benutzer. Die Benutzerkennung soll
 dabei anonymisiert sein. Hierzu mehr in Abschnitt \ref{anonymisation}.
 
 \section{Serverseitiger Empfang und Verarbeitung der Daten}
@@ -297,12 +297,13 @@ Da die Daten von der Anwendung in dem zuvor beschriebenen sehr allgemeinen
 Datenformat empfangen werden, ist eine Konvertierung der Daten in ein
 spezifischeres Datenformat vorzunehmen. Die Konvertierung sollte in ein
 domänen\-spezi\-fisches Datenformat stattfinden und muss vom Plug-In Entwickler
-selbst vorgenommen werden. Dies ist aus den folgenden Gründen zu empfehlen:
+selbst vorgenommen werden. Das ist aus den folgenden Gründen zu empfehlen:
 
 \begin{itemize}
   \item Die Verwaltung des allgemeinen Datenformats ist innerhalb von nicht
-  objektorientierten Datenbanken sehr aufwendig. Dies wird vor allen dingen dann
-  sichtbar, wenn man versucht diese in relationalen Datenbanken zu speichern.
+  objektorientierten Datenbanken sehr aufwendig. Das wird vor allen dingen dann
+  sichtbar, wenn man versucht die Datenstruktur in relationalen Datenbanken zu
+  speichern.
   \item Ein domänenspezifisches Datenformat erlaubt die einfachere Verarbeitung
   der Daten gegenüber dem allgemeinen Datenformat. Auch wird die Flexibilität
   des allgemeinen Datenformats in weiteren Verarbeitungsschritten nicht mehr
@@ -312,11 +313,11 @@ selbst vorgenommen werden. Dies ist aus den folgenden Gründen zu empfehlen:
 \section{Anonymisierung des Benutzers}
 \label{anonymisation}
 Wie bereits in Abschnitt \ref{anonym} beschrieben, können die von der Anwendung
-empfangenen Daten ohne eine eindeutige Benutzerkennung nicht über mehre
-Übertragungen zu einem Benutzer zugeordnet werden. Diese Zuordnung ist aber
-interessant, wenn man z.~B. die Bewegungen von Personen über einen längeren
+empfangenen Daten ohne eine eindeutige Benutzerkennung nicht über mehrere
+Übertragungen zu einem Benutzer zugeordnet werden. Die Zuordnung ist aber
+notwendig, wenn man z.~B. die Bewegungen von Personen über einen längeren
 Zeitraum überwachen möchte. Ohne eine Benutzerkennung wäre dies immer nur
-innerhalb eines Über\-tra\-gungs\-intervalls möglich. Um dieses Problem zu
+innerhalb eines Über\-tra\-gungs\-intervalls möglich. Um das Problem zu
 lösen, ist eine eindeutige Benutzerkennung nötig, die bei jeder Übertragung mit
 gesendet wird. Bei der Benutzerkennung ist auf Folgendes zu achten:
 
@@ -334,17 +335,17 @@ Um eine eindeutige Benutzerkennung zu berechnen, müssen eindeutige Werte vom
 Plug-In, sowie vom Benutzer verwendet werden. Da der Wert vom Benutzer ohne
 Interaktion ermittelt werden soll, muss hier ein Wert verwendet werden, der
 Benutzer spezifisch ist und sich bereits auf dem Smartphone befindet. Zu diesem
-Zweck kann die \acs{imsi} verwendet werden. Diese Nummer identifiziert einen
+Zweck kann die \acs{imsi} verwendet werden. Die Nummer identifiziert einen
 Benutzer eindeutig im \acs{gsm}- und \acs{umts}-Netz. Als Plug-In Wert kann die
 {\em Action} verwendet werden, die für jedes Plug-In eindeutig ist.
 
 Aus der Kombination von Plug-In spezifischer {\em Action} und \acs{imsi} lässt
 sich nun eine eindeutige Benutzerkennung berechnen. Zur Berechnung eignen sich
 Hashfunktionen. Diese erlauben die Generierung von eindeutigen Werten und sind
-nur mit sehr hohem Aufwand umkehrbar. Als Hashfunktion soll eines aus der Gruppe der
-\acs{sha}-2 Algorithmen verwendet werden, da diese das zurzeit sicherste
-Verfahren sind. Die eindeutige Benutzerkennung kann nun durch die Konkatenation
-aus Plug-In Action und \acs{imsi} und der anschließenden Anwendung eines
+nur mit sehr hohem Aufwand umkehrbar. Als Hashfunktion soll eine aus der Gruppe der
+\acs{sha}-2 Algorithmen verwendet werden, da jene das zurzeit sicherste
+Verfahren verwenden. Die eindeutige Benutzerkennung kann nun durch die
+Konkatenation aus Plug-In Action und \acs{imsi} und der anschließenden Anwendung eines
 \acs{sha}-2 Algorithmus berechnet werden. Die sich dabei ergebene
 Benutzerkennung bietet maximale Anonymität bei maximalem Komfort des Benutzers.
-Diese Kennung soll nun bei jeder Übertragung mit übertragen werden.
+Die Kennung soll nun bei jeder Übertragung mit übertragen werden.

@@ -1,17 +1,17 @@
 \chapter{Leitfaden zur Plug-In Entwicklung}
 \label{cha:leitfaden}
 In diesem Kapitel wird erklärt, wie man mithilfe der Eclipse \acs{ide},
-Plug-Ins für den {\em Mobile Data Collector} entwickeln kann. Dies schließt
+Plug-Ins für den {\em Mobile Data Collector} entwickeln kann. Das schließt
 neben der Entwicklung der Smartphone-Komponente auch die Serverkomponente mit
-ein. Dieses Kapitel ist in drei Teile gegliedert. Im Ersten wird erklärt, wie
+ein. Das Kapitel ist in drei Teile gegliedert. Im Ersten wird erklärt, wie
 man die nötigen Frameworks zur Entwicklung von Plug-Ins, sowie deren
 Serverkomponente beziehen kann. Im zweiten Teil wird erklärt, wie man ein
 einfaches Plug-In entwickeln kann und im letzten Teil die dazugehörige
 Serverkomponente. Das hierbei entwickelte Plug-In trägt den Arbeitstitel ``Hallo Welt''-Plug-In.
-Dieses Plug-In speichert bei jeder Ausführung den Text ``Hallo Welt'' in der
-Datenstruktur des {\em Mobile Data Collectors}. Dieses Kapitel verzichtet dabei,
+Das Plug-In speichert bei jeder Ausführung den Text ``Hallo Welt'' in der
+Datenstruktur des {\em Mobile Data Collectors}. Dieses Kapitel verzichtet,
 aus Einfachheitsgründen, auf die Verwendung von System Services. Beispiele
-dazu können aber dem Abschnitt \ref{cha:evaluation} entnommen werden.
+dazu können dem Abschnitt \ref{cha:evaluation} entnommen werden.
 
 \section{Beziehen des Mobile Data Collection Frameworks}
 Das {\em Mobile Data Collection Framework} kann entweder von der beiliegenden CD
@@ -46,7 +46,7 @@ Implementierung der Serverkomponente im {\em mdcf-remote}-Verzeichnis befindet.
 \section{Entwicklung eines Plug-Ins}
 Die Entwicklung eines Plug-Ins wird im Folgenden anhand eines ``Hallo
 Welt''-Plug-Ins dargestellt. Dabei wird der komplette Umfang der Entwicklung
-beschrieben. Dies schließt das Beziehen der nötigen Software sowie deren
+beschrieben. Das schließt das Beziehen der nötigen Software sowie deren
 Einrichtung ein.
 
 \subsection{Einrichtung der Entwicklungsumgebung Eclipse}
@@ -83,7 +83,7 @@ MobileDataCollector}-Verzeichnis. Sind beide Projekte importiert, kann das
 eigentliche Plug-In erstellt werden.
 
 \subsection{Erstellen des Plug-In Projekts}
-Im ersten Schritt muss ein neues Android Projekt erstellt werden. Dies geschieht
+Im ersten Schritt muss ein neues Android Projekt erstellt werden. Das geschieht
 mit Eclipse wie folgt. Durch einen Rechtsklick auf den {\em Package Explorer} kann
 durch die Menüpunkte {\em New} und {\em Project\ldots} der {\em New
 Project}-Dialog geöffnet werden. In diesem wählt man unter dem Verzeichnis {\em
@@ -166,7 +166,7 @@ Plug-In auffindbar und Plug-In Informationen dem {\em Mobile Data Collector}
 verfügbar zu machen. Dazu erstellt man, im selben Package, eine Klasse {\em
 HelloWorldRegister}, die von {\em XMLPluginRegister} erbt. Zu dieser Klasse fügt
 man einen {\em Constructor} hinzu, der auf die Datei ``plugin.xml'' verweist.
-Diese Datei enthält die Plug-In Informationen im \acs{xml}-Format. Die
+Die Datei enthält die Plug-In Informationen im \acs{xml}-Format. Die
 Klasse sollte nun wie in Listing \ref{helloworldregister} aussehen.
 
 \begin{lstlisting}[label=helloworldregister,
@@ -199,7 +199,7 @@ kopieren.
 </plugininfo>
 \end{lstlisting}
 
-In dieser Konfigurationsdatei wurden folgende Parameter festgelegt.
+In der Konfigurationsdatei wurden folgende Parameter festgelegt.
 
 \begin{itemize}
   \item {\bf action}: Das Plug-In kann innerhalb des Android Systems über die
@@ -210,17 +210,16 @@ In dieser Konfigurationsdatei wurden folgende Parameter festgelegt.
   Collectors} ist ``Hello World''.
   \item {\bf period}: Das Plug-In wird alle 10.000ms bzw. alle 10s ausgeführt.
   \item {\bf duration}: Die maximale Ausführungsdauer beträgt 1.000ms. Wird
-  diese Zeit über\-schritten wird das Plug-In vom Android System terminiert.
+  die Zeit über\-schritten wird das Plug-In vom Android System terminiert.
   \item {\bf url}: Alle gesammelten Daten sollen bei einer Übertragung an die
   URL\\ {\em http://HOSTNAME:PORT/receiver} gesendet werden.
   \item {\bf transferInterval}: Nach einer Zeit von 600.000ms bzw. 10min sollen
-  alle Daten Übertragen werden. Dies schließt nur die Zeit ein in der das Plug-In aktiv war.
+  alle Daten Übertragen werden. Das schließt nur die Zeit ein in der das Plug-In
+  aktiv war.
 \end{itemize}
 
-Diese Parameter können je nach Anforderung und Konfiguration beliebig abgeändert
-werden.
-
-Weitere mögliche Konfigurationsparameter innderhalb des {\em
+Die Parameter können je nach Anforderung und Konfiguration beliebig abgeändert
+werden. Weitere mögliche Konfigurationsparameter innderhalb des {\em
 plugininfo}-Tags sind:
 
 \begin{itemize}
@@ -271,7 +270,7 @@ Konfigurationsparameter, language=xml]
 </plugininfo>
 \end{lstlisting}
 
-Ein konkretes Beispiel, indem diese Konfigurationparameter verwendet werden,
+Ein konkretes Beispiel, indem die Konfigurationparameter verwendet werden,
 kann dem Kapitel \ref{cha:evaluation} entnommen werden.
 
 \subsubsection{Konfiguration der Manifest-Datei}
@@ -321,12 +320,12 @@ ausgeführt werden kann.
 
 \subsection{Plug-In installieren und ausführen}
 Das Plug-In ist nun fertig und kann zum ersten Mal ausgeführt werden. Dazu muss
-im ersten Schritt der {\em Mobile Data Collector} installiert werden. Dies
+im ersten Schritt der {\em Mobile Data Collector} installiert werden. Das
 geschieht durch einen Rechtsklick auf das {\em Mobile\-Data\-Collector}-Projekt.
 Durch einen Klick im Kontextmenü auf {\em Run As} und {\em Android Application}
 wird der {\em Mobile Data Collector} installiert. Sollte ein Android Smartphone am
 Computer angeschlossen sein, so wird der {\em Mobile Data Collector} auf diesem
-automatisch installiert. Sollte dies nicht der Fall sein, wird der
+automatisch installiert. Sollte das nicht der Fall sein, wird der
 Android Emulator gestartet. Es ist zu Empfehlen den {\em Mobile Data Collector}
 auf einem Smartphone zu installieren, da nur auf diesem, die volle Sensorik zur
 Verfügung steht. Nach der Installation wird der {\em Mobile Data Collector}
@@ -335,10 +334,10 @@ automatisch gestartet.
 Im nächsten Schritt kann nun das eigentliche Plug-In installiert werden. Dazu
 installiert man das {\em Hello\-World\-Plugin} wie zuvor den {\em Mobile Data
 Collector}. Nach der Installation wird das Plug-In in der Plug-In Liste des {\em
-Mobile Data Collectors} angezeigt. Aktiviert man nun das Plug-In, wird dieses
-das erste mal ausgeführt. Man kann sich nun in den Plug-In Details die gespeicherten
-Daten anschauen. Navigiert man in der Datenstruktur herum, wird man
-feststellen, dass bei jeder Ausführung die Zeichenkette ``Hello World''
+Mobile Data Collectors} angezeigt. Aktiviert man das Plug-In, wird
+dieses, dass erste mal ausgeführt. Man kann sich nun in den Plug-In Details die
+gespeicherten Daten anschauen. Navigiert man sich durch die Datenstruktur, so
+wird man feststellen, dass bei jeder Ausführung die Zeichenkette ``Hello World''
 gespeichert wurde.
 
 \section{Entwicklung der Serverkomponente}
@@ -354,7 +353,7 @@ entwickelt. Hierzu werden normale Java Servlets verwendet, sowie das
 
 \subsection{Installation des Remote Frameworks}
 Das {\em Remote Framework} dient zur einfachen Implementierung der
-Serverkomponente. Diese kann mit {\em Maven} wie folgt gebaut werden.
+Serverkomponente. Es kann mit {\em Maven} wie folgt gebaut werden.
 
 \begin{lstlisting}[language=bash]
 cd mdcf-remote
@@ -489,17 +488,17 @@ public class HelloWorldContextListener extends GuiceServletContextListener {
 In dem {\em HelloWorldContextListener} wird ein {\em ServletModule} definiert.
 Dieses definiert zum einen, dass das installierte {\em MdcfRemoteModule} den
 zuvor implementierten {\em TransferRequestProcessor} verwenden soll und dass die
-Daten über das URL-Suffix {\em /receiver} empfangen werden können. Bei dem {\em
-TransferRequestReceiver} handelt es sich um ein Servlet, dass die vom Smartphone
+Daten über das \acs{url}-Suffix {\em /receiver} empfangen werden können. Bei dem
+{\em TransferRequestReceiver} handelt es sich um ein Servlet, dass die vom Smartphone
 empfangenen Daten, auf das {\em TransferRequest}-Objekt überträgt und an den
 definierten {\em TransferRequestProcessor} übergibt. Hierbei ist anzumerken,
 dass der Suffix mit der in Listing \ref{helloworldpluginxml} definierten {\em
-url} übereinstimmen muss. Letztendlich muss in der ``plugin.xml'' die URL
+url} übereinstimmen muss. Letztendlich muss in der ``plugin.xml'' die \acs{url}
 stehen, unter der das hier definierte Servlet erreichbar ist.
 
 Damit das zuvor definierte {\em ServletModule} vom Servlet Container gefunden
 werden kann, muss noch der {\em HelloWorldContextListener} über die {\em
-web.xml} dem Servlet-Container bekannt gemacht werden. Dieses ist in Listing
+web.xml} dem Servlet-Container bekannt gemacht werden. Das ist in Listing
 \ref{webxml} dargestellt.
 
 \begin{lstlisting}[label=webxml, caption=web.xml, language=xml] 
@@ -535,11 +534,9 @@ web.xml} dem Servlet-Container bekannt gemacht werden. Dieses ist in Listing
 </web-app>
 \end{lstlisting}
 
-Die Serverkomponente ist nun komplett. Durch ein {\em mvn install} kann nun das
+Die Serverkomponente ist nun komplett. Durch ein {\em mvn install} kann das
 Projekt gebaut werden. Dabei wird im {\em target}-Verzeichnis ein {\em
 WAR}-Archive erstellt. Dieses lässt sich in einem beliebigen Servlet-Container
-ausführen.
-
-Führt man die Serverkomponente aus und übertragt Daten vom {\em Mobile Data
-Collector} zum Server, wird man feststellen, dass auf der Console des Servers
+ausführen. Führt man die Serverkomponente aus und übertragt Daten vom {\em
+Mobile Data Collector} zum Server, wird man feststellen, dass auf der Console des Servers
 die eindeutige Benutzerkennung und der Wert ``Hello World'' ausgegeben wird.

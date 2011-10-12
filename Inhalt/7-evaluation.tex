@@ -2,7 +2,7 @@
 \label{cha:evaluation}
 In diesem Kapitel wird gezeigt, dass sich mithilfe des {\em Mobile Data
 Collection Frameworks} auch komplexere Plug-Ins zum Sammeln von Sensordaten
-entwickeln lassen. Dies wird anhand zweier Beispiele gezeigt. Bei diesen
+entwickeln lassen. Das wird anhand zweier Beispiele gezeigt. Bei den
 Beispielen handelt es sich zum einen um ein Plug-In zur Positionsverfolgung
 eines Benutzers sowie um eine Erweiterung des Plug-Ins, dass zusätzlich die
 Umgebungslautstärke zu jeder Position erfasst. Hierbei wird neben den Plug-Ins
@@ -14,7 +14,7 @@ sowie der Visualisierung der Daten in Form einer Web-Anwendung.
 \label{locationtracker}
 Aufbauend auf dem in Kapitel \ref{cha:leitfaden} beschriebenen ``Hallo Welt''-
 Plug-In, wurde ein Plug-In entwickelt, dass die aktuelle Position
-des Benutzers speichert und in regelmäßigen Abständen übertragt. Dieses Plug-In
+des Benutzers speichert und in regelmäßigen Abständen übertragt. Das Plug-In
 trägt den Arbeitstitel {\em Location Tracker}. Es wird dabei auf die
 wichtigsten Punkte bei der Implementierung des Plug-Ins sowie der
 Serverkomponente eingegangen.
@@ -22,7 +22,7 @@ Serverkomponente eingegangen.
 \subsection{Implementierung des Plug-Ins}
 Im Folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
 durch die es möglich wird, die aktuelle Position eines Benutzers zu verfolgen
-und diese Daten zu speichern. Das Plug-In befindet sich im {\em
+und die Daten zu speichern. Das Plug-In befindet sich im {\em
 LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
 Framework}-Projekts. Es wird sich im Folgenden, auf dem im {\em
 mdcf/LocationTracker}-Verzeichnis befindlichen Quellcode bezogen.
@@ -43,7 +43,7 @@ Hierbei wird in Zeile 1 die Methode ermittelt, um die Position des Benutzers am
 genausten zu bestimmen. Die Positionsermittlung wird innerhalb von Android
 durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
 ermittelt werden, der am Besten dem gegebenen {\em Criteria}-Objekt entspricht.
-Durch dieses können Kriterien wie z.~B. Stromverbrauch und Genauigkeit
+Durch das Objekt können Kriterien wie z.~B. Stromverbrauch und Genauigkeit
 festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
 der zurzeit beste verfügbare {\em Provider} zurückgegeben. In Zeile 2 wird nun
 die letzte bekannte Position unter Zuhilfenahme des gegebenen {\em Providers}
@@ -74,8 +74,8 @@ getPersistenceManager().save(workspace);
 
 \subsubsection{Plug-In Konfiguration}
 Um das Plug-In fertigzustellen, muss im letzten Schritt das Plug-In konfiguriert
-werden. Dies geschieht ebenfalls über die {\em plugin.xml}. Eine mögliche
-Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt. Diese
+werden. Das geschieht ebenfalls über die {\em plugin.xml}. Eine mögliche
+Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt. Die
 Konfiguration unterscheidet sich zum ``Hallo Welt''-Plug-In dadurch, dass der
 {\em LocationManager} angefordert wird und eine Beschreibung angegeben ist. Der
 {\em LocationManager} wird zur Ermittlung der aktuellen Position benötigt. Es
@@ -131,7 +131,7 @@ wurden.
 	\label{collected_data_details_locationtracker}
 \end{figure}
 
-Dieses Plug-In demonstriert somit, dass es mit dem {\em Mobile Data
+Das Plug-In demonstriert somit, dass es mit dem {\em Mobile Data
 Collection Framework} möglich ist, Plug-Ins zu entwickeln, die
 Positionsdaten sammeln können. Im nächsten Abschnitt wird gezeigt, wie die
 gesammelten Daten von einem Server empfangen, verarbeitet und visualisiert
@@ -146,14 +146,13 @@ mdcf-locationtracker-remote}-Verzeichnis, des {\em Mobile Data
 Collector}-Projektes.
 
 \subsubsection{Persistierung der Daten}
-Wie in Kapitel \ref{cha:leitfaden} beschrieben, werden nach dem Empfang der
-Daten, die Daten an einen {\em TransferRequestProcessor} übergeben. Die Klasse
-eignet sich zur Persistierung der Daten. Bevor die Daten gespeichert werden,
-sollte aber eine Überführung des allgemeinen Datenformats des {\em Mobile Data
-Collection Frameworks} in ein domänenspezifisches Datenformat stattfinden. Eine
-Überführung des allgemeinen Datenformats in ein domänenspezifisches, sowie die
-anschließende Speicherung der Daten, kann dabei wie in Listing
-\ref{datenmapping} geschehen.
+Wie in Kapitel \ref{cha:leitfaden} beschrieben, werden nach dem Empfang, die
+Daten an einen {\em TransferRequestProcessor} übergeben. In der Klasse kann
+z.~B. die Persistierung der Daten stattfinden. Bevor die Daten gespeichert
+werden, sollte aber eine Überführung des allgemeinen Datenformats des {\em Mobile Data Collection
+Frameworks} in ein domänenspezifisches stattfinden. Eine Überführung
+des allgemeinen Datenformats in ein domänenspezifisches, sowie die anschließende
+Speicherung, kann dabei wie in Listing \ref{datenmapping} implementiert werden.
 
 \begin{lstlisting}[label=datenmapping,
 caption=TransferRequestProcessorImpl.java, language=java] 
@@ -215,10 +214,10 @@ public class TransferRequestProcessorImpl implements TransferRequestProcessor {
 \end{lstlisting}
 
 In diesem Listing wird gezeigt, wie der empfangene {\em TransferRequest} auf
-ein {\em Participant}-Objekt übertragen werden kann. Ein {\em Participant} ist
-in diesem Beispiel ein Benutzer des {\em Mobile Data Collector}. Die
-Identifikation findet anhand der eindeutigen Benutzerkennung statt. Diese kann
-über die {\em getId}-Methode abgefragt werden. Sollte der {\em Participant}
+ein {\em Participant}-Objekt übertragen werden kann. Ein {\em Participant}
+stellt einen Benutzer des {\em Mobile Data Collector} dar. Die
+Identifikation findet anhand der eindeutigen Benutzerkennung statt, welche über
+die {\em getId}-Methode abgefragt werden kann. Sollte der {\em Participant}
 bereits existierten, werden die gesammelten Daten, an den bereits existierenden
 Benutzer ran gehangen, sonst wird ein neuer {\em Participant} erstellt. Das {\em
 PersistentRepository} stellt die Datenbankabstraktionsschicht dar. In den darauf
@@ -226,8 +225,8 @@ folgenden Schritten werden die Daten aus dem {\em TransferRequest} an ein
 entsprechendes {\em Location}-Objekt übergeben und der {\em Participant} wird
 gespeichert. Die Daten sind nun in einer Datenbank persistiert und stehen somit
 anderen Anwendungen zur Verfügung. In diesem Beispiel wurde zur Persistierung
-der \acf{orm} {\em Hibernate} verwendet. Dieser wird vom {\em ParticipantRepsitory}
-abstrahiert. Durch die Abstraktion steht es dem Entwickler frei ein
+der \acf{orm} {\em Hibernate} verwendet. Die Persistierungsmethode wird vom {\em
+ParticipantRepsitory} abstrahiert. Durch die Abstraktion steht es dem Entwickler frei ein
 beliebiges anderes Persistierungsframework zu verwenden.
 
 \subsubsection{Visualisierung der Daten}
@@ -275,7 +274,7 @@ ausgeführt werden.
 mvn gwt:run
 \end{lstlisting}
 
-Daraufhin startet der \acs{gwt} eigene Webserver. Dies beinhaltet auch das
+Daraufhin startet der \acs{gwt} eigene Webserver sowie das
 Servlet zum Empfang der Daten. Gibt man die entsprechende lokale IP-Adresse innerhalb der
 Plug-In Konfiguration an, so kann der Webserver die Daten vom {\em Mobile Data
 Collector} empfangen und über die Web-Anwendung darstellen.
@@ -283,15 +282,15 @@ Collector} empfangen und über die Web-Anwendung darstellen.
 \section{Plug-In zum Sammeln der Lautstärke an der aktuellen Position}
 Aufbauend auf dem in Abschnitt \ref{locationtracker} beschriebenen {\em
 Location Tracker}, wird im Folgenden ein Plug-In entwickelt, das neben der
-aktuellen Position auch die Lautstärke speichert. Dieses Plug-In trägt den
+aktuellen Position auch die Lautstärke speichert. Das Plug-In trägt den
 Arbeitstitel {\em Noise Tracker}.
 
 \subsection{Plug-In Anpassungen}
 Das Plug-In befindet sich im {\em NoiseTrackerPlugin}-Verzeichnis. Es wird sich
 im Folgenden auf dem im Verzeichnis befindlichen Quellcode bezogen.
 
-Da der {\em Location Tracker} bereits die aktuelle Position ermittelt, muss noch
-die aktuelle Lautstärke ermittelt werden. Dies ist in Listing \ref{messurenoise}
+Da der {\em Location Tracker} bereits die aktuelle Position bestimmt, muss noch
+die aktuelle Lautstärke ermittelt werden. Das ist in Listing \ref{messurenoise}
 dargestellt.
 
 \begin{lstlisting}[label=messurenoise,
@@ -314,25 +313,25 @@ recorder.stop();
 recorder.release();
 \end{lstlisting}
 
-Dabei wird zuerst ein {\em MediaRecorder} erstellt. Dieser kann dazu verwendet
-werden, um Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
+In dem Listing wird zuerst ein {\em MediaRecorder} erstellt. Der kann dazu
+verwendet werden, um Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
 Zeilen wird als Audioquelle das Mikrofon verwendet. Die Einstellungen zum
-Ausgabeformat und Audio-Encoder sind zwar notwendig aber in diesem Fall egal, da
-wie in Zeile 5 angegeben alle Daten im {\em null-Device} gespeichert werden.
+Ausgabeformat und Audio-Encoder sind zwar notwendig, aber
+irrelevant, da wie in Zeile 5 angegeben alle Daten im {\em null-Device} gespeichert werden.
 Durch die {\em prepare}- und {\em start}-Methode wird das Mikrofon reserviert
 und die Aufnahme gestartet. Die Lautstärke wird nun anhand der maximalen Amplitude
-bestimmt. Diese kann über die {\em getAmplitude}-Methode abgefragt werden. Damit
-diese Methode einen Wert zurückliefert, muss für eine bestimmte Zeitspanne
-eine Tonaufnahme erfolgen. In diesem Fall werden für eine Sekunde lang alle
-Umgebungsgeräusche aufgenommen und die maximale Amplitude bestimmt. Durch die
-{\em stop}- und {\em release}-Methode wird die Aufnahme angehalten und das
-Mikrofon wieder freigegeben. Diese Art zur Bestimmung der Lautstärke wurde dem
-Beispielprogramm {\em NoiseAlert} entnommen\cite{noisealert}. Dabei ist zu
+bestimmt, welchen über die {\em getAmplitude}-Methode abgefragt werden kann.
+Damit die Methode einen brauchbaren Wert zurückliefert, muss für eine bestimmte
+Zeitspanne eine Tonaufnahme erfolgen. In diesem Fall werden für eine Sekunde
+lang, alle Umgebungsgeräusche aufgenommen und die maximale Amplitude bestimmt.
+Durch die {\em stop}- und {\em release}-Methode wird die Aufnahme angehalten und das
+Mikrofon wieder freigegeben. Diese Art zur Lautstärkenbestimmung wurde dem
+Beispielprogramm {\em NoiseAlert} entnommen~\cite{noisealert}. Dabei ist zu
 erwähnen, dass die maximale Amplitude zwischen verschiedenen Geräten
-unterschiedlich sein kann. Bei einer Auswertung ist deswegen eine Normalisierung
+variieren kann. Bei einer Auswertung ist deswegen eine Normalisierung
 der Daten erforderlich.
 
-Um die Amplitude nun zum bisherigen Datenmodell hinzuzufügen, ist die Zeile
+Um die Amplitude zum bisherigen Datenmodell hinzuzufügen, ist die Zeile
 aus Listing \ref{storeamplitude} hinzuzufügen.
 
 \begin{lstlisting}[label=storeamplitude,
@@ -350,10 +349,10 @@ caption=Permission für Tonaufnahmen, language=xml]
 	android:name="android.permission.RECORD_AUDIO" />
 \end{lstlisting}
 
-Bei Verwendung dieser {\em Permission} sei darauf hingewiesen, dass der Benutzer
-wie in Abbildung \ref{activation_recordaudio_warning} eine Warnung bei der
+Bei der Verwendung der {\em Permission} sei darauf hingewiesen, dass der
+Benutzer wie in Abbildung \ref{activation_recordaudio_warning} eine Warnung bei der
 Aktivierung erhält, da durch die Aufnahme von Ton personenbezogene Daten erhoben
-werden können. Der {\em Mobile Data Collector} ist aber nicht in der Lage zu
+werden können. Der {\em Mobile Data Collector} ist nicht in der Lage zu
 protokollieren, was wann aufgenommen wurde, sondern kann nur das Resultat
 speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
 
@@ -364,8 +363,8 @@ speichern. Siehe hierzu auch Abschnitt \ref{problemsofimplementation}.
 	\label{activation_recordaudio_warning}
 \end{figure}
 
-Das Plug-In ist nun fertig angepasst und kann zur Ermittlung der Lautstärke
-verwendet werden.
+Das Plug-In ist nun vollständig implementiert und kann zur Ermittlung der
+Lautstärke verwendet werden.
 
 \subsection{Anpassungen der Serverkomponente}
 Die Anpassungen an der Serverkomponente halten sich ebenfalls in Grenzen. Bei
@@ -387,8 +386,8 @@ Ausgabe aller Positionsdaten hinzugefügt. Siehe hierzu Abbildung
 Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
 
 \begin{itemize}
-  \item Das Erstellen von Plug-Ins für reale Anwendungsszenarien, wie die
-  Erfassung von Position und Umgebungsinformationen z.~B. die Lautstärke, sind
+  \item Die Erstellung von Plug-Ins für reale Anwendungsszenarien, z.~B. die
+  Erfassung der aktuellen Positionen und Lautstärke, ist
   mit dem {\em Mobile Data Collection Framework} möglich.
   \item Das allgemeine Datenformat erlaubt das Speichern von beliebigen
   Informationen und schränkt einen Plug-In Entwickler nur bedingt ein.
@@ -397,8 +396,9 @@ Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
   \item Bei der Verwendung von Android-{\em Permissions} die den Zugriff auf
   personenbezogene Daten ermöglichen, wird der Benutzer vor der Aktivierung
   gewarnt.
-  \item Der Zugriff auf personenbezogene Daten bzw. alle gesammelten Daten
-  lassen sich zu jedem Zeitpunkt einsehen.
+  \item Die Zugriffe auf die sicheren Android System Services werden
+  protokolliert und sind, wie die vom Plug-In gesammelten Daten, zu jedem
+  Zeitpunkt einsehbar.
   \item Die gesammelten Daten lassen sich anonym an externe Server übertragen
   und persistieren. Die serverseitige Persistenzart ist frei wählbar.
   \item Die Visualisierung hat gezeigt, dass die Daten auch verwertbar sind. Der

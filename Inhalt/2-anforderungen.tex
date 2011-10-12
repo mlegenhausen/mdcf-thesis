@@ -1,11 +1,11 @@
 \chapter{Anforderungsanalyse}
 \label{cha:anforderungsanalyse}
-In diesem Kapitel werden die aus der Aufgabenstellung sich ergebenen
+In diesem Kapitel werden die sich aus der Aufgabenstellung ergebenen
 Anforderungen genauer analysiert. Es wird dabei geklärt, in welchem Umfang die
-einzelnen Anforderungen bearbeitet werden müssen.
+einzelnen Aspekte bearbeitet werden müssen.
 
 Die sich aus der Aufgabenstellung ergeben Anforderungen sind das Sammeln von
-Sensordaten,Transparenz, Anonymität, ein Erweiterungssystem, die
+Sensordaten, Transparenz, Anonymität, ein Erweiterungssystem, die
 Mög\-lich\-keit der Datenspeicherung sowie die regelmäßige Übertragung von Daten
 an einen Server.
 
@@ -30,10 +30,10 @@ aktuelle Smartphones:
 \end{itemize}
 
 Die Anwendung soll in der Lage sein entsprechend auf die Sensorik zuzugreifen
-(falls vorhanden) und diese Daten zu verarbeiten und zu sammeln. Hierbei ist
-aber zwischen Sensoren zu unterscheiden, die potenziell personenbezogene Daten
-sammeln und die die keine personenbezogenen Daten sammeln. Nach §3 des
-Bundesdatenschutzgesetzes wird der Begriff der personenbezogenen Daten wie folgt
+(falls vorhanden) und alle anfallenden Daten zu verarbeiten und zu speichern.
+Hierbei ist jedoch zwischen Sensoren zu unterscheiden, die potenziell
+personenbezogene Daten sammeln und die, die keine personenbezogenen Daten
+sammeln. Nach §3 des Bundesdatenschutzgesetzes wird der Begriff der personenbezogenen Daten wie folgt
 definiert:
 
 \begin{quote}
@@ -41,49 +41,49 @@ Personenbezogene Daten sind Einzelangaben über persönliche oder
 sachliche Verhältnisse einer bestimmten oder bestimmbaren natürlichen Person.
 \end{quote}
 
-Unter Einzelangaben sind z.~B. der Name, Telefonnummer, Adresse zu verstehen
-während sachliche Verhältnisse bedeutet, dass sich über bestimmte Daten auf
-bestimmte Personen schließen lässt. Letzteres ist im Rahmen dieser Arbeit von
-größter Bedeutung.
+Unter Einzelangaben sind z.~B. der Name, die Telefonnummer und die Adresse zu
+verstehen, während sachliche Verhältnisse bedeutet, dass sich über
+Daten auf eindeutige Personen schließen lässt. Letzteres ist im Rahmen der
+Arbeit von größter Bedeutung.
 
-Die Sensorik die potenziell personenbezogene Daten sammeln sind
+Die Sensorik die potenziell personenbezogene Daten sammeln, sind
 Mobilfunk, \acs{gps}, \acs{wlan}, Bluetooth, Kamera und Mikrofon. Die
 hierbei anfallenden Daten sind die Position, verfügbare Netzwerke in der
-Umgebung, Ton sowie Bildaufnahmen. Über entsprechende Auswertung dieser Daten
+Umgebung, Ton sowie Bildaufnahmen. Über entsprechende Auswertung der Daten
 lässt sich auf bestimmte Personen schließen. Diese Daten sind somit besonders
-schützenswert. Die zu entwickelnde Anwendung sollte somit entsprechende
-Schutzmechanismen verfügen, die den Zugriff auf diese Daten regelt.
+schützenswert. Die zu entwickelnde Anwendung sollte somit über entsprechende
+Schutzmechanismen verfügen, die den Zugriff auf solche Daten regelt.
 
 Hierbei ist anzumerken, dass die Anwendung, nach Definition der
 Aufgabenstellung, nur in der Lage sein muss Daten zu sammeln, die von der
-Sensorik stammt. Die Ermittlung von Daten wie z.~B. dem Benutzerverhalten ist
+Sensorik stammen. Die Ermittlung von Daten wie z.~B. dem Benutzerverhalten ist
 nicht zu berücksichtigen.
 
 \section{Transparenz}
 \label{sec:transparenz}
-Das größte Gewicht im Rahmen dieser Masterarbeit hat die Anforderung der
-Transparenz. Mit Transparenz wird hierbei nicht, wie oft in der Informatik
-gemeint, dass ein bestimmter Prozess ``unsichtbar'' für den Benutzer
+Das größte Gewicht im Rahmen der Masterarbeit hat die Anforderung der
+Transparenz. Mit Transparenz ist hierbei nicht gemeint, wie oft in der
+Informatik, dass ein bestimmter Prozess ``unsichtbar'' für den Benutzer
 abläuft~\cite{transparenz}. Im Rahmen der Erhebung von personenbezogenen Daten
 bedeutet Transparenz, dass der Benutzer einen tiefen Einblick darin erhält,
-welche Daten, wie über ihn gesammelt werden. Dies bedeutet, dass folgende
+welche Daten, wie über ihn gesammelt werden. Das bedeutet, dass folgende
 Anforderungen an die transparente Datenerhebung gestellt werden:
 
 \begin{itemize}
-  \item Der Benutzer erhält zu jedem Zeitpunkt, Einblick in die bisher
+  \item Der Benutzer erhält zu jedem Zeitpunkt Einblick in die bisher
   gesammelten personenbezogenen Daten.
-  \item Der Zugriff auf System Ressourcen, wie z.~B. auf das \acs{gps} wird mit
+  \item Der Zugriff auf System Ressourcen, wie z.~B. auf das \acs{gps} wird 
   protokolliert. Dadurch kann ein Benutzer nachvollziehen, auf welche Daten
   zugegriffen und welche Daten gespeichert wurden.
   \item Vor der ersten Datenerhebung kann sich der Benutzer darüber informieren,
-  welche persönlichen Daten, wann über ihn gesammelt werden.
-  \item Eine Verschleierung, also das erheben von persönlichen Daten
-  und deren Übertragung, ohne die Zustimmung des Benutzers soll verhindert
+  wann welche persönlichen Daten, über ihn gesammelt werden.
+  \item Eine Verschleierung, also das Erheben persönlichen Daten
+  und deren Übertragung, ohne die Zustimmung des Benutzers, soll verhindert
   werden.
-  \item Der Benutzer soll Kontrolle darüber haben, wann Daten über ihn erhoben
-  werden sollen und wann nicht.
+  \item Der Benutzer erhält Kontrolle darüber, zu welchem Zeitpunkt Daten über
+  ihn erhoben werden und wann nicht.
   \item Vor einer Übertragung der Daten, an einen externen Server, muss der
-  Benutzer zustimmen. Sollte er der Übertragung nicht zustimmen, sollen die
+  Benutzer zustimmen. Sollte er der Übertragung nicht zustimmen, müssen die
   erhobenen Daten verworfen werden.
 \end{itemize}
 
@@ -91,7 +91,7 @@ Anforderungen an die transparente Datenerhebung gestellt werden:
 \label{anonym}
 Anonymität beschreibt den Zustand einer Person oder Gruppe, die
 nicht identifiziert werden kann. Bei der Art von Anonymität unterscheidet man
-verschiedene Abstufungen~\cite{anonymitaet}:
+verschiedene Kategorien~\cite{anonymitaet}:
 \begin{itemize}
   \item Formal anonym: Eindeutige Zuordnungsmerkmale (z.~B. Namen usw.) sind
   entfernt, die Daten ansonsten unverändert (das heißt eine leichte Zuordnung
@@ -101,24 +101,23 @@ verschiedene Abstufungen~\cite{anonymitaet}:
   \item Komplett anonym: Die Zuordnung zu einzelnen Personen ist ausgeschlossen.
 \end{itemize}
 
-Im Rahmen der Aufgabenstellung soll eine Anonymisierung des Benutzers
-von ``formal anonym'' bis ``faktisch anonym'' ermöglicht werden. Dies bedeutet,
-dass es nicht möglich sein soll, eindeutige Merkmale eines Benutzers zu sammeln
-(z.~B. \acs{imsi}, Telefonnummer) und zum anderen, eine Zuordnung zu realen
-Personen anhand der Daten erschwert wird.
+Im Rahmen der Aufgabenstellung soll eine Anonymisierung des Benutzers von
+``formal anonym'' bis ``faktisch anonym'' ermöglicht werden. Das bedeutet zum
+einen, dass es nicht möglich sein soll, eindeutige Merkmale eines Benutzers zu
+sammeln (z.~B. \acs{imsi}, Telefonnummer) und zum anderen, eine Zuordnung zu
+realen Personen anhand der Daten zu erschweren.
 
-Bei der Anonymisierung der Daten ergibt sich aber ein Problem, bei der
-Zuordnung von einzelnen Datensätzen, die in regelmäßigen Abständen an einen
-Server übertragen werden. Werden zwei Datensätze A und B zu zwei
+Beim regelmäßigen übersenden von Datensätzen an den Server, treten durch die
+Anonymisierung Probleme beim zuordnen auf.Werden zwei Datensätze A und B zu zwei
 unterschiedlichen Zeitpunkten übertragen, ist es nicht möglich, die
 Datensätze A und B einander zuzuordnen. Hierbei ergibt sich nun die
-Anforderung, ein Verfahren zu entwickeln, dass dieses Problem löst und die
-trotzdem die Anonymität des Benutzers bewahrt.
+Anforderung, ein Verfahren zu entwickeln, dass das Problem löst und
+trotzdem die Anonymität des Benutzers wahrt.
 
 \section{Erweiterungssystem}
 Wie \acs{boinc} soll die zu entwickelnde Anwendung,
-nur ein Grundgerüst darstellen. Es soll sich durch Erweiterungen erweitern
-lassen. Die Anforderung besteht also darin, ein bestehendes Erweiterungssystem
+nur ein Grundgerüst darstellen und sich durch Erweiterungen ausbauen
+lassen. Die Aufgabe besteht also darin, ein bestehendes Erweiterungssystem
 in Android zu integrieren, oder ein eigenes zu entwickeln.
 
 Anforderungen an das Erweiterungssystem:
@@ -127,7 +126,7 @@ Anforderungen an das Erweiterungssystem:
   \item Der Benutzer soll die Möglichkeit haben neue Erweiterungen zu
   installieren und zu deinstallieren.
    \item Die Installation neuer Erweiterungen soll für den Benutzer der
-   Anwendung möglichst einfach sein z.~B. durch die Bereitstellung eines
+   Anwendung möglichst unproblematisch sein z.~B. durch die Bereitstellung eines
    {\em Markets}.
   \item Das Erweiterungssystem soll eine Bibliothek liefern, über die es möglich
   ist, neue Erweiterungen möglichst einfach zu erstellen.
@@ -135,27 +134,27 @@ Anforderungen an das Erweiterungssystem:
 
 \section{Datenspeicherung}
 Die von den Erweiterungen gesammelten Daten müssen auf dem Gerät
-zwischengespeichert werden, bevor diese übertragen werden dürfen. Der Benutzer
-soll nämlich die Möglichkeit besitzen, sich die gesammelten Daten, vor einer
-Übertragung zu kontrollieren. Deswegen ist ein Datenmodell zu entwickeln, dass
+zwischengespeichert werden, bevor eine Übertragung stattfinden darf. Der
+Benutzer soll die Möglichkeit besitzen, sich die gesammelten Daten, vor einer
+Übertragung zu kontrollieren. Deswegen ist ein Datenmodell zu entwickeln, das
 es ermöglicht, Daten von beliebigen Erweiterungen zu speichern. Der Entwickler
 einer Erweiterung soll dabei aber so wenig wie möglich bei der Wahl seines
 Datenmodells eingeschränkt werden.
 
 \section{Datenübertragung}
-Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Ab-ständen,
-an einen Server übertragen werden. Dies soll aber nicht automatisch geschehen,
-sondern es soll der Benutzer darauf hingewiesen werden, das neue Daten zur
+Die von den Erweiterungen gesammelten Daten sollen in regelmäßigen Ab\-ständen
+an einen Server übertragen werden. Das soll aber nicht automatisch geschehen,
+sondern es soll der Benutzer darauf hingewiesen werden, dass neue Daten zur
 Übermittelung bereitstehen. Dadurch soll der Benutzer die Möglichkeit haben,
 vor einer Übertragung die Daten zu kontrollieren. Ist ein Benutzer nicht mit der
-Übertragung der Daten einverstanden, so soll diese Übertragung verworfen werden
+Übertragung der Daten einverstanden, so soll die Übertragung verworfen werden
 können (Siehe \ref{sec:transparenz}). Des Weiteren soll die Möglichkeit bestehen
-die Übertragung zu einem späteren Zeitpunkt auszuführen. Dies ist dann nützlich,
+die Übertragung zu einem späteren Zeitpunkt auszuführen. Das ist dann notwendig,
 wenn eine Übertragung z.~B. über das Mobilfunknetz für den Benutzer zu
 kostenintensiv ist.
 
 Für die Übertragung der Daten ist ein entsprechendes Datenformat und
-Über-tragungsprotokoll zu wählen. Beim Datenformat ist darauf zu achten, ein
+Über\-tragungsprotokoll zu wählen. Beim Datenformat ist darauf zu achten, ein
 Format zu wählen, das einen geringen Overhead aufweist, da die Bandbreite im
 mobilen Bereich stark limitiert ist.
 
