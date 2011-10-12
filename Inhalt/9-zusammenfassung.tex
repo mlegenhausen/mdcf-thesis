@@ -1,43 +1,43 @@
 \chapter{Zusammenfassung und Ausblick}
 \label{cha:zusammenfassung}
-Im Rahmen dieser Masterarbeit wurde ein Softwaresystem entwickelt, das eine
-vertrauenswürdige Plattform darstellen kann, von der Benutzer und Entwickler
-gleichermaßen profitieren können. Der Benutzer erhält eine Anwendung, mit der er
-mehr Möglichkeiten hat zur informationellen Selbstbestimmung. Er kann selbst
-entscheiden, wann, welche Daten, er wem freigeben möchte und kann der Freigabe
-auch widersprechen. Der Entwickler im Gegenzug erhält eine Plattform, auf der er
-Anwendungen zum Sammeln von Sensordaten entwickeln kann, ohne sich selbst um das
-Thema Transparenz kümmern zu müssen. Das kann Zeit und somit auch Geld sparen.
-Auch kann er das mögliche Vertrauen, welches in das System gesetzt wird, auf
-seine Anwendung übertragen. Ein Benutzer ist dadurch eher gewillt, eine für die
-Plattform entwickelte Anwendung zu verwenden, die personenbezogene Daten
+Im Rahmen der vorliegenden Arbeit wurde ein Softwaresystem entwickelt, das eine
+vertrauenswürdige Plattform darstellen kann und von der Benutzer und Entwickler
+gleichermaßen profitieren. Der Benutzer erhält eine Anwendung, anhand derer er
+mehr Möglichkeiten zur informationellen Selbstbestimmung hat. Er kann selbst
+entscheiden, wann er welche Daten wem freigeben bzw. ob er der Freigabe
+widersprechen möchte. Im Gegenzug erhält der Entwickler eine Plattform, auf der
+er Anwendungen zum Sammeln von Sensordaten entwickeln kann, ohne sich selbst um
+die Frage nach der Transparenz kümmern zu müssen. Dies spart Zeit und somit auch
+Geld. Auch kann er das mögliche Vertrauen, welches in das System gesetzt wird,
+auf seine Anwendung übertragen. Ein Benutzer ist dadurch eher gewillt, eine für
+die Plattform entwickelte Anwendung zu verwenden, die personenbezogene Daten
 sammelt.
 
-Das entwickelte Softwaresystem besteht aus zwei Teilen. Der erste Teil besteht
-aus einer Android Anwendung, dem {\em Mobile Data Collector}, welche der
+Das entwickelte Softwaresystem setzt sich aus zwei Teilen zusammen. Der erste
+Teil besteht aus einer Android Anwendung, dem {\em Mobile Data Collector}, welche der
 Benutzer auf seinem Smartphone installiert und verwendet. Der andere Teil
-beinhaltet ein Rahmenwerk mit dem Entwickler Erweiterungen bzw. Plug-Ins zum
+beinhaltet ein Rahmenwerk, mit dem Entwickler Erweiterungen bzw. Plug-Ins zum
 Sammeln von Daten, für den {\em Mobile Data Collector} entwickeln können.
 
 Der {\em Mobile Data Collector} erlaubt durch seine grafische Oberfläche die
-einfache Verwaltung von Plug-Ins. Der Benutzer kann Plug-Ins aktivieren und
-deaktivieren und kann somit entscheiden, wann Daten über ihn gesammelt werden
-sollen. Des Weiteren kann er über die grafische Oberfläche zu jedem Zeitpunkt
-einsehen, welche Daten über ihn angefordert und letztendlich gesammelt wurden.
-Dazu werden möglichst viele Aktivitäten des Plug-Ins protokolliert. War ein
-Plug-In für eine bestimmte Zeitspanne aktiv und möchte seine Daten übertragen,
-so kann der Benutzer vor der Übertragung entscheiden, ob er die gesammelten
-Daten freigeben will oder nicht. Er kann auch die Übertragung beliebig
-verzögern, um den Übertragungszeitpunkt selbst wählen zu können. Dadurch kann
-bei der Verwendung mobiler Datenverbindungen Geld bzw. Datenvolumen gespart
-werden. Gefahren, die von einem Plug-In ausgehen könnten, werden dem Benutzer
-vor der ersten Aktivierung angezeigt. Dadurch soll der Schaden der durch die
-Ausführung eines Plug-Ins entstehen kann minimiert werden.
+einfache Verwaltung von Plug-Ins. Der Benutzer kann sie aktivieren und
+deaktivieren und somit entscheiden, wann Daten über ihn gesammelt werden sollen.
+Des Weiteren kann er über die grafische Oberfläche zu jedem Zeitpunkt einsehen,
+welche Daten über ihn angefordert und letztendlich gesammelt wurden. Dazu werden
+möglichst viele Aktivitäten des Plug-Ins protokolliert. Ist ein Plug-In für eine
+bestimmte Zeitspanne aktiv gewesen und möchte seine Daten übertragen, so kann
+der Benutzer vor der Übertragung entscheiden, ob er die gesammelten Daten
+freigeben will oder nicht. Auch kann er die Übertragung beliebig verzögern, um
+den Übertragungszeitpunkt selbst zu wählen. Dadurch kann bei der Verwendung
+mobiler Datenverbindungen Geld bzw. Datenvolumen gespart werden. Gefahren, die
+von einem Plug-In ausgehen könnten, werden dem Benutzer vor der ersten
+Aktivierung angezeigt. Dadurch soll der Schaden der durch die Ausführung eines
+Plug-Ins entstehen kann, minimiert werden.
 
-Das Rahmenwerk für Entwickler besteht selbst auch aus zwei Komponenten. Zum
+Auch das Rahmenwerk für Entwickler besteht aus zwei Komponenten. Zum
 einem aus dem {\em Mobile Data Collection Framework}, das zur Entwicklung von
-Plug-Ins verwendet wird sowie einem serverseitigen Framework zum Empfang der
-gesammelten Daten. Die Frameworks erlauben die einfache Entwicklung von
+Plug-Ins verwendet wird, zum anderen einem serverseitigen Framework zum Empfang
+der gesammelten Daten. Die Frameworks erlauben die einfache Entwicklung von
 Anwendungen zum Sammeln von Sensordaten und einer dazugehörigen
 Serverkomponente, um die Daten vom {\em Mobile Data Collector} zu empfangen.
 
@@ -51,16 +51,16 @@ gezeigt, dass sich mit dem {\em Mobile Data Collection Framework} Plug-Ins für
 reale Anwendungsszenarien entwickeln lassen. So ist die Aufnahme von
 Positionsdaten (die wohl wichtigste Art von Daten im Bereich der mobilen
 Datenerfassung) relativ einfach möglich. Auch lässt sich das Plug-In einfach um
-die Erfassung zusätzlicher Daten erweitern. In diesem Fall um die aktuelle
-Umgebungslautstärke. Hierbei wurde bewusst darauf geachtet, den Entwickler so
-wenig wie möglich bei der Entwicklung von Plug-Ins einzuschränken. Die
-Evaluation zeigt aber auch die zurzeit bestehenden Überwachungsgrenzen des {\em
-Mobile Data Collectors}. So ist eine Protokollierung von Zugriffen auf die
-Kamera und das Mikrofon nicht bzw. nur mit relativ großem Aufwand möglich.
-Das Problem lässt sich am besten durch den Einsatz des \acs{osgi}-Frameworks
-lösen. Hierbei bleibt abzuwarten bis Frameworks wie Dynamix den nötigen Reifegrad
-erreicht haben, um diese im produktiven Einsatz zu verwenden.
+die Erfassung zusätzlicher Daten erweitern, im hier dargestellten Beispiel um
+die aktuelle Umgebungslautstärke. Hierbei wurde bewusst darauf geachtet, den
+Entwickler so wenig wie möglich bei der Entwicklung von Plug-Ins einzuschränken.
+Die Evaluation zeigt aber auch die zurzeit bestehenden Überwachungsgrenzen des
+{\em Mobile Data Collectors}. So ist eine Protokollierung von Zugriffen auf die
+Kamera und das Mikrofon nicht bzw. nur mit relativ großem Aufwand möglich. Das
+Problem lässt sich am besten durch den Einsatz des \acs{osgi}-Frameworks lösen.
+Um diese im produktiven Einsatz verwenden zu können, muss jedoch abgewartet
+werden, bis Frameworks wie Dynamix den nötigen Reifegrad erreicht haben.
 
-Das zukünftige Anwendungsgebiet des {\em Mobile Data Collector} liegen in
+Das zukünftige Anwendungsgebiet des {\em Mobile Data Collector} liegt in
 erster Linie im Bereich der Forschung. Hier existiert eine Vielzahl von
-Projekten, die auf die Erhebung von personenbezogenen Daten angewiesen sind.
+Projekten, die auf die Erhebung von personenbezogenen Daten angewiesen ist.
