@@ -1,23 +1,23 @@
 \chapter{Leitfaden zur Plug-In Entwicklung}
 \label{cha:leitfaden}
-In diesem Kapitel wird erklärt, wie man mithilfe der Eclipse \acs{ide},
-Plug-Ins für den {\em Mobile Data Collector} entwickeln kann. Das schließt
-neben der Entwicklung der Smartphone-Komponente auch die Serverkomponente mit
-ein. Das Kapitel ist in drei Teile gegliedert. Im Ersten wird erklärt, wie
-man die nötigen Frameworks zur Entwicklung von Plug-Ins, sowie deren
-Serverkomponente beziehen kann. Im zweiten Teil wird erklärt, wie man ein
-einfaches Plug-In entwickeln kann und im letzten Teil die dazugehörige
-Serverkomponente. Das hierbei entwickelte Plug-In trägt den Arbeitstitel ``Hallo Welt''-Plug-In.
-Das Plug-In speichert bei jeder Ausführung den Text ``Hallo Welt'' in der
-Datenstruktur des {\em Mobile Data Collectors}. Dieses Kapitel verzichtet,
-aus Einfachheitsgründen, auf die Verwendung von {\em Android System Services}.
+In diesem Kapitel wird erklärt, wie man mithilfe der Eclipse \acs{ide}, Plug-Ins
+für den {\em Mobile Data Collector} entwickeln kann. Das schließt neben der
+Entwicklung der Smartphone-Komponente auch die Serverkomponente ein. Das Kapitel
+ist in drei Teile gegliedert. Im ersten wird erklärt, wie man die nötigen
+Frameworks zur Entwicklung von Plug-Ins, sowie deren Serverkomponente beziehen
+kann. Im zweiten wird die Entwicklung eines einfachen Plug-Ins erklärt, und im
+letzten die Entwicklung der dazugehörigen Serverkomponente. Das hierbei
+entwickelte Plug-In trägt den Arbeitstitel ``Hallo Welt''-Plug-In. Das Plug-In
+speichert bei jeder Ausführung den Text ``Hallo Welt'' in der Datenstruktur des
+{\em Mobile Data Collectors}. Dieses Kapitel verzichtet aus
+Gründen der Einfachheit, auf die Verwendung von {\em Android System Services}.
 Beispiele dazu können dem Abschnitt \ref{cha:evaluation} entnommen werden.
 
 \section{Beziehen des Mobile Data Collection Frameworks}
 Das {\em Mobile Data Collection Framework} kann entweder von der beiliegenden CD
 oder von GitHub über die \acs{url} \url{https://github.com/mlegenhausen/mdcf}
 bezogen werden. Das Framework kann als Archiv heruntergeladen oder per
-Git geklont werden. Bei Git handelt es sich um verteiltes
+Git geklont werden. Bei Git handelt es sich um ein verteiltes
 Versionskontrollsystem, das von \url{http://git-scm.com/} heruntergeladen werden kann.
 
 Um das Projekt per Git zu klonen, muss Folgendes auf der Kommandozeile
@@ -163,11 +163,11 @@ wieder gespeichert.
 
 \subsubsection{Implementierung des Broadcast Receivers}
 Als nächstes muss ein {\em Broadcast Receiver} implementiert werden, um das
-Plug-In auffindbar und Plug-In Informationen dem {\em Mobile Data Collector}
+Plug-In auffindbar und Plug-In-Informationen dem {\em Mobile Data Collector}
 verfügbar zu machen. Dazu erstellt man, im selben Package, eine Klasse {\em
 HelloWorldRegister}, die von {\em XMLPluginRegister} erbt. Zu der Klasse fügt
 man einen {\em Constructor} hinzu, der auf die Datei ``plugin.xml'' verweist.
-Die Datei enthält die Plug-In Informationen im \acs{xml}-Format. Die
+Die Datei enthält die Plug-In-Informationen im \acs{xml}-Format. Die
 Klasse sollte danach wie in Listing \ref{helloworldregister} aussehen.
 
 \begin{lstlisting}[label=helloworldregister,
