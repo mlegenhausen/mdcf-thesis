@@ -15,11 +15,11 @@ Die Android-Klassenbibliothek ist dem {\em Java Development Kit}
 nachempfunden und enthält alle wichtigen Standardkomponenten sowie Erweiterungen für z.~B.
 die Bereiche Medienwiedergabe, 2D/3D Grafik, {\em SQLite}~\cite{whatisandroid}.
 
-Android Anwendungen bestehen aus einer oder mehreren Komponenten. Die
-Komponenten sind {\em Activities}, {\em Services}, {\em Content Providers} und {\em Broadcast
-Receiver}. Jede der Komponenten spielt jeweils eine spezifische Rolle
-innerhalb der Anwendung. Sie besitzen jeweils einen eigenen Lebenszyklus, der
-beschreibt wie diese erstellt und zerstört werden.
+Android-Anwendungen bestehen aus einer oder mehreren Komponenten. Die
+Komponenten sind {\em Activities}, {\em Services}, {\em Content Providers} und
+{\em Broadcast Receiver}. Jede der Komponenten spielt jeweils eine spezifische
+Rolle innerhalb der Anwendung. Sie besitzen jeweils einen eigenen Lebenszyklus,
+der beschreibt wie diese erstellt und zerstört werden.
 
 \begin{itemize}
   \item Eine {\bf Activity} repräsentiert einen Bildschirm mit
@@ -50,7 +50,7 @@ beschreibt wie diese erstellt und zerstört werden.
 \end{itemize}
 
 Grundsätzlich kann jede Komponente eine beliebige andere Komponente starten. Da
-aber jede Anwendung in ihrem eigenen Prozess läuft, verbietet das Android System
+aber jede Anwendung in ihrem eigenen Prozess läuft, verbietet das Android-System
 die direkte Aktivierung einer Komponente. Nur das Android-Betriebssystem kann
 dies. Um eine andere Komponente zu starten, muss deswegen eine Nachricht an das
 Betriebssystem gesendet werden. Diese Nachricht wird {\bf Intent} genannt. {\em
@@ -61,7 +61,7 @@ spezifiziert. Dabei kann ein {\em Intent} beliebige Daten enthalten, die zur
 Erfüllung der Aufgabe in der anderen Komponente benötigt werden. Das kann z.~B.
 dazu genutzt werden, den Browser mit einer bestimmten \acs{url} zu starten.
 
-Bevor das Android System eine Anwendung starten kann, muss das System wissen,
+Bevor das Android-System eine Anwendung starten kann, muss das System wissen,
 aus welchen Komponenten die Anwendung besteht. Das wird in einer {\bf Manifest}
 Datei definiert, der {\em AndroidManifest.xml}. In dieser Datei müssen alle von
 der Anwendung implementierten Komponenten eingetragen werden, sonst sind diese
@@ -106,8 +106,8 @@ Die zuvor beschriebenen Konzepte sollen einen Einstieg in die Android-Plattform
 erlauben. Für eine genauere Beschreibung zur Programmierung von
 Android-Anwendungen, sei die Dokumentation unter
 \url{http://developer.android.com} empfohlen. Im Folgenden wird nur noch
-vertieft auf das Security-Konzept von Android, die Android System Services sowie
-die \acf{ipc} eingegangen, da diese zum Verständnis der Masterarbeit
+vertieft auf das Security-Konzept von Android, die {\em Android System Services}
+sowie die \acf{ipc} eingegangen, da diese zum Verständnis der Masterarbeit
 erforderlich sind.
 
 \subsection{Das Security-Konzept von Android}
@@ -116,7 +116,7 @@ Jede installierte Anwendung läuft auf Android in einer Sandbox. Die Sandbox
 besitzt die folgenden Eigenschaften~\cite{androidfundamentals}:
 
 \begin{itemize}
-  \item Das Android Betriebssystem ist ein Mehrbenutzer Linux-System, in der
+  \item Das Android-Betriebssystem ist ein Mehrbenutzer Linux-System, in der
   jede Anwendung ein anderer Benutzer ist.
   \item Das bedeutet, dass jede Applikation eine eindeutige {\em Linux User ID}
   erhält und alle Anwendungsdateien nur von der Anwendung selbst zugegriffen
@@ -163,18 +163,18 @@ stattfinden soll. Bei der Verwendung von \acs{aidl} ist Android zuständig für
 die Serialisierung aller Parameter und Rückgabewerte~\cite{androidaidl}.
 
 \subsection{Android System Services}
-Zur Verwendung von gemeinsamen Ressourcen existieren systemweite Services. Jeder
-Service stellt eine entsprechende Schnittstelle zur Verfügung. Der Zugriff auf
-eine Ressource über einen Service kann konkurrierend stattfinden. Über die
-Services kann zum einen auf die Sensorik zugegriffen werden, zum anderen auf
-systeminterne Dienste. Da über diese auf personenbezogene Daten und
-systemkritische Konfigurationen zugegriffen werden kann, sind jene Services
-durch Zugriffsrechte geschützt. Die Überprüfung der Zugriffsrechte findet
-innerhalb des Services statt. Dabei wird feingranular zwischen
-verschiedenen Rechten unterschieden. So wird z.~B. beim Service zur Ermittlung
-der aktuellen Position zwischen den Rechten zur Standortbestimmung per Mobilfunk
-und per \acs{gps} unterschieden, da die Bestimmung per Mobilfunk sehr viel
-ungenauer ist als per \acs{gps}.
+Zur Verwendung von gemeinsamen Ressourcen existieren systemweite {\em Android
+System Services}. Jeder Service stellt eine entsprechende Schnittstelle zur
+Verfügung. Der Zugriff auf eine Ressource über einen Service kann konkurrierend
+stattfinden. Über die Services kann zum einen auf die Sensorik zugegriffen
+werden, zum anderen auf systeminterne Dienste. Da über diese auf
+personenbezogene Daten und systemkritische Konfigurationen zugegriffen werden
+kann, sind jene Services durch Zugriffsrechte geschützt. Die Überprüfung der
+Zugriffsrechte findet innerhalb des Services statt. Dabei wird feingranular
+zwischen verschiedenen Rechten unterschieden. So wird z.~B. beim Service zur
+Ermittlung der aktuellen Position zwischen den Rechten zur Standortbestimmung
+per Mobilfunk und per \acs{gps} unterschieden, da die Bestimmung per Mobilfunk
+sehr viel ungenauer ist als per \acs{gps}.
 
 Eine ausführliche Auflistung aller Services kann der Android-Dokumentation
 entnommen werden~\cite{androidservices}.
@@ -239,7 +239,7 @@ Container sind unter Android lauffähig.
 Apache Felix ist eine Open-Source-Implementierung des \acs{osgi} R4 Version 4.2
 Standards~\cite{apachefelix}. Es ist der zurzeit einzige auf Android lauffähige
 freie \acs{osgi}-Container. Leider bietet Apache Felix keine Integration in das
-Android System. Es lässt sich zurzeit nur per Konsole starten und verwalten.
+Android-System. Es lässt sich zurzeit nur per Konsole starten und verwalten.
 Das macht die Entwicklung von Android-Anwendungen, die in Apache Felix laufen,
 aufwendig.~\cite{apachefelixandroid}.
 
@@ -258,7 +258,7 @@ Plug-Ins werden in Form von Bundles installiert. Das Framework kümmert sich
 um den Lebenszyklus eines Plug-Ins und erlaubt das Senden von
 Kon\-text\-informationen an registrierte Anwendungen. Der vom Dynamix-Framework
 zur Verfügung gestellt \acs{osgi}-Container bietet eine Integration in das
-Android-System. Dynamix läuft als Service im Hintergrund und erlaubt durch
+Android-Sys\-tem. Dynamix läuft als Service im Hintergrund und erlaubt durch
 die sogenannte Context-Firewall einen kontrollierten Zugriff durch registrierte
 Anwendungen, auf die von den Plug-Ins generierten Kontextinformationen. Der
 Zugriff kann durch den Anwender geregelt werden~\cite{dynamixframework}.
@@ -266,14 +266,14 @@ Zugriff kann durch den Anwender geregelt werden~\cite{dynamixframework}.
 \section{Datenpersistierung mit db4o}
 \acs{db4o} ist eine Objektdatenbank für die Java und .NET Plattform, die sich
 durch ihre geringe Größe von nur 600~KB für die Einbettung in Anwendungen
-eignet, und somit auch für die Verwendung auf mobilen Geräten
-wie Smartphones, in diesem Fall Android geeignet ist. \acs{db4o} ist eine
-Alternative zu der in Android enthaltenden relationalen Datenbank {\em SQLite}.
-So ist \acs{db4o} schemafrei und erlaubt die Speicherung beliebig komplexer Objekte
-ohne die Verwendung eines {\em \aclp{orm}}. Die Datenspeicherung erfolgt
-wie bei {\em SQLite} in einer Datei. \acs{db4o} verwendet, im Gegensatz zu
-relationalen Datenbanken, kein \acs{sql}, sondern \acf{qbe}, Critera Queries
-sowie native Anfragen. Bei \acs{qbe} wird anhand eines Beispielobjektes nach
-ähnlichen Objekten gesucht. Bei Critera Queries werden \acs{sql} Anfragen durch
-eine Verkettung von Methodenaufrufen nachgebildet und bei nativen Queries können
-beliebig komplexe Suchanfragen in Java direkt implementiert werden.
+eignet, und somit auch für die Verwendung auf mobilen Geräten wie Smartphones,
+in diesem Fall Android geeignet ist. \acs{db4o} ist eine Alternative zu der in
+Android enthaltenden relationalen Datenbank {\em SQLite}. So ist \acs{db4o}
+schemafrei und erlaubt die Speicherung beliebig komplexer Objekte ohne ein {\em
+\acf{orm}}. Die Datenspeicherung erfolgt wie bei {\em SQLite} in einer Datei.
+\acs{db4o} verwendet, im Gegensatz zu relationalen Datenbanken, kein \acs{sql},
+sondern \acf{qbe}, Critera Queries sowie native Anfragen. Bei \acs{qbe} wird
+anhand eines Beispielobjektes nach ähnlichen Objekten gesucht. Bei Critera
+Queries werden \acs{sql} Anfragen durch eine Verkettung von Methodenaufrufen
+nachgebildet und bei nativen Queries können beliebig komplexe Suchanfragen in
+Java direkt implementiert werden.

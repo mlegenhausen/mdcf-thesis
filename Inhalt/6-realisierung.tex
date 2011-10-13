@@ -11,9 +11,9 @@ entweder von der beiliegenden CD oder von GitHub unter der Adresse
 in die folgenden Teile gegliedert:
 
 \begin{itemize}
-  \item {\bf MobileDataCollector}: Die {\em Mobile Data Collector} Android
-  Anwendung, die die komplette Anwendungslogik zur Ausführung von Erweiterungen
-  enthält.
+  \item {\bf MobileDataCollector}: Die {\em Mobile Data Collector}
+  Android-Anwendung, die die komplette Anwendungslogik zur Ausführung von
+  Erweiterungen enthält.
   \item {\bf MobileDataCollectionFramework}: Das Framework zur Entwicklung von
   Erweiterungen (Plug-Ins).
   \item {\bf LocationTrackerPlugin}: Ein Beispiel Plug-In zum Sammeln von
@@ -39,15 +39,15 @@ Das Framework ist in drei Teile gegliedert. Zum einen Klassen und Interfaces,
 die es einem Plug-In erlauben sich an dem Plug-In System anzumelden und mit
 diesem zu kommunizieren. Zum anderen einer Implementierung der in Abschnitt
 \ref{unifiedrepresentation} beschriebenen Datenstruktur sowie der in Abschnitt
-\ref{securepluginexecution} beschriebenen sicheren Android Services.
+\ref{securepluginexecution} beschriebenen sicheren {\em Android System Services}.
 
 Ein Plug-In wird dadurch definiert, dass es die {\em Plugin}-Schnittstelle
 implementiert. Diese stellt alle für das Plug-In System nötigen Methoden
 zur Verfügung, um mit dem Plug-In zu interagieren. Die Schnittstelle selbst
 besteht aus einer Reihe von {\em Settern}, mit denen die sicheren Versionen der
-Android System Services und der {\em PersistenceManager} gesetzt werden, sowie
+{\em Android System Services} und der {\em PersistenceManager} gesetzt werden, sowie
 einer {\em run}-Methode, mit der das Plug-In ausgeführt wird. Auf Folgende
-sichere Versionen der Android System Services kann ein Plug-In zugreifen:
+sichere Versionen der {\em Android System Services} kann ein Plug-In zugreifen:
 
 \begin{itemize}
   \item {\bf ConnectivityManager}: Erlaubt den Zugriff, auf aktuelle
@@ -65,9 +65,9 @@ man von der Klasse, muss nur noch eine vereinfachte Version der {\em
 run}-Methode, die {\em onRun}-Methode implementiert werden.
 
 Innerhalb der {\em run}- bzw. {\em onRun}-Methode kann auf die gesetzten
-Services zugegriffen werden. Die Services bieten weitestgehend alle in der
-Android Dokumentation beschriebenen Methoden. Neben den Services kann auch auf
-einen {\em PersistenceManager} zugegriffen werden. Dieser erlaubt über die {\em
+{\em Android System Services} zugegriffen werden, welche weitestgehend alle in
+der Android Dokumentation beschriebenen Methoden bieten. Neben diesen kann
+auch auf einen {\em PersistenceManager} zugegriffen werden. Dieser erlaubt über die {\em
 getWorkspace}-Methode den einfachen Zugriff auf alle bisher gespeicherten Daten.
 Die zurück\-gegebene Datenstruktur kann dann innerhalb des Plug-Ins beliebig
 manipuliert werden. Wurden alle Daten erfolgreich manipuliert, können die
@@ -102,7 +102,7 @@ Die Architektur des {\em Mobile Data Collector} ist in Abbildung
 Collector} dar. Er beherbergt das gesamte Plug-In System und kümmert sich somit
 um die Verwaltung und Ausführung von Plug-Ins. Er speichert alle von den
 Plug-Ins gesammelten Daten in einer \acs{db4o}-Datenbank (gelb). Sollte ein
-Plug-In auf die Android System Services (grau) zugreifen, geschieht das aus
+Plug-In auf die {\em Android System Services} (grau) zugreifen, geschieht das aus
 Transparenzgründen ebenfalls über den Plug-In Service.
 
 \begin{figure}[h!] 
@@ -120,7 +120,7 @@ Fülle von {\em Activities} (grün) zur Verfügung. Die {\em Activities} sind:
   \item Die {\bf Plug-In Details} erlaubt die Einsicht von Plug-In
   Informationen.
   \item Der {\bf Log-Viewer} dient zur Auflistung aller protokollierten Zugriffe
-  auf die sicheren Android System Services vom {\em Mobile Data Collector}.
+  auf die sicheren {\em Android System Services} vom {\em Mobile Data Collector}.
   \item Der {\bf Data-Viewer} erlaubt die Betrachtung von allen vom Plug-In
   gesammelten Daten.
   \item Der {\bf Transfer-Manager} listet alle ausstehenden Übertragungen auf
@@ -138,9 +138,8 @@ Im Folgenden wird auf die zuvor beschriebenen Komponenten genauer eingegangen.
 Der Plug-In Service stellt die zentrale Komponente zur Verwaltung von Plug-Ins
 sowie deren Ausführung dar. Er beinhaltet die gesamte Applikationslogik des
 {\em Mobile Data Collectors}. Alle {\em Activities} greifen über eine
-entsprechende Schnittstelle auf den Service zu. Der {\em Plug-In Service} läuft
-dauerhaft im Hintergrund und führt die Plug-Ins in den vorgegebenen
-Zeitabständen aus.
+entsprechende Schnittstelle auf den Plug-In Service zu, welcher dauerhaft im
+Hintergrund läuft und die Plug-Ins in den vorgegebenen Zeitabständen ausführt.
 
 Neben der Service-Schnittstelle stellt das {\em PluginConfiguration}-Ob\-jekt
 eine wichtige Datenstruktur dar. Alle zusätzlichen Informationen über ein Plug-In,
@@ -162,13 +161,13 @@ PluginConfiguration}-Ob\-jekt gespeichert. Dieses besitzt folgende Attribute:
   wurde.
   \item {\bf Total Activation Time} gibt summiert an wielange das Plug-In
   aktiviert war.
-  \item {\bf Permissions} gibt an, welche Zugriffsrechte das Plug-In vom Android
-  Betriebssystem benötigt. Im besten Fall ist das Attribut leer, da
+  \item {\bf Permissions} gibt an, welche Zugriffsrechte das Plug-In vom
+  Android-Betriebssystem benötigt. Im besten Fall ist das Attribut leer, da
   das bedeutet, dass das Plug-In nicht auf reglementierte Ressourcen zugreifen
   muss, sondern alle Aufgaben kontrolliert über den {\em Mobile Data Collector}
   ausführen kann.
   \item {\bf Log Records} protokolliert alle Zugriffe, die auf die sicheren
-  Versionen der Android System Services stattgefunden haben.
+  Versionen der {\em Android System Services} stattgefunden haben.
   \item {\bf Transfers} beinhaltet eine Liste von ausstehenden Übertragungen.
   \item {\bf Workspace} beinhaltet alle vom Plug-In gesammelten Daten. Dabei
   handelt es sich um ein {\em Node}-Objekt, an dem alle zusätzlichen Daten
@@ -252,19 +251,19 @@ dargestellt.
 	\label{register}
 \end{figure}
 
-Wie in dem Sequenzdiagramm zu erkennen, sendet als Erstes das Android System
+Wie in dem Sequenzdiagramm zu erkennen, sendet als Erstes das Android-System
 einen {\em Broadcast} mit dem Inhalt, dass eine neue Anwendung installiert
 wurde. Dieser wird vom {\em PackageAddedBroadcastReceiver} empfangen. Daraufhin
 versendet jener ein {\em Added-Intent} an den Plug-In Service, dass eine neue
 Anwendung installiert wurde. Der {\em Intent} wird von der {\em
-onStartCommand}-Methode des Services empfangen. Der Plug-In Service versendet
-daraufhin ein {\em Find-Intent} an die neu installierte Anwendung. Antwortet die
-Anwendung nicht, so handelt es sich nicht um ein Plug-In. Antwortet die
-neu installierte Anwendung mit einem {\em PluginInfo}-Objekt, so handelt es sich
-um ein neues Plug-In.  Das vom Plug-In System empfangene {\em PluginInfo}-Objekt
+onStartCommand}-Methode des Plug-In Services empfangen, welcher daraufhin ein
+{\em Find-Intent} an die neu installierte Anwendung versendet. Antwortet die
+Anwendung nicht, so handelt es sich nicht um ein Plug-In. Antwortet die neu
+installierte Anwendung mit einem {\em PluginInfo}-Objekt, so handelt es sich um
+ein neues Plug-In.  Das vom Plug-In System empfangene {\em PluginInfo}-Objekt
 wird nun vom Plug-In Service in einem {\em PluginConfiguration}-Objekt
-gespeichert. Das Plug-In gilt somit als registriert. Die weitere Verwaltung
-des Plug-Ins findet über das {\em PluginConfiguration}-Objekt statt.
+gespeichert. Das Plug-In gilt somit als registriert. Die weitere Verwaltung des
+Plug-Ins findet über das {\em PluginConfiguration}-Objekt statt.
 
 \subsubsection{Plug-In Ausführung}
 Die Ausführung des Plug-Ins findet im {\em PluginTaskManager} statt. Die
@@ -284,10 +283,10 @@ Thread-Pool zur sofortigen Ausführung übergeben. Bei der Ausführung wird aus der
 {\em PluginInfo} die {\em Action} ausgelesen. Mit dieser ist es möglich, die
 Service-Schnittstelle des Plug-Ins aufzurufen. Konnte eine Verbindung zum
 Plug-In hergestellt werden, werden zuerst die in den Plug-In Informationen
-angegebenen sicheren Android System Services sowie der {\em PersistenceManager}
+angegebenen sicheren {\em Android System Services} sowie der {\em PersistenceManager}
 gesetzt, um daraufhin das Plug-In auszuführen. Das Plug-In wird dabei nur
 maximal für die im {\em PluginInfo} angegebene Zeit ausgeführt. Sollte die
-Zeit überschritten werden, so wird das Plug-In vom Android System terminiert.
+Zeit überschritten werden, so wird das Plug-In vom Android-System terminiert.
 Nach der Ausführung wird das Plug-In wieder zum Thread-Pool hinzugefügt, um ihn
 diesmal erst nach dem vom Plug-In definierten Abstand auszuführen. Dieser Ablauf
 wiederholt sich solange, bis das Plug-In deaktiviert wurde oder eine Übertragung
@@ -299,8 +298,8 @@ eine Überlappung der Plug-In Ausführungen verhindert.
 Informationen innerhalb der Datenbank des {\em Mobile Data Collectors}
 gespeichert werden.
 
-Sollte während der Ausführung ein Plug-In auf Methoden der sicheren Android
-System Services zugreifen, so wird der Zugriff protokolliert. Dazu wird vor
+Sollte während der Ausführung ein Plug-In auf Methoden der sicheren {\em Android
+System Services} zugreifen, so wird der Zugriff protokolliert. Dazu wird vor
 jeder Ausführung ein neuer Eintrag zu den {\em Log Records} der {\em
 PluginConfiguration} hinzugefügt. In einen solchen {\em Log Record} können nun
 beliebig viele Einträge hinzugefügt werden, die den Zugriff in
@@ -319,8 +318,8 @@ Benutzer daraufhin gewiesen.
 	\label{pluginlist}
 \end{figure}
 
-Neue Plug-Ins können über Eclipse, dem Android Market oder von der SD-Card
-installiert werden. Um den Android Market schneller zu erreichen, kann auf
+Neue Plug-Ins können über Eclipse, dem {\em Android Market} oder von der SD-Card
+installiert werden. Um den {\em Android Market} schneller zu erreichen, kann auf
 den Market wie in Abbildung \ref{more_plugins} über die Menütaste direkt
 zugegriffen werden.
 
@@ -427,16 +426,16 @@ Log-Viewer} und {\em Data-Viewer} genauer erläutert werden.
 
 \subsubsection{Log-Viewer}
 Der Log-Viewer dient zur Anzeige aller protokollierten Aktivitäten eines
-Plug-Ins. Mit Aktivitäten ist der Zugriff auf die sicheren Android System
-Services gemeint. Greift ein Plug-In auf eine Methode der Services zu, so wird
+Plug-Ins. Mit Aktivitäten ist der Zugriff auf die sicheren {\em Android System
+Services} gemeint. Greift ein Plug-In auf eine Methode der Services zu, so wird
 ein Log-Eintrag erstellt. Dieser enthält in benutzerverständlicher Sprache,
 welche Informationen abgefragt wurden. Ein Beispiel ist in Abbildung \ref{log}
 dargestellt. Der Log ist wie folgt aufgebaut. Jede Zeile zeigt an, wann das
 Plug-In ausgeführt wurde. Durch die Auswahl eines Eintrags erweitern sich die
 Einträge um die eigentlichen Log-Einträge. In diesem Fall sagen die Log-Einträge
 aus, dass am 16.08.2011 um 5:58:40 Uhr das Plug-In ausgeführt wurde. Während
-dieser Ausführung wurde zur Lokalisierung des Benutzers das GSM/UMTS Netz ({\em
-network}) verwendet und als Position wurden die Koordinaten am 53.8477729
+dieser Ausführung wurde zur Lokalisierung des Benutzers das \acs{gsm}/\acs{umts}
+Netz ({\em network}) verwendet und als Position wurden die Koordinaten am 53.8477729
 Längengrad und am 10.6977904 Breitengrad ermittelt.
 
 \begin{figure}[h] 
@@ -579,36 +578,37 @@ Beispiele einschließlich deren Implementierung sind im Kapitel
 
 \section{Realisierungsprobleme}
 \label{problemsofimplementation}
-Während der Realisierung des {\em Mobile Data Collectors} trat bei der 
+Während der Realisierung des {\em Mobile Data Collectors} trat bei der
 Entwicklung folgendes Problem auf. Auf viele, der von Android verwalteten
 Hardware kann zwischen mehreren parallel laufenden Anwendungen konkurrierend
-zugegriffen werden. Hardware wie z.~B. \acs{gps} oder der Lagesensor
-werden aus jenem Gründen als System Service angeboten. Es gibt aber auch
+zugegriffen werden. Hardware wie z.~B. \acs{gps} oder der Lagesensor werden aus
+jenem Gründen als {\em Android System Service} angeboten. Es gibt aber auch
 Hardware, die nur von einer Anwendung zurzeit verwendet werden kann. Das sind
-z.~B. die Kamera und das Mikrofon. Diese werden nicht als System Service angeboten, sondern als
-Schnittstelle zu einer nativen Bibliothek, welche die Hardware ansteuern kann.
+z.~B. die Kamera und das Mikrofon. Diese werden nicht als {\em Android System
+Service} angeboten, sondern als Schnittstelle zu einer nativen Bibliothek,
+welche die Hardware ansteuern kann.
 
-Android System Services lassen sich sehr einfach durch eine neue Implementierung
-ersetzen, weil Android System Services selbst zur
+{\em Android System Services} lassen sich sehr einfach durch eine neue
+Implementierung ersetzen, weil {\em Android System Services} selbst zur
 Kommunikation mit der eigentlichen dahinter liegenden Service-Implementierung
 den \acs{ipc}-Mechanismus verwenden. Das ist bei den Klassen zur Ansteuerung der
 Kamera und dem Mikrofon nicht der Fall. Das Problem liegt darin, dass die
 Klassen zur Verwendung der Kamera und des Mikrofons, die anfallenden Daten in
-Dateien speichern. Man könnte nun die Klassen wie die Services durch eine
-sichere Implementierung ersetzen, indem man ebenfalls den \acs{ipc}-Mechanismus
-verwendet, um die Ausführung in den {\em Mobile Data Collector} zu verschieben.
-Hierbei ergibt sich aber das Problem, dass die aufgenommenen Daten in einer
-Datei im {\em Mobile Data Collector} gespeichert werden. Die Datei wäre für
-ein Plug-In durch die Android Sandbox-Architektur nicht direkt zugreifbar.
-Hierfür müsste eine weitere Schnittstelle geschaffen werden, um Plug-Ins den
-Zugriff auf die Datei zu ermöglichen. Auf diese Lösung wurde zugunsten einer
-einfacheren Implementierung von Plug-Ins verzichtet. Stattdessen sollte in
-diesen Fällen die von Android zur Verfügung gestellten Implementierungen
-verwendet werden. Da der Zugriff auf Kamera und Mikrofon ebenfalls durch {\em
-Permissions} geregelt wird, wird bei Aktivierung der Benutzer darauf
-hingewiesen. Da die eigentlichen zu übertragenden Daten weiterhin zentral
-im {\em Mobile Data Collector} gespeichert werden müssen, entfällt hierbei nur
-die Möglichkeit des Loggings.
+Dateien speichern. Man könnte nun die Klassen wie die {\em Android System
+Service} durch eine sichere Implementierung ersetzen, indem man ebenfalls den
+\acs{ipc}-Mechanismus verwendet, um die Ausführung in den {\em Mobile Data
+Collector} zu verschieben. Hierbei ergibt sich aber das Problem, dass die
+aufgenommenen Daten in einer Datei im {\em Mobile Data Collector} gespeichert
+werden. Die Datei wäre für ein Plug-In durch die Android-Sandbox-Architektur
+nicht direkt zugreifbar. Hierfür müsste eine weitere Schnittstelle geschaffen
+werden, um Plug-Ins den Zugriff auf die Datei zu ermöglichen. Auf diese Lösung
+wurde zugunsten einer einfacheren Implementierung von Plug-Ins verzichtet.
+Stattdessen sollte in diesen Fällen die von Android zur Verfügung gestellten
+Implementierungen verwendet werden. Da der Zugriff auf Kamera und Mikrofon
+ebenfalls durch {\em Permissions} geregelt wird, wird bei Aktivierung der
+Benutzer darauf hingewiesen. Da die eigentlichen zu übertragenden Daten
+weiterhin zentral im {\em Mobile Data Collector} gespeichert werden müssen,
+entfällt hierbei nur die Möglichkeit der Protokollierung.
 
 Das Problem würde sich am besten durch die Verwendung von \acs{osgi} lösen
 lassen. Durch \acs{osgi} würden der Mobile Data Collector und alle Plug-Ins im

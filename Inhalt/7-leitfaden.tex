@@ -10,8 +10,8 @@ einfaches Plug-In entwickeln kann und im letzten Teil die dazugehörige
 Serverkomponente. Das hierbei entwickelte Plug-In trägt den Arbeitstitel ``Hallo Welt''-Plug-In.
 Das Plug-In speichert bei jeder Ausführung den Text ``Hallo Welt'' in der
 Datenstruktur des {\em Mobile Data Collectors}. Dieses Kapitel verzichtet,
-aus Einfachheitsgründen, auf die Verwendung von System Services. Beispiele
-dazu können dem Abschnitt \ref{cha:evaluation} entnommen werden.
+aus Einfachheitsgründen, auf die Verwendung von {\em Android System Services}.
+Beispiele dazu können dem Abschnitt \ref{cha:evaluation} entnommen werden.
 
 \section{Beziehen des Mobile Data Collection Frameworks}
 Das {\em Mobile Data Collection Framework} kann entweder von der beiliegenden CD
@@ -51,15 +51,15 @@ Einrichtung ein.
 
 \subsection{Einrichtung der Entwicklungsumgebung Eclipse}
 Der Autor empfiehlt die Verwendung der Eclipse \acs{ide}, da diese zum Zeitpunkt
-der Arbeit die beste Unterstützung bei der Entwicklung von Android Anwendungen
+der Arbeit die beste Unterstützung bei der Entwicklung von Android-Anwendungen
 geboten hat. Zur Einrichtung der Eclipse \acs{ide} sind folgende Schritte
 durchzuführen.
 
 \begin{enumerate}
-  \item Installation des Android \acfp{sdk}. Dazu müssen
+  \item Installation des Android-\acfp{sdk}. Dazu müssen
   die Schritte auf \url{http://developer.android.com/sdk/installing.html}
   befolgt werden.
-  \item Installation des Android Development Tools (ADT) Plug-In für Eclipse.
+  \item Installation des \acf{adt} Plug-In für Eclipse.
   Dazu müssen die Schritte auf
   \url{http://developer.android.com/sdk/eclipse-adt.html} befolgt werden.
 \end{enumerate}
@@ -83,14 +83,14 @@ MobileDataCollector}-Verzeichnis. Sind beide Projekte importiert, kann das
 eigentliche Plug-In erstellt werden.
 
 \subsection{Erstellen des Plug-In Projekts}
-Im ersten Schritt muss ein neues Android Projekt erstellt werden. Das geschieht
+Im ersten Schritt muss ein neues Android-Projekt erstellt werden. Das geschieht
 mit Eclipse wie folgt. Durch einen Rechtsklick auf den {\em Package Explorer} kann
 durch die Menüpunkte {\em New} und {\em Project\ldots} der {\em New
 Project}-Dialog geöffnet werden. In diesem wählt man unter dem Verzeichnis {\em
 Android}, {\em Android Project} aus. Durch einen klick auf {\em Next} gelangt
 man zum {\em New Android Project}-Dialog. In diesem Dialog trägt man unter {\em
 Project name} ``HelloWorldPlugin'' ein. Wählt unter {\em Build target} die
-Android Version 2.3.3 aus, gibt unter {\em Package name}
+Android-Version 2.3.3 aus, gibt unter {\em Package name}
 {\em com.example.helloworld} ein und wählt den Haken bei {\em Create Activity}
 ab. Durch einen Klick auf {\em Finish} wird das Projekt erstellt.
 
@@ -203,7 +203,7 @@ kopieren.
 In der Konfigurationsdatei wurden folgende Parameter festgelegt.
 
 \begin{itemize}
-  \item {\bf action}: Das Plug-In kann innerhalb des Android Systems über die
+  \item {\bf action}: Das Plug-In kann innerhalb des Android-Systems über die
   {\em action}\\ {\em com.example.helloworld.HELLO\_WORLD\_PLUGIN} per \acs{ipc} angesprochen
   werden.
   \item {\bf version}: Das Plug-In trägt die Version 1.0.
@@ -211,7 +211,7 @@ In der Konfigurationsdatei wurden folgende Parameter festgelegt.
   Collectors} ist ``Hello World''.
   \item {\bf period}: Das Plug-In wird alle 10.000ms bzw. alle 10s ausgeführt.
   \item {\bf duration}: Die maximale Ausführungsdauer beträgt 1.000ms. Wird
-  die Zeit über\-schritten wird das Plug-In vom Android System terminiert.
+  die Zeit über\-schritten wird das Plug-In vom Android-System terminiert.
   \item {\bf url}: Alle gesammelten Daten sollen bei einer Übertragung an die
   \acs{url}\\ {\em http://HOSTNAME:PORT/receiver} gesendet werden.
   \item {\bf transferInterval}: Nach einer Zeit von 600.000ms bzw. 10min sollen
@@ -229,11 +229,11 @@ plugininfo}-Tags sind:
   war. Der {\em Workspace} wird standardmäßig nach der Erstellung einer
   Übertragung gelöscht.
   \item {\bf description}: Eine längere Plug-In Beschreibung.
-  \item {\bf services}: Gibt an, welche sicheren Android Services bei der
+  \item {\bf services}: Gibt an, welche sicheren {\em Android System Services} bei der
   Plug-In Aus\-führung gesetzt werden sollen.
 \end{itemize}
 
-Die zurzeit verfügbaren sicheren Android System Services sind:
+Die zurzeit verfügbaren sicheren {\em Android System Services} sind:
 
 \begin{itemize}
   \item {\bf location}: Zur Anforderung des {\em LocationManager}, um die
@@ -247,9 +247,9 @@ Die zurzeit verfügbaren sicheren Android System Services sind:
 \end{itemize}
 
 Ein Beispiel für die Verwendung der Parameter ist in Lisiting
-\ref{additionalparameters} dargestellt. In diesem werden alle verfügbaren
-Services angefordert und der {\em Workspace} wird nach der Erstellung einer
-Übertragung nicht mehr gelöscht.
+\ref{additionalparameters} dargestellt. In diesem werden alle verfügbaren {\em
+Android System Services} angefordert und der {\em Workspace} wird nach der
+Erstellung einer Übertragung nicht mehr gelöscht.
 
 \begin{lstlisting}[label=additionalparameters, caption=Zusätzliche
 Konfigurationsparameter, language=xml] 
@@ -275,9 +275,10 @@ Ein konkretes Beispiel, indem die Konfigurationparameter verwendet werden,
 kann dem Kapitel \ref{cha:evaluation} entnommen werden.
 
 \subsubsection{Konfiguration der Manifest-Datei}
-Zu guter Letzt muss das Plug-In und der {\em Broadcast Receiver} dem Android
-System bekannt gemacht werden. Dazu muss die {\em AndroidManifest.xml} angepasst
-werden. Die Anpassungen sehen wie in Listing \ref{helloworldmanifest} aus.
+Zu guter Letzt muss das Plug-In und der {\em Broadcast Receiver} dem
+Android-System bekannt gemacht werden. Dazu muss die {\em AndroidManifest.xml}
+angepasst werden. Die Anpassungen sehen wie in Listing \ref{helloworldmanifest}
+aus.
 
 \begin{lstlisting}[label=helloworldmanifest, caption=AndroidManifest.xml,
 language=xml] <?xml version="1.0" encoding="utf-8"?>
@@ -327,7 +328,7 @@ Durch einen Klick im Kontextmenü auf {\em Run As} und {\em Android Application}
 wird der {\em Mobile Data Collector} installiert. Sollte ein Android Smartphone am
 Computer angeschlossen sein, so wird der {\em Mobile Data Collector} auf diesem
 automatisch installiert. Sollte das nicht der Fall sein, wird der
-Android Emulator gestartet. Es ist zu Empfehlen den {\em Mobile Data Collector}
+Android-Emulator gestartet. Es ist zu Empfehlen den {\em Mobile Data Collector}
 auf einem Smartphone zu installieren, da nur auf diesem, die volle Sensorik zur
 Verfügung steht. Nach der Installation wird der {\em Mobile Data Collector}
 automatisch gestartet.

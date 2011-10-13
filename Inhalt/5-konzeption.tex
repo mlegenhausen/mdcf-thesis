@@ -49,15 +49,15 @@ Bei der Entwicklung eines Plug-In Systems für Android gibt es zwei Ansätze:
 \begin{itemize}
   \item Man lädt zur Laufzeit das Plug-In aus einem nachträglich
   heruntergeladenen \acf{jar}. Das wäre der Ansatz von \acs{osgi}.
-  \item Man sieht ein Plug-In als Android Service an und kommuniziert mit diesem
+  \item Man sieht ein Plug-In als Android-Service an und kommuniziert mit diesem
   über {\em Intents} oder per \acs{ipc}.
 \end{itemize}
 
 Ersteres hat den Nachteil, dass eine Infrastruktur geschaffen werden müsste, um
 die Plug-Ins zur Verfügung zu stellen. Letzteres hat den Vorteil, dass ein
-Plug-In als einfache Android Anwendung aus dem Android Market heruntergeladen und
-installiert werden kann. Die Infrastruktur ist also schon vorhanden. Auch ist
-Letzteres der Ansatz, der vom Android System am besten unterstützt wird.
+Plug-In als einfache Android-Anwendung aus dem {\em Android Market}
+heruntergeladen und installiert werden kann. Die Infrastruktur ist also schon vorhanden. Auch ist
+Letzteres der Ansatz, der vom Android-System am besten unterstützt wird.
 
 Plug-Ins können somit als {\em Service} angesehen werden. Nach der Installation
 eines Plug-Ins sollen sich neue Plug-Ins beim Plug-In System registrieren. Dazu soll
@@ -154,17 +154,17 @@ Die Voraussetzungen werden im Folgenden genauer erläutert.
 \subsection{Sichere und kontrollierte Ausführung von Plug-Ins}
 \label{securepluginexecution}
 Ein Plug-In wird dann sicher ausgeführt, wenn der Zugriff auf personenbezogene
-Daten bzw. Android System Services kontrolliert stattfindet. Es
-sollte also geregelt werden, auf welche Services zugegriffen werden darf und
-wenn ein Zugriff stattfindet, sollte der Zugriff protokolliert werden. Des
-Weiteren sollte der Zugriff auf bestimmte Daten, die den Benutzer eindeutig
-identifizieren (z.~B. \acs{imsi}, Telefonnummer) komplett unterbunden werden.
-Aus diesem Grund sollen dem Plug-In nicht die original Android System Services
-zur Verfügung gestellt werden, sondern stattdessen überwachte bzw. sichere
-Implementierungen der Android System Services. Die sicheren Services sollen
-jeden Methodenzugriff protokollieren und zuvor beschriebene gefährliche Methoden gar
-nicht erst anbieten. Folgende Android System Services müssen durch sichere
-Implementierung ersetzt werden:
+Daten bzw. {\em Android System Services} kontrolliert stattfindet. Es sollte
+also geregelt werden, auf welche {\em Android System Services} zugegriffen
+werden darf und wenn ein Zugriff stattfindet, sollte der Zugriff protokolliert
+werden. Des Weiteren sollte der Zugriff auf bestimmte Daten, die den Benutzer
+eindeutig identifizieren (z.~B. \acs{imsi}, Telefonnummer) komplett unterbunden
+werden. Aus diesem Grund sollen dem Plug-In nicht die original {\em Android
+System Services} zur Verfügung gestellt werden, sondern stattdessen überwachte
+bzw. sichere Implementierungen der {\em Android System Services}. Die sicheren
+Services sollen jeden Methodenzugriff protokollieren und zuvor beschriebene
+gefährliche Methoden gar nicht erst anbieten. Folgende {\em Android System
+Services} müssen durch sichere Implementierung ersetzt werden:
 
 \begin{itemize}
   \item {\bf ConnectivityManager}: Erlaubt den Zugriff, auf aktuelle
@@ -176,13 +176,13 @@ Implementierung ersetzt werden:
   \acsp{wlan}.
 \end{itemize}
 
-Dabei sollen einem Plug-In nicht von vorne rein alle Services übergeben werden,
-sondern nur die, die in den Plug-In Informationen angegeben wurden. Sollte ein
-Plug-In trotzdem versuchen auf einen Android System Services zuzugreifen, soll
-das dem Benutzer bei der Aktivierung angezeigt werden. Der unerlaubte Versuch Zugriff
-auf einen Android System Service zu erlangen, kann über die angeforderten
-Rechte des Plug-Ins entnommen werden. Es muss also vor der Aktivierung eine
-Kontrolle stattfinden.
+Dabei sollen einem Plug-In nicht von vorne rein alle {\em Android System
+Services} übergeben werden, sondern nur die, die in den Plug-In Informationen
+angegeben wurden. Sollte ein Plug-In trotzdem versuchen auf einen {\em Android
+System Services} zuzugreifen, soll das dem Benutzer bei der Aktivierung
+angezeigt werden. Der unerlaubte Versuch Zugriff auf einen {\em Android System
+Service} zu erlangen, kann über die angeforderten Rechte des Plug-Ins entnommen
+werden. Es muss also vor der Aktivierung eine Kontrolle stattfinden.
 
 Das entwickelte Konzept erweitert die von Android zur Verfügung
 gestellte Sandbox, um weitere Überwachungsmechanismen, um den Schaden, der durch
@@ -261,11 +261,11 @@ Plug-In in dieser Zeit deaktiviert worden sein, soll diese Zeit nicht in die
 das Plug-In aktiv war.
 
 Befindet sich das Plug-In im Transferzustand, sollen die bis zu diesem Zeitpunkt
-vom Plug-In gesammelten Daten gesichert und für die Übertragung vorbereitet werden. Das
-Plug-In kann nun wieder aktiviert werden und weiter Daten sammeln. Der Benutzer
-soll vor der Übertragung alle angefallenden Daten des Plug-Ins einsehen
-können, das heißt, alle Zugriffe auf die Services sowie die vom Plug-In
-gesammelten Daten.
+vom Plug-In gesammelten Daten gesichert und für die Übertragung vorbereitet
+werden. Das Plug-In kann nun wieder aktiviert werden und weiter Daten sammeln.
+Der Benutzer soll vor der Übertragung alle angefallenden Daten des Plug-Ins
+einsehen können, das heißt, alle Zugriffe auf die {\em Android System Services}
+sowie die vom Plug-In gesammelten Daten.
 
 Ist der Benutzer mit einer Übertragung der Daten einverstanden, kann er die
 Daten zu einem beliebigen Zeitpunkt in der Zukunft übertragen. Die Daten sollen
@@ -284,7 +284,7 @@ verwendete Benutzerkennung muss anonymisiert sein (siehe Abschnitt
 \ref{anonymisation}).
 
 \section{Serverseitiger Empfang und Verarbeitung der Daten}
-Neben der reinen Android Anwendung soll auch eine Serverkomponente ent\-wickelt
+Neben der reinen Android-Anwendung soll auch eine Serverkomponente ent\-wickelt
 werden, die die vom Plug-In gesammelten Daten empfangen kann. Zum Empfang der
 Daten auf dem Server sollen bereits bekannte Standards wie das \acf{http}, der
 \acf{rest} und die \acf{json} verwendet werden. \acs{rest} erlaubt den Zugriff
