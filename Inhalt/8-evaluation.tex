@@ -19,12 +19,9 @@ trägt den Arbeitstitel {\em Location Tracker}. Es wird im Folgenden auf die
 wichtigsten Punkte bei der Implementierung eingegangen.
 
 \subsection{Implementierung des Plug-Ins}
-Im Folgenden wird auf die wichtigsten Eigenschaften des Plug-Ins eingegangen,
-durch die es möglich wird, die aktuelle Position eines Benutzers zu verfolgen
-und die Daten zu speichern. Das Plug-In befindet sich im {\em
-LocationTrackerPlugin}-Verzeichnis des {\em Mobile Data Collection
-Framework}-Projekts. Es wird sich im Folgenden, auf dem im Verzeichnis
-befindlichen Quellcode bezogen.
+Das Plug-In befindet sich im {\em LocationTrackerPlugin}-Verzeichnis des {\em
+Mobile Data Collection Framework}-Projekts. Es wird sich im Folgenden, auf dem
+im Verzeichnis befindlichen Quellcode bezogen.
 
 \subsubsection{Ermittelung der aktuellen Position}
 Um die aktuelle Position des Benutzers zu erfahren, muss der {\em
@@ -38,11 +35,11 @@ Location location = getLocationManager()
 	.getLastKnownLocation(provider);
 \end{lstlisting}
 
-In Zeile 1 wird die Methode ermittelt, um die Position des Benutzers am
-genausten zu bestimmen. Die Positionsermittlung wird innerhalb von Android
-durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein Provider
-ermittelt werden, der am Besten dem gegebenen {\em Criteria}-Objekt entspricht.
-Durch das Objekt können Kriterien wie z.~B. Stromverbrauch und Genauigkeit
+In Zeile 1 wird die Methode ermittelt, mit der die Position des Benutzers am
+genausten bestimmt werden kann. Die Positionsermittlung wird innerhalb von
+Android durch einen {\em Provider} bewerkstelligt. In diesem Fall soll ein
+{\em Provider} ermittelt werden, der am Besten dem gegebenen {\em
+Criteria}-Objekt entspricht. Durch das Objekt können Kriterien wie z.~B. Stromverbrauch und Genauigkeit
 festgelegt werden. Übergibt man ein nicht weiter konfiguriertes Objekt, so wird
 der zurzeit beste verfügbare {\em Provider} zurückgegeben. In Zeile 2 wird
 daraufhin die letzte bekannte Position unter Zuhilfenahme des gegebenen {\em
@@ -54,7 +51,7 @@ Die zuvor ermittelte Position kann nun gespeichert werden. In Listing
 \ref{storelocation} wird dazu im ersten Schritt der {\em Workspace} abgefragt.
 Dann wird eine neuer Knoten erstellt, an der alle Attribute des {\em
 Location}-Objekts gespeichert werden. Der Knoten wird im letzten Schritt an den
-{\em Workspace} angehangen und gespeichert.
+{\em Workspace} angehängt und gespeichert.
 
 \begin{lstlisting}[label=storelocation,
 caption=Speichern der Position, language=java]
@@ -72,13 +69,13 @@ getPersistenceManager().save(workspace);
 \end{lstlisting}
 
 \subsubsection{Plug-In Konfiguration}
-Um das Plug-In fertigzustellen, muss im letzten Schritt das Plug-In konfiguriert
-werden. Das geschieht ebenfalls über die {\em plugin.xml}. Eine mögliche
-Konfiguration ist in Listing \ref{locationtrackerpluginxml} dargestellt. Die
-Konfiguration unterscheidet sich zum ``Hallo Welt''-Plug-In dadurch, dass der
-{\em LocationManager} angefordert wird und eine Beschreibung angegeben ist. Der
-{\em LocationManager} wird zur Ermittlung der aktuellen Position benötigt. Es
-ist darauf zu achten, dass die angegebene \acs{url} mit der des Empfangsserver
+Um das Plug-In fertigzustellen, muss es im letzten Schritt konfiguriert werden.
+Das geschieht ebenfalls über die {\em plugin.xml}. Eine mögliche Konfiguration
+ist in Listing \ref{locationtrackerpluginxml} dargestellt. Die Konfiguration
+unterscheidet sich zum ``Hallo Welt''-Plug-In dadurch, dass der {\em
+LocationManager} angefordert wird und eine Beschreibung angegeben ist. Der {\em
+LocationManager} wird zur Ermittlung der aktuellen Position benötigt. Es ist
+darauf zu achten, dass die angegebene \acs{url} mit der des Empfangsserver
 übereinstimmt.
 
 \begin{lstlisting}[label=locationtrackerpluginxml, caption=plugin.xml,
@@ -99,31 +96,31 @@ language=xml]
 \end{lstlisting}
 
 \subsubsection{Verwendung des Plug-Ins}
-Das Plug-In kann jetzt wie in Kapitel \ref{cha:leitfaden} beschrieben, auf dem
+Das Plug-In kann jetzt, wie in Kapitel \ref{cha:leitfaden} beschrieben, auf dem
 Smartphone installiert und ausgeführt werden. Nach der ersten Ausführung können
 wie in Abbildung \ref{log_locationtracker},
 \ref{collected_data_overview_locationtracker} und
-\ref{collected_data_details_locationtracker} zu sehen, zum einen die Zugriffe
-auf den {\em LocationManager} bzw. alle gesammelten Daten eingesehen werden.
+\ref{collected_data_details_locationtracker} zu sehen, die Zugriffe
+auf den {\em LocationManager} sowie alle gesammelten Daten eingesehen werden.
 Betrachtet man die gesammelten Daten des Plug-Ins wird man feststellen, dass die
 zuvor definierte Datenstruktur mit den entsprechenden Positionsdaten gefüllt
-wurden.
+wurde.
 
-\begin{figure}[h!] 
+\begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/log.png}
 	\caption{Zugriffsprotokoll auf den LocationManager}
 	\label{log_locationtracker}
 \end{figure}
 
-\begin{figure}[h!] 
+\begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/collected_data_overview.png}
 	\caption{Überblick über alle gesammelten Positionen}
 	\label{collected_data_overview_locationtracker}
 \end{figure}
 
-\begin{figure}[h!] 
+\begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/collected_data_details.png}
 	\caption{Detailierte Ansicht einer Position}
@@ -140,18 +137,18 @@ werden können.
 Bei der Implementierung der Serverkomponente wird als Ausgangspunkt die ``Hallo
 Welt''-Serverkomponente verwendet. Diese wurde um eine Persistierungsschicht
 erweitert und erlaubt die Visualisierung der Daten mit Hilfe einer
-Web-Anwendung. Die Serverkomponente befindet sich im {\em
+Web-Anwendung. Diese befindet sich im {\em
 mdcf-locationtracker-remote}-Verzeichnis, des {\em Mobile Data
 Collector}-Projektes.
 
 \subsubsection{Persistierung der Daten}
-Wie in Kapitel \ref{cha:leitfaden} beschrieben, werden nach dem Empfang, die
-Daten an einen {\em TransferRequestProcessor} übergeben. In der Klasse kann
-z.~B. die Persistierung der Daten stattfinden. Bevor die Daten gespeichert
+Wie in Kapitel \ref{cha:leitfaden} beschrieben, werden die Daten nach dem
+Empfang, an einen {\em TransferRequestProcessor} übergeben. In der Klasse kann
+z.~B. die Persistierung der Daten stattfinden. Bevor diese gespeichert
 werden, sollte aber eine Überführung des allgemeinen Datenformats des {\em Mobile Data Collection
 Frameworks} in ein domänenspezifisches stattfinden. Eine Überführung
 des allgemeinen Datenformats in ein domänenspezifisches sowie die anschließende
-Speicherung, kann wie in Listing \ref{datenmapping} implementiert werden.
+Speicherung kann wie in Listing \ref{datenmapping} implementiert werden.
 
 \begin{lstlisting}[label=datenmapping,
 caption=TransferRequestProcessorImpl.java, language=java] 
@@ -217,41 +214,41 @@ ein {\em Participant}-Objekt übertragen werden kann. Ein {\em Participant}
 stellt einen Benutzer des {\em Mobile Data Collector} dar. Die
 Identifikation findet anhand der eindeutigen Benutzerkennung statt, welche über
 die {\em getId}-Methode abgefragt werden kann. Sollte der {\em Participant}
-bereits existierten, werden die gesammelten Daten, an den bereits existierenden
-Benutzer ran gehangen, sonst wird ein neuer {\em Participant} erstellt. Das {\em
-PersistentRepository} stellt die Datenbankabstraktionsschicht dar. In den darauf
+bereits existierten, werden die gesammelten Daten an den bereits existierenden
+Benutzer angehängt, da andernfalls ein neuer {\em Participant} erstellt wird.
+Das {\em PersistentRepository} stellt die Datenbankabstraktionsschicht dar. In den darauf
 folgenden Schritten werden die Daten aus dem {\em TransferRequest} an ein
 entsprechendes {\em Location}-Objekt übergeben und der {\em Participant} wird
 gespeichert. Die Daten sind nun in einer Datenbank persistiert und stehen somit
 anderen Anwendungen zur Verfügung. In diesem Beispiel wurde zur Persistierung
-der \acf{orm} {\em Hibernate} verwendet. Die Persistierungsmethode wird vom {\em
-ParticipantRepsitory} abstrahiert. Durch die Abstraktion steht es dem Entwickler frei ein
-beliebiges anderes Persistierungsframework zu verwenden.
+der \acs{orm} {\em Hibernate} verwendet. Die Persistierungsmethode wird vom {\em
+ParticipantRepsitory} abstrahiert. Durch die Abstraktion steht es dem Entwickler
+frei, ein beliebiges anderes Persistierungsframework zu verwenden.
 
 \subsubsection{Visualisierung der Daten}
 Als letzter Teil der Evaluation sollen die gespeicherten Daten visualisiert
 werden. Da es sich um Positionsdaten handelt, bietet es sich an, die
-Positionen eines Benutzers auf einer Karte zu visualisieren. Dadurch ist es
-sehr einfach möglich, die Daten zu evaluieren.
+Positionen eines Benutzers auf einer Karte zu visualisieren. Dadurch ist die
+Evaluierung der Daten sehr einfach.
 
 Für die technische Realisierung bietet es sich an, auf bereits bestehende
 Infrastruktur und Programmiersprachen zurückzugreifen. Da bisher nur die
 Programmiersprache Java verwendet wurde und bereits ein Java Servlet-Container
 zum Empfang der Daten vorhanden ist, eignet sich ein javabasiertes
 Web-Framework am besten. In diesem Fall fiel die Wahl auf
-das \acf{gwt}\cite{gwt}. Bei \acs{gwt} handelt es sich um einen
+das {\em \acf{gwt}}~\cite{gwt}. Bei \acs{gwt} handelt es sich um einen
 Java-zu-JavaScript-Compiler, der die Implementierung von Web-Anwendung in Java
 erlaubt. Die clientseitige Ausführung der Web-Anwendung findet nach der
 Kompilierung nur noch in JavaScript statt. Zur Einbindung von Karten wurde die
-Google Maps \acs{api} für \acs{gwt} verwendet\cite{gwtmaps}.
+{\em Google Maps \acs{api}} für \acs{gwt} verwendet~\cite{gwtmaps}.
 
 In Abbildung \ref{locationtrackermap} ist die Web-Anwendung dargestellt. Im
 oberen Bereich befinden sich alle Bedienelemente. Über die erste List-Box lassen
 sich unterschiedliche Benutzer anhand ihrer eindeutigen Benutzerkennung
 auswählen. Über die zweite List-Box lassen sich zu jedem Benutzer die
 aufgenommenen Positionen auswählen. Die daneben befindlichen Bedienelemente
-dienen zur Navigation durch die Daten sowie einer Funktion zum automatischen
-Durchlaufen der Positionen. Man kann dadurch die Bewegung eines Benutzers besser
+dienen der Navigation durch die Daten und beinhalten eine Funktion zum
+automatischen Durchlaufen der Positionen. Man kann dadurch die Bewegung eines Benutzers besser
 verfolgen. Zu jeder Position werden außerdem alle gesammelten Informationen
 angezeigt. Der grüne Kreis gibt an, wie genau die Messung
 war. In diesem Fall wurde die Messung auf 57 Meter genau durchgeführt, welches
@@ -275,7 +272,7 @@ mvn gwt:run
 
 Daraufhin startet der \acs{gwt} eigene Webserver sowie das
 Servlet zum Empfang der Daten. Gibt man die entsprechende lokale IP-Adresse innerhalb der
-Plug-In Konfiguration an, so kann der Webserver die Daten vom {\em Mobile Data
+Plug-In-Konfiguration an, so kann der Webserver die Daten vom {\em Mobile Data
 Collector} empfangen und über die Web-Anwendung darstellen.
 
 \section{Plug-In zum Sammeln der Lautstärke an der aktuellen Position}
@@ -284,7 +281,7 @@ Location Tracker}, wird im Folgenden ein Plug-In entwickelt, das neben der
 aktuellen Position auch die Lautstärke speichert. Das Plug-In trägt den
 Arbeitstitel {\em Noise Tracker}.
 
-\subsection{Plug-In Anpassungen}
+\subsection{Anpassung des Plug-Ins}
 Das Plug-In befindet sich im {\em NoiseTrackerPlugin}-Verzeichnis. Es wird sich
 im Folgenden auf dem im Verzeichnis befindlichen Quellcode bezogen.
 
@@ -312,12 +309,12 @@ recorder.stop();
 recorder.release();
 \end{lstlisting}
 
-In dem Listing wird zuerst ein {\em MediaRecorder} erstellt. Der kann dazu
-verwendet werden, um Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
+In dem Listing wird zuerst ein {\em MediaRecorder} erstellt. Dieser kann dazu
+verwendet werden, Audio- und Videoaufnahmen durchzuführen. In den darauf folgenden
 Zeilen wird als Audioquelle das Mikrofon verwendet. Die Einstellungen zum
 Ausgabeformat und Audio-Encoder sind zwar notwendig, aber
-irrelevant, da wie in Zeile 5 angegeben alle Daten im {\em null-Device} gespeichert werden.
-Durch die {\em prepare}- und {\em start}-Methode wird das Mikrofon reserviert
+irrelevant, da, wie in Zeile 5 angegeben, alle Daten im {\em null-Device}
+gespeichert werden. Durch die {\em prepare}- und {\em start}-Methode wird das Mikrofon reserviert
 und die Aufnahme gestartet. Die Lautstärke wird nun anhand der maximalen Amplitude
 bestimmt, welchen über die {\em getAmplitude}-Methode abgefragt werden kann.
 Damit die Methode einen brauchbaren Wert zurückliefert, muss für eine bestimmte
@@ -325,10 +322,10 @@ Zeitspanne eine Tonaufnahme erfolgen. In diesem Fall werden für eine Sekunde
 lang, alle Umgebungsgeräusche aufgenommen und die maximale Amplitude bestimmt.
 Durch die {\em stop}- und {\em release}-Methode wird die Aufnahme angehalten und das
 Mikrofon wieder freigegeben. Diese Art zur Lautstärkenbestimmung wurde dem
-Beispielprogramm {\em NoiseAlert} entnommen~\cite{noisealert}. Dabei ist zu
-erwähnen, dass die maximale Amplitude zwischen verschiedenen Geräten
-variieren kann. Bei einer Auswertung ist deswegen eine Normalisierung
-der Daten erforderlich.
+Beispielprogramm {\em NoiseAlert} entnommen~\cite{noisealert}. Hierbei ist darau
+hinzuweisen, dass die maximale Amplitude zwischen verschiedenen Geräten
+variieren kann. Bei einer Auswertung ist deswegen eine Normalisierung der Daten
+erforderlich.
 
 Um die Amplitude zum bisherigen Datenmodell hinzuzufügen, ist die Zeile
 aus Listing \ref{storeamplitude} hinzuzufügen.
@@ -338,7 +335,7 @@ caption=Speichern der Ampltiude, language=java]
 node.setProperty("Amplitude", amplitude);
 \end{lstlisting}
 
-Als letzte Anpassung muss dem Plug-In noch die {\em Permission} zur Aufnahme von
+Als letzte Anpassung muss das Plug-In noch die {\em Permission} zur Aufnahme von
 Tonaufnahmen erhalten. Dazu muss die {\em AndroidManifest.xml} um die Zeile aus 
 Listing \ref{recordaudio} ergänzt werden.
 
@@ -366,9 +363,9 @@ Das Plug-In ist jetzt vollständig implementiert und kann zur Ermittlung der
 Lautstärke verwendet werden.
 
 \subsection{Anpassungen der Serverkomponente}
-Die Anpassungen an der Serverkomponente halten sich ebenfalls in Grenzen. Bei
-der Übertragung des allgemeinen Datenmodells auf das domänenspezifische muss
-entsprechend ein Attribut für die Amplitude vorgesehen werden.
+Die Anpassungen an der Serverkomponente sind ebenfalls gering. Bei
+der Über\-tra\-gung des allgemeinen Datenmodells auf das domänenspezifische muss
+ein entsprechendes Attribut für die Amplitude vorgesehen werden.
 
 Bei der Visualisierung wurde in diesem Fall nur ein weiteres Attribut bei der
 Ausgabe aller Positionsdaten hinzugefügt. Siehe hierzu Abbildung
@@ -389,10 +386,10 @@ Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
   Erfassung der aktuellen Positionen und Lautstärke, ist
   mit dem {\em Mobile Data Collection Framework} möglich.
   \item Das allgemeine Datenformat erlaubt das Speichern von beliebigen
-  Informationen und schränkt einen Plug-In Entwickler nur bedingt ein.
+  Informationen und schränkt einen Plug-In-Entwickler nur bedingt ein.
   \item Bestehende Plug-Ins lassen sich leicht an neuen Anforderungen anpassen
   bzw. erweitern.
-  \item Bei der Verwendung von Android-{\em Permissions} die den Zugriff auf
+  \item Bei der Verwendung von Android-{\em Permissions}, die den Zugriff auf
   personenbezogene Daten ermöglichen, wird der Benutzer vor der Aktivierung
   gewarnt.
   \item Die Zugriffe auf die sicheren {\em Android System Services} werden
@@ -403,7 +400,7 @@ Als Ergebnis der Evaluation lässt sich folgendes Festhalten:
   \item Die Visualisierung hat gezeigt, dass die Daten auch verwertbar sind. Der
   Visualisierung sind hierbei keine Grenzen gesetzt.
   \item Es ist zurzeit nicht möglich, die Aufnahme von Ton und Video über den
-  {\em Mobile Data Collector} zu protokollieren. Der Benutzer wird aber gewarnt
+  {\em Mobile Data Collector} zu protokollieren. Der Benutzer wird aber gewarnt,
   sollte ein Plug-In dieses versuchen.
 \end{itemize}
 

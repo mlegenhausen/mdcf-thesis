@@ -5,19 +5,19 @@ umfasst die Überführung der Anforderungen in ein Vorgehen, wie die Anforderungen
 softwareseitig realisiert werden können.
 
 \section{Plug-In System}
-Ein Erweiterungssystem oder wie hier benannt Plug-In System kümmert sich um die
-Verwaltung von Erweiterungen bzw. Plug-Ins. Das Plug-In System erlaubt die
-Erweiterung der Anwendung auch nach ihrer Installation auf dem Smartphone. In
+Ein Erweiterungssystem oder wie hier benannt {\em Plug-In System} kümmert sich
+um die Verwaltung von Erweiterungen bzw. Plug-Ins. Das {\em Plug-In System}.
+erlaubt die Erweiterung der Anwendung auch nach ihrer Installation auf dem Smartphone. In
 diesem Fall soll die Anwendung im Nachhinein um Plug-Ins erweitert werden,
 welche Sensordaten sammeln.
 
-Zur Realisierung eines Plug-In Systems auf Android gibt er zwei Ansätze. Der
-Erste umfasst die Verwendung eines bereits existierenden Plug-In Systems (z.~B.
-\acs{osgi}) und der Zweite die Entwicklung eines eigenen Plug-In Systems. Diese
+Zur Realisierung eines Plug-In-Systems auf Android gibt er zwei Ansätze. Der
+Erste umfasst die Verwendung eines bereits existierenden Plug-In-Systems (z.~B.
+\acs{osgi}) und der Zweite die Entwicklung eines eigenen Plug-In-Systems. Diese
 zwei Ansätze sollen im Folgenden genauer betrachtet werden.
 
 \subsection{Evaluation der \acs{osgi}-Plattform für Android}
-Die Verwendung von \acs{osgi} als Modularisierungs- bzw. Plug-In System würde
+Die Verwendung von \acs{osgi} als Modularisierungs- bzw. Plug-In-System würde
 folgende Vorteile bieten:
 
 \begin{itemize}
@@ -40,7 +40,7 @@ möglich. Dem Autor wurde in einem persönlichen Gespräch mit dem Dynamix
 Entwickler Dr.-Ing. Darren Carlson von dessen Verwendung abgeraten. Der Grund
 hierfür war das recht frühe Stadium des Frameworks und die damit verbundene
 mögliche Fehleranfälligkeit sowie die fehlende Dokumentation. Die Entwicklung
-eines eigenen Plug-Ins Systems war somit die einzige Lösung.
+eines eigenen Plug-In-Systems war somit die einzige Lösung.
 
 \subsection{Eigenentwicklung eines Plug-In Systems für Android}
 \label{pluginsystemforandroid}
@@ -60,9 +60,9 @@ heruntergeladen und installiert werden kann. Die Infrastruktur ist also bereits
 vorhanden. Auch ist Letzteres der Ansatz, der vom Android-System am besten unterstützt wird.
 
 Plug-Ins können somit als {\em Service} angesehen werden. Nach der Installation
-eines Plug-Ins sollen sich neue Plug-Ins beim Plug-In System registrieren. Dazu soll
-das Plug-In System, nachdem es über die Installation eines neuen Plug-Ins per
-{\em Broadcast} benachichtigt wurde, einen {\em Intent} an das neu installierte
+eines Plug-Ins sollen sich neue Plug-Ins beim Plug-In-System registrieren. Dazu
+soll das Plug-In-System, nachdem es über die Installation eines neuen Plug-Ins
+per {\em Broadcast} benachichtigt wurde, einen {\em Intent} an das neu installierte
 Plug-In schicken. Das neue Plug-In soll daraufhin mit entsprechenden
 Plug-In-Informationen antworten. Folgende Informationen sollen bei der Anmeldung
 übermittelt werden:
@@ -86,7 +86,7 @@ Plug-In-Informationen antworten. Folgende Informationen sollen bei der Anmeldung
 \end{itemize}
 
 Hierbei ist anzumerken, dass Android nicht zwischen einem Plug-In und einer
-anderen neu installierten Anwendung unterscheiden kann. Das Plug-In System
+anderen neu installierten Anwendung unterscheiden kann. Das Plug-In-System
 sendet somit an alle neu installierten Anwendungen eine Aufforderung zur
 Registrierung. Alle Anwendungen die kein Plug-In sind, antworten auf die
 Anfrage nicht.
@@ -123,9 +123,9 @@ Möchte ein Benutzer ein Plug-In wieder entfernen, kann er das über den
 Anwendungsmanager von Android machen. Darüber hinaus soll der Benutzer auch direkt die
 Möglichkeit besitzen, das Plug-In aus der Übersicht zu entfernen. 
 
-Bei der Deinstallation eines Plug-Ins erhält das Plug-In System ebenfalls einen
+Bei der Deinstallation eines Plug-Ins erhält das Plug-In-System ebenfalls einen
 {\em Broadcast} darüber, dass eine Anwendung entfernt wurde. Das erlaubt dem
-Plug-In System, die gespeicherten Daten vom Plug-In zu löschen und die
+Plug-In-System, die gespeicherten Daten vom Plug-In zu löschen und die
 Plug-In-Informationen konsistent zu den anderen installierten Plug-Ins zu halten.
 
 \section{Transparentes Sammeln von personenbezogenen Daten}
@@ -248,7 +248,7 @@ gespeicherte Daten nachträglich zu bearbeiten und neue Datensätze hinzuzufügen.
 
 \subsection{Regelmäßige Übertragung der gesammelten Daten}
 \label{periodicallytransfer}
-Im Gegensatz zu anderen Anwendungen, bei denen die Daten sofort ohne Rückfrage
+Im Gegensatz zu anderen Anwendungen, bei denen die Daten sofort ohne Rück\-frage
 des Benutzers übertragen werden, sollen sie in dieser Anwendung nur in regelmäßigen
 Abständen und nur nach Erlaubnis des Benutzers übertragen werden. Die Abstände
 sollen durch das Plug-In selbst definiert werden. Wird als Übertragungsintervall
@@ -296,7 +296,7 @@ Internet~\cite{json}.
 Da die Daten von der Anwendung in dem zuvor beschriebenen sehr allgemeinen
 Datenformat empfangen werden, ist eine Konvertierung der Daten in ein
 spezifischeres Datenformat vorzunehmen. Die Konvertierung sollte in ein
-domänen\-spezi\-fisches Datenformat stattfinden und muss vom Plug-In Entwickler
+domänen\-spezi\-fisches Datenformat stattfinden und muss vom Plug-In-Entwickler
 selbst vorgenommen werden. Das ist aus den folgenden Gründen zu empfehlen:
 
 \begin{itemize}

@@ -36,13 +36,13 @@ Komponenten zu ermöglichen. Das Framework wird als Android-Bibliothek zur
 Verfügung gestellt.
 
 Das Framework ist in drei Teile gegliedert. Zum einen Klassen und Interfaces,
-die es einem Plug-In erlauben, sich an dem Plug-In System anzumelden und mit
+die es einem Plug-In erlauben, sich an dem Plug-In-System anzumelden und mit
 diesem zu kommunizieren. Zum anderen einer Implementierung der in Abschnitt
 \ref{unifiedrepresentation} beschriebenen Datenstruktur sowie der in Abschnitt
 \ref{securepluginexecution} beschriebenen sicheren {\em Android System Services}.
 
 Ein Plug-In wird dadurch definiert, dass es die {\em Plugin}-Schnittstelle
-implementiert. Diese stellt alle für das Plug-In System nötigen Methoden
+implementiert. Diese stellt alle für das Plug-In-System nötigen Methoden
 zur Verfügung, um mit dem Plug-In zu interagieren. Die Schnittstelle selbst
 besteht aus einer Reihe von {\em Settern}, mit denen die sicheren Versionen der
 {\em Android System Services} und der {\em PersistenceManager} gesetzt werden, sowie
@@ -73,11 +73,11 @@ Die zurück\-gegebene Datenstruktur kann dann innerhalb des Plug-Ins beliebig
 manipuliert werden. Wurden alle Daten erfolgreich manipuliert, können die
 Änderungen mit der {\em save}-Methode gespeichert werden.
 
-Die Registrierung eines Plug-Ins erfolgt durch die Antwort auf den vom Plug-In
-System versendeten {\em Broadcast}, der nach der Installation einer neuen
-Anwendung versendet wird. Um auf den {\em Broadcast} zu antworten, muss ein
-{\em Broadcast Receiver} implementiert werden. Zu diesem Zweck existiert bereits
-eine Implementierung des {\em Broadcast Receiver}, der {\em
+Die Registrierung eines Plug-Ins erfolgt durch die Antwort auf den vom
+Plug-In-System versendeten {\em Broadcast}, der nach der Installation einer
+neuen Anwendung versendet wird. Um auf den {\em Broadcast} zu antworten, muss
+ein {\em Broadcast Receiver} implementiert werden. Zu diesem Zweck existiert
+bereits eine Implementierung des {\em Broadcast Receiver}, der {\em
 AbstractPluginRegister}. Erbt man von der Klasse, muss man die {\em
 onRegister}-Methode implementieren. Diese muss ein {\em PluginInfo}-Objekt
 zurückliefern, welche die Plug-In-Informationen enthält. Bei dem {\em
@@ -99,7 +99,7 @@ Konkrete Beispiele zur Implementierung und Konfiguration sind dem Kapitel
 Die Architektur des {\em Mobile Data Collector} ist in Abbildung
 \ref{architecture} dargestellt. Wie in der Abbildung zu erkennen, stellt der
 {\em Plug-In Service} (blau) die zentrale Komponente des {\em Mobile Data
-Collector} dar. Er beherbergt das gesamte Plug-In System und kümmert sich somit
+Collector} dar. Er beherbergt das gesamte Plug-In-System und kümmert sich somit
 um die Verwaltung und Ausführung von Plug-Ins. Er speichert alle von den
 Plug-Ins gesammelten Daten in einer \acs{db4o}-Datenbank (gelb). Sollte ein
 Plug-In auf die {\em Android System Services} (grau) zugreifen, geschieht das aus
@@ -228,8 +228,8 @@ PluginConfiguration}-Objekten zurück.
 List<Transfer> getTransfers()
 \end{lstlisting}
 
-Liefert alle noch ausstehenden Übertragungen zurück. Sollten keine Übertragungen
-vorhanden sein, wird eine leere Liste zurückgegeben.
+Liefert alle noch ausstehenden Übertragungen zurück. Sollten keine
+Über\-tra\-gungen vorhanden sein, wird eine leere Liste zurückgegeben.
 
 \begin{lstlisting}[language=java]
 void removeTransfer(Transfer transfer)
@@ -348,7 +348,7 @@ den Aktivierungsprozess abbrechen.
 \begin{figure}[h!] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/activation.png}
-	\caption{Plug-In aktivierung}
+	\caption{Plug-In-Aktivierung}
 	\label{activation}
 \end{figure}
 
@@ -362,7 +362,7 @@ gegebenenfalls der Aktivierung zu widersprechen.
 \begin{figure}[h!] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/activation_warning.png}
-	\caption{Plug-In Aktivierung}
+	\caption{Warnung bei Plug-In-Aktivierung}
 	\label{activation_warning}
 \end{figure}
 
@@ -425,7 +425,7 @@ Log-Viewer} und {\em Data-Viewer} genauer erläutert werden.
 \end{figure}
 
 \subsubsection{Log-Viewer}
-Der Log-Viewer dient zur Anzeige aller protokollierten Aktivitäten eines
+Der {\em Log-Viewer} dient zur Anzeige aller protokollierten Aktivitäten eines
 Plug-Ins. Mit Aktivitäten ist der Zugriff auf die sicheren {\em Android System
 Services} gemeint. Greift ein Plug-In auf eine Methode der Services zu, so wird
 ein Log-Eintrag erstellt. Dieser gibt in benutzerverständlicher Sprache an,
@@ -441,20 +441,20 @@ Längengrad und am 10.6977904 Breitengrad ermittelt.
 \begin{figure}[h] 
 	\centering
 	\includegraphics[width=5cm]{grafiken/log.png}
-	\caption{Plug-In Logs}
+	\caption{Zugriffe aus die sicheren {\em Android System Services}}
 	\label{log}
 \end{figure}
 
 \vspace*{1cm}
 
 \subsubsection{Data-Viewer}
-Der Data-Viewer dient zur Anzeige aller vom Plug-In gesammelten Daten bzw. aller
-Daten, welche das Plug-In später übertragen möchte. Einem Plug-In steht es frei,
+Der {\em Data-Viewer} dient zur Anzeige aller vom Plug-In gesammelten Daten bzw.
+aller Daten, welche das Plug-In später übertragen möchte. Einem Plug-In steht es frei,
 beliebig viele private Daten für interne Zwecke zu sammeln, diese lassen dann
 aber nicht durch den {\em Mobile Data Collector} übertragen.
 
 Die im Konzept beschriebene hierarchische Datenstruktur lässt sich durch den
-Data-Viewer anzeigen. Dabei wird jede Ebene der Datenstruktur als Liste
+{\em Data-Viewer} anzeigen. Dabei wird jede Ebene der Datenstruktur als Liste
 dargestellt. In Abbildung \ref{collected_data_overview} wird die erste Ebene
 angezeigt. Jeder anklickbare Knoten wird als Datum angezeigt. Das
 Datum gibt an, wann der entsprechende Datensatz das letzte Mal modifiziert
@@ -610,8 +610,8 @@ weiterhin zentral im {\em Mobile Data Collector} gespeichert werden müssen,
 entfällt hierbei nur die Möglichkeit der Protokollierung.
 
 Das Problem ließe sich am besten durch die Verwendung von \acs{osgi} lösen.
-Durch \acs{osgi} würden der Mobile Data Collector und alle Plug-Ins im selben
-Prozess laufen. Dadurch würde sich der Zugriff auf Dateien deutlich
+Durch \acs{osgi} würden der {\em Mobile Data Collector} und alle Plug-Ins im
+selben Prozess laufen. Dadurch würde sich der Zugriff auf Dateien deutlich
 vereinfachen. Des Weiteren könnte man durch einen eigenen {\em ClassLoader} den
 Zugriff auf bestimmte Klassen verbieten, sodass ein Entwickler dazu gezwungen
 würde, die sicheren Implementierungen einer Klasse zu verwenden.
